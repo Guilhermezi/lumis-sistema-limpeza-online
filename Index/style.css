@@ -68,62 +68,68 @@ body {
     font-family: var(--p-font);
 }
 
-/*============navbar============*/
+/*============header============*/
 header {
+    display: flex;                   /* coloca logo e nav lado a lado */
+    justify-content: space-between;  /* logo à esquerda, nav à direita */
+    align-items: center;             /* centraliza verticalmente */
+    padding: 0 1.45rem;                 /* respiro nas laterais */
     background-color: var(--cor-fundo);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    justify-content: space-between;
 }
 
+/*==========logo============*/
+/*não mexe nisso POR FAVOR*/
+#logo-headers img {
+    height: 80px;  /* ajusta o tamanho da logo */
+    width: auto;
+}
+
+#logo-headers:hover{
+    cursor: pointer;
+}
+
+/*==============NavBar=========== */
 nav ul {
-    list-style: none;
-    text-align: center;
-    justify-content: right;
     display: flex;
+    gap: 10px;               /* espaço entre os itens */
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-li {
-    position: relative;
-}
-
-li a {
+nav ul li a {
+    display: flex;
+    align-items: center;      /* ícone e texto alinhados */
+    gap: 6px;
+    padding: 8px 14px;
     text-decoration: none;
     color: var(--cor-primaria);
-    padding: 1rem;
     font-family: var(--h1-font);
-    padding: 10px 20px;
-    position: relative;
-
-    display: flex;          /* coloca ícone + texto lado a lado */
-    align-items: center;    /* centraliza verticalmente */
-    gap: 8px;               /* espaço entre ícone e texto */
+    transition: color 0.3s ease;
 }
 
-li a:hover {
+nav ul li a:hover {
     color: var(--cor-botao-primario-hover);
 }
 
-/* Faz com que os ícones dentro do link também mudem */
-li a:hover i {
-    color: inherit; /* herda a cor do link */
-}
-
+/*==============BOTÃO DE LOGIN===========  */
 .bntCadastro {
-    margin-right: 20px;
-    text-align: center; 
     background-color: var(--cor-primaria);
     color: white;
-    border: none;
-    padding: 8px 20px;
-    align-items: center;
-    border-radius: 10px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    margin-right: 1.45rem;
 }
+
 .bntCadastro:hover {
     background-color: var(--cor-botao-primario-hover);
-    color: white;
+    color: darkgray;
     cursor: pointer;
 }
