@@ -141,51 +141,148 @@ nav ul li a:hover {
     margin-top: 120px; /* Espaçamento para evitar sobreposição com o header fixo */
     text-align: center;
     font-family: var(--h1-font);
-    color: var(--cor-texto);
+    color: var(--cor-primaria);
     font-size: 1.90rem;
 }
-/*================= Informações de Contato =================*/
-#Contato .container {
+/*================= Seção Contato =================*/
+#Contato {
+    margin: 40px auto;          /* Centraliza a seção */
+    padding: 25px;
+    max-width: 1100px;          /* largura máxima do bloco inteiro */
+    width: 100%;
+}
+
+/*================= Container principal =================*/
+.container {
     display: flex;
-    align-items: center; /* Centraliza horizontalmente */
-    gap: 20px; /* Espaço entre os itens */
+    justify-content: space-between; /* espaço entre os dois lados */
+    align-items: flex-start;        /* alinha pelo topo */
+    gap: 40px;                      /* espaço entre formulário e info */
+}
+
+/*================= Bloco do Formulário =================*/
+.Formulario {
+    flex: 1; /* ocupa metade do espaço */
+    background-color: var(--cor-fundo);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: var(--cor-primaria);
+}
+
+.Formulario label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.Formulario input,
+.Formulario textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid var(--cor-primaria);
+    border-radius: 4px;
+    font-family: var(--p-font);
+}
+
+.Formulario button {
+    background-color: var(--cor-terciaria);
+    color: var(--cor-botao-texto);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
+    margin: 20px auto; /* auto nas laterais centraliza */
+}
+
+
+.Formulario button:hover {
+    background-color: var(--cor-botao-terciario-hover);
+    color: var(--cor-botao-texto-hover);
+    cursor: pointer;
+}
+
+/*================= Bloco das Informações =================*/
+.contact-info {
+    flex: 1; /* ocupa a outra metade */
+    background-color: var(--cor-fundo);
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#Contato {
-    margin-left: 1005px;   /* espaço da esquerda */
-    margin-right: 85px;  /* espaço da direita */
-    
-    padding: 25px;
-    max-width: 325px;
-    width: auto;
-    height: auto;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    font-family: var(--p-font);
-    color: var(--cor-texto);
+.contact-info img {
+    width: 100%;        /* ocupa toda a largura do container */
+    max-width: 100%;    /* não limita a largura */
+    height: auto;       /* mantém proporção */
+    display: block;
+    margin: 0 auto 20px auto; /* centraliza e dá espaçamento embaixo */
+    object-fit: contain;
 }
 
-.contact-info img{
-    width: 300px;
-    height: auto; 
-    display: block; /* Garante que a imagem seja tratada como um bloco */
-    margin: 0 auto 20px auto; /* Centraliza a imagem e adiciona margem inferior */
-}
 
 .contact-info p {
-    margin-left: 7px;
-    font-size: 1.03rem;
+    font-size: 1rem;
     display: flex;
-    align-items: center; /* Alinha ícone e texto verticalmente */
+    align-items: center;
+    margin: 8px 0;
 }
 
-.h2_container {
-    text-align: center;
+.endereco h3 {
+    color: var(--cor-primaria);
+    margin-top: 15px;
+}
+
+/*================= Social Media =================*/
+.social-media {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/*================= Responsividade =================*/
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+    }
+
+    nav ul li a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .bntCadastro {
+        margin: 10px 0 0 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    #Titulo {
+        font-size: 1.5rem;
+        margin-top: 100px; /* Ajusta o espaçamento para telas menores */
+    }
+
+    .contact-info img {
+        width: 100%;
+        max-width: 200px; /* Limita o tamanho máximo da imagem */
+    }
 }
 
 /*================= icones =================*/

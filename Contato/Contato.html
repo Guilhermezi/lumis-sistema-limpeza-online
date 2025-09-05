@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../IMG/Logo_sem_nome-removebg-preview.png" type="image/x-icon">
-    
 
     <!-- Link para o arquivo CSS -->
     <link rel="stylesheet" href="Contato.css">
@@ -28,10 +27,10 @@
                 <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
                 <li><a href="../Cidade_consciente/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
                 <li><a class="bntCadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
-                <li></li>
             </ul>
         </nav>
     </header>
+    
     <main>
         <section id="Titulo">
             <div class="Titulo">
@@ -41,23 +40,43 @@
 
         <section id="Contato">
             <div class="container">
+                
+                <!-- Formulário -->
+                <div class="Formulario">
+                    <h2>Entre em Contato Conosco</h2>
+                    <p>Se você tiver alguma dúvida, sugestão ou quiser compartilhar sua paixão pelo automobilismo, sinta-se à vontade para entrar em contato conosco!</p>
+                    
+                    <form action ="#" method="post">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="mensagem">Mensagem:</label>
+                        <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+                
+                <!-- Informações de contato -->
                 <div class="contact-info">
-                    <img src="../IMG/MensagemDaLumisSemFundo.png" alt="">
-                    <div class="h2_container"><h2>Informações de Contato</h2></div>
+                    <img src="../IMG/MensagemDaLumisSemFundo.png" alt="Logo mensagem Lumis">
+                    
+                    <h2>Informações de Contato</h2>
                     <p><i class="ri-mail-line"></i> Email: lumisstartup@gmail.com</p>
                     <p><i class="ri-phone-line"></i> Telefone: (11) 98121-4352</p>
                     
                     <div class="endereco">
-                        <h3><i class="ri-map-pin-line"></i> Localização </h3>
+                        <h3><i class="ri-map-pin-line"></i> Localização</h3>
                         <p>Rua: Av. Amador Bueno da Veiga <br> N°4430 <br> São Paulo</p>
                         
-                        <h3><i class="ri-time-line"></i> Horários de atendimento </h3>
-                        <p>Segunda a Sexta: 9:00 - 18:00 <br> Sábado: 10:00 - 14:00 <br> Domingo: Fechado</p>
-
+                        <h3><i class="ri-time-line"></i> Horários de atendimento</h3>
+                        <p>Segunda a Sexta: 9:00 - 18:00 <br>
+                           Sábado: 10:00 - 14:00 <br>
+                           Domingo: Fechado</p>
                     </div>
 
                     <div class="social-media">
-                        <a class="icons" href="#"><i class="ri-facebook-circle-fill"></i></i></i></i></a>
+                        <a class="icons" href="#"><i class="ri-facebook-circle-fill"></i></a>
                         <a class="icons" href="#"><i class="ri-twitter-x-line"></i></a>
                         <a class="icons" href="#"><i class="ri-instagram-line"></i></a>
                         <a class="icons" href="#"><i class="ri-tiktok-line"></i></a>
@@ -66,12 +85,6 @@
                 </div>
             </div>
         </section>
-        
-            
-
-                    
     </main>
-
-
 </body>
 </html>
