@@ -1,321 +1,367 @@
 /*=============fontes============*/
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Questrial&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Questrial&display=swap');
 
+        /*================cores================*/
+        :root {
+            --cor-primaria: #50BF87;
+            --cor-secundaria: #3DBEA9;
+            --cor-terciaria: #508ABF;
+            --cor-botao-primario-hover: #317252;
+            --cor-botao-secundario-hover: #2E8C7E;
+            --cor-botao-terciario-hover: #3168A2;
+            --cor-fundo: #F9F9FB;
+            --cor-texto: #000000;
+            --cor-texto-secundario: #666666;
+            --cor-botao-texto: #F9F9FB;
+            --cor-botao-texto-hover: #D3D3D3;
+        }
 
-/*================cores================*/
-/* Variáveis de cores para o tema do site */
-/* Você pode ajustar essas cores conforme necessário */
-:root {
-    --cor-primaria: #50BF87;
-    --cor-secundaria: #3DBEA9;
-    --cor-terciaria: #508ABF;
-    --cor-botao-primario-hover: #317252;
-    --cor-botao-secundario-hover: #2E8C7E;
-    --cor-botao-terciario-hover: #3168A2;
-    --cor-fundo: #F9F9FB;
-    --cor-texto: #000000;
-    --cor-texto-secundario: #666666;
-    --cor-botao-texto: #F9F9FB;
-    --cor-botao-texto-hover: #D3D3D3;
-}
+        /*================tipografia================*/
+        :root {
+            --h1-font: "Montserrat", sans-serif;
+            --h2-font: "Merriweather Sans", sans-serif;
+            --h3-font: "Merriweather Sans", sans-serif;
+            --p-font: "Questrial", sans-serif;
+            --h2-font-zise: 1.45rem;
+            --small-font-size: .813rem;
+        }
 
-/*================tipografia================*/
-/*0.5rem = 8px / 1rem = 16px...*/
-:root {
-    --h1-font: "Montserrat", sans-serif;
-    --h2-font: "Merriweather Sans", sans-serif;
-    --h3-font: "Merriweather Sans", sans-serif;
-    --p-font: "Questrial", sans-serif;
-    --h2-font-zise: 1.45rem;
-    --small-font-size: .813rem;
-}
+        h1 {
+            font-family: var(--h1-font);
+            color: var(--cor-texto);
+        }
 
-h1 {
-    font-family: var(--h1-font);
-    color: var(--cor-texto);
-}
+        h2 {
+            font-family: var(--h2-font);
+            color: var(--cor-texto);
+        }
 
-h2 {
-    font-family: var(--h2-font);
-    color: var(--cor-texto);
-}
+        h3 {
+            font-family: var(--h3-font);
+            color: var(--cor-texto);
+        }
 
-h3 {
-    font-family: var(--h3-font);
-    color: var(--cor-texto);
-}
+        p{
+            font-family: var(--p-font);
+            color: var(--cor-texto);
+        }
 
-p{
-    font-family: var(--p-font);
-    color: var(--cor-texto);
-}
+        /*=================body=================*/
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            font-family: var(--p-font);
+            padding-top: 80px; /* Compensa o header fixo */
+            overflow-x: hidden; /* Impede rolagem horizontal */
+        }
 
+        /*============HEADER============*/
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.45rem;
+            background-color: var(--cor-fundo);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            height: 80px;
+        }
 
+        /*==========LOGO============*/
+        #logo-headers img {
+            height: 60px;
+            width: auto;
+        }
 
-/*==================== Tipografia Resposiva ====================*/
-@media screen and (min-width: 1120px) {
-    :root {
-        --h2-font-size: 2.5rem;
-        --font-header: 1.2rem;
-        --smal-font-size: .875rem;
-    }
-}
+        #logo-headers:hover {
+            cursor: pointer;
+        }
 
-/*=================body=================*/
-body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
-    font-family: var(--p-font);
-}
+        /*==============NAVBAR=========== */
+        nav {
+            position: relative;
+        }
 
-/*============header============*/
-header {
-    display: flex;                   /* coloca logo e nav lado a lado */
-    justify-content: space-between;  /* logo à esquerda, nav à direita */
-    align-items: center;             /* centraliza verticalmente */
-    padding: 0 1.45rem;                 /* respiro nas laterais */
-    background-color: var(--cor-fundo);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
+        nav ul {
+            display: flex;
+            gap: 10px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
-/*==========logo============*/
-/*não mexe nisso POR FAVOR*/
-#logo-headers img {
-    height: 80px;  /* ajusta o tamanho da logo */
-    width: auto;
-}
+        nav ul li a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            text-decoration: none;
+            color: var(--cor-primaria);
+            font-family: var(--h1-font);
+            transition: color 0.3s ease;
+        }
 
-#logo-headers:hover{
-    cursor: pointer;
-}
+        nav ul li a:hover {
+            color: var(--cor-botao-primario-hover);
+        }
 
-/*==============NavBar=========== */
-nav ul {
-    display: flex;
-    gap: 10px;               /* espaço entre os itens */
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+        /*==============BOTÃO DE LOGIN===========  */
+        .bntCadastro {
+            background-color: var(--cor-primaria);
+            color: var(--cor-botao-texto);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: var(--h1-font);
+            margin-right: 1.45rem;
+        }
 
-nav ul li a {
-    display: flex;
-    align-items: center;      /* ícone e texto alinhados */
-    gap: 6px;
-    padding: 8px 14px;
-    text-decoration: none;
-    color: var(--cor-primaria);
-    font-family: var(--h1-font);
-    transition: color 0.3s ease;
-}
+        .bntCadastro:hover {
+            background-color: var(--cor-botao-primario-hover);
+            color: var(--cor-botao-texto-hover);
+            cursor: pointer;
+        }
 
-nav ul li a:hover {
-    color: var(--cor-botao-primario-hover);
-}
+        /*============== MENU HAMBURGUER ==============*/
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            z-index: 1100;
+            position: relative;
+        }
 
-/*==============BOTÃO DE LOGIN===========  */
-.bntCadastro {
-    background-color: var(--cor-primaria);
-    color: var(--cor-botao-texto);
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-family: var(--h1-font);
-    margin-right: 1.45rem;
-}
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background: var(--cor-primaria);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
 
-.bntCadastro:hover {
-    background-color: var(--cor-botao-primario-hover);
-    color: var(--cor-botao-texto-hover);
-    cursor: pointer;
-}
+        /* animação virar X */
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
 
-/*================= Título Contato =================*/
-#Titulo {
-    margin-top: 120px; /* Espaçamento para evitar sobreposição com o header fixo */
-    text-align: center;
-    font-family: var(--h1-font);
-    color: var(--cor-primaria);
-    font-size: 1.90rem;
-}
-/*================= Seção Contato =================*/
-#Contato {
-    margin: 40px auto;          /* Centraliza a seção */
-    padding: 25px;
-    max-width: 1100px;          /* largura máxima do bloco inteiro */
-    width: 100%;
-}
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            header {
+                padding: 0 1rem;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                background: var(--cor-fundo);
+                flex-direction: column;
+                width: 100%;
+                height: calc(100vh - 80px);
+                display: none;
+                padding: 2rem 1rem;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+                overflow-y: auto;
+                gap: 0;
+                z-index: 1000;
+            }
 
-/*================= Container principal =================*/
-.container {
-    display: flex;
-    justify-content: space-between; /* espaço entre os dois lados */
-    align-items: flex-start;        /* alinha pelo topo */
-    gap: 40px;                      /* espaço entre formulário e info */
-}
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+                width: 100%;
+            }
 
-/*================= Bloco do Formulário =================*/
-.Formulario {
-    flex: 1; /* ocupa metade do espaço */
-    background-color: var(--cor-fundo);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: var(--cor-primaria);
-}
+            nav ul li a {
+                justify-content: center;
+                padding: 12px;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            
+            nav ul li:last-child a {
+                border-bottom: none;
+            }
 
-.Formulario label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
+            .menu-toggle {
+                display: flex;
+                margin-right: 1rem;
+            }
 
-.Formulario input,
-.Formulario textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid var(--cor-primaria);
-    border-radius: 4px;
-    font-family: var(--p-font);
-}
+            nav ul.active {
+                display: flex;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+            
+            .bntCadastro {
+                margin-right: 0;
+                margin-top: 10px;
+                text-align: center;
+                display: block;
+            }
+            
+            /* Garantir que o menu fique acima de tudo no mobile */
+            nav {
+                z-index: 1001;
+            }
+        }
 
-.Formulario button {
-    background-color: var(--cor-terciaria);
-    color: var(--cor-botao-texto);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-family: var(--h1-font);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    display: block;
-    margin: 20px auto; /* auto nas laterais centraliza */
-}
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /*================= Seção Contato =================*/
+        #Contato {
+            margin: 40px auto;
+            padding: 25px;
+            max-width: 1100px;
+            width: 100%;
+        }
 
+        /*================= Container principal =================*/
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+        }
 
-.Formulario button:hover {
-    background-color: var(--cor-botao-terciario-hover);
-    color: var(--cor-botao-texto-hover);
-    cursor: pointer;
-}
+        /*================= Bloco do Formulário =================*/
+        .Formulario {
+            flex: 1;
+            background-color: var(--cor-fundo);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: var(--cor-primaria);
+        }
 
-/*================= Bloco das Informações =================*/
-.contact-info {
-    flex: 1; /* ocupa a outra metade */
-    background-color: var(--cor-fundo);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .Formulario label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
 
-.contact-info img {
-    width: 100%;        /* ocupa toda a largura do container */
-    max-width: 100%;    /* não limita a largura */
-    height: auto;       /* mantém proporção */
-    display: block;
-    margin: 0 auto 20px auto; /* centraliza e dá espaçamento embaixo */
-    object-fit: contain;
-}
+        .Formulario input,
+        .Formulario textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 4px;
+            font-family: var(--p-font);
+        }
 
+        .Formulario button {
+            background-color: var(--cor-terciaria);
+            color: var(--cor-botao-texto);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: var(--h1-font);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
 
-.contact-info p {
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    margin: 8px 0;
-}
+        .Formulario button:hover {
+            background-color: var(--cor-botao-terciario-hover);
+            color: var(--cor-botao-texto-hover);
+            cursor: pointer;
+        }
 
-.endereco h3 {
-    color: var(--cor-primaria);
-    margin-top: 15px;
-}
+        /*================= Bloco das Informações =================*/
+        .contact-info {
+            flex: 1;
+            background-color: var(--cor-fundo);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-/*================= Social Media =================*/
-.social-media {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-}
+        .contact-info img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px auto;
+            object-fit: contain;
+        }
 
-/*================= Responsividade =================*/
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-}
-@media (max-width: 480px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px;
-    }
+        .contact-info p {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
 
-    nav ul {
-        flex-direction: column;
-        gap: 5px;
-        width: 100%;
-    }
+        .endereco h3 {
+            color: var(--cor-primaria);
+            margin-top: 15px;
+        }
 
-    nav ul li a {
-        width: 100%;
-        justify-content: center;
-    }
+        /*================= Social Media =================*/
+        .social-media {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
 
-    .bntCadastro {
-        margin: 10px 0 0 0;
-        width: 100%;
-        text-align: center;
-    }
+        /*================= Responsividade =================*/
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            #Titulo {
+                margin-top: 20px;
+                font-size: 1.6rem;
+            }
+        }
 
-    #Titulo {
-        font-size: 1.5rem;
-        margin-top: 100px; /* Ajusta o espaçamento para telas menores */
-    }
+        /*================= icones =================*/
+        .endereco h3 {
+            color: var(--cor-primaria);
+        }
+        
+        p i {
+            color: var(--cor-primaria);
+            margin-right: 8px;
+        }
+        
+        p i:hover {
+            color: var(--cor-botao-primario-hover);
+            cursor: pointer;
+        }
 
-    .contact-info img {
-        width: 100%;
-        max-width: 200px; /* Limita o tamanho máximo da imagem */
-    }
-}
+        a {
+            text-decoration: none;
+            color: var(--cor-primaria);
+        }
 
-/*================= icones =================*/
-#social-media {
-    display: flex;
-    text-align: center;
-    gap: 15px; /* Espaço entre os ícones */
-    margin-top: 20px;
-}
+        .icons {
+            color: var(--cor-primaria);
+            margin-left: 14px;
+            font-size: 2.35rem;
+        }
 
-.endereco h3 {
-    color: var(--cor-primaria);
-}
-p i {
-    color: var(--cor-primaria);
-}
-p i:hover {
-    color: var(--cor-botao-primario-hover);
-    cursor: pointer;
-}
-
-a {
-    text-decoration: none;
-    color: var(--cor-primaria);
-}
-
-.icons {
-    color: var(--cor-primaria);
-    margin-left: 14px;
-    font-size: 2.35rem;
-}
-
-.icons:hover {
-    color: var(--cor-botao-primario-hover);
-    cursor: pointer;
-}
+        .icons:hover {
+            color: var(--cor-botao-primario-hover);
+            cursor: pointer;
+        }

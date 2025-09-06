@@ -17,8 +17,16 @@
         <div id="logo-headers">
             <a href="../Index/index.html"><img src="../IMG/Logo_Cor_Fundo.png" alt="Logo da Lumis" id="logo"></a>
         </div>
+
         <nav>
-            <ul>
+            <!-- Botão hamburguer -->
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul id="menu">
                 <li><a href="../Index/index.html"><i class="ri-home-2-line"></i> Início</a></li>
                 <li><a href="../Sobre/Sobre.html"><i class="ri-team-line"></i> Sobre</a></li>
                 <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
@@ -30,25 +38,25 @@
             </ul>
         </nav>
     </header>
-    
-    <main>
-        <section id="Titulo">
-            <div class="Titulo">
-                <h1>Fale conosco</h1>
-            </div>
-        </section>
 
+    <main>
         <section id="Contato">
             <div class="container">
                 
                 <!-- Formulário -->
                 <div class="Formulario">
                     <h2>Entre em Contato Conosco</h2>
-                    <p>Se você tiver alguma dúvida, sugestão ou quiser compartilhar sua paixão pelo automobilismo, sinta-se à vontade para entrar em contato conosco!</p>
+                    <p>Tem alguma dúvida, sugestão ou deseja compartilhar sua experiência com um ambiente mais limpo e agradável? Fale com a gente!</p>
                     
-                    <form action ="#" method="post">
+                    <form action="#" method="post">
+                        <label for="Nome">Nome:</label>
+                        <input type="Nome" id="nome" name="nome" required>
+
                         <label for="email">E-mail:</label>
                         <input type="email" id="email" name="email" required>
+
+                        <label for="Telefone">Telefone:</label>
+                        <input type="Telefone" id="Telefone" name="Telefone" required>
 
                         <label for="mensagem">Mensagem:</label>
                         <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
@@ -86,5 +94,7 @@
             </div>
         </section>
     </main>
+
+    <script src="Contato.js"></script>
 </body>
 </html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos Responsivos</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --cor-primaria: #50BF87;
+            --cor-secundaria: #3DBEA9;
+            --cor-terciaria: #508ABF;
+            --cor-botao-terciario-hover: #3168A2;
+            --cor-fundo: #F9F9FB;
+            --cor-texto: #000000;
+            --cor-texto-secundario: #666666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            padding: 20px;
+        }
+        
+        /*============Planos===========*/
+        .container_planos {
+            display: flex;
+            max-width: 80%;
+            border-radius: 10px;
+            background-color: var(--cor-fundo);
+            margin: 55px auto;
+        }
+        
+        .planos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .Texto_card {
+            font-size: 14px;
+            color: var(--cor-texto-secundario);
+        }
+        
+        .mes {
+            font-size: 12px;
+            color: var(--cor-texto-secundario);
+        }
+        
+        .button1 {
+            display: block;
+            background-color: var(--cor-terciaria);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .button1:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--cor-botao-terciario-hover);
+        }
+        
+        .button2 {
+            display: block;
+            background-color: var(--cor-fundo);
+            color: var(--cor-terciaria);
+            border: 2px solid var(--cor-terciaria);
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .button2:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--cor-botao-terciario-hover);
+        }
+        
+        .linha_horizontal {
+            border: none;
+            height: 1px;
+            background-color: var(--cor-terciaria);
+            margin: 15px 0;
+        }
+        
+        .Plano_basico, .Plano_personalizado {
+            width: 250px;
+            border-radius: 15px;
+            border: 2px solid var(--cor-primaria);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .Plano_basico {
+            align-self: flex-end;
+        }
+        
+        p i {
+            color: var(--cor-primaria);
+            font-size: 19px;
+            margin-right: 10px;
+        }
+        
+        .Topo_regular, .Topo_premium {
+            background: linear-gradient(to right, var(--cor-primaria), var(--cor-terciaria));
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 12px 0;
+            border-radius: 30px;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            box-shadow: 0 5px 15px rgba(80, 191, 135, 0.3);
+            z-index: 2;
+        }
+        
+        .Topo_premium {
+            background: linear-gradient(to left, var(--cor-primaria), var(--cor-terciaria));
+        }
+        
+        .Preco {
+            color: var(--cor-primaria);
+            font-size: 2rem;
+            margin: 10px 0;
+        }
+        
+        .Plano_regular, .Plano_premium {
+            position: relative;
+            border-radius: 15px;
+            padding: 40px 25px 25px;
+            border: 2px solid transparent;
+            background: 
+                linear-gradient(white, white) padding-box,
+                linear-gradient(to right, var(--cor-primaria), var(--cor-terciaria)) border-box;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .Plano_premium {
+            background: 
+                linear-gradient(white, white) padding-box,
+                linear-gradient(to left, var(--cor-primaria), var(--cor-terciaria)) border-box;
+        }
+        
+        .Plano_personalizado {
+            align-self: flex-end;
+        }
+        
+        /* Ajustes de conteúdo para os planos com topo */
+        .Plano_regular > *:first-child,
+        .Plano_premium > *:first-child {
+            margin-top: 15px;
+        }
+        
+        /* RESPONSIVIDADE */
+        @media (max-width: 1200px) {
+            .container_planos {
+                max-width: 90%;
+            }
+            
+            .planos {
+                gap: 15px;
+            }
+            
+            .Plano_basico, .Plano_personalizado {
+                width: 220px;
+            }
+            
+            .Plano_regular, .Plano_premium {
+                width: 260px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .planos {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .Plano_basico, .Plano_regular, .Plano_premium, .Plano_personalizado {
+                width: 45%;
+                margin-bottom: 40px;
+                align-self: stretch;
+            }
+            
+            .Plano_basico, .Plano_personalizado {
+                align-self: stretch;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container_planos {
+                max-width: 95%;
+                margin: 30px auto;
+            }
+            
+            .planos {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .Plano_basico, .Plano_regular, .Plano_premium, .Plano_personalizado {
+                width: 100%;
+                max-width: 400px;
+                margin-bottom: 50px;
+            }
+            
+            .Topo_regular, .Topo_premium {
+                width: 70%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container_planos {
+                max-width: 100%;
+            }
+            
+            .Plano_basico, .Plano_regular, .Plano_premium, .Plano_personalizado {
+                padding: 20px 15px;
+            }
+            
+            .Topo_regular, .Topo_premium {
+                font-size: 0.9rem;
+                padding: 10px 0;
+                width: 80%;
+            }
+            
+            .Preco {
+                font-size: 1.7rem;
+            }
+            
+            .button1, .button2 {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="Planos">
+        <div class="container_planos">
+            <div class="planos">
+                <div class="Plano_basico">
+                    <p><b>Plano Básico</b><br><span class="Texto_card">Perfeito para quem busca praticidade com economia.</span></p>
+                    <h3><span class="mes">R$</span> 99,90 <span class="mes">/mês</span></h3>
+                    <a class="button1" href=""><b>Quero este plano</b></a>
+                    <p><span class="Texto_card">Comece simples e mantenha seu espaço limpo e organizado.</span></p>
+                    <hr class="linha_horizontal">
+                    <p><i class="ri-checkbox-circle-fill"></i>2 limpezas/mês (até 4 cômodos)</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>1 serviço especializado por trimestre (ex: sofá ou vidros)</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Atendimento em até 3 dias úteis</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Dicas mensais de organização e sustentabilidade</p>
+                </div>
+                
+                <div class="Plano_regular">
+                    <p class="Topo_regular">Mais Popular</p>
+                    <p><b>Plano Regular</b><br><span class="Texto_card">Equilíbrio perfeito entre custo e benefícios.</span></p>
+                    <h3><span class="mes">R$</span><span class="Preco">179,90</span><span class="mes">/mês</span></h3>
+                    <a class="button1" href=""><b>Quero este plano</b></a>
+                    <p><span class="Texto_card">Nosso plano mais escolhido, ideal para famílias e pequenos negócios.</span></p>
+                    <hr class="linha_horizontal">
+                    <p><i class="ri-checkbox-circle-fill"></i>3 limpezas/mês (até 4 cômodos)</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>2 serviço especializado por trimestre (ex: sofá ou vidros)</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Atendimento em até 2 dias úteis</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Dicas mensais de organização e sustentabilidade</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Relatórios simples de impacto ambiental</p>
+                </div>
+                
+                <div class="Plano_premium">
+                    <p class="Topo_premium">Recomendado</p>
+                    <p><b>Plano Premium</b><br><span class="Texto_card">Conforto total e suporte prioritário.</span></p>
+                    <h3><span class="mes">R$</span><span class="Preco">399,90</span><span class="mes">/mês</span></h3>
+                    <a class="button2" href=""><b>Quero este plano</b></a>
+                    <p><span class="Texto_card">Máximo de comodidade e resultados profissionais.</span></p>
+                    <hr class="linha_horizontal">
+                    <p><i class="ri-checkbox-circle-fill"></i>Limpeza semanal (residencial ou pequena empresa)</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Todos os serviços especializados liberados (até 4/mês)</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Atendimento em até 24h</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Equipe fixa ou exclusiva para empresas</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Tudo que os planos inferiores oferece, e mais</p>
+                </div>
+                
+                <div class="Plano_personalizado">
+                    <p><b>Plano Personalizado</b><br><span class="Texto_card">Flexível, do seu jeito.</span></p>
+                    <h3><span class="mes">R$</span> ???,?? <span class="mes">/mês</span></h3>
+                    <a class="button2" href=""><b>Quero este plano</b></a>
+                    <p><span class="Texto_card">Monte o plano perfeito para sua rotina e pague apenas pelo que realmente precisa.</span></p>
+                    <hr class="linha_horizontal">
+                    <p><i class="ri-checkbox-circle-fill"></i>Você escolhe quanto quer pagar, a frequência e o tamanho da limpeza.</p>
+                    <p><i class="ri-checkbox-circle-fill"></i>Um profissional analisa sua proposta e, se for viável, o serviço é aprovado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
