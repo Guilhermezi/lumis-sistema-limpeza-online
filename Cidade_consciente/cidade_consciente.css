@@ -1,0 +1,498 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        :root {
+            --cor-primaria: #50BF87;
+            --cor-secundaria: #3DBEA9;
+            --cor-terciaria: #508ABF;
+            --cor-botao-primario-hover: #317252;
+            --cor-botao-secundario-hover: #2E8C7E;
+            --cor-botao-terciario-hover: #3168A2;
+            --cor-fundo: #F9F9FB;
+            --cor-texto: #000000;
+            --cor-texto-secundario: #666666;
+            --cor-botao-texto: #F9F9FB;
+            --cor-botao-texto-hover: #D3D3D3;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.45rem;
+            background-color: var(--cor-fundo);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            height: 80px;
+        }
+
+        #logo-headers img {
+            height: 60px;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--cor-primaria);
+        }
+        .has-submenu {
+    position: relative;
+}
+
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.bntCadastro {
+    background-color: var(--cor-primaria);
+    color: var(--cor-botao-texto);
+    padding: 8px 16px;
+    border-radius: 10px;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero-cidade {
+            background: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
+            padding: 8rem 2rem 4rem;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            color: var(--cor-texto);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            color: var(--cor-primaria);
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--cor-primaria);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--cor-primaria);
+            padding: 1rem 2rem;
+            border: 2px solid var(--cor-primaria);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 350px;
+            height: 400px;
+            border-radius: 25px;
+            object-fit: contain;
+        }
+
+        /* Project Section */
+        .projeto-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .projeto-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--cor-texto);
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .projeto-description {
+            font-size: 1.1rem;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 3rem;
+            max-width: 800px;
+        }
+.lixeiras-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(240, 248, 255, 0.5);
+    border-radius: 20px;
+    border: 2px solid rgba(70, 130, 180, 0.3);
+}
+
+.lixeira-card {
+    text-align: center;
+    padding: 1rem;
+}
+
+.lixeira-icon {
+    width: 120px;
+    height: 200px;
+    margin: 0 auto 1.5rem;
+    border-radius: 25px;
+    position: relative;
+    background: #555;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+.lixeira-icon::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 0 25px 25px;
+    transition: height 0.3s ease;
+}
+
+.lixeira-icon.disponivel::before {
+    height: 25%;
+    background: #4CAF50;
+}
+
+.lixeira-icon.atencao::before {
+    height: 60%;
+    background: #FFD700;
+}
+
+.lixeira-icon.coletar::before {
+    height: 95%;
+    background: #FF6B6B;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.status-badge.disponivel {
+    background: #4CAF50;
+}
+
+.status-badge.atencao {
+    background: #FFD700;
+    color: #333;
+}
+
+.status-badge.coletar {
+    background: #FF6B6B;
+}
+
+.lixeira-card h4 {
+    color: var(--cor-texto, #333);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.sistema-info {
+    text-align: center;
+    margin-top: 2rem;
+    color: #666;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.saiba-mais-btn {
+    background: var(--cor-secundaria);
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Conheca Section */
+      .conheca-section {
+    padding: 4rem 2rem;
+    background: var(--cor-fundo);
+}
+
+.conheca-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.projeto-card {
+    background: var(--cor-primaria);
+    color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.projeto-info {
+    flex: 1;
+}
+
+.projeto-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.projeto-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+    line-height: 1.4;
+}
+
+.projeto-features {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+}
+
+.projeto-features li {
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.projeto-features li::before {
+    content: '✓';
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.btn-conhecer {
+    background: white;
+    color: var(--cor-primaria);
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-conhecer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.projeto-imagem {
+    width: 250px;
+    height: auto;
+    border-radius: 15px;
+    flex-shrink: 0;
+}
+
+/* Partnership Section */
+.parceiros-section {
+    padding: 4rem 2rem;
+    background: white;
+    text-align: center;
+        }
+
+        .parceiros-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .parceiros-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .parceiro-card {
+            background: var(--cor-fundo);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .parceiro-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--cor-primaria);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .parceiro-card h4 {
+            color: var(--cor-texto);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .parceiro-card p {
+            color: var(--cor-texto-secundario);
+            font-size: 0.85rem;
+        }
+
+        .btn-parceiro {
+            background: var(--cor-terciaria);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Dots Navigation */
+        .dots-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #D3D3D3;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: var(--cor-primaria);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content,
+            .conheca-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .conheca-section {
+        padding: 2rem 1rem;
+    }
+    
+    .projeto-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .projeto-imagem {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+.lixeiras-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .lixeira-icon {
+        width: 100px;
+        height: 160px;
+    }
+
