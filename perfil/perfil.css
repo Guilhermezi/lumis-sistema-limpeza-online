@@ -136,6 +136,7 @@ nav ul li a:hover {
 /*==============Perfil===========  */
 #titulo-subtitulo{
     display:flex;
+    justify-content: center;
     gap: 500px;
     margin-top: 120px; /* Espaçamento para evitar sobreposição com o header fixo */
     margin-left: auto;
@@ -179,4 +180,5 @@ td{
 }
 #remarcar{
     background-color: #508ABF;
+
 }
