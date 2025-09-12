@@ -245,6 +245,8 @@
     max-width: 80%; 
     background-color: var(--cor-fundo);
     margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .informacoes {
@@ -448,6 +450,51 @@ p i {
     padding: 5px 25px;
 }
 
+/*=== Depoimento ===*/
+    .Depoimento {
+        font-size: 18px;
+    }
+
+    .Conteiner_depoimento {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 60px auto;
+        max-width: 80%;
+    }
+
+    .Texto_depoimento {
+        max-width: 600px;
+        margin-left: 40px;
+    }
+
+    .Destaque{
+        color: var(--cor-primaria);
+        font-weight: bold;
+    }
+
+    .Destaque2{
+        color: var(--cor-terciaria);
+        font-weight: bold;
+    }
+
+    .linha_horizontal2 {
+        border: none;
+        height: 1px;             
+        background-color: var(--cor-terciaria); 
+        margin: 20px 0;
+    }
+
+/*=====================Footer=================*/
+footer {
+    background-color: #262726;
+    padding: 20px 0;
+    text-align: center;
+    font-family: var(--p-font);
+    color: var(--cor-texto-secundario);
+    margin-top: 40px;
+}
+
 /* RESPONSIVIDADE */
         @media (max-width: 1200px) {
             .container_planos {
@@ -506,9 +553,9 @@ p i {
             }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 460px) {
             .container_planos {
-                max-width: 100%;
+                max-width: 90%;
             }
             
             .Plano_basico, .Plano_regular, .Plano_premium, .Plano_personalizado {
