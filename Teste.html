@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="IMG/Logo_sem_nome-removebg-preview.png" type="image/x-icon">
+    <title>Menu Hamburguer Responsivo</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <title>Lumis</title>
     <style>
-        /* ============ VARIÁVEIS ============ */
         :root {
-            /* Cores */
             --cor-primaria: #50BF87;
             --cor-secundaria: #3DBEA9;
             --cor-terciaria: #508ABF;
@@ -21,945 +18,116 @@
             --cor-texto-secundario: #666666;
             --cor-botao-texto: #F9F9FB;
             --cor-botao-texto-hover: #D3D3D3;
-            
-            /* Tipografia */
-            --fonte-titulo: "Montserrat", sans-serif;
-            --fonte-subtitulo: "Merriweather Sans", sans-serif;
-            --fonte-texto: "Questrial", sans-serif;
-            --tamanho-titulo: 1.45rem;
-            --tamanho-pequeno: .813rem;
+            --h1-font: "Montserrat", sans-serif;
+            --h2-font: "Merriweather Sans", sans-serif;
+            --h3-font: "Merriweather Sans", sans-serif;
+            --p-font: "Questrial", sans-serif;
         }
 
-        /* ============ RESET E ESTILOS GERAIS ============ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        
 
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        body {
-            background-color: var(--cor-fundo);
-            color: var(--cor-texto);
-            font-family: var(--fonte-texto);
-            padding-top: 80px; /* Compensa o header fixo */
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--fonte-titulo);
-            color: var(--cor-texto);
-        }
-
-        p {
-            font-family: var(--fonte-texto);
-            color: var(--cor-texto);
-        }
-
-        .container {
-            width: min(1200px, 92%);
+        /* Conteúdo de exemplo */
+        .content {
+            padding: 2rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
-
-        /* ============ HEADER ============ */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 1.45rem;
-            background-color: var(--cor-fundo);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            height: 80px;
-        }
-
-        .header__logo img {
-            height: 60px;
-            width: auto;
-        }
-
-        .header__logo:hover {
-            cursor: pointer;
-        }
-
-        .nav {
-            position: relative;
-        }
-
-        .nav__list {
-            display: flex;
-            gap: 10px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav__link {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            text-decoration: none;
+        
+        h1 {
+            font-family: var(--h1-font);
             color: var(--cor-primaria);
-            font-family: var(--fonte-titulo);
-            transition: color 0.3s ease;
-        }
-
-        .nav__link:hover {
-            color: var(--cor-botao-primario-hover);
-        }
-
-        .btn--login {
-            background-color: var(--cor-primaria);
-            color: var(--cor-botao-texto);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-family: var(--fonte-titulo);
-            margin-right: 1.45rem;
-            text-decoration: none;
-        }
-
-        .btn--login:hover {
-            background-color: var(--cor-botao-primario-hover);
-            color: var(--cor-botao-texto-hover);
-            cursor: pointer;
-        }
-
-        /* Menu Hamburger */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            cursor: pointer;
-            width: 30px;
-            height: 25px;
-            z-index: 1100;
-            position: relative;
-        }
-
-        .menu-toggle span {
-            height: 3px;
-            width: 100%;
-            background: var(--cor-primaria);
-            margin: 4px 0;
-            border-radius: 2px;
-            transition: 0.3s;
-        }
-
-        /* Animação do menu hamburger */
-        .menu-toggle.open span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .menu-toggle.open span:nth-child(2) {
-            opacity: 0;
-        }
-        .menu-toggle.open span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-
-        /* ============ HERO SECTION ============ */
-        .hero {
-            background: #fff;
-            padding: 28px 0 16px;
-        }
-
-        .hero__inner {
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            gap: 28px;
-            align-items: center;
-        }
-
-        .hero__media img {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .hero__title {
-            font-size: 56px;
-            line-height: 0.9;
-            margin: 0 0 14px;
-            color: #3a9b88;
-            letter-spacing: .5px;
-            text-shadow: 0 2px 0 rgba(0,0,0,.08);
-        }
-
-        .hero__title span {
-            color: #4bc3ae;
-            font-weight: 900;
-        }
-
-        .hero__description {
-            font-size: 30px;
-            color: #222;
-            margin: 6px 0 18px;
-        }
-
-        .cta {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border-radius: 12px;
-            padding: 10px 18px;
-            text-decoration: none;
-            font-weight: 800;
-        }
-
-        .btn--green {
-            background: var(--cor-primaria);
-            color: #fff;
-            box-shadow: 0 6px 0 rgba(0,0,0,.08);
-        }
-
-        .btn--blue {
-            background: var(--cor-terciaria);
-            color: #fff;
-        }
-
-        .btn--outline {
-            background: #e8f1fb;
-            color: var(--cor-terciaria);
-            border: 2px solid var(--cor-terciaria);
-        }
-
-        .btn--large {
-            padding: 14px 26px;
-            font-size: 18px;
-        }
-
-        .btn--big {
-            padding: 14px 22px;
-        }
-
-        /* ============ SERVIÇOS SECTION ============ */
-        .servicos {
-            background: #f9f9fb;
-            padding: 36px 0 24px;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin: 12px 0 26px;
-        }
-
-        .tab {
-            padding: 10px 18px;
-            border: 2px solid #2ab59f;
-            color: #1ea790;
-            border-radius: 999px;
-            background: #eefaf7;
-            font-weight: 800;
-            letter-spacing: .6px;
-            cursor: pointer;
-        }
-
-        .tab.active {
-            background: #e3fbf6;
-        }
-
-        .cards {
-            display: grid;
-            gap: 24px;
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .card {
-            border: 1.5px solid #a8e3d9;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fff;
-            box-shadow: 0 2px 0 #d4eae5;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background: #f2f4f3;
-        }
-
-        .card__body {
-            padding: 18px;
-        }
-
-        .card__title {
-            margin: 0 0 8px;
-            font-size: 22px;
-        }
-
-        .card__description {
-            margin: 0 0 14px;
-            color: #4b4f54;
-        }
-
-        .card .btn {
-            width: 100%;
-            justify-content: center;
-        }
-
-        /* ============ PLANOS SECTION ============ */
-        .planos {
-            background: #e4e4e4;
-            padding: 38px 0;
-        }
-
-        .planos__grid {
-            display: grid;
-            gap: 28px;
-            grid-template-columns: 1.1fr 1fr;
-            align-items: center;
-        }
-
-        .planos__title {
-            font-size: 44px;
-            margin: 0 0 12px;
-            color: #e4e4e4;
-            background: linear-gradient(90deg,#4bc3ae, #3a9b88);
-            padding: 24px;
-            border-radius: 18px;
-        }
-
-        .planos__description {
-            margin: 16px 0;
-            max-width: 52ch;
-        }
-
-        .bullets {
-            display: grid;
-            gap: 14px;
-            margin: 18px 0 24px;
-        }
-
-        .bullet {
-            display: flex;
-            gap: 14px;
-            align-items: flex-start;
-            background: #f5fbf9;
-            border: 1px solid #bfece2;
-            padding: 12px 14px;
-            border-radius: 12px;
-        }
-
-        .bullet__icon {
-            font-size: 22px;
-        }
-
-        .planos__media img {
-            width: 100%;
-            border-radius: 18px;
-        }
-
-        /* ============ POR QUE SECTION ============ */
-        .porque {
-            padding: 46px 0;
-            background: #fff;
-        }
-
-        .porque__title {
-            text-align: center;
-            font-size: 48px;
-            margin: 0 0 26px;
-        }
-
-        .features {
-            display: grid;
-            gap: 24px;
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .feature {
-            background: #fff;
-            border: 1px solid #cde1ee;
-            border-radius: 18px;
-            padding: 22px;
-            box-shadow: 0 6px 0 #dfebf7;
-        }
-
-        .feature__icon {
-            font-size: 28px;
-            background: #e2f2ea;
-            width: 54px;
-            height: 54px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            margin-bottom: 8px;
-        }
-
-        .feature__title {
-            margin: 6px 0 8px;
-        }
-
-        .feature__description {
-            color: #4b4f54;
-        }
-
-        /* ============ TRABALHE CONOSCO SECTION ============ */
-        .jobs {
-            padding: 48px 0;
-            background: #fff;
-        }
-
-        .jobs__title {
-            text-align: center;
-            font-size: 56px;
-            margin: 0 0 24px;
-        }
-
-        .jobs__grid {
-            display: grid;
-            gap: 24px;
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .job-card {
-            background: #fff;
-            border: 2px solid #b6e7dd;
-            border-radius: 14px;
-            padding: 20px;
-            box-shadow: 0 4px 0 #d6f1ea;
-        }
-
-        .job-card__icon {
-            font-size: 28px;
-            color: #1ea790;
-        }
-
-        .center {
-            text-align: center;
-            margin-top: 22px;
-        }
-
-        /* ============ DEPOIMENTOS SECTION ============ */
-        .depoimentos {
-            padding: 28px 0 56px;
-            background: #f7fafb;
-        }
-
-        .depoimentos__title {
-            font-size: 56px;
-            margin: 0 0 18px;
-        }
-
-        .depoimentos__grid {
-            display: grid;
-            gap: 24px;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .depoimento-card {
-            display: flex;
-            gap: 14px;
-            padding: 18px;
-            background: #fff;
-            border-radius: 12px;
-            border: 1px solid #bcdaf4;
-            box-shadow: 0 4px 0 #dbe9fa;
-        }
-
-        .depoimento-avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background: #ddd;
-        }
-
-        /* ============ FOOTER ============ */
-        .footer {
-            background: #262726;
-            color: #e8fffb;
-            margin-top: 12px;
-        }
-
-        .footer__grid {
-            display: grid;
-            gap: 24px;
-            grid-template-columns: 1.1fr repeat(4, 1fr);
-            padding: 28px 0;
-        }
-
-        .footer__brand p {
-            opacity: .9;
-        }
-
-        .footer__social {
-            display: flex;
-            gap: 10px;
-            margin-top: 14px;
-        }
-
-        .footer__social span {
-            display: inline-grid;
-            place-items: center;
-            width: 34px;
-            height: 34px;
-            border: 1px solid #3aa694;
-            border-radius: 50%;
-        }
-
-        .footer__title {
-            margin: 6px 0 10px;
-            font-size: 18px;
-        }
-
-        .footer__list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer__list li {
-            margin: 6px 0;
-        }
-
-        .footer__link {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .footer__link:hover {
-            color: #c1fff3;
-        }
-
-        .footer__list--plain li {
-            opacity: .9;
-        }
-
-        .legal {
-            border-top: 1px solid #000;
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            align-items: center;
-            padding: 12px 10px;
-            font-size: 14px;
-            color: #fff;
-        }
-
-        .legal span {
-            opacity: .9;
-        }
-
-        /* ============ RESPONSIVIDADE ============ */
-        @media (max-width: 1200px) {
-            .hero__inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .planos__grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .jobs__grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .depoimentos__grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav__list {
-                display: none;
-            }
-            
-            .btn--login {
-                margin-left: auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 0 1rem;
-            }
-            
-            .nav__list {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                background: var(--cor-fundo);
-                flex-direction: column;
-                width: 100%;
-                height: calc(100vh - 80px);
-                display: none;
-                padding: 2rem 1rem;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-                overflow-y: auto;
-                gap: 0;
-                z-index: 1000;
-            }
-
-            .nav__item {
-                margin: 10px 0;
-                text-align: center;
-                width: 100%;
-            }
-
-            .nav__link {
-                justify-content: center;
-                padding: 12px;
-                border-bottom: 1px solid rgba(0,0,0,0.05);
-            }
-            
-            .nav__item:last-child .nav__link {
-                border-bottom: none;
-            }
-
-            .menu-toggle {
-                display: flex;
-                margin-right: 1rem;
-            }
-
-            .nav__list.active {
-                display: flex;
-                animation: fadeIn 0.3s ease-in-out;
-            }
-            
-            .btn--login {
-                margin-right: 0;
-                margin-top: 10px;
-                text-align: center;
-                display: block;
-            }
-            
-            .nav {
-                z-index: 1001;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .btn {
-                padding: 10px 14px;
-            }
-            
-            .hero__title {
-                font-size: 46px;
-            }
-            
-            .jobs__title, .depoimentos__title {
-                font-size: 40px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .footer__grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .cta {
-                justify-content: center;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            margin-bottom: 1.5rem;
+        }
+        
+        p {
+            font-family: var(--p-font);
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header__logo">
-            <img src="IMG/Logo_Cor_Fundo.png" alt="Logo da Lumis" class="logo">
+    <header>
+        <div id="logo-headers">
+            <a href="#"><img src="https://via.placeholder.com/150x50/50BF87/FFFFFF?text=Logo" alt="Logo da Empresa" id="logo"></a>
         </div>
-        <nav class="nav">
+
+        <nav>
+            <!-- Botão hamburguer -->
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <ul class="nav__list">
-                <li class="nav__item"><a href="#" class="nav__link"><i class="ri-home-2-line"></i> Início</a></li>
-                <li class="nav__item"><a href="Sobre/Sobre.html" class="nav__link"><i class="ri-team-line"></i> Sobre</a></li>
-                <li class="nav__item"><a href="Servicos/Servicos.html" class="nav__link"><i class="ri-tools-line"></i> Serviços</a></li>
-                <li class="nav__item"><a href="Plano/Plano.html" class="nav__link"><i class="ri-wallet-3-line"></i> Planos</a></li>
-                <li class="nav__item"><a href="Contato/Contato.html" class="nav__link"><i class="ri-chat-2-line"></i> Contato</a></li>
-                <li class="nav__item"><a href="Ajuda/Ajuda.html" class="nav__link"><i class="ri-question-line"></i> Ajuda</a></li>
-                <li class="nav__item"><a href="Cidade_consciente/Cidade_consciente.html" class="nav__link"><i class="ri-earth-line"></i> Cidade consciente</a></li>
-                <li class="nav__item"><a class="btn--login" href="Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
+
+            <ul id="menu">
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
+                <li class="has-submenu">
+                    <a href="../Sobre/Sobre.html">
+                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                    </ul>
+                </li>
+                <!-- Item adicional para mobile -->
+                <li class="mobile-only-item"><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
+                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
+                <li><a href="#"><i class="ri-chat-2-line"></i> Contato</a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
+                <li><a class="bntCadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <!-- HERO SECTION -->
-        <section class="hero">
-            <div class="container hero__inner">
-                <div class="hero__media">
-                    <img src="./IMG/Banner_HOME.png" alt="Profissional de limpeza segurando balde com produtos">
-                </div>
-                <div class="hero__copy">
-                    <h1 class="hero__title"><span>Transforma</span><br>seu espaço</h1>
-                    <p class="hero__description">Limpeza e sustentabilidade em um só lugar!</p>
-                    <div class="cta">
-                        <a href="#" class="btn btn--green">Agendar serviços</a>
-                        <a href="#" class="btn btn--blue">Fale conosco</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="content">
+        <h1>Conteúdo Principal</h1>
+        <p>Este é um exemplo de conteúdo para demonstrar o funcionamento do menu hambúrguer em dispositivos móveis.</p>
+        <p>No desktop, "Cidade Consciente" aparece como submenu de "Sobre".</p>
+        <p>No mobile, "Cidade Consciente" aparece como um item separado no menu.</p>
+    </div>
 
-        <!-- SERVIÇOS SECTION -->
-        <section id="servicos" class="servicos">
-            <div class="container">
-                <div class="tabs">
-                    <button class="tab active">PARA O SEU LAR</button>
-                    <button class="tab">PARA A SUA EMPRESA</button>
-                </div>
-
-                <div class="cards">
-                    <article class="card">
-                        <img src="./IMG/Limpeza_padrao.png" alt="Limpeza padrão">
-                        <div class="card__body">
-                            <h3 class="card__title">Limpeza padrão</h3>
-                            <p class="card__description">Limpeza do dia-a-dia na medida certa</p>
-                            <a href="#" class="btn btn--blue btn--outline">Agendar serviços</a>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <img src="./IMG/Limpeza_pesada.png" alt="Limpeza pesada">
-                        <div class="card__body">
-                            <h3 class="card__title">Limpeza pesada</h3>
-                            <p class="card__description">Limpeza para locais com acúmulo excessivo de resíduos</p>
-                            <a href="#" class="btn btn--blue btn--outline">Agendar serviços</a>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <img src="./IMG/Limpeza_rapida.png" alt="Limpeza rápida">
-                        <div class="card__body">
-                            <h3 class="card__title">Limpeza rápida</h3>
-                            <p class="card__description">Limpeza rápida para eventos.</p>
-                            <a href="#" class="btn btn--blue btn--outline">Agendar serviços</a>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <img src="./IMG/Limpeza_localizada.png" alt="Limpeza localizada">
-                        <div class="card__body">
-                            <h3 class="card__title">Limpeza localizada</h3>
-                            <p class="card__description">Limpeza de ambiente individual.</p>
-                            <a href="#" class="btn btn--blue btn--outline">Agendar serviços</a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- PLANOS SECTION -->
-        <section id="planos" class="planos">
-            <div class="container planos__grid">
-                <div class="planos__copy">
-                    <h2 class="planos__title">Seu ambiente limpo e organizado do jeito que você gosta!</h2>
-                    <p class="planos__description">Oferecemos planos de limpeza personalizados para atender as suas necessidades — seja você quem busca praticidade no dia a dia ou uma empresa que precisa de manutenção regular.</p>
-
-                    <div class="bullets">
-                        <div class="bullet">
-                            <div class="bullet__icon">💲</div>
-                            <p>Assinantes semanais têm assistência residencial gratuita em situações de emergências.</p>
-                        </div>
-                        <div class="bullet">
-                            <div class="bullet__icon">📞</div>
-                            <p>Basta acionar o suporte por telefone, explicar o problema e o socorro estará a caminho.</p>
-                        </div>
-                    </div>
-
-                    <a href="#" class="btn btn--green btn--large">Nossos Planos</a>
-                </div>
-                <div class="planos__media">
-                    <img src="assets/Moplimpeza.png" alt="Mop de limpeza em piso brilhante">
-                </div>
-            </div>
-        </section>
-
-        <!-- POR QUE ESCOLHER SECTION -->
-        <section class="porque">
-            <div class="container">
-                <h2 class="porque__title">Por que escolher a Lumis?</h2>
-                <div class="features">
-                    <div class="feature">
-                        <div class="feature__icon">👥</div>
-                        <h3 class="feature__title">Profissionais Qualificados</h3>
-                        <p class="feature__description">Todos os nossos profissionais são treinados, verificados e avaliados continuamente para garantir a máxima qualidade do serviço.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature__icon">🛡️</div>
-                        <h3 class="feature__title">Segurança Garantida</h3>
-                        <p class="feature__description">Oferecemos seguro completo para todos os serviços, garantindo tranquilidade total para nossos clients.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature__icon">📱</div>
-                        <h3 class="feature__title">Tecnologia Integrada</h3>
-                        <p class="feature__description">Plataforma digital que facilita agendamentos, o acompanhamento dos serviços e comunicação direta com profissionais.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature__icon">⭐</div>
-                        <h3 class="feature__title">Excelência em Atendimento</h3>
-                        <p class="feature__description">Mais de 95% de satisfação dos clientes e atendimento personalizado para cada tipo de necessidade.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature__icon">🌱</div>
-                        <h3 class="feature__title">Sustentabilidade</h3>
-                        <p class="feature__description">Proporcionamos sustentabilidade através de nossos serviços e produtos.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TRABALHE CONOSCO SECTION -->
-        <section class="jobs">
-            <div class="container">
-                <h2 class="jobs__title">Venha trabalhar conosco!</h2>
-                <div class="jobs__grid">
-                    <div class="job-card">
-                        <div class="job-card__icon">💸</div>
-                        <h3 class="job-card__title">Pagamentos em Dia e Benefícios</h3>
-                        <p class="job-card__description">Reconhecemos seu esforço com remuneração justa, benefícios e valorização contínua.</p>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-card__icon">🕒</div>
-                        <h3 class="job-card__title">Horários Flexíveis</h3>
-                        <p class="job-card__description">Possibilidade de montar escalas que se encaixam na sua rotina.</p>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-card__icon">📚</div>
-                        <h3 class="job-card__title">Treinamento e Crescimento</h3>
-                        <p class="job-card__description">Oferecemos capacitação contínua para que você se desenvolva e cresça com a gente.</p>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-card__icon">🧳</div>
-                        <h3 class="job-card__title">Ambiente Respeitoso e Profissional</h3>
-                        <p class="job-card__description">Valorizamos cada pessoa da equipe com respeito, transparência e apoio no dia a dia.</p>
-                    </div>
-                </div>
-
-                <div class="center">
-                    <a href="#" class="btn btn--blue btn--big">Trabalhe conosco</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- DEPOIMENTOS SECTION -->
-        <section class="depoimentos">
-            <div class="container">
-                <h2 class="depoimentos__title">Comentários</h2>
-                <div class="depoimentos__grid">
-                    <blockquote class="depoimento-card">
-                        <div class="depoimento-avatar"></div>
-                        <div>
-                            <h4>João Neves</h4>
-                            <p>“Assinei o plano semanal e foi a melhor escolha! A equipe é pontual e deixa minha casa impecável toda semana.”</p>
-                        </div>
-                    </blockquote>
-                    <blockquote class="depoimento-card">
-                        <div class="depoimento-avatar"></div>
-                        <div>
-                            <h4>Maria de Souza</h4>
-                            <p>“Fechamos o plano empresarial e o escritório nunca esteve tão bem cuidado. Atendimento excelente e serviço de primeira.”</p>
-                        </div>
-                    </blockquote>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container footer__grid">
-            <div class="footer__brand">
-                <div class="brand">
-                    <div class="brand__mark"><img src="./IMG/Logo_sem_nome-removebg-preview.png" alt="Logo" width="80px" height="auto"></div>
-                    <div class="brand__text">
-                        <strong>Lumis</strong>
-                        <span>Serviços de Limpeza</span>
-                    </div>
-                </div>
-                <p><span class="Texto_secundario">Especialistas em limpeza sustentável</span></p>
-                <div class="footer__social">
-                    <span>in</span><span>X</span><span>ig</span><span>fb</span>
-                </div>
-            </div>
-            <div>
-                <h5 class="footer__title">Links Rápidos</h5>
-                <ul class="footer__list">
-                    <li><a href="#" class="footer__link">Início</a></li>
-                    <li><a href="./Sobre/Sobre.html" class="footer__link">Sobre Nós</a></li>
-                    <li><a href="./Servicos/Servicos.html" class="footer__link">Serviços</a></li>
-                    <li><a href="./Plano/Plano.html" class="footer__link">Planos</a></li>
-                    <li><a href="./perfil/perfil.html" class="footer__link">Conta</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="footer__title">Tipos De Limpeza</h5>
-                <ul class="footer__list">
-                    <li><a href="#" class="footer__link">Estofados</a></li>
-                    <li><a href="#" class="footer__link">Vidros</a></li>
-                    <li><a href="#" class="footer__link">Carros</a></li>
-                    <li><a href="#" class="footer__link">Escritórios</a></li>
-                    <li><a href="#" class="footer__link">Empresarial</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="footer__title">Localização</h5>
-                <ul class="footer__list footer__list--plain">
-                    <li>Rua: Av. Amador Bueno da Veiga;</li>
-                    <li>Endereço: 4430;</li>
-                    <li>Bairro: Penha de França;</li>
-                    <li>Cidade: São Paulo - SP;</li>
-                    <li>CEP: 03890-000.</li>
-                </ul>
-            </div>
-            <div id="contatos">
-                <h5 class="footer__title">Contatos</h5>
-                <ul class="footer__list footer__list--plain">
-                    <li>Telefone: (+55) 11 981214326</li>
-                    <li>Email: lumis@gmail.com</li>
-                </ul>
-            </div>
-        </div>
-        <div class="legal">
-            <a href="#" class="footer__link">Política de Privacidade</a>
-            <a href="#" class="footer__link">Termos de Uso</a>
-            <span>© Lumis. Todos os direitos reservados.</span>
-        </div>
-    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const menu = document.getElementById('menu');
+            
+            menuToggle.addEventListener('click', function() {
+                this.classList.toggle('open');
+                menu.classList.toggle('active');
+                
+                // Impede a rolagem da página quando o menu está aberto
+                if (menu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Fechar o menu ao clicar em um item (útil para mobile)
+            document.querySelectorAll('#menu a').forEach(item => {
+                item.addEventListener('click', () => {
+                    menu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Fechar o menu ao clicar fora dele
+            document.addEventListener('click', function(event) {
+                if (!menu.contains(event.target) && !menuToggle.contains(event.target) && menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Prevenir que cliques dentro do menu fechem ele
+            menu.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
 </body>
 </html>
