@@ -60,79 +60,337 @@ p{
 }
 
 /*=================body=================*/
-body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
-    font-family: var(--p-font);
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/*============header============*/
-header {
-    display: flex;                   /* coloca logo e nav lado a lado */
-    justify-content: space-between;  /* logo à esquerda, nav à direita */
-    align-items: center;             /* centraliza verticalmente */
-    padding: 0 1.45rem;                 /* respiro nas laterais */
-    background-color: var(--cor-fundo);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
+        body {
+            font-family: var(--p-font);
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            padding-top: 70px;
+        }
 
-/*==========logo============*/
-/*não mexe nisso POR FAVOR*/
-#logo-headers img {
-    height: 80px;  /* ajusta o tamanho da logo */
-    width: auto;
-}
+        /*============HEADER============*/
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            background-color: var(--cor-fundo);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            height: 70px;
+            box-sizing: border-box;
+        }
 
-#logo-headers:hover{
-    cursor: pointer;
-}
+        /*==========LOGO============*/
+        #logo-headers {
+            display: flex;
+            align-items: center;
+            z-index: 1001;
+        }
+        
+        #logo-headers img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+        
+        #logo-headers:hover {
+            cursor: pointer;
+        }
 
-/*==============NavBar=========== */
-nav ul {
-    display: flex;
-    gap: 10px;               /* espaço entre os itens */
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+        /*==============NAVBAR===========*/
+        nav {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
 
-nav ul li a {
-    display: flex;
-    align-items: center;      /* ícone e texto alinhados */
-    gap: 6px;
-    padding: 8px 14px;
-    text-decoration: none;
-    color: var(--cor-primaria);
-    font-family: var(--h1-font);
-    transition: color 0.3s ease;
-}
+        nav ul {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            height: 100%;
+        }
 
-nav ul li a:hover {
-    color: var(--cor-botao-primario-hover);
-}
+        /* Itens do menu */
+        nav ul li {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
-/*==============BOTÃO DE LOGIN===========  */
-.bntCadastro {
-    background-color: var(--cor-primaria);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-family: var(--h1-font);
-    margin-right: 1.45rem;
-}
+        /* Links */
+        nav ul li a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            text-decoration: none;
+            color: var(--cor-primaria);
+            font-family: var(--h1-font);
+            font-weight: 600;
+            white-space: nowrap;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            border-radius: 6px;
+        }
 
-.bntCadastro:hover {
-    background-color: var(--cor-botao-primario-hover);
-    color: darkgray;
-    cursor: pointer;
-}
+        nav ul li a:hover,
+        nav ul li:hover > a {
+            color: var(--cor-botao-primario-hover);
+            background-color: rgba(80, 191, 135, 0.1);
+        }
+
+        /* Submenu */
+        .has-submenu {
+            position: relative;
+        }
+        
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            min-width: 180px;
+            padding: 8px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            transform: translateY(10px);
+        }
+        
+        .has-submenu:hover .submenu,
+        .has-submenu:focus-within .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu li {
+            padding: 0;
+        }
+
+        .submenu li a {
+            padding: 12px 20px;
+            color: var(--cor-texto);
+            font-family: var(--p-font);
+            font-weight: 500;
+            white-space: nowrap;
+            display: block;
+            transition: background-color 0.2s ease;
+            border-radius: 0;
+        }
+
+        .submenu li a:hover {
+            background-color: var(--cor-primaria);
+            color: var(--cor-botao-texto);
+        }
+
+        /*==============BOTÃO DE LOGIN===========*/
+        .bntCadastro {
+            background-color: var(--cor-primaria);
+            color: var(--cor-botao-texto);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: var(--h1-font);
+            margin-left: 10px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            align-self: center;
+        }
+
+        .bntCadastro:hover {
+            background-color: var(--cor-botao-primario-hover);
+            color: var(--cor-botao-texto-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /*============== MENU HAMBURGUER ==============*/
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            z-index: 1001;
+            position: relative;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background: var(--cor-primaria);
+            margin: 3px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+            transform-origin: center;
+        }
+
+        /* animação virar X */
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Item mobile (inicialmente oculto) */
+        .mobile-only-item {
+            display: none;
+        }
+
+        /* ============ RESPONSIVIDADE ============ */
+        @media (max-width: 1024px) {
+            nav ul {
+                gap: 8px;
+            }
+            
+            nav ul li a {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .bntCadastro {
+                padding: 8px 14px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0 1rem;
+            }
+            
+            #logo-headers img {
+                height: 45px;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                background: var(--cor-fundo);
+                flex-direction: column;
+                width: 100%;
+                height: calc(100vh - 70px);
+                display: none;
+                padding: 1.5rem 1rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                overflow-y: auto;
+                gap: 0;
+                z-index: 1000;
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(-100%);
+            }
+
+            nav ul.active {
+                display: flex;
+                transform: translateX(0);
+                animation: slideIn 0.3s ease-in-out;
+            }
+
+            nav ul li {
+                width: 100%;
+                margin: 8px 0;
+            }
+
+            nav ul li a {
+                justify-content: flex-start;
+                padding: 15px 20px;
+                border-radius: 8px;
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            
+            nav ul li:last-child a {
+                border-bottom: none;
+            }
+            
+            /* Esconder submenu no mobile */
+            .has-submenu .submenu {
+                display: none;
+            }
+            
+            /* Mostrar item "Cidade consciente" como item normal no mobile */
+            .mobile-only-item {
+                display: block;
+            }
+            
+            /* Esconder a seta do submenu no mobile */
+            .has-submenu > a > i.ri-arrow-down-s-line {
+                display: none;
+            }
+            
+            .bntCadastro {
+                margin: 20px 0 10px 0;
+                padding: 14px 20px;
+                text-align: center;
+                display: block;
+                width: 100%;
+                font-size: 1.1rem;
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0 0.8rem;
+            }
+            
+            #logo-headers img {
+                height: 40px;
+            }
+            
+            nav ul {
+                padding: 1rem 0.8rem;
+            }
+            
+            nav ul li a {
+                padding: 14px 16px;
+                font-size: 1rem;
+            }
+            
+            .bntCadastro {
+                padding: 12px 16px;
+                font-size: 1rem;
+            }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
 /*==============Perfil===========  */
 #titulo-subtitulo{
     display:flex;

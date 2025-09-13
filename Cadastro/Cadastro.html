@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
+
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="Cadastro.css">
+
+    <!-- Link para o RemixIcon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <title>Lumis</title>
+</head>
+<body>
+    <header>
+        <div id="logo-headers">
+            <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
+        </div>
+
+        <nav>
+            <!-- Botão hamburguer -->
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul id="menu">
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
+                <li class="has-submenu">
+                    <a href="../Sobre/Sobre.html">
+                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                    </ul>
+                </li>
+                <!-- Item adicional para mobile -->
+                <li class="mobile-only-item"><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
+                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
+                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
+                <li><a class="bntCadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cadastro-section">
+            <div class="cadastro-container">
+                <div class="icon-cadastro">
+                    <i class="ri-user-add-line"></i>
+                </div>
+                <h2 class="Cadastrotitle">Criar Conta</h2>
+                <span class="texto-secundario">Preencha os dados abaixo para criar sua conta</span>
+                <form id="cadastroForm">
+                    <div class="grupo-formulario">
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" placeholder="Guilherme Izidio Nogueira" name="nome" required>
+                        <br>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="guilherme@gmail.com" name="email" required>
+                        <br>
+
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" placeholder="Fo084@3$&l" name="senha" required>
+                        <br>
+
+                        <label for="confirmarSenha">Confirmar Senha:</label>
+                        <input type="password" id="confirmarSenha" placeholder="Fo084@3$&l" name="confirmarSenha" required>
+                        <br>
+                    </div>
+
+                    <button type="submit">Cadastrar</button>
+                </form>
+                <p class="ja-tem-conta">Já tem uma conta? <a href="../Login/Login.html">Faça login aqui</a></p>
+                
+                    <img src="../IMG/aperto.png" alt="">
+                
+            </div>
+        </section>
+    </main>
+
+    <script src="Cadastro.js"></script>
+</body>
+</html>

@@ -378,3 +378,98 @@
             from { transform: translateX(-100%); }
             to { transform: translateX(0); }
         }
+
+/*==Formulario de Cadastro==*/
+.icon-cadastro {
+    text-align: center;
+    font-size: 3.5rem;
+    color: var(--cor-primaria);
+}
+
+.texto-secundario {
+    font-family: var(--p-font);
+    color: var(--cor-texto-secundario);
+    text-align: center;
+}
+
+.cadastro-section {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--cor-fundo);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cadastro-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Cadastrotitle {
+    font-family: var(--h2-font);
+    font-size: 1.8rem;
+    color: var(--cor-primaria);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cadastroForm label {
+    font-family: var(--p-font);
+    font-size: 1rem;
+    color: var(--cor-texto);
+    margin-bottom: 5px;
+}
+
+.grupo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#nome, #email, #senha, #confirmarSenha {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: var(--p-font);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+
+button[type="submit"] {
+    width: 100%;
+    background-color: var(--cor-primaria);
+    color: var(--cor-botao-texto);
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-family: var(--h1-font);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--cor-botao-primario-hover);
+    transform: translateY(-2px);
+}
+
+p a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.ja-tem-conta {
+    text-align: center;
+    font-family: var(--p-font);
+    color: var(--cor-texto-secundario);
+    margin-top: 15px;
+}
+
+
+
