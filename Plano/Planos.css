@@ -125,7 +125,7 @@
             gap: 6px;
             padding: 8px 14px;
             text-decoration: none;
-            color: var(--cor-primaria);
+            color: var(--cor-texto);
             font-family: var(--h1-font);
             font-weight: 600;
             white-space: nowrap;
@@ -136,7 +136,7 @@
 
         nav ul li a:hover,
         nav ul li:hover > a {
-            color: var(--cor-botao-primario-hover);
+            color: var(--cor-primaria);
             background-color: rgba(80, 191, 135, 0.1);
         }
 
@@ -184,8 +184,8 @@
         }
 
         .submenu li a:hover {
-            background-color: var(--cor-primaria);
-            color: var(--cor-botao-texto);
+            background-color: rgba(80, 191, 135, 0.1);
+            color: var(--cor-primaria);
         }
 
         /*==============BOTÃO DE LOGIN===========*/

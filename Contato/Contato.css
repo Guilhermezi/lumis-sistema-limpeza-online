@@ -466,16 +466,9 @@
             margin: 8px 0;
         }
 
-        .endereco h3 {
-            color: var(--cor-primaria);
+        .contact-info h3 {
+            color: #000000;
             margin-top: 15px;
-        }
-
-        /*================= Social Media =================*/
-        .social-media {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
         }
 
         /*================= Responsividade =================*/
@@ -491,7 +484,15 @@
         }
 
         /*================= icones =================*/
-        .endereco h3 {
+        /*================= Social Media =================*/
+        .social-media {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .endereco h3 i {
             color: var(--cor-primaria);
         }
         
