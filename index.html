@@ -1,283 +1,229 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="IMG/Logo_sem_nome-removebg-preview.png" type="image/x-icon">
+    <title>Lumis - Home</title>
+
+    <!---Links do css e outros-->
+    <link rel="stylesheet" href="home.css">
+    <link rel="website icon" type="png" href="/img/_Lumis (9).png">
     
-
-    <!-- Link para o arquivo CSS -->
-    <link rel="stylesheet" href="style.css">
-
     <!-- Link para o RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <title>Lumis</title>
 </head>
 <body>
     <header>
         <div id="logo-headers">
-            <img src="/IMG/Logo_Cor_Fundo.png" alt="Logo da Lumis" class="logo">
+            <img src="/img/_Lumis (9).png" alt="Logo da Lumis" id="logo">
         </div>
+
         <nav>
-            <ul>
-                <li><a href="#"><i class="ri-home-2-line"></i> Início</a></li>
-                <li><a href="Sobre/Sobre.html"><i class="ri-team-line"></i> Sobre</a></li>
-                <li><a href="Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
-                <li><a href="Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
-                <li><a href="Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
-                <li><a href="Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
-                <li><a href="Cidade_consciente/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
-                <li><a class="bntCadastro" href="Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
-                <li></li>
-            </ul>
+            <!-- Botão hamburguer -->
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul id="menu">
+    <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
+    <li class="has-submenu">
+        <a href="../Sobre/Sobre.html">
+            <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+        </a>
+        <ul class="submenu">
+            <li><a href="/So/Cidade_consciente.html">Cidade consciente</a></li>
+        </ul>
+    </li>
+    <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
+    <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
+    <li><a href="#"><i class="ri-chat-2-line"></i> Contato</a></li>
+    <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
+    <li><a class="bntCadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
+</ul>
         </nav>
     </header>
 
-    <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-inner container">
-        <div class="hero-media">
-          <img src="./IMG/Banner_HOME.png" alt="Profissional de limpeza segurando balde com produtos">
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Transforme sua <span class="highlight">casa</span> em um ambiente mais limpo e saudável!</h1>
+                <p>Serviços profissionais de limpeza e higienização para sua casa ou empresa. Qualidade garantida e produtos eco-friendly.</p>
+                <div class="hero-buttons">
+                    <a href="#servicos" class="btn-primary">Conheça nossos serviços</a>
+                    <a href="#contato" class="btn-secondary">Solicite orçamento</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=400&fit=crop" alt="Profissional de limpeza">
+            </div>
         </div>
-        <div class="hero-copy">
-          <h1><span>Transforma</span><br>seu espaço</h1>
-          <p>Limpeza e sustentabilidade em um só lugar!</p>
-          <div class="cta">
-            <a href="#" class="btn btn-green">Agendar serviços</a>
-            <a href="#" class="btn btn-blue">Fale conosco</a>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- SERVIÇOS -->
-    <section id="servicos" class="servicos">
-      <div class="container">
-        <div class="tabs">
-          <button class="tab active">PARA O SEU LAR</button>
-          <button class="tab">PARA A SUA EMPRESA</button>
+    <!-- Services Section -->
+    <section class="services" id="servicos">
+        <div class="services-content">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="ri-home-4-line"></i>
+                    </div>
+                    <h3>Limpeza Residencial</h3>
+                    <p>Serviços completos de limpeza para sua casa, incluindo todos os cômodos com produtos de alta qualidade.</p>
+                    <a href="#" class="learn-more">Saiba mais <i class="ri-arrow-right-line"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="ri-building-line"></i>
+                    </div>
+                    <h3>Limpeza Comercial</h3>
+                    <p>Soluções profissionais de limpeza para escritórios, lojas e estabelecimentos comerciais.</p>
+                    <a href="#" class="learn-more">Saiba mais <i class="ri-arrow-right-line"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="ri-shield-check-line"></i>
+                    </div>
+                    <h3>Higienização</h3>
+                    <p>Sanitização completa com produtos certificados para garantir um ambiente seguro e livre de germes.</p>
+                    <a href="#" class="learn-more">Saiba mais <i class="ri-arrow-right-line"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="ri-tools-line"></i>
+                    </div>
+                    <h3>Limpeza Pós-Obra</h3>
+                    <p>Remoção de resíduos de construção e limpeza especializada após reformas e obras.</p>
+                    <a href="#" class="learn-more">Saiba mais <i class="ri-arrow-right-line"></i></a>
+                </div>
+            </div>
         </div>
-
-        <div class="cards">
-          <article class="card">
-            <img src="./IMG/Limpeza_padrao.png" alt="Limpeza padrão">
-            <div class="card-body">
-              <h3>Limpeza padrão</h3>
-              <p>Limpeza do dia-a-dia na medida certa</p>
-              <a href="#" class="btn btn-blue outline">Agendar serviços</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <img src="./IMG/Limpeza_pesada.png" alt="Limpeza pesada">
-            <div class="card-body">
-              <h3>Limpeza pesada</h3>
-              <p>Limpeza para locais com acúmulo excessivo de resíduos</p>
-              <a href="#" class="btn btn-blue outline">Agendar serviços</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <img src="./IMG/Limpeza_rapida.png" alt="Limpeza rápida">
-            <div class="card-body">
-              <h3>Limpeza rápida</h3>
-              <p>Limpeza rápida para eventos.</p>
-              <a href="#" class="btn btn-blue outline">Agendar serviços</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <img src="./IMG/Limpeza_localizada.png" alt="Limpeza localizada">
-            <div class="card-body">
-              <h3>Limpeza localizada</h3>
-              <p>Limpeza de ambiente individual.</p>
-              <a href="#" class="btn btn-blue outline">Agendar serviços</a>
-            </div>
-          </article>
-        </div>
-      </div>
     </section>
 
-    <!-- PLANOS -->
-    <section id="planos" class="planos">
-      <div class="container planos-grid">
-        <div class="planos-copy">
-          <h2>Seu ambiente limpo e organizado do jeito que você gosta!</h2>
-          <p>Oferecemos planos de limpeza personalizados para atender as suas necessidades — seja você quem busca praticidade no dia a dia ou uma empresa que precisa de manutenção regular.</p>
-
-          <div class="bullets">
-            <div class="bullet">
-              <div class="ic">💲</div>
-              <p>Assinantes semanais têm assistência residencial gratuita em situações de emergências.</p>
+    <!-- About Section -->
+    <section class="about" id="sobre">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Seu ambiente limpo e higienizado em um só lugar!</h2>
+                <p>Na Lumis, oferecemos serviços completos de limpeza e higienização com foco na sustentabilidade. Nossa equipe especializada utiliza produtos eco-friendly e técnicas modernas para garantir o melhor resultado.</p>
+                <a href="#" class="btn-primary">Conheça nossa história</a>
             </div>
-            <div class="bullet">
-              <div class="ic">📞</div>
-              <p>Basta acionar o suporte por telefone, explicar o problema e a ajuda estará a caminho.</p>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3610?w=500&h=400&fit=crop" alt="Ambiente limpo">
             </div>
-          </div>
-
-          <a href="#" class="btn btn-green large">Nossos Planos</a>
         </div>
-        <div class="planos-media">
-          <img src="C:\Users\Usuario\3D Objects\Home\assets\Moplimpeza.png" alt="Mop de limpeza em piso brilhante">
-        </div>
-      </div>
     </section>
 
-    <!-- POR QUE ESCOLHER -->
-    <section class="porque">
-      <div class="container">
-        <h2>Por que escolher a Lumis?</h2>
-        <div class="grid-features">
-          <div class="feature">
-            <div class="ico">👥</div>
-            <h3>Profissionais Qualificados</h3>
-            <p>Todos os nossos profissionais são treinados, verificados e avaliados continuamente para garantir a máxima qualidade do serviço.</p>
-          </div>
-          <div class="feature">
-            <div class="ico">🛡️</div>
-            <h3>Segurança Garantida</h3>
-            <p>Oferecemos seguro completo para todos os serviços, garantindo tranquilidade total para nossos clientes.</p>
-          </div>
-          <div class="feature">
-            <div class="ico">📱</div>
-            <h3>Tecnologia Integrada</h3>
-            <p>Plataforma digital que facilita agendamentos, o acompanhamento dos serviços e comunicação direta com profissionais.</p>
-          </div>
-          <div class="feature">
-            <div class="ico">⭐</div>
-            <h3>Excelência em Atendimento</h3>
-            <p>Mais de 95% de satisfação dos clientes e atendimento personalizado para cada tipo de necessidade.</p>
-          </div>
-          <div class="feature">
-            <div class="ico">🌱</div>
-            <h3>Sustentabilidade</h3>
-            <p>Proporcionamos sustentabilidade através de nossos serviços e produtos.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Why Choose Section -->
+    <section class="why-choose">
+        <div class="why-choose-content">
+            <h2 class="section-title">Por que escolher a Lumis?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="ri-user-star-line"></i>
+                    </div>
+                    <h4>Profissionais Qualificados</h4>
+                    <p>Equipe treinada e experiente</p>
+                </div>
 
-    <!-- TRABALHE CONOSCO -->
-    <section class="jobs">
-      <div class="container">
-        <h2>Venha trabalhar conosco!</h2>
-        <div class="grid-jobs">
-          <div class="jobcard">
-            <div class="jico">💸</div>
-            <h3>Pagamentos em Dia e Benefícios</h3>
-            <p>Reconhecemos seu esforço com remuneração justa, benefícios e valorização contínua.</p>
-          </div>
-          <div class="jobcard">
-            <div class="jico">🕒</div>
-            <h3>Horários Flexíveis</h3>
-            <p>Possibilidade de montar escalas que se encaixam na sua rotina.</p>
-          </div>
-          <div class="jobcard">
-            <div class="jico">📚</div>
-            <h3>Treinamento e Crescimento</h3>
-            <p>Oferecemos capacitação contínua para que você se desenvolva e cresça com a gente.</p>
-          </div>
-          <div class="jobcard">
-            <div class="jico">🧳</div>
-            <h3>Ambiente Respeitoso e Profissional</h3>
-            <p>Valorizamos cada pessoa da equipe com respeito, transparência e apoio no dia a dia.</p>
-          </div>
-        </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="ri-leaf-line"></i>
+                    </div>
+                    <h4>Produtos Eco-friendly</h4>
+                    <p>Sustentabilidade em primeiro lugar</p>
+                </div>
 
-        <div class="center">
-          <a href="#" class="btn btn-blue big">Trabalhe conosco</a>
-        </div>
-      </div>
-    </section>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="ri-time-line"></i>
+                    </div>
+                    <h4>Pontualidade</h4>
+                    <p>Compromisso com horários</p>
+                </div>
 
-    <!-- DEPOIMENTOS -->
-    <section class="depo">
-      <div class="container">
-        <h2>Comentários</h2>
-        <div class="depo-grid">
-          <blockquote class="depo-card">
-            <div class="depo-avatar"></div>
-            <div>
-              <h4>João Neves</h4>
-              <p>⭐⭐⭐⭐⭐</p>
-              <p>“Assinei o plano semanal e foi a melhor escolha! A equipe é pontual e deixa minha casa impecável toda semana.”</p>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="ri-shield-check-line"></i>
+                    </div>
+                    <h4>Garantia de Qualidade</h4>
+                    <p>Satisfação garantida</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="ri-24-hours-line"></i>
+                    </div>
+                    <h4>Flexibilidade de Horários</h4>
+                    <p>Atendimento quando você precisar</p>
+                </div>
             </div>
-          </blockquote>
-          <blockquote class="depo-card">
-            <div class="depo-avatar"></div>
-            <div>
-              <h4>Maria de Souza</h4>
-              <p>⭐⭐⭐⭐⭐</p>
-              <p>“Fechamos o plano empresarial e o escritório nunca esteve tão bem cuidado. Atendimento excelente e serviço de primeira.”</p>
-            </div>
-          </blockquote>
         </div>
-      </div>
     </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container foot-grid">
-      <div class="foot-brand">
-        <div class="brand">
-          <div class="brand-mark"><img src="./IMG/Logo_sem_nome-removebg-preview.png" alt="Logo" width="80px" height="auto"></div>
-          <div class="brand-text">
-            <strong>Lumis</strong>
-            <span>Serviços de Limpeza</span>
-          </div>
-        </div>
-        <p><span class="Texto_secundario">Especialistas em limpeza sustentável</span></p>
-        <div class="social">
-          <span>in</span><span>X</span><span>ig</span><span>fb</span>
-        </div>
-      </div>
-      <div>
-        <h5>Links Rápidos</h5>
-        <ul>
-          <li><a href="#">Início</a></li>
-          <li><a href="./Sobre/Sobre.html">Sobre Nós</a></li>
-          <li><a href="./Servicos/Servicos.html">Serviços</a></li>
-          <li><a href="./Plano/Plano.html">Planos</a></li>
-          <li><a href="./perfil/perfil.html">Conta</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Tipos De Limpeza</h5>
-        <ul>
-          <li><a href="#">Estofados</a></li>
-          <li><a href="#">Vidros</a></li>
-          <li><a href="#">Carros</a></li>
-          <li><a href="#">Escritórios</a></li>
-          <li><a href="#">Empresarial</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Localização</h5>
-        <ul class="plain">
-          <li>Av. Águia de Haia;</li>
-          <li>Endereço: 2633;</li>
-          <li>Bairro: Cidade Antônio Estêvão de Carvalho;</li>
-          <li>Cidade: São Paulo - SP;</li>
-          <li>CEP: 03694-000.</li>
-        </ul>
-      </div>
-      <div id="contatos">
-        <h5>Contatos</h5>
-        <ul class="plain">
-          <li>Telefone: (+55) 11 981214326</li>
-          <li>Email: lumis@gmail.com</li>
-        </ul>
-      </div>
-    </div>
-    <div class="legal">
-      <a href="#">Política de Privacidade</a>
-      <a href="#">Termos de Uso</a>
-      <span>© Lumis. Todos os direitos reservados.</span>
-    </div>
-  </footer>
+    <!-- Work With Us Section -->
+    <section class="work-with-us">
+        <div class="work-content">
+            <h2 class="section-title">Venha trabalhar conosco!</h2>
+            <div class="work-grid">
+                <div class="work-card">
+                    <h4>Oportunidades de crescimento</h4>
+                    <p>Oferecemos um ambiente de trabalho que valoriza o desenvolvimento profissional e pessoal de nossos colaboradores.</p>
+                </div>
 
-    <script src="/index.js"></script>
+                <div class="work-card">
+                    <h4>Ambiente colaborativo</h4>
+                    <p>Trabalhe em uma equipe unida, onde cada membro é valorizado e suas ideias são ouvidas e implementadas.</p>
+                </div>
+
+                <div class="work-card">
+                    <h4>Benefícios atrativos</h4>
+                    <p>Pacote completo de benefícios incluindo plano de saúde, vale-alimentação e programas de capacitação.</p>
+                </div>
+
+                <div class="work-card">
+                    <h4>Propósito sustentável</h4>
+                    <p>Faça parte de uma empresa comprometida com a sustentabilidade e o cuidado com o meio ambiente.</p>
+                </div>
+            </div>
+            <a href="#" class="btn-primary" style="margin-top: 2rem;">Candidate-se agora</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-content">
+            <h2 class="section-title">Comentários</h2>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Excelente serviço! A equipe da Lumis é muito profissional e deixou minha casa impecável. Produtos de qualidade e atendimento excepcional. Recomendo!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div class="author-info">
+                        <h5>Maria Silva</h5>
+                        <p>Cliente há 2 anos</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Trabalho com a Lumis na limpeza do nosso escritório há mais de um ano. Sempre pontuais, cuidadosos e com produtos ecológicos. Serviço de primeira!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div class="author-info">
+                        <h5>João Santos</h5>
+                        <p>Gerente Administrativo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
