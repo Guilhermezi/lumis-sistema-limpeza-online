@@ -1,39 +1,41 @@
-// Menu hamburguer functionality
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('active');
-            this.classList.toggle('open');
-            
-            // Impede a rolagem da página quando o menu está aberto
-            if (menu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
+  document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const nav = document.querySelector('.navigation');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
         });
-        
-        // Fechar o menu ao clicar em um item (útil para mobile)
-        document.querySelectorAll('#menu a').forEach(item => {
-            item.addEventListener('click', () => {
-                document.getElementById('menu').classList.remove('active');
-                document.getElementById('menuToggle').classList.remove('open');
-                document.body.style.overflow = 'auto'; // Restaura a rolagem
+
+       // Smooth scrolling para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
-        
-        // Fechar o menu ao clicar fora dele
-        document.addEventListener('click', function(event) {
-            const menu = document.getElementById('menu');
-            const menuToggle = document.getElementById('menuToggle');
-            
-            if (!menu.contains(event.target) && !menuToggle.contains(event.target) && menu.classList.contains('active')) {
-                menu.classList.remove('active');
-                menuToggle.classList.remove('open');
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Prevenir que cliques dentro do menu fechem ele
-        document.getElementById('menu').addEventListener('click', function(event) {
-            event.stopPropagation();
+
+        // Animação de entrada dos cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar todos os cards
+        document.querySelectorAll('.service-card, .work-card, .testimonial-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
         });
