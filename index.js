@@ -31,6 +31,7 @@
                     menu.classList.remove('active');
                     menuToggle.classList.remove('open');
                     document.body.style.overflow = 'auto';
+<<<<<<< Updated upstream
                 }
             });
             
@@ -74,6 +75,11 @@
                 }
             });
             
+=======
+                }
+            });
+            
+>>>>>>> Stashed changes
             // Prevenir que cliques dentro do menu fechem ele
             menu.addEventListener('click', function(event) {
                 event.stopPropagation();
