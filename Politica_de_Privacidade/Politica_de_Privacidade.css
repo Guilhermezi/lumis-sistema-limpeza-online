@@ -1,0 +1,115 @@
+/*=============fontes============*/
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Questrial&display=swap');
+
+        /*================cores================*/
+        :root {
+            --cor-primaria: #50BF87;
+            --cor-secundaria: #3DBEA9;
+            --cor-terciaria: #508ABF;
+            --cor-botao-primario-hover: #317252;
+            --cor-botao-secundario-hover: #2E8C7E;
+            --cor-botao-terciario-hover: #3168A2;
+            --cor-fundo: #F9F9FB;
+            --cor-texto: #000000;
+            --cor-texto-secundario: #666666;
+            --cor-botao-texto: #F9F9FB;
+            --cor-botao-texto-hover: #D3D3D3;
+        }
+
+        /*================tipografia================*/
+        :root {
+            --h1-font: "Montserrat", sans-serif;
+            --h2-font: "Merriweather Sans", sans-serif;
+            --h3-font: "Merriweather Sans", sans-serif;
+            --p-font: "Questrial", sans-serif;
+            --h2-font-zise: 1.45rem;
+            --small-font-size: .813rem;
+        }
+
+        h1 {
+            font-family: var(--h1-font);
+            color: var(--cor-texto);
+        }
+
+        h2 {
+            font-family: var(--h2-font);
+            color: var(--cor-texto);
+        }
+
+        h3 {
+            font-family: var(--h3-font);
+            color: var(--cor-texto);
+        }
+
+        p{
+            font-family: var(--p-font);
+            color: var(--cor-texto);
+        }
+
+        /*=================body=================*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--p-font);
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+        }
+        header {
+            background-color: var(--cor-terciaria);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1 {
+            margin-bottom: 1.5rem;
+            color: var(--cor-texto);
+        }
+        h2 {
+            margin: 1.5rem 0 1rem 0;
+            color: var(--cor-primaria);
+        }
+        p, ul {
+            margin-bottom: 1rem;
+        }
+        ul {
+            margin-left: 1.5rem;
+        }
+        section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: var(--cor-primaria);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        a {
+            color: var(--cor-terciaria);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footer-link {
+            color: white;
+        }
+        .last-update {
+            text-align: right;
+            font-style: italic;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 1rem;
+        }

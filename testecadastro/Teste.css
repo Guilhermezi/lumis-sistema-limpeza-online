@@ -1,0 +1,35 @@
+.cadastro-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.6s ease-in-out;
+}
+
+.cadastro-imagem, .cadastro-formulario {
+  flex: 1;
+  padding: 40px;
+  transition: all 0.6s ease-in-out;
+}
+
+.cadastro-imagem img {
+  width: 100%;
+  max-width: 350px;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.6s ease-in-out;
+}
+
+/* Quando o login for ativado, troca os lados */
+.cadastro-container.login-ativo {
+  flex-direction: row-reverse; /* inverte os lados */
+}
+
+.cadastro-container.login-ativo .cadastro-imagem img {
+  transform: translateX(-20px); /* efeito de deslizar */
+}

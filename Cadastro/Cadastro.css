@@ -776,7 +776,7 @@
 
 button[type="submit"] {
     width: 100%;
-    background-color: var(--cor-primaria);
+    background-color: var(--cor-terciaria);
     color: var(--cor-botao-texto);
     padding: 12px;
     border: none;
@@ -789,7 +789,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: var(--cor-botao-primario-hover);
+    background-color: var(--cor-botao-terciario-hover);
     transform: translateY(-2px);
 }
 
@@ -807,5 +807,79 @@ p a {
     margin-top: 15px;
 }
 
+.social-login {
+            margin: 20px 0;
+            text-align: center;
+        }
 
+        .social-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: var(--cor-texto-secundario);
+            font-size: 0.9rem;
+        }
+
+        .social-divider::before,
+        .social-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #ddd;
+            margin: 0 10px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .social-btn.google {
+            color: #DB4437;
+        }
+
+        .social-btn.facebook {
+            color: #4267B2;
+        }
+
+        .social-btn.apple {
+            color: #000;
+        }
+        
+         .terms {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: var(--cor-texto-secundario);
+        }
+
+        .terms a {
+            color: var(--cor-primaria);
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+/*=================Efeito de troca de lado=================*/
 
