@@ -738,55 +738,34 @@
             to { transform: translateX(0); }
         }
 /*==============Perfil===========  */
-#titulo-subtitulo{
-    display:flex;
-    justify-content: center;
-    gap: 500px;
-    margin-top: 120px; /* Espaçamento para evitar sobreposição com o header fixo */
-}
-#editar_perfil{
-    background-color: #508ABF;
-    color: white;
-    border-radius: 10px;
-}
-table{
-    margin: 50px;
-}
-td{
-    border-radius: 20px;
-    border:1px solid
-}
-#conteudo_perfil{
-    background-color: white;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-#info-pessoal{
+main{
     display: flex;
+    background-color:#69FAB1;
     gap: 40px;
 }
-#infos{
-    background-color: #50BF87;
+#infos_usuario{
+    max-width: 40%;
+    margin-top: 60px;
+    margin-left: 60px;
+    margin-bottom: 60px;
+    background-color: white;
+    h2{
+      background-color: #69FAB1;  
+    } 
 }
 #info_serviços{
-    display: flex;
-    gap: 300px;
-}
-#profissinal_recorrente {
-    display: flex;
-    background-color:#F3F0E6 ;
-    border-radius: 20px;
-    margin: 40px;
-}
-#proximas_visitas{
-    background-color: #F3F0E6;
-    border-radius: 20px;
-    margin: 40px;
-}
-#confirmar{
-    background-color: #3DBEA9;
-}
-#remarcar{
-    background-color: #508ABF;
+    margin-top: 60px;
+    }
+    #profissinal_recorrente{
+        background-color: white;
+    }
+    #proximas_visitas{
+        margin-top: 60px;
+        background-color: white;
+    }
+    #data_visitas{
+        display: flex;
+    }
+table{
+    overflow-y: auto;
 }
