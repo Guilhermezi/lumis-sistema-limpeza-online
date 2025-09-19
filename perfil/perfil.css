@@ -531,6 +531,7 @@ main {
     border-radius: 12px;
     padding: 1.25rem;
     transition: all 0.3s ease;
+    margin: 10px;
 }
 
 .comment-card:hover {
@@ -584,7 +585,7 @@ main {
 }
 
 /*=====================SERVICES SIDEBAR=================*/
-.services-sidebar {
+.profissional-sidebar {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -796,10 +797,30 @@ main {
 
 .calendar-preview img {
     width: 100%;
+    margin-top: 20px;
+    margin-left: 20px;
     border-radius: 12px;
     margin-bottom: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+#calendario{
+    max-width: 100%;
+    height: auto;
+}
+.next_visits-card{
+    display: flex;
+    background-color: white;
+    border-radius: 16px;
+}
+.proximas_visitas{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.comentarios{
+    background-color: white;
+    border-radius: 16px;
+}
+.comments-container
 
 /*=====================FOOTER=================*/
 footer {
