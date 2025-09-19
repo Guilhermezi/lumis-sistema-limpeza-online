@@ -399,6 +399,9 @@ main {
 }
 
 /*=====================CARD Perfil=================*/
+.informações_usuário{
+    display:table-column
+}
 .profile-card, .service-card {
     background: white;
     border-radius: 16px;
@@ -518,6 +521,18 @@ main {
     gap: 0.5rem;
     font-size: 1.25rem;
 }
+.infos_usuario{
+    background-color: white;
+    border-radius: 16px;
+    table{
+        width: 100%;
+        table-layout: fixed;
+    }
+    td{
+        background-color: #50BF87;
+        border-radius: 16px;
+    }
+}
 
 /*=====================Comentários=================*/
 .comments-container {
@@ -582,6 +597,10 @@ main {
 
 .read-more-btn:hover {
     gap: 0.5rem;
+}
+.comentarios{
+    background-color: white;
+    border-radius: 16px;
 }
 
 /*=====================SERVICES SIDEBAR=================*/
@@ -816,21 +835,18 @@ main {
     margin-top: 20px;
     margin-left: 20px;
 }
-.comentarios{
-    background-color: white;
-    border-radius: 16px;
-}
-.comments-container
 
-/*=====================FOOTER=================*/
+/*=====================Footer=================*/
 footer {
     background-color: #262726;
     padding: 40px 20px 20px;
-    margin-top: 40px;
+    margin-top: auto;
     color: #CCCBCB;
+    width: 100%;
 }
 
 .footer-content {
+    background-color: #262726;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -850,6 +866,7 @@ footer {
     height: auto;
     margin-bottom: 15px;
     display: block;
+
     padding: 10px;
     border-radius: 5px;
     color: white;
@@ -937,45 +954,18 @@ footer {
     color: #CCCBCB;
 }
 
-/*=====================RESPONSIVIDADE PERFIL=================*/
+/* Responsividade */
 @media (max-width: 992px) {
-    .profile-container {
-        grid-template-columns: 1fr;
+    .footer-content {
+        gap: 20px;
     }
     
-    .services-sidebar {
-        order: -1;
+    .footer-section {
+        flex: 1 1 45%;
     }
 }
 
 @media (max-width: 768px) {
-    main {
-        padding: 1rem;
-    }
-    
-    .user-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .pro-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .pro-actions {
-        flex-direction: column;
-    }
-    
-    .visit-card {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .visit-actions {
-        margin-top: 1rem;
-    }
-    
     .footer-content {
         flex-direction: column;
         gap: 30px;
@@ -1014,10 +1004,194 @@ footer {
     .subfooter-links span {
         display: none;
     }
-    
-    .service-detail {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
+}
+/*==============BOTÃO DE LOGIN===========*/
+.bntCadastro {
+    background-color: var(--cor-primaria);
+    color: var(--cor-botao-texto);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    margin-left: 10px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+}
+
+.bntCadastro:hover {
+    background-color: var(--cor-botao-primario-hover);
+    color: var(--cor-botao-texto-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/*============== MENU HAMBURGUER ==============*/
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    z-index: 1001;
+    position: relative;
+}
+
+.menu-toggle span {
+    height: 3px;
+    width: 100%;
+    background: var(--cor-primaria);
+    margin: 3px 0;
+    border-radius: 2px;
+    transition: 0.3s;
+    transform-origin: center;
+}
+
+/* animação virar X */
+.menu-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Item mobile (inicialmente oculto) */
+.mobile-only-item {
+    display: none;
+}
+
+/* ============ RESPONSIVIDADE ============ */
+@media (max-width: 1024px) {
+    nav ul {
+        gap: 8px;
     }
+    
+    nav ul li a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .bntCadastro {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 0 1rem;
+    }
+    
+    #logo-headers img {
+        height: 45px;
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    nav ul {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        background: var(--cor-fundo);
+        flex-direction: column;
+        width: 100%;
+        height: calc(100vh - 70px);
+        display: none;
+        padding: 1.5rem 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        overflow-y: auto;
+        gap: 0;
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%);
+    }
+
+    nav ul.active {
+        display: flex;
+        transform: translateX(0);
+        animation: slideIn 0.3s ease-in-out;
+    }
+
+    nav ul li {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    nav ul li a {
+        justify-content: flex-start;
+        padding: 15px 20px;
+        border-radius: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 1.1rem;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    nav ul li:last-child a {
+        border-bottom: none;
+    }
+    
+    /* Esconder submenu no mobile */
+    .has-submenu .submenu {
+        display: none;
+    }
+    
+    /* Mostrar item "Cidade consciente" como item normal no mobile */
+    .mobile-only-item {
+        display: block;
+    }
+    
+    /* Esconder a seta do submenu no mobile */
+    .has-submenu > a > i.ri-arrow-down-s-line {
+        display: none;
+    }
+    
+    .bntCadastro {
+        margin: 20px 0 10px 0;
+        padding: 14px 20px;
+        text-align: center;
+        display: block;
+        width: 100%;
+        font-size: 1.1rem;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0 0.8rem;
+    }
+    
+    #logo-headers img {
+        height: 40px;
+    }
+    
+    nav ul {
+        padding: 1rem 0.8rem;
+    }
+    
+    nav ul li a {
+        padding: 14px 16px;
+        font-size: 1rem;
+    }
+    
+    .bntCadastro {
+        padding: 12px 16px;
+        font-size: 1rem;
+    }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
 }

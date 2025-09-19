@@ -52,34 +52,114 @@
     <main>
         <div class="profile-container">
             <!-- Seção de Informações do Usuário -->
-            <section class="profile-card">
-                <div class="user-header">
-                    <div class="avatar-container">
-                        <img src="..\IMG\Foto_usuario.png" alt="Foto do usuário" class="user-avatar">
-                        <button class="edit-avatar-btn" aria-label="Editar foto de perfil">
-                            <i class="ri-camera-line"></i>
+            <div class="informações_usuário">
+                <section class="profile-card">
+                    <div class="user-header">
+                        <div class="avatar-container">
+                            <img src="..\IMG\Foto_usuario.png" alt="Foto do usuário" class="user-avatar">
+                            <button class="edit-avatar-btn" aria-label="Editar foto de perfil">
+                                <i class="ri-camera-line"></i>
+                            </button>
+                        </div>
+                        <div class="user-info">
+                            <h2>Maria de Souza</h2>
+                            <div class="rating">
+                                <div class="stars">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-line"></i>
+                                </div>
+                                <span class="rating-text">4.5 (128 avaliações)</span>
+                            </div>
+                        </div>
+                        <button class="edit-profile-btn">
+                            <i class="ri-edit-line"></i> Editar perfil
                         </button>
                     </div>
-                    <div class="user-info">
-                        <h2>Maria de Souza</h2>
-                        <div class="rating">
-                            <div class="stars">
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-half-line"></i>
+                </section>
+                <section class="infos_usuario">
+                    <table>
+                        <tr>
+                            <td id="infos"><h2>Nome completo</h2><p>Maria de Souza</p></td>
+                        </tr>
+                            <tr>
+                                <td id="infos"><h2>Telefone</h2><p>+55 (11) 98765-4321</p></td>
+                            </tr>
+                        <tr>
+                            <td id="infos"><h2>E-mail</h2><p>maria.desouza@gmail.com</p></td>
+                        </tr>
+                        <tr>
+                            <td id="infos"><h2>Endereço</h2><p>Rua das Flores, 123 - São Paulo/SP</p></td>
+                        </tr>
+                               </table>
+                </section>
+
+                <!-- Próximas Visitas -->
+                <section class="next_visits-card">
+                    <div class="proximas_visitas">
+                        <div class="section-title">
+                            <h2><i class="ri-calendar-event-line"></i> Próximas Visitas</h2>
+                        </div>
+                        
+                        <div class="visits-container">
+                            <div class="visit-card">
+                                <div class="visit-date">
+                                    <span class="day">10</span>
+                                    <span class="month">Jun</span>
+                                    <span class="year">2025</span>
+                                </div>
+                                <div class="visit-details">
+                                    <h4>Terça-feira</h4>
+                                    <p>Limpeza rápida - 2 horas</p>
+                                    <div class="visit-time">
+                                        <i class="ri-time-line"></i> 14:00 - 16:00
+                                    </div>
+                                </div>
+                                <div class="visit-actions">
+                                    <button class="btn-confirm" title="Confirmar visita">
+                                        <i class="ri-check-line"></i>
+                                    </button>
+                                    <button class="btn-cancel" title="Cancelar visita">
+                                        <i class="ri-close-line"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <span class="rating-text">4.5 (128 avaliações)</span>
+                        
+                            <div class="visit-card">
+                                <div class="visit-date">
+                                    <span class="day">20</span>
+                                    <span class="month">Jun</span>
+                                    <span class="year">2025</span>
+                                </div>
+                                <div class="visit-details">
+                                    <h4>Sexta-feira</h4>
+                                    <p>Limpeza localizada - 3 horas</p>
+                                    <div class="visit-time">
+                                        <i class="ri-time-line"></i> 09:00 - 12:00
+                                    </div>
+                                </div>
+                                <div class="visit-actions">
+                                    <button class="btn-confirm" title="Confirmar visita">
+                                        <i class="ri-check-line"></i>
+                                    </button>
+                                    <button class="btn-cancel" title="Cancelar visita">
+                                        <i class="ri-close-line"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <button class="edit-profile-btn">
-                        <i class="ri-edit-line"></i> Editar perfil
-                    </button>
-                </div>
-
-                
-            </section>
+                    
+                    <div class="calendar-preview">
+                        <img id="calendario" src="..\IMG\Calendário.jpeg" alt="Visualização do calendário">
+                        <button class="btn-secondary full-width">
+                            <i class="ri-calendar-2-line"></i> Ver calendário completo
+                        </button>
+                    </div>
+                </section>
+            </div>
 
             <!-- Seção de Informações de Serviços -->
             <div class="profissional-sidebar">
@@ -203,73 +283,13 @@
                 </div>
             </div>
 
-                <!-- Próximas Visitas -->
-                <section class="next_visits-card">
-                    <div class="proximas_visitas">
-                        <div class="section-title">
-                            <h2><i class="ri-calendar-event-line"></i> Próximas Visitas</h2>
-                        </div>
-                        
-                        <div class="visits-container">
-                            <div class="visit-card">
-                                <div class="visit-date">
-                                    <span class="day">10</span>
-                                    <span class="month">Jun</span>
-                                    <span class="year">2025</span>
-                                </div>
-                                <div class="visit-details">
-                                    <h4>Terça-feira</h4>
-                                    <p>Limpeza rápida - 2 horas</p>
-                                    <div class="visit-time">
-                                        <i class="ri-time-line"></i> 14:00 - 16:00
-                                    </div>
-                                </div>
-                                <div class="visit-actions">
-                                    <button class="btn-confirm" title="Confirmar visita">
-                                        <i class="ri-check-line"></i>
-                                    </button>
-                                    <button class="btn-cancel" title="Cancelar visita">
-                                        <i class="ri-close-line"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        
-                            <div class="visit-card">
-                                <div class="visit-date">
-                                    <span class="day">20</span>
-                                    <span class="month">Jun</span>
-                                    <span class="year">2025</span>
-                                </div>
-                                <div class="visit-details">
-                                    <h4>Sexta-feira</h4>
-                                    <p>Limpeza localizada - 3 horas</p>
-                                    <div class="visit-time">
-                                        <i class="ri-time-line"></i> 09:00 - 12:00
-                                    </div>
-                                </div>
-                                <div class="visit-actions">
-                                    <button class="btn-confirm" title="Confirmar visita">
-                                        <i class="ri-check-line"></i>
-                                    </button>
-                                    <button class="btn-cancel" title="Cancelar visita">
-                                        <i class="ri-close-line"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="calendar-preview">
-                        <img id="calendario" src="..\IMG\Calendário.jpeg" alt="Visualização do calendário">
-                        <button class="btn-secondary full-width">
-                            <i class="ri-calendar-2-line"></i> Ver calendário completo
-                        </button>
-                    </div>
-                </section>
             
         </div>
     </main>
     
+    <footer id="Footer">
+        <div class="footer-content">
+
     <footer id="Footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -323,15 +343,15 @@
         <div class="subfooter">
             <p class="P-Color">© Lumis. Todos os direitos reservados.</p>
             <div class="subfooter-links">
-                <a href="#">Política de Privacidade</a>
+                <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>
                 <span>|</span>
                 <a href="#">Termos de Uso</a>
             </div>
         </div>
     </footer>
-
     
 </body>
 </html>
+
 
 
