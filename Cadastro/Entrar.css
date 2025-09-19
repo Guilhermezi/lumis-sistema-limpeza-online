@@ -714,7 +714,7 @@ body{
         }
         
         @media (max-width: 868px) {
-            .mobile-toggle {
+            .mobile-toggle {  
                 display: flex;
                 flex-direction: column;
                 align-items: center;

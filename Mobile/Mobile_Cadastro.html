@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
 
     <!-- Link para o arquivo CSS -->
-    <link rel="stylesheet" href="Cadastro.css">
+    <link rel="stylesheet" href="Mobile_Cadastro.css">
 
     <!-- Link para o RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
@@ -163,66 +163,6 @@
         </div>
     </footer>
 
-    <script src="Cadastro.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Elementos do DOM
-            const showLoginBtn = document.getElementById('show-login');
-            const showSignupBtn = document.getElementById('show-signup');
-            const loginForm = document.querySelector('.login-form');
-            const signupForm = document.querySelector('.signup-form');
-            const authImage = document.getElementById('auth-image');
-            
-            // Imagens em base64 para evitar dependências externas
-            const cadastroImage = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Y1ZjdmYSIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjE1MCIgcj0iODAiIGZpbGw9IiM1MEJGODciIG9wYWNpdHk9IjAuNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjI1MCIgcj0iNjAiIGZpbGw9IiM1MEJGODciIG9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjI1MCIgY3k9IjI1MCIgcj0iNzAiIGZpbGw9IiM1MEJGODciIG9wYWNpdHk9IjAuNiIvPjx0ZXh0IHg9IjIwMCIgeT0iMzUwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiPkFwZXJ0byBkZSBNw6Nvb3M8L3RleHQ+PC9zdmc+";
-            const loginImage = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Y1ZjdmYSIvPjxwYXRoIGQ9Ik0xNTAgMTUwIEMxNTAgMTE1IDE4MCAxMDAgMjAwIDEwMCBDMjIwIDEwMCAyNTAgMTE1IDI1MCAxNTAiIHN0cm9rZT0iIzUwQkY4NyIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTgwIiByPSI0MCIgZmlsbD0iIzUwQkY4NyIgb3BhY2l0eT0iMC43Ii8+PHBhdGggZD0iTTE1MCAyNTAgTDEwMCAzMDAgTTI1MCAyNTAgTDMwMCAzMDAiIHN0cm9rZT0iIzUwQkY4NyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHRleHQgeD0iMjAwIiB5PSIzNTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+TG9naW48L3RleHQ+PC9zdmc+";
-            
-            // Função para mostrar o formulário de login
-            function showLogin() {
-                loginForm.classList.add('active-form');
-                signupForm.classList.remove('active-form');
-                authImage.src = loginImage;
-                authImage.alt = "Imagem de login";
-            }
-            
-            // Função para mostrar o formulário de cadastro
-            function showSignup() {
-                loginForm.classList.remove('active-form');
-                signupForm.classList.add('active-form');
-                authImage.src = cadastroImage;
-                authImage.alt = "Imagem de cadastro";
-            }
-            
-            // Event listeners para os botões
-            showLoginBtn.addEventListener('click', showLogin);
-            showSignupBtn.addEventListener('click', showSignup);
-            
-            // Validação do formulário de cadastro
-            document.getElementById('cadastroForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const senha = document.getElementById('senha-cadastro').value;
-                const confirmarSenha = document.getElementById('confirmarSenha').value;
-                
-                if (senha !== confirmarSenha) {
-                    alert('As senhas não coincidem!');
-                    return;
-                }
-                
-                // Simulação de cadastro bem-sucedido
-                alert('Cadastro realizado com sucesso!');
-                showLogin(); // Redireciona para o login após cadastro
-            });
-            
-            // Validação do formulário de login
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Simulação de login bem-sucedido
-                alert('Login realizado com sucesso!');
-                // Aqui você redirecionaria para a página principal
-            });
-        });
-    </script>
+    <script src="Mobile_Cadastro.js"></script>
 </body>
 </html>

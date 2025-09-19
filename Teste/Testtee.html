@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
+    
+    <!-- Link para o RemixIcon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <title>Lumis - Cadastro</title>
+    
+    <style>
+        /*=============fontes============*/
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Questrial&display=swap');
+
+        /*================cores================*/
+        :root {
+            --cor-primaria: #50BF87;
+            --cor-secundaria: #3DBEA9;
+            --cor-terciaria: #508ABF;
+            --cor-botao-primario-hover: #317252;
+            --cor-botao-secundario-hover: #2E8C7E;
+            --cor-botao-terciario-hover: #3168A2;
+            --cor-fundo: #F9F9FB;
+            --cor-texto: #000000;
+            --cor-texto-secundario: #666666;
+            --cor-botao-texto: #F9F9FB;
+            --cor-botao-texto-hover: #D3D3D3;
+        }
+
+        /*================tipografia================*/
+        :root {
+            --h1-font: "Montserrat", sans-serif;
+            --h2-font: "Merriweather Sans", sans-serif;
+            --h3-font: "Merriweather Sans", sans-serif;
+            --p-font: "Questrial", sans-serif;
+            --h2-font-zise: 1.45rem;
+            --small-font-size: .813rem;
+        }
+
+        h1 {
+            font-family: var(--h1-font);
+            color: var(--cor-texto);
+        }
+
+        h2 {
+            font-family: var(--h2-font);
+            color: var(--cor-texto);
+        }
+
+        h3 {
+            font-family: var(--h3-font);
+            color: var(--cor-texto);
+        }
+
+        p{
+            font-family: var(--p-font);
+            color: var(--cor-texto);
+        }
+
+        /*=================body=================*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--p-font);
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            padding-top: 70px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /*============HEADER============*/
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            background-color: var(--cor-fundo);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            height: 70px;
+            box-sizing: border-box;
+        }
+
+        /*==========LOGO============*/
+        #logo-headers {
+            display: flex;
+            align-items: center;
+            z-index: 1001;
+        }
+        
+        #logo-headers img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+        
+        #logo-headers:hover {
+            cursor: pointer;
+        }
+
+        /*==============NAVBAR===========*/
+        nav {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Itens do menu */
+        nav ul li {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Links */
+        nav ul li a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-family: var(--h1-font);
+            font-weight: 600;
+            white-space: nowrap;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        nav ul li a:hover,
+        nav ul li:hover > a {
+            color: var(--cor-primaria);
+            background-color: rgba(80, 191, 135, 0.1);
+        }
+
+        /* Submenu */
+        .has-submenu {
+            position: relative;
+        }
+        
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            min-width: 180px;
+            padding: 8px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            transform: translateY(10px);
+        }
+        
+        .has-submenu:hover .submenu,
+        .has-submenu:focus-within .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu li {
+            padding: 0;
+        }
+
+        .submenu li a {
+            padding: 12px 20px;
+            color: var(--cor-texto);
+            font-family: var(--p-font);
+            font-weight: 500;
+            white-space: nowrap;
+            display: block;
+            transition: background-color 0.2s ease;
+            border-radius: 0;
+        }
+
+        .submenu li a:hover {
+            background-color: rgba(80, 191, 135, 0.1);
+            color: var(--cor-primaria);
+        }
+
+        /*==============BOTÃO DE LOGIN===========*/
+        .bntCadastro {
+            background-color: var(--cor-primaria);
+            color: var(--cor-botao-texto);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: var(--h1-font);
+            margin-left: 10px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            align-self: center;
+        }
+
+        .bntCadastro:hover {
+            background-color: var(--cor-botao-primario-hover);
+            color: var(--cor-botao-texto-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /*============== MENU HAMBURGUER ==============*/
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            z-index: 1001;
+            position: relative;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background: var(--cor-primaria);
+            margin: 3px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+            transform-origin: center;
+        }
+
+        /* animação virar X */
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Item mobile (inicialmente oculto) */
+        .mobile-only-item {
+            display: none;
+        }
+
+        /* ============ RESPONSIVIDADE HEADER ============ */
+        @media (max-width: 1024px) {
+            nav ul {
+                gap: 8px;
+            }
+            
+            nav ul li a {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .bntCadastro {
+                padding: 8px 14px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0 1rem;
+            }
+            
+            #logo-headers img {
+                height: 45px;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                background: var(--cor-fundo);
+                flex-direction: column;
+                width: 100%;
+                height: calc(100vh - 70px);
+                display: none;
+                padding: 1.5rem 1rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                overflow-y: auto;
+                gap: 0;
+                z-index: 1000;
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(-100%);
+            }
+
+            nav ul.active {
+                display: flex;
+                transform: translateX(0);
+                animation: slideIn 0.3s ease-in-out;
+            }
+
+            nav ul li {
+                width: 100%;
+                margin: 8px 0;
+            }
+
+            nav ul li a {
+                justify-content: flex-start;
+                padding: 15px 20px;
+                border-radius: 8px;
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            
+            nav ul li:last-child a {
+                border-bottom: none;
+            }
+            
+            /* Esconder submenu no mobile */
+            .has-submenu .submenu {
+                display: none;
+            }
+            
+            /* Mostrar item "Cidade consciente" como item normal no mobile */
+            .mobile-only-item {
+                display: block;
+            }
+            
+            /* Esconder a seta do submenu no mobile */
+            .has-submenu > a > i.ri-arrow-down-s-line {
+                display: none;
+            }
+            
+            .bntCadastro {
+                margin: 20px 0 10px 0;
+                padding: 14px 20px;
+                text-align: center;
+                display: block;
+                width: 100%;
+                font-size: 1.1rem;
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0 0.8rem;
+            }
+            
+            #logo-headers img {
+                height: 40px;
+            }
+            
+            nav ul {
+                padding: 1rem 0.8rem;
+            }
+            
+            nav ul li a {
+                padding: 14px 16px;
+                font-size: 1rem;
+            }
+            
+            .bntCadastro {
+                padding: 12px 16px;
+                font-size: 1rem;
+            }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        /*========== CONTEÚDO PRINCIPAL ==========*/
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        /*========== Cadastro Desktop ===========*/
+        .desktop-container{
+            background-color: var(--cor-fundo);
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            max-width: 100%;
+            min-height: 480px;
+        }
+
+        .desktop-container p{
+            font-size: 18px;
+            line-height: 20px;
+            letter-spacing: 0.3px;
+            margin: 20px 0;
+        }
+
+        .desktop-container span{
+            font-size: 16px;
+        }
+
+        .desktop-container a{
+            color: var(--cor-texto);
+            font-size: 15px;
+            text-decoration: none;
+            margin: 15px 0 10px;
+        }
+
+        .desktop-container button{
+            background-color: var(--cor-terciaria);
+            color: var(--cor-botao-texto);
+            font-size: 12px;
+            padding: 10px 45px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .desktop-container button:hover{
+            background-color: var(--cor-botao-terciario-hover);
+            color: var(--cor-botao-texto-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .desktop-container button.hidden{
+            background-color: transparent;
+            border-color: var(--cor-fundo);
+        }
+
+        .desktop-container form{
+            background-color: var(--cor-fundo);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            height: 100%;
+        }
+
+        .desktop-container input{
+            background-color: #eee;
+            border: none;
+            margin: 8px 0;
+            padding: 10px 15px;
+            font-size: 13px;
+            border-radius: 8px;
+            width: 100%;
+            outline: none;
+        }
+
+        .form-container{
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .sign-in{
+            left: 0;
+            width: 50%;
+            z-index: 2;
+        }
+
+        .desktop-container.active .sign-in{
+            transform: translateX(100%);
+        }
+
+        .sign-up{
+            left: 0;
+            width: 50%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .desktop-container.active .sign-up{
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+            animation: move 0.6s;
+        }
+
+        @keyframes move{
+            0%, 49.99%{
+                opacity: 0;
+                z-index: 1;
+            }
+            50%, 100%{
+                opacity: 1;
+                z-index: 5;
+            }
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .social-btn.google {
+            color: #DB4437;
+        }
+
+        .social-btn.facebook {
+            color: #4267B2;
+        }
+
+        .social-btn.apple {
+            color: #000;
+        }
+
+        .toggle-container{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: all 0.6s ease-in-out;
+            border-radius: 150px 0 0 100px;
+            z-index: 1000;
+        }
+
+        .desktop-container.active .toggle-container{
+            transform: translateX(-100%);
+            border-radius: 0 150px 100px 0;
+        }
+
+        .toggle{
+            background-color: var(--cor-primaria);
+            height: 100%;
+            background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
+            color: var(--cor-fundo);
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .desktop-container.active .toggle{
+            transform: translateX(50%);
+        }
+
+        .toggle-panel{
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 30px;
+            text-align: center;
+            top: 0;
+            transform: translateX(0);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .toggle-left{
+            transform: translateX(-200%);
+        }
+
+        .desktop-container.active .toggle-left{
+            transform: translateX(0);
+        }
+
+        .toggle-right{
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .desktop-container.active .toggle-right{
+            transform: translateX(200%);
+        }
+
+        /* ============ RESPONSIVIDADE PARA O FORMULÁRIO DESKTOP ============ */
+        @media (max-width: 868px) {
+            .desktop-container {
+                width: 90%;
+                height: auto;
+                min-height: 500px;
+            }
+            
+            .toggle-container {
+                display: none;
+            }
+            
+            .sign-in, .sign-up {
+                width: 100%;
+            }
+            
+            .desktop-container.active .sign-in {
+                transform: translateX(0);
+                opacity: 0;
+                pointer-events: none;
+            }
+            
+            .desktop-container.active .sign-up {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            
+            .form-container {
+                width: 100%;
+            }
+            
+            /* Alternância entre login e cadastro em mobile */
+            .mobile-toggle {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .desktop-container {
+                border-radius: 20px;
+            }
+            
+            .desktop-container form {
+                padding: 0 20px;
+            }
+            
+            .social-buttons {
+                flex-wrap: wrap;
+            }
+            
+            .social-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Para dispositivos muito pequenos */
+        @media (max-width: 360px) {
+            .desktop-container {
+                width: 95%;
+            }
+            
+            .desktop-container h1 {
+                font-size: 1.5rem;
+            }
+            
+            .desktop-container p {
+                font-size: 14px;
+            }
+        }
+
+        /*========== Cadastro Mobile ===========*/
+        .mobile-container {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .cadastro-section {
+            background-color: var(--cor-fundo);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .icon-cadastro {
+            text-align: center;
+            font-size: 3.5rem;
+            color: var(--cor-primaria);
+            margin-bottom: 1rem;
+        }
+
+        .texto-secundario {
+            font-family: var(--p-font);
+            color: var(--cor-texto-secundario);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .Cadastrotitle {
+            font-family: var(--h2-font);
+            font-size: 1.8rem;
+            color: var(--cor-primaria);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .cadastroForm label {
+            font-family: var(--p-font);
+            font-size: 1rem;
+            color: var(--cor-texto);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .grupo-formulario {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #nome, #email, #senha, #confirmarSenha {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: var(--p-font);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            width: 100%;
+        }
+
+        .mobile-container button[type="submit"] {
+            width: 100%;
+            background-color: var(--cor-terciaria);
+            color: var(--cor-botao-texto);
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-family: var(--h1-font);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-container button[type="submit"]:hover {
+            background-color: var(--cor-botao-terciario-hover);
+            transform: translateY(-2px);
+        }
+
+        .social-login {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .social-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: var(--cor-texto-secundario);
+            font-size: 0.9rem;
+        }
+
+        .social-divider::before,
+        .social-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #ddd;
+            margin: 0 10px;
+        }
+
+        .social-buttons-mobile {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-btn-mobile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn-mobile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .social-btn-mobile.google {
+            color: #DB4437;
+        }
+
+        .social-btn-mobile.facebook {
+            color: #4267B2;
+        }
+
+        .social-btn-mobile.apple {
+            color: #000;
+        }
+        
+        .ja-tem-conta {
+            text-align: center;
+            font-family: var(--p-font);
+            color: var(--cor-texto-secundario);
+            margin-top: 1.5rem;
+        }
+        
+        .ja-tem-conta a {
+            color: var(--cor-primaria);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .ja-tem-conta a:hover {
+            text-decoration: underline;
+        }
+
+        .terms {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: var(--cor-texto-secundario);
+        }
+
+        .terms a {
+            color: var(--cor-primaria);
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Toggle mobile (só aparece em telas menores) */
+        .mobile-toggle {
+            display: none;
+            justify-content: center;
+            gap: 15px;
+            padding: 10px;
+            background-color: var(--cor-fundo);
+            border-radius: 20px;
+            margin-top: 20px;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .mobile-toggle p {
+            margin: 0;
+        }
+        
+        .mobile-toggle button {
+            background: none;
+            border: none;
+            color: var(--cor-primaria);
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 14px;
+        }
+
+        /* ============ MEDIA QUERIES PARA ALTERNÂNCIA ENTRE VERSÕES ============ */
+        @media (max-width: 767px) {
+            .desktop-container {
+                display: none;
+            }
+            
+            .mobile-container {
+                display: block;
+            }
+            
+            .mobile-toggle {
+                display: none;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .desktop-container {
+                display: block;
+            }
+            
+            .mobile-container {
+                display: none;
+            }
+        }
+
+        /*=====================Footer=================*/
+        footer {
+            background-color: #262726;
+            padding: 40px 20px 20px;
+            margin-top: auto;
+            color: #CCCBCB;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1 1 200px;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .logo-footer {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 15px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .socials {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .socials a {
+            color: #CCCBCB;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .socials a:hover {
+            color: #50BF87;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            color: #CCCBCB;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #50BF87;
+        }
+
+        .Footer-Titulo {
+            color: #50BF87;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .P-Color {
+            color: #CCCBCB;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .subfooter {
+            background-color: #1e1e1e;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 30px auto 0;
+            border-radius: 5px;
+        }
+
+        .subfooter-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .subfooter-links a {
+            color: #CCCBCB;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .subfooter-links a:hover {
+            color: #50BF87;
+        }
+
+        .subfooter-links span {
+            color: #CCCBCB;
+        }
+
+        /* Responsividade Footer */
+        @media (max-width: 992px) {
+            .footer-content {
+                gap: 20px;
+            }
+            
+            .footer-section {
+                flex: 1 1 45%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-section {
+                flex: 1 1 100%;
+                text-align: center;
+            }
+            
+            .socials {
+                justify-content: center;
+            }
+            
+            .subfooter {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .subfooter-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-section {
+                min-width: 100%;
+            }
+            
+            .subfooter-links {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .subfooter-links span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+    
+<body>
+    <header>
+        <div id="logo-headers">
+            <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
+        </div>
+
+        <nav>
+            <!-- Botão hamburguer -->
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul id="menu">
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
+                <li class="has-submenu">
+                    <a href="../Sobre/Sobre.html">
+                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                    </ul>
+                </li>
+                <!-- Item adicional para mobile -->
+                <li class="mobile-only-item"><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
+                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
+                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
+                <li><a class="bntCadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Versão Desktop -->
+        <div class="desktop-container" id="container">
+            <div class="form-container sign-up">
+                <form action="../perfil/perfil.html" method="get">
+                    <h1>Criar conta</h1>
+                    <div class="social-login">
+                        <div class="social-buttons">
+                            <a class="social-btn google"><i class="ri-google-line"></i></a>
+                            <a class="social-btn facebook"><i class="ri-facebook-circle-fill"></i></a>
+                            <a class="social-btn apple"><i class="ri-apple-fill"></i></a>
+                            <a class="social-btn linkedin"><i class="ri-linkedin-fill"></i></a>
+                        </div>
+                    </div>
+                    <span>ou use o email para se cadastrar</span>
+                    <input type="name" placeholder="Nome Completo" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Senha" required>
+                    <button type="submit">Cadastro</button>
+                </form>
+            </div>
+
+            <div class="form-container sign-in">
+                <form action="../perfil/perfil.html" method="get">
+                    <h1>Entrar</h1>
+                    <div class="social-login">
+                        <div class="social-buttons">
+                            <a class="social-btn google"><i class="ri-google-line"></i></a>
+                            <a class="social-btn facebook"><i class="ri-facebook-circle-fill"></i></a>
+                            <a class="social-btn apple"><i class="ri-apple-fill"></i></a>
+                            <a class="social-btn linkedin"><i class="ri-linkedin-fill"></i></a>
+                        </div>
+                    </div>
+                    <span>ou use sua senha de E-mail</span>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Senha" required>
+                    <a href="#">esqueceu sua senha?</a>
+                    <button type="submit">Entrar</button>
+                </form>
+            </div>
+
+            <div class="toggle-container">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-left">
+                        <h1>Bem vindo de volta!</h1>
+                        <p>Insira seus dados pessoais para usar todos os recursos do site</p>
+                        <button class="hidden" id="login">Entrar</button>                  
+                    </div>
+                    <div class="toggle-panel toggle-right">
+                        <h1>Olá, seja bem-vindo!</h1>
+                        <p>Cadastre-se com seus dados pessoais para acessar todos os recursos do site</p>
+                        <button class="hidden" id="register">Criar conta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Toggle mobile (só aparece em telas menores) -->
+        <div class="mobile-toggle">
+            <p>Não tem uma conta? <button id="mobile-register">Cadastre-se</button></p>
+            <p>Já tem uma conta? <button id="mobile-login">Entrar</button></p>
+        </div> 
+
+        <!-- Versão Mobile -->
+        <div class="mobile-container">
+            <section class="cadastro-section">
+                <div class="icon-cadastro">
+                    <i class="ri-user-add-line"></i>
+                </div>
+                
+                <h2 class="Cadastrotitle">Criar Conta</h2>
+                <span class="texto-secundario">Preencha os dados abaixo para criar sua conta</span>
+
+                <form id="cadastroForm" action="../perfil/perfil.html" method="get">
+                    <div class="grupo-formulario">
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" placeholder="Guilherme Izidio Nogueira" name="nome" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="guilherme@gmail.com" name="email" required>
+
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" placeholder="Fo084@3$&l" name="senha" required>
+
+                        <label for="confirmarSenha">Confirmar Senha:</label>
+                        <input type="password" id="confirmarSenha" placeholder="Fo084@3$&l" name="confirmarSenha" required>
+                    </div>
+
+                    <button type="submit">Cadastrar</button>
+                </form>
+
+                <div class="social-login">
+                    <div class="social-divider">Ou continue com</div>
+                    <div class="social-buttons-mobile">
+                        <button class="social-btn-mobile google">
+                            <i class="ri-google-line"></i>
+                        </button>
+                        <button class="social-btn-mobile facebook">
+                            <i class="ri-facebook-circle-fill"></i>
+                        </button>
+                        <button class="social-btn-mobile apple">
+                            <i class="ri-apple-fill"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <p class="ja-tem-conta">Já tem uma conta? <a href="../Login/Login.html">Faça login aqui</a></p>
+                
+                <div class="terms">
+                    <p>Ao se cadastrar, você concorda com nossos <a href="#">Termos de Uso</a> e <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer id="Footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-footer">
+                <p><span class="P-Color">Especialistas em limpeza sustentável</span></p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/profile.php?id=61580024704625" target="_blank"><i class="ri-facebook-circle-fill"></i></a>
+                    <a href="https://www.instagram.com/lumisstartup/?next=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
+                    <a href="#"><i class="ri-linkedin-fill"></i></a>
+                    <a href="https://x.com/LumisStartup" target="_blank"><i class="ri-twitter-x-fill"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h2 class="Footer-Titulo">Links Rápidos</h2>
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="../Sobre/Sobre.html">Sobre</a></li>
+                    <li><a href="../Servicos/Servicos.html">Serviços</a></li>
+                    <li><a href="../Plano/Plano.html">Planos</a></li>
+                    <li><a href="../Contato/Contato.html">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h2 class="Footer-Titulo">Tipos de Serviços</h2>
+                <ul>
+                    <li><a href="#">Estofados</a></li>
+                    <li><a href="#">Vidros</a></li>
+                    <li><a href="#">Carros</a></li>
+                    <li><a href="#">Escritórios</a></li>
+                    <li><a href="#">Empresarial</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h2 class="Footer-Titulo">Localização</h2>
+                <p class="P-Color">Rua: Av. Amador Bueno da Veiga;</p>
+                <p class="P-Color">Endereço: 4430;</p>
+                <p class="P-Color">Cidade: São Paulo - SP;</p>
+                <p class="P-Color">CEP: 03890-000</p>
+            </div>
+            
+            <div class="footer-section">
+                <h2 class="Footer-Titulo">Contato</h2>
+                <p class="P-Color">Telefone: (11) 98121-4352</p>
+                <p class="P-Color">Email: <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
+            </div>
+        </div>
+        
+        <div class="subfooter">
+            <p class="P-Color">© Lumis. Todos os direitos reservados.</p>
+            <div class="subfooter-links">
+                <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>
+                <span>|</span>
+                <a href="#">Termos de Uso</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para alternância entre login e cadastro (versão desktop)
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
+        const mobileRegisterBtn = document.getElementById('mobile-register');
+        const mobileLoginBtn = document.getElementById('mobile-login');
+
+        if (registerBtn) {
+            registerBtn.addEventListener('click', () => {
+                container.classList.add("active");
+            });
+        }
+
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => {
+                container.classList.remove("active");
+            });
+        }
+
+        if (mobileRegisterBtn) {
+            mobileRegisterBtn.addEventListener('click', () => {
+                container.classList.add("active");
+            });
+        }
+
+        if (mobileLoginBtn) {
+            mobileLoginBtn.addEventListener('click', () => {
+                container.classList.remove("active");
+            });
+        }
+
+        // Menu mobile toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav ul');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('open');
+                nav.classList.toggle('active');
+                
+                // Impede a rolagem da página quando o menu está aberto
+                if (nav.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+        
+        // Fechar o menu ao clicar em um item (útil para mobile)
+        document.querySelectorAll('#menu a').forEach(item => {
+            item.addEventListener('click', () => {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Fechar o menu ao clicar fora dele
+        document.addEventListener('click', function(event) {
+            if (!nav.contains(event.target) && !menuToggle.contains(event.target) && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Prevenir que cliques dentro do menu fechem ele
+        if (nav) {
+            nav.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        }
+
+        // Função para redirecionamento baseado no tamanho da tela
+        function redirecionarPorTela() {
+            const largura = window.innerWidth;
+            const urlAtual = window.location.pathname.toLowerCase();
+            
+            // Definindo os caminhos
+            const destinoGrande = "/cadastro/cadastro.html";
+            const destinoPequena = "/index.html";
+
+            // Verifica se estamos na página correta
+            if (largura >= 1768) {
+                // Se a tela for grande mas não estamos na página de cadastro
+                if (!urlAtual.endsWith('/cadastro/cadastro.html')) {
+                    window.location.href = destinoGrande;
+                }
+            } else if (largura < 768) {
+                // Se a tela for pequena mas não estamos na página inicial
+                if (!urlAtual.endsWith('/index.html')) {
+                    window.location.href = destinoPequena;
+                }
+            }
+            // Para telas entre 768px e 1767px, não faz redirecionamento
+        }
+
+        // Adiciona os event listeners com debounce para evitar múltiplas execuções
+        let timeout;
+        function debouncedRedirecionar() {
+            clearTimeout(timeout);
+            timeout = setTimeout(redirecionarPorTela, 250);
+        }
+
+        window.addEventListener('load', redirecionarPorTela);
+        window.addEventListener('resize', debouncedRedirecionar);
+    </script>
+</body>
+</html>
