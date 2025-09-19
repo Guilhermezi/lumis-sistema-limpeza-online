@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumis - Cadastro</title>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <style>
-        /*=============fontes============*/
+/*=============fontes============*/
         @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Questrial&display=swap');
 
         /*================cores================*/
@@ -66,9 +58,6 @@
             background-color: var(--cor-fundo);
             color: var(--cor-texto);
             padding-top: 70px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         /*============HEADER============*/
@@ -219,7 +208,7 @@
             background-color: var(--cor-botao-primario-hover);
             color: var(--cor-botao-texto-hover);
             transform: translateY(-2px);
-            box-shadow: 极 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         /*============== MENU HAMBURGUER ==============*/
@@ -390,202 +379,7 @@
             to { transform: translateX(0); }
         }
 
-        /*========== Cadastro ===========*/
-
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Questrial', sans-serif;
-        }
-
-        body{
-            background-color: var(--cor-primaria);
-            background: linear-gradient(to right, var(--cor-fundo), var(--cor-primaria));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container{
-            background-color: var(--cor-fundo);
-            border-radius: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-            position: relative;
-            overflow: hidden;
-            width: 768px;
-            max-width: 100%;
-            min-height: 480px;
-        }
-
-        .container p{
-            font-size: 18px;
-            line-height: 20px;
-            letter-spacing: 0.3px;
-            margin: 20px 0;
-        }
-
-        .container span{
-            font-size: 16px;
-        }
-
-        .container a{
-            color: var(--cor-texto);
-            font-size: 15px;
-            text-decoration: none;
-            margin: 15px 0 10px;
-        }
-
-        .container button{
-            background-color: var(--cor-terciaria);
-            color: var(--cor-botao-texto);
-            font-size: 12px;
-            padding: 10px 45px;
-            border: 1px solid transparent;
-            border-radius: 8px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-
-        .container button:hover{
-            background-color: var(--cor-botao-terciario-hover);
-            color: var(--cor-botao-texto-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .container button.hidden{
-            background-color: transparent;
-            border-color: var(--cor-fundo);
-        }
-
-        .container form{
-            background-color: var(--cor-fundo);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 0 40px;
-            height: 100%;
-        }
-
-        .container input{
-            background-color: #eee;
-            border: none;
-            margin: 8px 0;
-            padding: 10px 15px;
-            font-size: 13px;
-            border-radius: 8px;
-            width: 100%;
-            outline: none;
-        }
-
-        .form-container{
-            position: absolute;
-            top: 0;
-            height: 100%;
-            transition: all 0.6s ease-in-out;
-        }
-
-        .sign-up{
-            left: 0;
-            width: 100%;
-            opacity: 1;
-            z-index: 5;
-        }
-
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .social-btn.google {
-            color: #DB4437;
-        }
-
-        .social-btn.facebook {
-            color: #4267B2;
-        }
-
-        .social-btn.apple {
-            color: #000;
-        }
-
-        /* ============ RESPONSIVIDADE PARA O FORMULÁRIO ============ */
-        @media (max-width: 868px) {
-            .container {
-                width: 90%;
-                height: auto;
-                min-height: 500px;
-            }
-            
-            .form-container {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                border-radius: 20px;
-            }
-            
-            .container form {
-                padding: 0 20px;
-            }
-            
-            .social-buttons {
-                flex-wrap: wrap;
-            }
-            
-            .social-btn {
-                width: 40px;
-                height: 40px;
-            }
-        }
-
-        /* Para dispositivos muito pequenos */
-        @media (max-width: 360px) {
-            .container {
-                width: 95%;
-            }
-            
-            .container h1 {
-                font-size: 1.5rem;
-            }
-            
-            .container p {
-                font-size: 14px;
-            }
-        }
-
-        /*==Formulario de Cadastro Mobile==*/
-        .mobile-cadastro-section {
+.mobile-cadastro-section {
             max-width: 500px;
             margin: 40px auto;
             padding: 20px;
@@ -611,6 +405,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            margin-top: 80px;
         }
 
         .Cadastrotitle {
@@ -655,6 +450,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
         }
 
         button[type="submit"]:hover {
@@ -761,129 +557,3 @@
                 display: block;
             }
         }
-    </style>
-</head>
-<body>
-    <header>
-        <div id="logo-headers">
-            <a href="../index.html"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiM1MEJGODciLz48dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPkxVTVM8L3RleHQ+PC9zdmc+" alt="Logo da Empresa" id="logo"></a>
-        </div>
-
-        <nav>
-            <!-- Botão hamburguer -->
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <ul id="menu">
-                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
-                <li class="has-submenu">
-                    <a href="../Sobre/Sobre.html">
-                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="../Cidade_consciente/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
-                    </ul>
-                </li>
-                <!-- Item adicional para mobile -->
-                <li class="mobile-only-item"><a href="../Cidade_consciente/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
-                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
-                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
-                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
-                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
-                <li><a class="bntCadastro" href="../Login/Login.html"><i class="ri-login-box-line"></i> Login</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Formulário principal para desktop -->
-    <div class="container">
-        <div class="form-container sign-up">
-            <form action="../perfil/perfil.html" method="get">
-                <h1>Criar conta</h1>
-                <div class="social-login">
-                    <div class="social-buttons">
-                        <a class="social-btn google"><i class="ri-google-line"></i></a>
-                        <a class="social-btn facebook"><i class="ri-facebook-circle-fill"></i></a>
-                        <a class="social-btn apple"><i class="ri-apple-fill"></i></a>
-                        <a class="social-btn linkedin"><i class="ri-linkedin-fill"></i></a>
-                    </div>
-                </div>
-                <span>ou use o email para se cadastrar</span>
-                <input type="name" placeholder="Nome Completo" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Senha" required>
-                <button type="submit">Cadastro</button>
-                
-                <p class="ja-tem-conta">Já tem uma conta? <a href="../Login/Login.html">Faça login aqui</a></p>
-            </form>
-        </div>
-    </div>
-
-    <!-- Formulário mobile de cadastro -->
-    <section class="mobile-cadastro-section">
-        <div class="cadastro-container">
-            <div class="icon-cadastro">
-                <i class="ri-user-add-line"></i>
-            </div>
-            
-            <h2 class="Cadastrotitle">Criar Conta</h2>
-            <span class="texto-secundario">Preencha os dados abaixo para criar sua conta</span>
-
-            <form id="cadastroForm" action="../perfil/perfil.html" method="get">
-                <div class="grupo-formulario">
-                    <label for="nome">Nome Completo:</label>
-                    <input type="text" id="nome" placeholder="Guilherme Izidio Nogueira" name="nome" required>
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" placeholder="guilherme@gmail.com" name="email" required>
-
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" placeholder="Fo084@3$&l" name="senha" required>
-
-                    <label for="confirmarSenha">Confirmar Senha:</label>
-                    <input type="password" id="confirmarSenha" placeholder="Fo084@3$&l" name="confirmarSenha" required>
-                </div>
-
-                <button type="submit">Cadastrar</button>
-            </form>
-
-            <div class="social-login">
-                <div class="social-divider">Ou continue com</div>
-                <div class="social-buttons">
-                    <button class="social-btn google">
-                        <i class="ri-google-line"></i>
-                    </button>
-                    <button class="social-btn facebook">
-                        <i class="ri-facebook-circle-fill"></i>
-                    </button>
-                    <button class="social-btn apple">
-                        <i class="ri-apple-fill"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <p class="ja-tem-conta">Já tem uma conta? <a href="../Login/Login.html">Faça login aqui</a></p>
-            
-            <div class="terms">
-                <p>Ao se cadastrar, você concorda com nossos <a href="#">Termos de Uso</a> e <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>.</p>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // Menu mobile toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav ul');
-
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
-                menuToggle.classList.toggle('open');
-                nav.classList.toggle('active');
-            });
-        }
-    </script>
-</body>
-</html>
