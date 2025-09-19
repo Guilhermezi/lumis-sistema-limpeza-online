@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 /*=============fontes============*/
         @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Questrial&display=swap');
 
@@ -379,170 +380,343 @@
             to { transform: translateX(0); }
         }
 
-/*=====================Footer=================*/
-        footer {
-            background-color: #262726;
-            padding: 40px 20px 20px;
-            margin-top: auto;
-            color: #CCCBCB;
-        }
+/*========== Cadastro ===========*/
 
-        .footer-content {
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Questrial', sans-serif;
+}
+
+body{
+    background-color: var(--cor-primaria);
+    background: linear-gradient(to right, var(--cor-fundo), var(--cor-primaria));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container{
+    background-color: var(--cor-fundo);
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.container p{
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+}
+
+.container span{
+    font-size: 16px;
+}
+
+.container a{
+    color: var(--cor-texto);
+    font-size: 15px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+.container button{
+    background-color: var(--cor-terciaria);
+    color: var(--cor-botao-texto);
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.container button:hover{
+    background-color: var(--cor-botao-terciario-hover);
+    color: var(--cor-botao-texto-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.container button.hidden{
+    background-color: transparent;
+    border-color: var(--cor-fundo);
+}
+
+.container form{
+    background-color: var(--cor-fundo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.container input{
+    background-color: #eee;
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.container.active .sign-in{
+    transform: translateX(100%);
+}
+
+.sign-up{
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.active .sign-up{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+@keyframes move{
+    0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100%{
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.social-btn {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 30px;
-        }
-
-        .footer-section {
-            flex: 1 1 200px;
-            min-width: 200px;
-            margin-bottom: 20px;
-        }
-
-        .logo-footer {
-            max-width: 180px;
-            height: auto;
-            margin-bottom: 15px;
-            display: block;
-
-            padding: 10px;
-            border-radius: 5px;
-            color: white;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .socials {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .socials a {
-            color: #CCCBCB;
-            font-size: 24px;
-            transition: color 0.3s ease;
-        }
-
-        .socials a:hover {
-            color: #50BF87;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section li {
-            margin-bottom: 10px;
-        }
-
-        .footer-section a {
-            text-decoration: none;
-            color: #CCCBCB;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: #50BF87;
-        }
-
-        .Footer-Titulo {
-            color: #50BF87;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .P-Color {
-            color: #CCCBCB;
-            line-height: 1.6;
-            margin-bottom: 8px;
-        }
-
-        .subfooter {
-            background-color: #1e1e1e;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 30px auto 0;
-            border-radius: 5px;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+}
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .subfooter-links {
-            display: flex;
-            gap: 10px;
-            align-items: center;
+        .social-btn.google {
+            color: #DB4437;
         }
 
-        .subfooter-links a {
-            color: #CCCBCB;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.9rem;
+        .social-btn.facebook {
+            color: #4267B2;
         }
 
-        .subfooter-links a:hover {
-            color: #50BF87;
+        .social-btn.apple {
+            color: #000;
         }
 
-        .subfooter-links span {
-            color: #CCCBCB;
-        }
+.toggle-container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 1000;
+}
 
-        /* Responsividade */
-        @media (max-width: 992px) {
-            .footer-content {
-                gap: 20px;
+.container.active .toggle-container{
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+.toggle{
+    background-color: var(--cor-primaria);
+    height: 100%;
+    background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
+    color: var(--cor-fundo);
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.container.active .toggle{
+    transform: translateX(50%);
+}
+
+.toggle-panel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-left{
+    transform: translateX(-200%);
+}
+
+.container.active .toggle-left{
+    transform: translateX(0);
+}
+
+.toggle-right{
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.active .toggle-right{
+    transform: translateX(200%);
+}
+
+/* ============ RESPONSIVIDADE PARA O FORMULÁRIO ============ */
+        @media (max-width: 868px) {
+            .container {
+                width: 90%;
+                height: auto;
+                min-height: 500px;
             }
             
-            .footer-section {
-                flex: 1 1 45%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .footer-content {
-                flex-direction: column;
-                gap: 30px;
+            .toggle-container {
+                display: none;
             }
             
-            .footer-section {
-                flex: 1 1 100%;
-                text-align: center;
+            .sign-in, .sign-up {
+                width: 100%;
             }
             
-            .socials {
+            .container.active .sign-in {
+                transform: translateX(0);
+                opacity: 0;
+                pointer-events: none;
+            }
+            
+            .container.active .sign-up {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            
+            .form-container {
+                width: 100%;
+            }
+            
+            /* Alternância entre login e cadastro em mobile */
+            .mobile-toggle {
+                display: flex;
                 justify-content: center;
+                margin-top: 20px;
             }
             
-            .subfooter {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-            
-            .subfooter-links {
-                justify-content: center;
+            .mobile-toggle button {
+                background: none;
+                border: none;
+                color: var(--cor-primaria);
+                font-weight: bold;
+                cursor: pointer;
+                text-decoration: underline;
+                font-size: 14px;
             }
         }
 
         @media (max-width: 480px) {
-            .footer-section {
-                min-width: 100%;
+            .container {
+                border-radius: 20px;
             }
             
-            .subfooter-links {
+            .container form {
+                padding: 0 20px;
+            }
+            
+            .social-buttons {
+                flex-wrap: wrap;
+            }
+            
+            .social-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Para dispositivos muito pequenos */
+        @media (max-width: 360px) {
+            .container {
+                width: 95%;
+            }
+            
+            .container h1 {
+                font-size: 1.5rem;
+            }
+            
+            .container p {
+                font-size: 14px;
+            }
+        }
+
+        /* Estilo para o toggle mobile (será mostrado apenas em mobile) */
+        .mobile-toggle {
+            display: none;
+            justify-content: center;
+            gap: 15px;
+            padding: 10px;
+            background-color: var(--cor-fundo);
+            border-radius: 20px
+        }
+        
+        @media (max-width: 868px) {
+            .mobile-toggle {
+                display: flex;
                 flex-direction: column;
-                gap: 5px;
-            }
-            
-            .subfooter-links span {
-                display: none;
+                align-items: center;
             }
         }

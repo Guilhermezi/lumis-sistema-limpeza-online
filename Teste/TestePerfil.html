@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../IMG/Logo_sem_nome-removebg-preview.png" type="image/x-icon">
+    
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="perfil.css">
+
+    <!-- Link para o RemixIcon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <title>Lumis - Perfil</title>
+</head>
+<body>
+    <header>
+        <div id="logo-headers">
+            <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
+        </div>
+
+        <nav>
+            <!-- Botão hamburguer -->
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul id="menu">
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
+                <li class="has-submenu">
+                    <a href="../Sobre/Sobre.html">
+                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                    </ul>
+                </li>
+                <!-- Item adicional para mobile -->
+                <li class="mobile-only-item"><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
+                <li><a href="#"><i class="ri-wallet-3-line"></i> Planos</a></li>
+                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
+                <li><a class="bntCadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="profile-container">
+            <!-- Seção de Informações do Usuário -->
+            <section class="profile-card">
+                <div class="user-header">
+                    <div class="avatar-container">
+                        <img src="..\IMG\Foto_usuario.png" alt="Foto do usuário" class="user-avatar">
+                        <button class="edit-avatar-btn" aria-label="Editar foto de perfil">
+                            <i class="ri-camera-line"></i>
+                        </button>
+                    </div>
+                    <div class="user-info">
+                        <h2>Maria de Souza</h2>
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-half-line"></i>
+                            </div>
+                            <span class="rating-text">4.5 (128 avaliações)</span>
+                        </div>
+                    </div>
+                    <button class="edit-profile-btn">
+                        <i class="ri-edit-line"></i> Editar perfil
+                    </button>
+                </div>
+
+                <div class="section-title">
+                    <h2><i class="ri-chat-3-line"></i> Meus Comentários</h2>
+                </div>
+
+                <div class="comments-container">
+                    <div class="comment-card">
+                        <div class="comment-header">
+                            <span class="comment-date">15/05/2023</span>
+                            <div class="comment-rating">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                            </div>
+                        </div>
+                        <p class="comment-text">Ótimo serviço! O Jorge foi extremamente profissional e cuidadoso com meus móveis. A limpeza ficou impecável e ele ainda deu dicas para manter a casa organizada por mais tempo.</p>
+                        <button class="read-more-btn">Ler mais <i class="ri-arrow-right-s-line"></i></button>
+                    </div>
+
+                    <div class="comment-card">
+                        <div class="comment-header">
+                            <span class="comment-date">02/04/2023</span>
+                            <div class="comment-rating">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-line"></i>
+                            </div>
+                        </div>
+                        <p class="comment-text">Serviço muito bom, mas atrasou 20 minutos. A limpeza em si foi excelente, superou minhas expectativas. Recomendo, mas espero que sejam mais pontuais da próxima vez.</p>
+                        <button class="read-more-btn">Ler mais <i class="ri-arrow-right-s-line"></i></button>
+                    </div>
+
+                    <div class="comment-card">
+                        <div class="comment-header">
+                            <span class="comment-date">18/03/2023</span>
+                            <div class="comment-rating">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-half-line"></i>
+                            </div>
+                        </div>
+                        <p class="comment-text">Contratei o serviço de limpeza pós-reforma e fiquei muito satisfeita. O profissional foi atencioso e meticuloso. Só não dou 5 estrelas porque algumas manchas mais difíceis não saíram completamente.</p>
+                        <button class="read-more-btn">Ler mais <i class="ri-arrow-right-s-line"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Informações de Serviços -->
+            <div class="services-sidebar">
+                <!-- Profissional Recorrente -->
+                <section class="service-card">
+                    <div class="section-title">
+                        <h2><i class="ri-user-star-line"></i> Profissional Preferido</h2>
+                    </div>
+                    
+                    <div class="professional-info">
+                        <div class="pro-header">
+                            <img src="..\IMG\Foto_profissional_recorrente.png" alt="Foto profissional recorrente" class="pro-avatar">
+                            <div class="pro-details">
+                                <h3>Jorge Silva</h3>
+                                <div class="rating">
+                                    <div class="stars">
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                    <span class="rating-text">4.9 (86 avaliações)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pro-services">
+                            <div class="service-detail">
+                                <i class="ri-brush-line"></i>
+                                <div>
+                                    <h4>Tipos de limpeza</h4>
+                                    <p>Residencial, Empresarial, Pós-reforma</p>
+                                </div>
+                            </div>
+                            
+                            <div class="service-detail">
+                                <i class="ri-map-pin-line"></i>
+                                <div>
+                                    <h4>Região de atuação</h4>
+                                    <p>São Paulo e arredores</p>
+                                </div>
+                            </div>
+                            
+                            <div class="service-detail">
+                                <i class="ri-money-dollar-circle-line"></i>
+                                <div>
+                                    <h4>Valor mínimo</h4>
+                                    <p>R$ 150,00</p>
+                                </div>
+                            </div>
+                            
+                            <div class="service-detail">
+                                <i class="ri-forbid-line"></i>
+                                <div>
+                                    <h4>Não realiza</h4>
+                                    <p>Lavar roupa, estofados e dentro de armários</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pro-actions">
+                            <button class="btn-primary">
+                                <i class="ri-calendar-line"></i> Agendar
+                            </button>
+                            <button class="btn-secondary">
+                                <i class="ri-message-2-line"></i> Mensagem
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Próximas Visitas -->
+                <section class="service-card">
+                    <div class="section-title">
+                        <h2><i class="ri-calendar-event-line"></i> Próximas Visitas</h2>
+                    </div>
+                    
+                    <div class="visits-container">
+                        <div class="visit-card">
+                            <div class="visit-date">
+                                <span class="day">10</span>
+                                <span class="month">Jun</span>
+                                <span class="year">2025</span>
+                            </div>
+                            <div class="visit-details">
+                                <h4>Terça-feira</h4>
+                                <p>Limpeza rápida - 2 horas</p>
+                                <div class="visit-time">
+                                    <i class="ri-time-line"></i> 14:00 - 16:00
+                                </div>
+                            </div>
+                            <div class="visit-actions">
+                                <button class="btn-confirm" title="Confirmar visita">
+                                    <i class="ri-check-line"></i>
+                                </button>
+                                <button class="btn-cancel" title="Cancelar visita">
+                                    <i class="ri-close-line"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="visit-card">
+                            <div class="visit-date">
+                                <span class="day">20</span>
+                                <span class="month">Jun</span>
+                                <span class="year">2025</span>
+                            </div>
+                            <div class="visit-details">
+                                <h4>Sexta-feira</h4>
+                                <p>Limpeza localizada - 3 horas</p>
+                                <div class="visit-time">
+                                    <i class="ri-time-line"></i> 09:00 - 12:00
+                                </div>
+                            </div>
+                            <div class="visit-actions">
+                                <button class="btn-confirm" title="Confirmar visita">
+                                    <i class="ri-check-line"></i>
+                                </button>
+                                <button class="btn-cancel" title="Cancelar visita">
+                                    <i class="ri-close-line"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-preview">
+                        <img src="..\IMG\Calendário.jpeg" alt="Visualização do calendário">
+                        <button class="btn-secondary full-width">
+                            <i class="ri-calendar-2-line"></i> Ver calendário completo
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer id="Footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-footer">
+                <p><span class="P-Color">Especialistas em limpeza sustentável</span></p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/profile.php?id=61580024704625" target="_blank"><i class="ri-facebook-circle-fill"></i></a>
+                    <a href="https://www.instagram.com/lumisstartup/?next=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
+                    <a href="#"><i class="ri-linkedin-fill"></i></a target="_blank">
+                    <a href="https://x.com/LumisStartup" target="_blank"><i class="ri-twitter-x-fill"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h2 class="Footer-Titulo">Links Rápidos</h2>
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="../Sobre/Sobre.html">Sobre</a></li>
+                    <li><a href="../Servicos/Servicos.html">Serviços</a></li>
+                    <li><a href="#">Planos</a></li>
+                    <li><a href="../Contato/Contato.html">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h2 class="Footer-Titulo">Tipos de Serviços</h2>
+                <ul>
+                    <li><a href="#">Estofados</a></li>
+                    <li><a href="#">Vidros</a></li>
+                    <li><a href="#">Carros</a></li>
+                    <li><a href="#">Escritórios</a></li>
+                    <li><a href="#">Empresarial</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h2 class="Footer-Titulo">Localização</h2>
+                <p class="P-Color">Rua: Av. Amador Bueno da Veiga;</p>
+                <p class="P-Color">Endereço: 4430;</p>
+                <p class="P-Color">Cidade: São Paulo - SP;</p>
+                <p class="P-Color">CEP: 03890-000</p>
+            </div>
+            
+            <div class="footer-section">
+                <h2 class="Footer-Titulo">Contato</h2>
+                <p class="P-Color">Telefone: (11) 98121-4352</p>
+                <p class="P-Color">Email: <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
+            </div>
+        </div>
+        
+        <div class="subfooter">
+            <p class="P-Color">© Lumis. Todos os direitos reservados.</p>
+            <div class="subfooter-links">
+                <a href="#">Política de Privacidade</a>
+                <span>|</span>
+                <a href="#">Termos de Uso</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="perfil.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const menu = document.getElementById('menu');
+            
+            menuToggle.addEventListener('click', function() {
+                this.classList.toggle('open');
+                menu.classList.toggle('active');
+                
+                // Impede a rolagem da página quando o menu está aberto
+                if (menu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Fechar o menu ao clicar em um item (útil para mobile)
+            document.querySelectorAll('#menu a').forEach(item => {
+                item.addEventListener('click', () => {
+                    menu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Fechar o menu ao clicar fora dele
+            document.addEventListener('click', function(event) {
+                if (!menu.contains(event.target) && !menuToggle.contains(event.target) && menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Prevenir que cliques dentro do menu fechem ele
+            menu.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+
+            // Interações para os botões de confirmação e cancelamento
+            document.querySelectorAll('.btn-confirm').forEach(button => {
+                button.addEventListener('click', function() {
+                    const visitCard = this.closest('.visit-card');
+                    visitCard.classList.add('confirmed');
+                    setTimeout(() => {
+                        visitCard.style.opacity = '0.7';
+                    }, 300);
+                    alert('Visita confirmada com sucesso!');
+                });
+            });
+            
+            document.querySelectorAll('.btn-cancel').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (confirm('Tem certeza que deseja cancelar esta visita?')) {
+                        const visitCard = this.closest('.visit-card');
+                        visitCard.style.transform = 'translateX(-100%)';
+                        visitCard.style.opacity = '0';
+                        setTimeout(() => {
+                            visitCard.remove();
+                        }, 500);
+                    }
+                });
+            });
+
+            // Botões de "Ler mais" para comentários
+            document.querySelectorAll('.read-more-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const commentCard = this.closest('.comment-card');
+                    commentCard.classList.toggle('expanded');
+                    
+                    if (commentCard.classList.contains('expanded')) {
+                        this.innerHTML = 'Ler menos <i class="ri-arrow-up-s-line"></i>';
+                    } else {
+                        this.innerHTML = 'Ler mais <i class="ri-arrow-down-s-line"></i>';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
