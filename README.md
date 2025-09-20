@@ -1,5 +1,10 @@
 # Lumis - Sistema de Limpeza Online
 
+## 🌐 Link para o Site na Web
+O projeto está disponível no GitHub Pages através do link abaixo:  
+
+🔗 [Lumis - Sistema de Limpeza Online](https://guilhermezi.github.io/lumis-sistema-limpeza-online/) 
+
 ## 🧹 Objetivo do Projeto
 O Lumis é um sistema desenvolvido para facilitar a contratação e organização de serviços de limpeza, atendendo a ambientes **residenciais, empresariais e urbanos**.  
 O objetivo é oferecer praticidade, transparência e eficiência tanto para clientes quanto para prestadores de serviço.
