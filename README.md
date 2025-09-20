@@ -43,7 +43,7 @@ Sinta-se livre para usar, modificar e distribuir, desde que mantido o devido crÃ
 
 ## ğŸ‘¥ Integrantes do Grupo
 Ana Beatriz
-Arthur Ozorio
+Arthur Ozorio Silva
 Diego Rodrigues
 Douglas Soares Silva
 Guilherme Izidio Nogueira
