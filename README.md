@@ -42,8 +42,8 @@ Este projeto está licenciado sob a licença MIT.
 Sinta-se livre para usar, modificar e distribuir, desde que mantido o devido crédito.
 
 ## 👥 Integrantes do Grupo
--Ana Beatriz Araujo Fagundes
--Arthur Ozorio Silva
--Diego Rodrigues Jordão dos Santos
--Douglas Soares Silva
--Guilherme Izidio Nogueira
+- Ana Beatriz Araujo Fagundes
+- Arthur Ozorio Silva
+- Diego Rodrigues Jordão dos Santos
+- Douglas Soares Silva
+- Guilherme Izidio Nogueira
