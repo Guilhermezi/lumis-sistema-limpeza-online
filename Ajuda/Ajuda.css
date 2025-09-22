@@ -22,8 +22,8 @@
             --h2-font: "Merriweather Sans", sans-serif;
             --h3-font: "Merriweather Sans", sans-serif;
             --p-font: "Questrial", sans-serif;
-            --h2-font-size: 3rem;
-            --small-font-size: .1000rem;
+            --h2-font-zise: 1.45rem;
+            --small-font-size: .813rem;
         }
 
         h1 {
@@ -250,7 +250,7 @@
         .mobile-only-item {
             display: none;
         }
-         
+
         /* ============ RESPONSIVIDADE ============ */
         @media (max-width: 1024px) {
             nav ul {
