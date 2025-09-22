@@ -415,7 +415,7 @@ main {
     background: linear-gradient(135deg, #ffffff, #f8fffe);
     border-radius: 20px;
     border: 1px solid rgba(80, 191, 135, 0.15);
-    box-shadow: 0 8px 25px rgba(80, 191, 135, 0.08);
+    box-shadow: linear-gradient(135deg, #E8F5E8, var(--cor-fundo))
     overflow: hidden;
     transition: all 0.3s ease;
 }
@@ -440,7 +440,7 @@ main {
     font-weight: 600;
     text-align: center;
     font-size: 0.95rem;
-    box-shadow: 0 4px 12px rgba(80, 191, 135, 0.3);
+    box-shadow: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
     transition: all 0.3s ease;
     border: none;
 }
@@ -610,7 +610,7 @@ main {
 }
 
 .service-detail i {
-    color: var(--cor-primaria);
+    color: llinear-gradient(135deg, #E8F5E8, var(--cor-fundo));
     font-size: 1.25rem;
     margin-top: 0.25rem;
 }
@@ -685,7 +685,7 @@ main {
     align-items: center;
     gap: 1.5rem;
     padding: 1.5rem;
-    background: linear-gradient(145deg, #ffffff, #fdfdfd);
+    background: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
     border: 1px solid rgba(80, 191, 135, 0.12);
     border-radius: 16px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
