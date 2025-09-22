@@ -546,10 +546,98 @@
                 display: none;
             }
         }
+/* =====================Hero================================ */
+/* Hero Video */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* ocupa a altura total da tela */
+    overflow: hidden;
+}
 
-/*==============Banner===========  */
-.banner {
+.hero video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Alinhador central do conteúdo */
+.alinhador {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    color: white;
+    height: 100%; /* ocupa a altura do container */
+    padding: 0 1rem;
+    text-align: center;
+}
+
+/* Títulos */
+.alinhador h1,
+.alinhador h2 {
     margin-top: 1rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-family: var(--h1-font);
+    margin-bottom: 2rem;
+}
+
+/* Botão */
+.alinhador_bnt a {
+    padding: 20%;
+    text-decoration: none;
+    background-color: var(--cor-primaria);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.alinhador_bnt a:hover {
+    background-color: var(--cor-botao-primario-hover);
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .alinhador h1,
+    .alinhador h2 {
+        font-size: 2rem;
+    }
+
+    .alinhador_bnt a {
+        font-size: 1.2rem;
+        padding: 0.7rem 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .alinhador h1,
+    .alinhador h2 {
+        font-size: 1.5rem;
+    }
+
+    .alinhador_bnt a {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+
+/*==============pq escolher===========  */
+.banner {
+    margin-top: 7rem;
     padding: 2rem 4%;
 }
 
@@ -561,13 +649,13 @@
     max-width: 100%;
 
 }
-/* Estilos para a imagem do banner */
+/* Estilos para do pq escolher */
 .banner img {
     border-radius: 1rem; 
     height: auto;
 }
 
-/* texto do banner */
+/* texto do pq escolher */
 
 .texto1 h1 {
     font-size: 3rem;
@@ -601,6 +689,68 @@
 .texto1 a:hover {
     background-color: var(--cor-botao-primario-hover);
     cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Para telas até 1024px (Laptops e Tablets grandes) */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column; /* Empilha a imagem e o texto */
+        text-align: center; /* Centraliza o texto */
+        gap: 2rem;
+    }
+
+    .banner img {
+        width: 80%; /* Reduz o tamanho da imagem */
+        max-width: 400px;
+    }
+
+    .texto1 p {
+        max-width: 100%; /* Permite que o parágrafo ocupe a largura total */
+    }
+}
+
+/* Para telas até 768px (Tablets e Smartphones) */
+@media (max-width: 768px) {
+    .banner {
+        padding: 2rem 2%; /* Reduz o padding lateral */
+    }
+    
+    .texto1 h1 {
+        font-size: 2.2rem; /* Reduz a fonte do título */
+    }
+
+    .texto1 h2 {
+        font-size: 1.2rem; /* Reduz a fonte do subtítulo */
+    }
+
+    .texto1 p {
+        font-size: 0.9rem; /* Reduz a fonte do parágrafo */
+    }
+
+    .texto1 a {
+        font-size: 1rem; /* Reduz a fonte do botão */
+        padding: 8px 16px;
+    }
+}
+
+/* Para telas até 480px (Smartphones pequenos) */
+@media (max-width: 480px) {
+    .banner {
+        padding: 1rem 1%; /* Mais um ajuste no padding */
+    }
+    
+    .texto1 h1 {
+        font-size: 1.8rem;
+    }
+    
+    .texto1 h2 {
+        font-size: 1rem;
+    }
+
+    .texto1 a {
+        font-size: 0.9rem;
+    }
 }
 
 /*=================Seção problema=================*/
@@ -646,6 +796,71 @@
     max-width: 95%;
 }
 
+/* Para telas até 1024px (Laptops e Tablets) */
+@media (max-width: 1024px) {
+    .container_2 {
+        flex-direction: column; /* Altera para layout de coluna */
+        text-align: center; /* Centraliza o texto */
+        gap: 2rem;
+    }
+    
+    .imagem2 img {
+        width: 80%; /* Reduz a largura da imagem */
+        max-width: 400px; /* Garante que a imagem não seja muito grande */
+    }
+
+    .texto2 {
+        margin-left: 0; /* Remove a margem fixa para centralizar o texto */
+        max-width: 100%;
+    }
+
+    .texto2 h1, .texto2 h2 {
+        text-align: center;
+    }
+    
+    .texto2 p {
+        max-width: 90%;
+        margin-inline: auto;
+    }
+}
+
+/* Para telas até 768px (Tablets e Smartphones grandes) */
+@media (max-width: 768px) {
+    .historia {
+        padding: 1.5rem 2%; /* Reduz o padding lateral */
+    }
+    
+    .texto2 h1 {
+        font-size: 2.2rem;
+    }
+    
+    .texto2 h2 {
+        font-size: 1.2rem;
+    }
+    
+    .texto2 p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Para telas até 480px (Smartphones pequenos) */
+@media (max-width: 480px) {
+    .historia {
+        padding: 1rem 1%;
+    }
+    
+    .texto2 h1 {
+        font-size: 1.8rem;
+    }
+    
+    .texto2 h2 {
+        font-size: 1rem;
+    }
+    
+    .texto2 p {
+        font-size: 0.85rem;
+    }
+}
 /*=================Seção Cards=================*/
 .container_3 {
   display: grid;
@@ -668,6 +883,7 @@
   border-radius: 1.5rem;
 }
 
+
 .card__data {
   width: 280px;
   background-color: var(--cor-fundo);
@@ -679,6 +895,11 @@
   left: 0;
   right: 0;
   margin-inline: auto;
+}
+
+.card__data:hover{
+  transform: translateY(-10px);
+  transition: transform 0.3s;
 }
 
 .card__description {
@@ -729,17 +950,35 @@
     width: 348px;
   }
 }
+/* Para telas até 320px (Smartphones pequenos) */
+@media (max-width: 320px) {
+    .container_3 {
+        padding-block: 2rem;
+    }
+    
+    .card__data {
+        width: 90%; /* Ajusta a largura do texto para telas muito pequenas */
+        padding: 1rem;
+    }
+    
+    .card__title {
+        font-size: 1rem;
+    }
+}
+
+
 
 /*====================texto oculto======================*/
 .centro{
-     display: flex;
+    display: flex;
   justify-content: center; /* centraliza horizontalmente */
   align-items: center;     /* centraliza verticalmente */
   gap: 2rem;               /* espaço entre os textos */
   text-align: center;      /* centraliza o conteúdo dentro dos cards */
   flex-wrap: wrap;         /* faz quebrar em telas pequenas */
   margin: 2rem auto;
-  max-width: 60%;    
+  max-width: 60%;   
+  
 }
 
 .centro h1  {
@@ -757,6 +996,7 @@
 
 .oculto_1 {
     display: none;
+    
 }
 
 .oculto_2 {
@@ -767,62 +1007,53 @@
     display: none;
 }
 
-/*================== cidade consciente ================*/
-.cidade {
-    background-color: var(--cor-primaria);
+/*================== conquista ================*/
+.conquistas {
+    background:linear-gradient(to right,#508ABF, #50BF87 );
     padding: 2rem 4%;
         }
 
 .container_4 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-     max-width: 1200px;
-    margin: 0 auto;
+        display: flex;
+        flex-direction: row; /* alinhamento horizontal */
+        align-items: flex-start;
+        justify-content: space-between; /* espaçamento igual entre os itens */
+        flex-wrap: wrap; /* quebra em telas menores */
+        gap: 2rem; /* espaço entre os blocos */
 }
 
-.container_4 img {
-    border-radius: 1rem;
-    height: auto;
-    max-width: 100%;
-    width: 600px;
+.texto3 {
+    flex: 1 1 22%; /* largura flexível, até 4 itens por linha */
+    background: rgba(255, 255, 255, 0.1); /* leve destaque sobre o gradiente */
+    padding: 1rem;
+    border-radius: 10px;
+    color: white;
+}
+
+.texto3:hover{
+  transform: translateY(-10px);
+  transition: transform 0.3s;
 }
 
 .texto3 h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: var(--cor-fundo);
+    color: white;
 }
 .texto3 h2 {
-    font-size: var(--h2-font-size);
+    font-size: var(--h1-font);
     margin-bottom: 1rem;
-    color:var(--cor-terciaria);
+    color:var(--cor-texto);
 }
 
 .texto3 p {
     font-size: 1rem;
-    color: whitesmoke;
+    color: black;
     margin-bottom: 1.5rem;
     line-height: 1.6;
     max-width: 90%;
 }
 
-.texto3 a {
-    text-decoration: none;
-    background-color: var(--cor-terciaria);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-family: var(--h1-font);
-}
-
-.texto3 a:hover {
-    background-color: var(--cor-botao-terciario-hover);
-    color: darkgray;
-    cursor: pointer;
-}
 
 /*================== vantagens ================*/
 .vantagens {
@@ -888,7 +1119,7 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 20px;
-    color: var(--cor-secundaria);
+    color: whitesmoke;
     font-weight: 600;
 }
 
@@ -1028,8 +1259,223 @@
         height: 40px;
     }
 }
+/* ====================================================================tipo de limpeza=========================== */
+.Serviços {
+    margin-bottom: 2rem;
+    background-color:whitesmoke;
+}
 
+.Limpezas {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
 
+.card_Limp{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+}
+
+.card_Limp h2 {
+    color: var(--cor-primaria);
+}
+
+.card_Limp i {
+    font-size: 6rem;
+    color: var(--cor-secundaria);
+}
+.residencial {
+background: white;
+border-radius: 10px;
+padding: 25px;
+text-align: center;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+width: 100%;
+max-width: 300px;
+cursor: pointer;
+}
+
+.residencial:hover{
+    transform: translateY(-10px);
+  transition: transform 0.3s;
+  box-shadow: 0 0 20px var(--cor-secundaria);
+
+}
+
+.Residencial_Saiba a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--cor-terciaria);
+  cursor: pointer;
+}
+
+.comercial {
+background: white;
+border-radius: 10px;
+padding: 25px;
+text-align: center;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+width: 100%;
+max-width: 300px;
+}
+.comercial:hover{
+    transform: translateY(-10px);
+    transition: transform 0.3s;
+    box-shadow: 0 0 20px var(--cor-secundaria);
+    cursor: pointer;
+
+}
+
+.Comercial_saiba a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--cor-terciaria);
+  cursor: pointer;
+}
+/* =================texto oculto================= */
+
+.Limpeza_residencial {
+  display: flex;                  /* coloca imagem e texto lado a lado */
+  align-items: center;            /* centraliza verticalmente */
+  justify-content: space-between; /* espaço entre os dois */
+  gap: 2rem;                      /* espaço entre colunas */
+  margin-top: 2rem;
+  padding: 2rem 4%;
+}
+
+/* Coluna da imagem */
+.Limpeza_residencial .imagem_Servico {
+  flex: 0 0 400px;   /* largura fixa para a imagem */
+}
+
+.Limpeza_residencial .imagem_Servico img {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  border-radius: 1rem;
+}
+
+/* Coluna do texto */
+.Limpeza_residencial .limpeza_Texto {
+  flex: 1;          /* ocupa todo o espaço restante */
+}
+
+.Limpeza_residencial h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--cor-primaria);
+}
+
+.Limpeza_residencial p {
+  font-size: 1rem;
+  color: var(--cor-texto-secundario);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  max-width: 100%; /* ajusta a largura do texto */
+}
+
+.Limpeza_residencial ul {
+  padding: 2px 2%;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .Limpeza_residencial {
+    flex-direction: column;  /* empilha no mobile */
+    text-align: left;
+  }
+
+  .Limpeza_residencial .imagem_Servico {
+    flex: none;
+    max-width: 100%;
+  }
+}   
+/* ====================================Comercial========================== */
+.Limpeza_Comercial {
+  display: flex;                  /* coloca imagem e texto lado a lado */
+  align-items: center;            /* centraliza verticalmente */
+  justify-content: space-between; /* espaço entre os dois */
+  gap: 2rem;                      /* espaço entre colunas */
+  margin-top: 2rem;
+  padding: 2rem 4%;
+}
+
+/* Coluna da imagem */
+.Limpeza_Comercial .imagem_Servico {
+  flex: 0 0 400px;   /* largura fixa para a imagem */
+}
+
+.Limpeza_Comercial .imagem_Servico img {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  border-radius: 1rem;
+}
+
+/* Coluna do texto */
+.Limpeza_Comercial .limpeza_Texto {
+  flex: 1;          /* ocupa todo o espaço restante */
+}
+
+.Limpeza_Comercial h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--cor-primaria);
+}
+
+.Limpeza_Comercial p {
+  font-size: 1rem;
+  color: var(--cor-texto-secundario);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  max-width: 100%; /* ajusta a largura do texto */
+}
+
+.Limpeza_Comercial ul {
+  padding: 2px 2%;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .Limpeza_Comercial {
+    flex-direction: column;  /* empilha no mobile */
+    text-align: left;
+  }
+
+  .Limpeza_Comercial .imagem_Servico {
+    flex: none;
+    max-width: 100%;
+  }
+}
+.Botao_servicos a {
+    text-decoration: none;
+    background-color: var(--cor-primaria);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    margin-top: 4px;
+}
+.Botao_servicos a:hover{
+  background-color: var(--cor-botao-primario-hover);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  
+}
+
+/*========================Oculto================= */
+#oculto4{
+    display: none;
+}
+
+#oculto5{
+    display: none;
+}
+
+/* ====================================================================tipo de limpeza============================= */
 /*==================equipes================*/
 
         .Equipe {
