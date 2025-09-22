@@ -415,7 +415,7 @@ main {
     background: linear-gradient(135deg, #ffffff, #f8fffe);
     border-radius: 20px;
     border: 1px solid rgba(80, 191, 135, 0.15);
-    box-shadow: linear-gradient(135deg, #E8F5E8, var(--cor-fundo))
+    box-shadow: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
     overflow: hidden;
     transition: all 0.3s ease;
 }
