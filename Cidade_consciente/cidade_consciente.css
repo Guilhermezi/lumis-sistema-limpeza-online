@@ -548,6 +548,7 @@
         }
 
         /* Hero Section */
+        
         .hero-cidade {
             background: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
             padding: 8rem 2rem 4rem;
@@ -613,16 +614,7 @@
             display: inline-block;
         }
 
-        .hero-image {
-            text-align: center;
-        }
-
-        .hero-image img {
-            width: 350px;
-            height: 400px;
-            border-radius: 25px;
-            object-fit: contain;
-        }
+        
 
         /* Project Section */
         .projeto-section {
