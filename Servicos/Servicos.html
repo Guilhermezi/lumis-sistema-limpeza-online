@@ -47,9 +47,337 @@
             </ul>
         </nav>
     </header>
+<!-- ==========================================================Residencial ou comercial============================= -->
+ <section class="tipo_servico">
+    <div id="button1"class="residencial">
+        <h1><i class="ri-home-9-fill"></i>Limpeza Residencial</h1>
+        <h2 id="button1"><i class="ri-arrow-right-long-fill"></i></h2>
+        <div class="residencil_img">
+            <img src="../IMG/mulher_limpando1.jpg" alt="pessoa limpando uma casa">
+            <img id="" src="../IMG/Mulher_sorrindo1.jpg" alt="pessoa sorrindo">
+        </div>
+    </div>
+    <div id="button2" class="comercial">
+      <h1><i class="ri-building-fill"></i>Limpeza Comercial</h1>
+      <h2 id="button2" ><i class="ri-arrow-left-long-fill"></i></h2>
+      <div class="comercial_img">
+        <img src="../IMG/mulher_limpando2.jpg" alt="pessoa limpando uma loja">
+        <img id="" src="../IMG/Mulher_sorrindo2.jpg" alt="pessoa sorrindo">
+      </div>
+    </div>
+    
+    <script src=""></script>
+ </section>
+ <!--==========================================================tipo de limpeza e outras opções  -->
+ <section class="serviço">
+    <div id="oculto1" class="tipo_residencial">
+        <div class="titulo1">
+            <h1 id=""><i class="ri-home-9-fill"></i> Limpeza Residencial</h1>
+        </div>
+        <div class="card">
+            <h1> Escolha um serviço</h1>
+        <div class="botao">
+            <a href=""><i class="ri-sparkling-2-line"></i>Limpeza Padrão</a>
+            <a id="button3" href=""><i class="ri-delete-bin-5-line"></i>Limpeza Pesada</a>
+        </div>
+        <div id="oculto3" class="Tipo_Pesado">
+        <h1> Qual tipo de Limpeza Pesada</h1>
+        <a href="">Rotina</a>
+        <a href="">Pré-mudança</a>
+        <a href="">Pós-Obra</a>
+        </div>
+        <div class="Tipo_Imovel">
+            <label class="edit" for="servico">Tipo do imóvel:</label>
+        <select id="servico" name="servico">
+        <option value="casa">Casa</option>
+        <option value="casa_movel">Casa Móvel</option>
+        <option value="apartamento">Apartamento</option>
+        <option value="kitnets">Kitnets</option>
+        <option value="studios">Lofts e Studios</option>
+        </select>
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo minima aperiam quia facilis odio. Animi eligendi quisquam, vitae nihil error, quaerat quasi officiis voluptate excepturi deleniti mollitia optio veritatis voluptates.</p>
+         <div class="Tipo_Imovel">
+            <label class="edit" for="servicoad">Adicionais</label>
+        <select id="servicoad" name="servicoad">
+        <option value="geladeira">Interior da geladeira</option>
+        <option value="janelas">Interior de janelas</option>
+        <option value="cozinha">Int. de armário de cozinha</option>
+        <option value="estofado">Aspirar tapete ou estofado</option>
+        <option value="externa">Área externa (até 20m²)</option>
+        <option value="vestuário">Organização de vestuário</option>
+        <option value="Lavar_roupas">Lavar roupas</option>
+        </select>
+        <p>Selecione opções extras para personalizar o serviço conforme sua necessidade.</p>
+        </div>
+        </div>
+        <div class="comodos">
+            <h3>Cômodos</h3>
+             <!-- Banheiros -->
+  <div class="counter" data-label="banheiro">
+    <a href="#" class="btn-circle minus">−</a>
+    <div class="info">
+      <div class="value">1</div>
+      <div class="label">banheiro</div>
+    </div>
+    <a href="#" class="btn-circle plus">+</a>
+  </div>
 
+  <!-- Quartos -->
+  <div class="counter" data-label="quarto">
+    <a href="#" class="btn-circle minus">−</a>
+    <div class="info">
+      <div class="value">2</div>
+      <div class="label">quartos</div>
+    </div>
+    <a href="#" class="btn-circle plus">+</a>
+  </div>
+   <p><i class="ri-checkbox-fill"></i>Cozinha e sala já incluso</p>
+   <ul>
+    <li>
+        <p>Para lavabos, adicione banheiros</p>
+    </li>
+    <li>
+        <p>Para demais cômodos, adicione quartos</p>
+    </li>
+   </ul>
+        </div>
+        </div>
+
+        <div class="horario">
+        <h3>Ajuste de Horas</h3>
+        <p>Faça as alterações necessrias</p>
+        <div class="counter" data-label="hora">
+    <a href="#" class="btn-circle minus">−</a>
+    <div class="info">
+      <div class="value">4</div>
+      <div class="label">horas</div>
+    </div>
+    <a href="#" class="btn-circle plus">+</a>
+  </div>
+  </div>
+  <div id="button5"class="Proximo">
+    <a>Proximo</a>
+  </div>
+        </div>
+    </div>
+<!-- ====================================================================comercial======================= -->
+<div id="oculto2" class="tipo_comercial">
+        <div class="titulo1">
+            <h1 id=""><i class="ri-building-fill"></i>Limpeza Comercial</h1>
+        </div>
+            <div id="button8" class="checkbox0">
+            <div class="empresas_check">
+                        <input type="checkbox" id="Empresa"> <!--isso daqui e para saber se o cliente tem uma empresa enorme no caso-->
+                        <label for="empresa" class="checkbox-label0">Local com varios andares?</label>
+                    </div>
+            <div id="oculto8" class="Formulario">
+                    <h2>Entre em Contato Conosco</h2>
+                    <p>Se a sua empresa ocupa vários andares, precisamos de um planejamento eficiente para garantir que cada espaço seja limpo e organizado. Nosso serviço oferece agilidade e profissionalismo, cuidando de todas as áreas sem interromper suas atividades.</p>
+                    
+                    <form action="#" method="post">
+                        <label for="Nome">Nome:</label>
+                        <input type="Nome" id="nome" name="nome" required>
+
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="Telefone">Telefone:</label>
+                        <input type="Telefone" id="Telefone" name="Telefone" required>
+
+                        <label for="CEP">CEP</label>
+                        <input type="CEP" id="CEP" name="CEP" required>
+
+                        <label for="endereco">endereco</label>
+                        <input type="endereço" id="endereço" name="endereço" required>
+
+                        <label for="mensagem">Mensagem:</label>
+                        <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+        </div>
+        <div id="oculto9" class="card">
+            <h1> Escolha um serviço</h1>
+        <div class="botao">
+            <a href=""><i class="ri-sparkling-2-line"></i>Limpeza Padrão</a>
+            <a id="button4" href=""><i class="ri-delete-bin-5-line"></i>Limpeza Pesada</a>
+        </div>
+        <div id="oculto4" class="Tipo_Pesado2">
+        <h1> Qual tipo de Limpeza Pesada</h1>
+        <a href="">Rotina</a>
+        <a href="">Pré-mudança</a>
+        <a href="">Pós-Obra</a>
+        </div>
+        <div class="Tipo_Imovel">
+            <label class="edit" for="servico">Tipos de estabelicimento:</label>
+        <select id="servico" name="servico">
+        <option value="salao">Salão</option>
+        <option value="alimento">Alimentação e Bebidas</option>
+        <option value="moda">Moda e Acessórios</option>
+        <option value="Específicos">Produtos Específicos</option>
+        <option value="Especializados">Serviços Especializados</option>
+        </select>
+        </div>
+        <div class="Tipo_Imovel">
+            <label class="edit" for="servicoad">Adicionais</label>
+        <select id="servicoad" name="servicoad">
+        <option value="Fachadas">Fachadas e vitrines</option>
+        <option value="Banheiros">Banheiros coletivos</option>
+        <option value="AR">Ar-condicionado</option>
+        <option value="Pisos">Pisos e polimento</option>
+        <option value="Externas">Áreas externas</option>
+        <option value="cozinhas">Cozinhas/refeitórios</option>
+        <option value="eventos">Pós-evento/reforma</option>
+        </select>
+        <p>Selecione opções extras para personalizar o serviço conforme sua necessidade.</p>
+        </div>
+        <div class="comodos">
+            <h3>Cômodos</h3>
+             <!-- Banheiros -->
+  <div class="counter" data-label="banheiro">
+    <a href="#" class="btn-circle minus">−</a>
+    <div class="info">
+      <div class="value">1</div>
+      <div class="label">banheiro</div>
+    </div>
+    <a href="#" class="btn-circle plus">+</a>
+  </div>
+
+  <!-- Quartos -->
+  <div class="counter" data-label="quarto">
+    <a href="#" class="btn-circle minus">−</a>
+    <div class="info">
+      <div class="value">1</div>
+      <div class="label">quartos</div>
+    </div>
+    <a href="#" class="btn-circle plus">+</a>
+  </div>
+   <p><i class="ri-checkbox-fill"></i>Cômodo e banheiro principal já incluso</p>
+   <ul>
+    <li>
+        <p>Para lavabos, adicione banheiros</p>
+    </li>
+    <li>
+        <p>Para demais cômodos, adicione quartos</p>
+    </li>
+   </ul>
+    <div id="oculto9" class="horario">
+        <h3>Ajuste de Horas</h3>
+        <p>Faça as alterações necessrias</p>
+        <div class="counter" data-label="hora">
+    <a href="#" class="btn-circle minus">−</a>
+    <div class="info">
+      <div class="value">4</div>
+      <div class="label">horas</div>
+    </div>
+    <a href="#" class="btn-circle plus">+</a>
+  </div>
+  </div>
+  <div id="button6"class="Proximo">
+    <a>Proximo</a>
+  </div>
+        </div>
+    </div>
+
+<script src="botoes2.js"></script>
+<script src="botoes.js"></script>
+<script src="Contagem.js"></script>
+<script src="residencial_comercial.js"></script>
+ </section>
+ <!--=========================================================agendamento========================================  -->
+ <section id="oculto5" class="agendamento">
+ <div class="container">
+        <div class="Agendamento">
+            <div class="card_agenda">
+                <div class="Tipo_Imovel">
+            <label class="edit" for="agendamento">Agendamento</label>
+        <select id="agendamento" name="agendamento">
+        <option value="diarias">Diarias</option>
+        <option value="Semanal">Semanal</option>
+        <option value="quinzena">toda quinzena</option>
+        <select name="" id=""></select>
+                <div class="calendario">
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <h1 id="current-month">Dezembro 2023</h1>
+                            <div class="nav-buttons">
+                                <button id="prev-month">&lt;</button>
+                                <button id="today-btn">Hoje</button>
+                                <button id="next-month">&gt;</button>
+                            </div>
+                        </div>
+                        <div class="weekdays">
+                            <div>Dom</div>
+                            <div>Seg</div>
+                            <div>Ter</div>
+                            <div>Qua</div>
+                            <div>Qui</div>
+                            <div>Sex</div>
+                            <div>Sáb</div>
+                        </div>
+                        <div class="days" id="calendar-days">
+                            </div>
+                        <div class="calendar-footer">
+                            <div class="event-indicator">
+                                <div class="event-dot"></div>
+                                <span>Dia com evento</span>
+                            </div>
+                            <div class="selected-date" id="selected-date">Nenhuma data selecionada</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="horas">
+                    <div class="container">
+                        <div class="time-display">
+                            <div class="selected-time" id="selected-time">12:00</div>
+                            </div>
+                        <button class="select-button" id="open-modal">Selecionar Horário</button>
+                    </div>
+                    <div class="modal" id="time-modal">
+                        <div class="modal-content">
+                            <button class="close-button" id="close-modal">&times;</button>
+                            <h2 class="modal-title">Selecionar Horário</h2>
+                            <div class="time-inputs">
+                                <div class="time-input">
+                                    <label for="modal-hours">Horas</label>
+                                    <input type="number" id="modal-hours" min="0" max="23" value="12">
+                                </div>
+                                <div class="time-input">
+                                    <label for="modal-minutes">Minutos</label>
+                                    <input type="number" id="modal-minutes" min="0" max="59" value="0">
+                                </div>
+                            </div>
+                            <div class="modal-buttons">
+                                <button class="modal-button cancel-button" id="cancel-modal">Cancelar</button>
+                                <button class="modal-button confirm-button" id="confirm-time">Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+<script src=""></script>
+<script src="botoes3.js"></script>
+<script src="calendario_horas.js"></script>
+<script src="botoes.js"></script>
+ </section>
+<!--===========================================================total===========================================  -->
+ <section id="oculto10" class="total">
+     <div class="container2">
+        <h2>Resumo do Pedido</h2>
+        <div id="resumo-pedido">
+            <!-- O resumo do pedido será inserido aqui via JavaScript -->
+        </div>
+        <div class="total-final">
+            <h3>Total: <span id="valor-total">R$ 0,00</span></h3>
+            <button id="finalizar-pedido" class="btn-finalizar" href="../Servicos/Servicos.html">Finalizar Pedido</button>
+        </div>
+    </div>
+<script src="finalizar.js"></script>    
+<script src="carrinho.js"></script>
+ </section>
+<!-- ===============================================================footer========================================== -->
     <footer id="Footer">
         <div class="footer-content">
             <div class="footer-section">
