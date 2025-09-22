@@ -1,8 +1,9 @@
-/*=============fontes============*/
+/*=============FONTES============*/
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Questrial&display=swap');
 
-/*================cores================*/
+/*=============CORES E VARIÁVEIS============*/
 :root {
+    /* Cores principais */
     --cor-primaria: #50BF87;
     --cor-secundaria: #3DBEA9;
     --cor-terciaria: #508ABF;
@@ -16,18 +17,32 @@
     --cor-botao-texto-hover: #D3D3D3;
     --cor-borda: #e0e0e0;
     --cor-sombra: rgba(0, 0, 0, 0.08);
-}
-
-/*================tipografia================*/
-:root {
+    
+    /* Tipografia */
     --h1-font: "Montserrat", sans-serif;
     --h2-font: "Merriweather Sans", sans-serif;
     --h3-font: "Merriweather Sans", sans-serif;
     --p-font: "Questrial", sans-serif;
-    --h2-font-zise: 1.45rem;
-    --small-font-size: .813rem;
+    --h2-font-size: 1.45rem;
+    --small-font-size: 0.813rem;
 }
 
+/*=============RESET E CONFIGURAÇÕES GLOBAIS============*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--p-font);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    padding-top: 70px;
+    line-height: 1.6;
+}
+
+/*=============TIPOGRAFIA============*/
 h1 {
     font-family: var(--h1-font);
     color: var(--cor-texto);
@@ -43,27 +58,12 @@ h3 {
     color: var(--cor-texto);
 }
 
-p{
+p {
     font-family: var(--p-font);
     color: var(--cor-texto);
 }
 
-/*=================body=================*/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: var(--p-font);
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
-    padding-top: 70px;
-    line-height: 1.6;
-}
-
-/*============HEADER============*/
+/*=============HEADER============*/
 header {
     display: flex;
     justify-content: space-between;
@@ -79,7 +79,7 @@ header {
     box-sizing: border-box;
 }
 
-/*==========LOGO============*/
+/*=============LOGO============*/
 #logo-headers {
     display: flex;
     align-items: center;
@@ -96,7 +96,7 @@ header {
     cursor: pointer;
 }
 
-/*==============NAVBAR===========*/
+/*=============NAVEGAÇÃO============*/
 nav {
     position: relative;
     display: flex;
@@ -114,14 +114,12 @@ nav ul {
     height: 100%;
 }
 
-/* Itens do menu */
 nav ul li {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-/* Links */
 nav ul li a {
     display: flex;
     align-items: center;
@@ -143,7 +141,7 @@ nav ul li:hover > a {
     background-color: rgba(80, 191, 135, 0.1);
 }
 
-/* Submenu */
+/*=============SUBMENU============*/
 .has-submenu {
     position: relative;
 }
@@ -153,7 +151,7 @@ nav ul li:hover > a {
     top: 100%;
     left: 0;
     background: #fff;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     opacity: 0;
     visibility: hidden;
     min-width: 180px;
@@ -191,7 +189,7 @@ nav ul li:hover > a {
     color: var(--cor-primaria);
 }
 
-/*==============BOTÃO DE LOGIN===========*/
+/*=============BOTÃO DE CADASTRO============*/
 .bntCadastro {
     background-color: var(--cor-primaria);
     color: var(--cor-botao-texto);
@@ -211,10 +209,10 @@ nav ul li:hover > a {
     background-color: var(--cor-botao-primario-hover);
     color: var(--cor-botao-texto-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/*============== MENU HAMBURGUER ==============*/
+/*=============MENU HAMBURGUER============*/
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -236,7 +234,6 @@ nav ul li:hover > a {
     transform-origin: center;
 }
 
-/* animação virar X */
 .menu-toggle.open span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 6px);
 }
@@ -249,145 +246,16 @@ nav ul li:hover > a {
     transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Item mobile (inicialmente oculto) */
 .mobile-only-item {
     display: none;
 }
 
-/* ============ RESPONSIVIDADE ============ */
-@media (max-width: 1024px) {
-    nav ul {
-        gap: 8px;
-    }
-    
-    nav ul li a {
-        padding: 8px 12px;
-        font-size: 0.9rem;
-    }
-    
-    .bntCadastro {
-        padding: 8px 14px;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 768px) {
-    header {
-        padding: 0 1rem;
-    }
-    
-    #logo-headers img {
-        height: 45px;
-    }
-    
-    .menu-toggle {
-        display: flex;
-    }
-    
-    nav ul {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        background: var(--cor-fundo);
-        flex-direction: column;
-        width: 100%;
-        height: calc(100vh - 70px);
-        display: none;
-        padding: 1.5rem 1rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        overflow-y: auto;
-        gap: 0;
-        z-index: 1000;
-        transition: transform 0.3s ease-in-out;
-        transform: translateX(-100%);
-    }
-
-    nav ul.active {
-        display: flex;
-        transform: translateX(0);
-        animation: slideIn 0.3s ease-in-out;
-    }
-
-    nav ul li {
-        width: 100%;
-        margin: 8px 0;
-    }
-
-    nav ul li a {
-        justify-content: flex-start;
-        padding: 15px 20px;
-        border-radius: 8px;
-        width: 100%;
-        box-sizing: border-box;
-        font-size: 1.1rem;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-    
-    nav ul li:last-child a {
-        border-bottom: none;
-    }
-    
-    /* Esconder submenu no mobile */
-    .has-submenu .submenu {
-        display: none;
-    }
-    
-    /* Mostrar item "Cidade consciente" como item normal no mobile */
-    .mobile-only-item {
-        display: block;
-    }
-    
-    /* Esconder a seta do submenu no mobile */
-    .has-submenu > a > i.ri-arrow-down-s-line {
-        display: none;
-    }
-    
-    .bntCadastro {
-        margin: 20px 0 10px 0;
-        padding: 14px 20px;
-        text-align: center;
-        display: block;
-        width: 100%;
-        font-size: 1.1rem;
-        margin-left: 0;
-    }
-}
-
-@media (max-width: 480px) {
-    header {
-        padding: 0 0.8rem;
-    }
-    
-    #logo-headers img {
-        height: 40px;
-    }
-    
-    nav ul {
-        padding: 1rem 0.8rem;
-    }
-    
-    nav ul li a {
-        padding: 14px 16px;
-        font-size: 1rem;
-    }
-    
-    .bntCadastro {
-        padding: 12px 16px;
-        font-size: 1rem;
-    }
-}
-
-@keyframes slideIn {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-}
-
-/*=====================Countéudo MAIN=================*/
+/*=============CONTEÚDO PRINCIPAL============*/
 main {
     padding: 2rem;
     max-width: 1280px;
     margin: 0 auto;
-    background-color: rgba(80, 191, 135, 0.5); /*==== Aqui foi usado rgba para incluir transparencia(opacidade) na cor do fundo==== */
+    background-color: rgba(80, 191, 135, 0.5);
     border-radius: 16px;
 }
 
@@ -398,10 +266,7 @@ main {
     align-items: start;
 }
 
-/*=====================CARD Perfil=================*/
-.informações_usuário{
-    display:table-column
-}
+/*=============CARDS============*/
 .profile-card, .service-card {
     background: white;
     border-radius: 16px;
@@ -416,6 +281,7 @@ main {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
+/*=============PERFIL DO USUÁRIO============*/
 .user-header {
     display: flex;
     align-items: center;
@@ -461,7 +327,7 @@ main {
     transform: scale(1.1);
 }
 
-.user-info{
+.user-info {
     flex: 1;
     min-width: 200px;
 }
@@ -521,20 +387,32 @@ main {
     gap: 0.5rem;
     font-size: 1.25rem;
 }
-.infos_usuario, .infos_profissional{
+
+/*=============INFORMAÇÕES DO USUÁRIO/PROFISSIONAL============*/
+.infos_usuario, .infos_profissional {
     background-color: white;
     border-radius: 16px;
-    table{
-        width: 100%;
-        table-layout: fixed;
-    }
-    td{
-        background-color: #50BF87;
-        border-radius: 16px;
-    }
 }
 
-/*=====================Comentários=================*/
+.infos_usuario table, .infos_profissional table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.infos_usuario td, .infos_profissional td {
+    background-color: #50BF87;
+    border-radius: 16px;
+    padding: 0.75rem;
+    color: white;
+    font-weight: 500;
+}
+
+/*=============COMENTÁRIOS============*/
+.comentarios {
+    background-color: white;
+    border-radius: 16px;
+}
+
 .comments-container {
     display: flex;
     flex-direction: column;
@@ -598,19 +476,14 @@ main {
 .read-more-btn:hover {
     gap: 0.5rem;
 }
-.comentarios{
-    background-color: white;
-    border-radius: 16px;
-}
 
-/*=====================SERVICES SIDEBAR=================*/
+/*=============SIDEBAR PROFISSIONAL============*/
 .profissional-sidebar {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-/*=====================PROFISSIONAL INFO=================*/
 .pro-header {
     display: flex;
     align-items: center;
@@ -665,7 +538,7 @@ main {
     gap: 0.75rem;
 }
 
-/*=====================BUTTONS=================*/
+/*=============BOTÕES============*/
 .btn-primary, .btn-secondary {
     padding: 0.75rem 1.25rem;
     border-radius: 8px;
@@ -677,6 +550,8 @@ main {
     align-items: center;
     gap: 0.5rem;
     border: none;
+    text-decoration: none;
+    justify-content: center;
 }
 
 .btn-primary {
@@ -705,7 +580,7 @@ main {
     justify-content: center;
 }
 
-/*=====================VISITAS=================*/
+/*=============VISITAS============*/
 .visits-container {
     display: flex;
     flex-direction: column;
@@ -726,6 +601,11 @@ main {
 .visit-card:hover {
     border-color: var(--cor-primaria);
     box-shadow: 0 4px 12px rgba(80, 191, 135, 0.15);
+}
+
+.visit-card.confirmed {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.05);
 }
 
 .visit-date {
@@ -805,9 +685,17 @@ main {
     transform: scale(1.1);
 }
 
-.visit-card.confirmed {
-    border-color: #4CAF50;
-    background: rgba(76, 175, 80, 0.05);
+/*=============CALENDÁRIO E PRÓXIMAS VISITAS============*/
+.next_visits-card {
+    margin-top: 25%;
+    display: flex;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.proximas_visitas {
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .calendar-preview {
@@ -822,74 +710,13 @@ main {
     margin-bottom: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-#calendario{
+
+#calendario {
     max-width: 100%;
     height: auto;
 }
-.next_visits-card{
-    margin-top: 25%;
-    display: flex;
-    background-color: white;
-    border-radius: 16px;
-}
-.proximas_visitas{
-    margin-top: 20px;
-    margin-left: 20px;
-}
-/*=================Responsividade=================*/
-@media (max-width: 768px) {
-    .profile-container {
-        grid-template-columns: 1fr;
-    }
 
-    .user-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .pro-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .pro-actions {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .btn-primary, .btn-secondary {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .visit-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .visit-date {
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
-
-    .visit-actions {
-        justify-content: flex-start;
-        width: 100%;
-    }
-
-    .next_visits-card {
-        flex-direction: column;
-    }
-
-    .calendar-preview img {
-        margin-left: 0;
-    }
-}
-
-
-/*=====================Footer=================*/
+/*=============FOOTER============*/
 footer {
     background-color: #262726;
     padding: 40px 20px 20px;
@@ -919,7 +746,6 @@ footer {
     height: auto;
     margin-bottom: 15px;
     display: block;
-
     padding: 10px;
     border-radius: 5px;
     color: white;
@@ -1007,121 +833,18 @@ footer {
     color: #CCCBCB;
 }
 
-/* Responsividade */
-@media (max-width: 992px) {
-    .footer-content {
-        gap: 20px;
+/*=============ANIMAÇÕES============*/
+@keyframes slideIn {
+    from { 
+        transform: translateX(-100%); 
     }
-    
-    .footer-section {
-        flex: 1 1 45%;
-    }
-}
-
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        gap: 30px;
-    }
-    
-    .footer-section {
-        flex: 1 1 100%;
-        text-align: center;
-    }
-    
-    .socials {
-        justify-content: center;
-    }
-    
-    .subfooter {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .subfooter-links {
-        justify-content: center;
+    to { 
+        transform: translateX(0); 
     }
 }
 
-@media (max-width: 480px) {
-    .footer-section {
-        min-width: 100%;
-    }
-    
-    .subfooter-links {
-        flex-direction: column;
-        gap: 5px;
-    }
-    
-    .subfooter-links span {
-        display: none;
-    }
-}
-/*==============BOTÃO DE LOGIN===========*/
-.bntCadastro {
-    background-color: var(--cor-primaria);
-    color: var(--cor-botao-texto);
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-family: var(--h1-font);
-    margin-left: 10px;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    align-self: center;
-}
-
-.bntCadastro:hover {
-    background-color: var(--cor-botao-primario-hover);
-    color: var(--cor-botao-texto-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/*============== MENU HAMBURGUER ==============*/
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    cursor: pointer;
-    width: 30px;
-    height: 25px;
-    z-index: 1001;
-    position: relative;
-}
-
-.menu-toggle span {
-    height: 3px;
-    width: 100%;
-    background: var(--cor-primaria);
-    margin: 3px 0;
-    border-radius: 2px;
-    transition: 0.3s;
-    transform-origin: center;
-}
-
-/* animação virar X */
-.menu-toggle.open span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
-
-.menu-toggle.open span:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-toggle.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
-
-/* Item mobile (inicialmente oculto) */
-.mobile-only-item {
-    display: none;
-}
-
-/* ============ RESPONSIVIDADE ============ */
+/*=============RESPONSIVIDADE============*/
+/* Tablets */
 @media (max-width: 1024px) {
     nav ul {
         gap: 8px;
@@ -1136,8 +859,17 @@ footer {
         padding: 8px 14px;
         font-size: 0.9rem;
     }
+    
+    main {
+        padding: 1.5rem;
+    }
+    
+    .profile-container {
+        grid-template-columns: 1fr;
+    }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
     header {
         padding: 0 1rem;
@@ -1161,7 +893,7 @@ footer {
         height: calc(100vh - 70px);
         display: none;
         padding: 1.5rem 1rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         overflow-y: auto;
         gap: 0;
         z-index: 1000;
@@ -1187,24 +919,21 @@ footer {
         width: 100%;
         box-sizing: border-box;
         font-size: 1.1rem;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
     
     nav ul li:last-child a {
         border-bottom: none;
     }
     
-    /* Esconder submenu no mobile */
     .has-submenu .submenu {
         display: none;
     }
     
-    /* Mostrar item "Cidade consciente" como item normal no mobile */
     .mobile-only-item {
         display: block;
     }
     
-    /* Esconder a seta do submenu no mobile */
     .has-submenu > a > i.ri-arrow-down-s-line {
         display: none;
     }
@@ -1218,8 +947,94 @@ footer {
         font-size: 1.1rem;
         margin-left: 0;
     }
+
+    /* Layout mobile */
+    main {
+        padding: 1rem;
+    }
+
+    .profile-container {
+        grid-template-columns: 1fr;
+    }
+
+    .user-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pro-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pro-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .visit-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .visit-date {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .visit-actions {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .next_visits-card {
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+
+    .calendar-preview img {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .proximas_visitas {
+        margin: 15px;
+    }
+
+    /* Footer mobile */
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-section {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+    
+    .socials {
+        justify-content: center;
+    }
+    
+    .subfooter {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .subfooter-links {
+        justify-content: center;
+    }
 }
 
+/* Mobile pequeno */
 @media (max-width: 480px) {
     header {
         padding: 0 0.8rem;
@@ -1242,9 +1057,21 @@ footer {
         padding: 12px 16px;
         font-size: 1rem;
     }
-}
 
-@keyframes slideIn {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
+    main {
+        padding: 0.8rem;
+    }
+
+    .footer-section {
+        min-width: 100%;
+    }
+    
+    .subfooter-links {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .subfooter-links span {
+        display: none;
+    }
 }
