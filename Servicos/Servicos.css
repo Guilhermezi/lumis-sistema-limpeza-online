@@ -546,3 +546,1868 @@
                 display: none;
             }
         }
+
+/* ==========================================================residencial ou comercial================================================ */
+.tipo_servico {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.residencial, .comercial {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.residencial {
+  background: linear-gradient(135deg, #2d5016, #4a7c26);
+}
+
+.comercial {
+  background: linear-gradient(135deg, #4a7c26, #2d5016);
+}
+
+/* Hover effect - expande a seção */
+.residencial:hover, .comercial:hover {
+  flex: 1.3;
+}
+
+.residencial:hover ~ .comercial {
+  flex: 0.7;
+}
+
+.comercial:hover ~ .residencial {
+  flex: 0.7;
+}
+
+/* Container das imagens */
+.residencil_img, .comercial_img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.residencil_img img, .comercial_img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.6s ease;
+}
+
+/* Por padrão, mostra a primeira imagem */
+.residencil_img img:first-child,
+.comercial_img img:first-child {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.residencil_img img:last-child,
+.comercial_img img:last-child {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+/* No hover, troca as imagens e aplica zoom */
+.residencial:hover .residencil_img img:first-child,
+.comercial:hover .comercial_img img:first-child {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.residencial:hover .residencil_img img:last-child,
+.comercial:hover .comercial_img img:last-child {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Overlay com gradiente para melhor legibilidade do texto */
+.residencial::before, .comercial::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0,0,0,0.4) 0%,
+    rgba(0,0,0,0.2) 50%,
+    rgba(0,0,0,0.6) 100%
+  );
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.residencial:hover::before, .comercial:hover::before {
+  opacity: 0.7;
+}
+
+/* Estilos dos títulos */
+.residencial h1, .comercial h1 {
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  z-index: 3;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  white-space: nowrap;
+}
+
+.residencial h1 i, .comercial h1 i {
+  font-size: 3rem;
+}
+
+/* Efeito hover nos títulos */
+.residencial:hover h1, .comercial:hover h1 {
+  bottom: 140px;
+  font-size: 3rem;
+  text-shadow: 3px 3px 12px rgba(0,0,0,0.8);
+}
+
+/* Estilos das setas */
+.residencial h2, .comercial h2 {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--cor-terciaria);
+  font-size: 2rem;
+  z-index: 3;
+  transition: all 0.4s ease;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+}
+
+/* Animação das setas no hover */
+.residencial:hover h2 {
+  transform: translateX(-30%);
+  font-size: 2.5rem;
+}
+
+.comercial:hover h2 {
+  transform: translateX(-70%);
+  font-size: 2.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .tipo_servico {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .residencial, .comercial {
+    height: 50vh;
+    flex: 1;
+    min-height: 300px;
+  }
+  
+  /* Remove efeitos de hover problemáticos no mobile */
+  .residencial:hover, .comercial:hover {
+    flex: 1;
+  }
+  
+  .residencial:hover ~ .comercial {
+    flex: 1;
+  }
+  
+  .comercial:hover ~ .residencial {
+    flex: 1;
+  }
+  
+  /* Garante que as imagens fiquem visíveis no mobile */
+  .residencil_img img:first-child,
+  .comercial_img img:first-child {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+  
+  .residencil_img img:last-child,
+  .comercial_img img:last-child {
+    opacity: 0 !important;
+    transform: scale(1.1) !important;
+  }
+  
+  /* Efeito de toque para mobile */
+  .residencial:active .residencil_img img:first-child,
+  .comercial:active .comercial_img img:first-child {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  
+  .residencial:active .residencil_img img:last-child,
+  .comercial:active .comercial_img img:last-child {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  
+  .residencial h1, .comercial h1 {
+    font-size: 1.8rem;
+    bottom: 100px;
+  }
+  
+  .residencial h1 i, .comercial h1 i {
+    font-size: 2rem;
+  }
+  
+  /* Mantém posição fixa dos títulos no mobile */
+  .residencial:hover h1, .comercial:hover h1 {
+    font-size: 1.8rem;
+    bottom: 100px;
+  }
+  
+  /* Mantém setas no lugar no mobile */
+  .residencial:hover h2 {
+    transform: translateX(-50%);
+    font-size: 2rem;
+  }
+  
+  .comercial:hover h2 {
+    transform: translateX(-50%);
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .residencial h1, .comercial h1 {
+    font-size: 1.4rem;
+    gap: 8px;
+  }
+  
+  .residencial h1 i, .comercial h1 i {
+    font-size: 1.6rem;
+  }
+  
+  .residencial:hover h1, .comercial:hover h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* ==================================serviço=============================================== */
+
+
+/* ===========================oculto======================================================= */
+#oculto1 {
+    display: none;
+}
+#oculto2 {
+    display: none;
+}
+/* ============================ CARD PRINCIPAL ============================ */
+.tipo_residencial {
+  width: 90%;                   /* ocupa quase toda a largura da tela */
+  max-width: 900px;             /* limita em telas grandes */
+  margin: 30px auto;            /* centraliza horizontalmente e dá espaçamento vertical */
+  background-color: var(--cor-fundo); /* fundo do card */
+  border-radius: 15px;
+  border: 2px solid var(--cor-secundaria);          /* cantos arredondados */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* sombra suave */
+  padding: 30px 25px;           /* mais espaço interno */
+  font-family: var(--p-font);
+  box-sizing: border-box;       /* garante que padding não aumente largura */
+  color: var(--cor-texto);
+}
+.tipo_comercial {
+  width: 90%;                   /* ocupa quase toda a largura da tela */
+  max-width: 900px;             /* limita em telas grandes */
+  margin: 30px auto;            /* centraliza horizontalmente e dá espaçamento vertical */
+  background-color: var(--cor-fundo); /* fundo do card */
+  border-radius: 15px;
+  border: 2px solid var(--cor-secundaria);          /* cantos arredondados */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* sombra suave */
+  padding: 30px 25px;           /* mais espaço interno */
+  font-family: var(--p-font);
+  box-sizing: border-box;       /* garante que padding não aumente largura */
+  color: var(--cor-texto);
+}
+/* =========================================responsividade========================== */
+/* ===================== Responsividade Geral ===================== */
+
+/* Para telas pequenas (320px até 480px) */
+@media (max-width: 480px) {
+    .tipo_residencial, .tipo_comercial {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .titulo1 h1, .card h1 {
+        font-size: 1.5rem;
+    }
+
+    .botao a, .Tipo_Pesado a, .Tipo_Pesado2 a, .Proximo a {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .comodos h3, .horario h3 {
+        font-size: 1.2rem;
+    }
+
+    .comodos p, .comodos ul li p, .horario p {
+        font-size: 0.9rem;
+    }
+
+    .counter {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+
+    .value {
+        font-size: 16px;
+    }
+
+    .Formulario input, .Formulario textarea {
+        font-size: 0.9rem;
+    }
+
+    .Formulario button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Para telas médias (481px até 768px) */
+@media (max-width: 768px) {
+    .tipo_residencial, .tipo_comercial {
+        width: 90%;
+        padding: 25px;
+    }
+
+    .titulo1 h1, .card h1 {
+        font-size: 1.8rem;
+    }
+
+    .botao a, .Tipo_Pesado a, .Tipo_Pesado2 a, .Proximo a {
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+
+    .comodos h3, .horario h3 {
+        font-size: 1.3rem;
+    }
+
+    .comodos p, .comodos ul li p, .horario p {
+        font-size: 0.95rem;
+    }
+
+    .counter {
+        gap: 10px;
+    }
+
+    .btn-circle {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+
+    .value {
+        font-size: 17px;
+    }
+}
+
+/* Para telas grandes, mantém os estilos padrões */
+@media (min-width: 769px) {
+    .tipo_residencial, .tipo_comercial {
+        max-width: 900px;
+        padding: 30px 25px;
+    }
+}
+
+/* Estilo padrão para telas médias e grandes */
+.botao, .Tipo_Pesado, .Tipo_Pesado2, .Proximo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start; /* botões lado a lado */
+}
+
+.botao a, .Tipo_Pesado a, .Tipo_Pesado2 a, .Proximo a {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    max-width: none;  /* sem limitação de largura */
+    width: auto;      /* largura automática conforme conteúdo */
+}
+
+/* Ajustes para telas pequenas (até 480px) */
+@media (max-width: 480px) {
+    .botao, .Tipo_Pesado, .Tipo_Pesado2, .Proximo {
+        justify-content: center; /* centraliza os botões */
+    }
+    .botao a, .Tipo_Pesado a, .Tipo_Pesado2 a, .Proximo a {
+        width: 100%;     /* ocupa toda a largura disponível */
+        max-width: 200px; /* opcional para não ficar muito largo */
+        padding: 8px 12px; /* reduz padding */
+        font-size: 0.9rem; /* reduz fonte */
+    }
+}
+/* ============================ TITULOS ============================ */
+.titulo1 h1 {
+  font-size: 2rem;
+  color: var(--cor-primaria);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-family: var(--h1-font);
+}
+
+.card h1 {
+  font-size: 2rem;
+  color: var(--cor-texto);
+  margin-bottom: 15px;
+  font-family: var(--h2-font);
+
+}
+
+/* ============================ DROPDOWN ============================ */
+.Tipo_Imovel label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-family: var(--h3-font);
+  margin-top: 30px;
+}
+
+.Tipo_Imovel select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--cor-terciaria);
+  font-size: 1rem;
+  font-family: var(--p-font);
+  background-color: #fff;
+  color: var(--cor-texto);
+}
+
+.Tipo_Imovel p {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: var(--p-font);
+  color: var(--cor-primaria);
+}
+.edit {
+    font-size: 2rem;
+}
+
+/* ============================ COMODOS E HORARIO ============================ */
+
+.comodos p, .comodos ul li p {
+  font-size: 1rem;
+  color: var(--cor-texto-secundario);
+  margin-top: 10px;
+}
+.comodos h3 {
+  font-size: 1.4rem;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-family: var(--h2-font);
+}
+
+.comodos ul {
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.horario h3 {
+  font-size: 1.4rem;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-family: var(--h2-font);
+}
+
+.horario p {
+  font-size: 1rem;
+  color: var(--cor-texto-secundario);
+  margin-bottom: 15px;
+}
+
+
+/* ============================ ESPAÇAMENTOS ENTRE SEÇÕES ============================ */
+.botao, .Tipo_Pesado, .Tipo_Pesado2, .Tipo_Imovel, .comodos, .horario {
+  margin-bottom: 25px;
+}
+
+/* ============================ ÍCONES ============================ */
+p i {
+  color: var(--cor-primaria);
+  margin-right: 5px;
+}
+
+/* ===================================botões============================================== */
+.botao a {
+    text-decoration: none;
+    background-color: white;
+    color: var(--cor-texto);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid var(--cor-primaria) ;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    margin-top: 4px;
+}
+.botao a:hover{
+  background-color: var(--cor-botao-primario-hover);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  
+}
+
+.Tipo_Pesado a {
+    text-decoration: none;
+    background-color: white;
+    color: var(--cor-texto);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid var(--cor-primaria) ;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    margin-top: 4px;
+}
+
+.Tipo_Pesado2 a {
+    text-decoration: none;
+    background-color: white;
+    color: var(--cor-texto);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid var(--cor-primaria) ;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    margin-top: 4px;
+}
+
+.Tipo_Pesado a:hover{
+  background-color: var(--cor-botao-primario-hover);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  
+}
+
+.Tipo_Pesado2 a:hover{
+  background-color: var(--cor-botao-primario-hover);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  
+}
+.botao a.selected{
+    background-color: var(--cor-primaria); /* cor quando selecionado */
+    color: white;
+    transform: scale(1.05); /* opcional: aumenta levemente para destacar */
+}
+
+.Tipo_Pesado a.selected {
+    background-color: var(--cor-primaria); /* cor quando selecionado */
+    color: white;
+    transform: scale(1.05); /* opcional: aumenta levemente para destacar */
+}
+
+.Tipo_Pesado2 a.selected {
+    background-color: var(--cor-primaria); /* cor quando selecionado */
+    color: white;
+    transform: scale(1.05); /* opcional: aumenta levemente para destacar */
+}
+
+.Proximo {
+    margin-top: 6%;
+}
+.Proximo a{
+    text-decoration: none;
+    background-color: var(--cor-primaria);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    margin-top: 2px;
+}
+
+.Proximo a:hover{
+  background-color: var(--cor-botao-primario-hover);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  
+}
+/* ============================botão de comodos e horario=============================== */
+.counter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+      margin: 15px 0;
+    }
+
+    .btn-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 35px;
+      height: 35px;
+      border: 2px solid var(--cor-terciaria);
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: #000;
+      transition: all 0.3s ease;
+      background: #fff;
+      user-select: none;
+    }
+
+    .btn-circle:hover {
+      background: var(--cor-terciaria);
+      color: #fff;  
+    }
+
+    .value {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      background-color: whitesmoke;
+
+    }
+
+    .label {
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+    }
+
+    .info {
+      min-width: 60px;
+    }
+/* =============================================formulario===================================== */ 
+        #oculto8{
+            display: none;
+        }
+
+        .Formulario {
+            flex: 1;
+            background-color: var(--cor-fundo);
+            padding: 20px;
+            border-radius: 8px;
+            color: var(--cor-primaria);
+        }
+
+        .Formulario label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .Formulario input,
+        .Formulario textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 4px;
+            font-family: var(--p-font);
+        }
+
+        .Formulario button {
+            background-color: var(--cor-terciaria);
+            color: var(--cor-botao-texto);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: var(--h1-font);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .Formulario button:hover {
+            background-color: var(--cor-botao-terciario-hover);
+            color: var(--cor-botao-texto-hover);
+            cursor: pointer;
+        }
+
+
+/* =======================================================agendamento================================================= */
+.agendamento {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+
+    /* CENTRALIZAÇÃO */
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertical */
+    
+    /* Imagem de fundo */
+    background-image: url('../IMG/imagem_invertida_estendida.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card_agenda {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 700px;
+    background-color: var(--cor-fundo, #fff);
+    border-radius: 15px;
+    border: 2px solid var(--cor-secundaria, #f0ad4e);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    padding: 40px 35px;
+    font-family: var(--p-font, 'Arial', sans-serif);
+    color: var(--cor-texto, #333);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.calendario, .horas {
+    margin-bottom: 25px;
+    margin-top: 50px;
+}
+.button a {
+    text-decoration: none;
+    background-color: white;
+    color: var(--cor-texto);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid var(--cor-primaria) ;
+    font-weight: bold;
+    font-family: var(--h1-font);
+    margin-top: 4px;
+}
+
+
+.button a:hover{
+  background-color: var(--cor-botao-primario-hover);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  
+}
+
+
+.button a.selected{
+    background-color: var(--cor-primaria); /* cor quando selecionado */
+    color: white;
+    transform: scale(1.05); /* opcional: aumenta levemente para destacar */
+}
+
+/* =======================================oculto============================== */
+#oculto5{
+    display: none;
+}
+
+/* =========================================caelendario========================== */
+        .calendar-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #3DBEA9, #50BF87);
+            color: white;
+        }
+        
+        .calendar-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-buttons button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 20%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .nav-buttons button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: #f0f4f8;
+            font-weight: 600;
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e1e5eb;
+        }
+        
+        .weekdays div {
+            padding: 10px;
+        }
+        
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            padding: 15px;
+        }
+        
+        .days div {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .days div:hover:not(.empty):not(.today) {
+            background: var(--cor-primaria);
+        }
+        
+        .days .empty {
+            background: transparent;
+            cursor: default;
+        }
+        
+        .days .today {
+            background: #3DBEA9;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .days .selected {
+            background: #50BF87;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .days .has-event::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            width: 5px;
+            height: 5px;
+            background: #f0ad4e;
+            border-radius: 50%;
+        }
+        
+        .calendar-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #e1e5eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .event-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #64748b;
+        }
+        
+        .event-dot {
+            width: 10px;
+            height: 10px;
+            background: #f0ad4e;
+            border-radius: 50%;
+        }
+        
+        .selected-date {
+            font-weight: 600;
+            color: #3DBEA9;
+        }
+        
+        @media (max-width: 768px) {
+            .calendar-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .days div {
+                height: 40px;
+                font-size: 14px;
+            }
+            
+            .calendar-footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+/* ===============================================horas============================= */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .time-display {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .selected-time {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .selected-date {
+            font-size: 1.1rem;
+            color: #718096;
+        }
+        
+        .select-button {
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(61, 190, 169, 0.3);
+        }
+        
+        .select-button:hover {
+            background: var(--cor-botao-primario-hover);
+            transform: translateY(-2px);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #718096;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .time-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .time-input {
+            text-align: center;
+        }
+        
+        .time-input label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+        
+        .time-input input {
+            width: 70px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+        
+        .time-input input:focus {
+            border-color: var(--cor-primaria);
+            outline: none;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .modal-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .confirm-button {
+            background: var(--cor-primaria);
+            color: white;
+        }
+        
+        .confirm-button:hover {
+            background: var(--cor-botao-primario-hover);
+        }
+        
+        .cancel-button {
+            background: #f8f9fa;
+            color: #718096;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .cancel-button:hover {
+            background: #e2e8f0;
+        }
+        
+        @media (max-width: 480px) {
+            .selected-time {
+                font-size: 2rem;
+            }
+            
+            .time-inputs {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+/* -======================================================resto da responsividade do agendar================= */
+/* ============================ RESPONSIVIDADE AGENDAMENTO ============================ */
+
+/* Tablets e telas médias (768px - 1024px) */
+@media (max-width: 1024px) {
+    .agendamento {
+        padding: 40px 15px;
+    }
+    
+    .card_agenda {
+        max-width: 900px;
+        min-height: 600px;
+        padding: 35px 30px;
+    }
+    
+    .calendar-container {
+        max-width: 700px;
+    }
+    
+    .calendar-header h1 {
+        font-size: 22px;
+    }
+    
+    .nav-buttons button {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+    
+    .days div {
+        height: 45px;
+        font-size: 15px;
+    }
+    
+    .selected-time {
+        font-size: 2.2rem;
+    }
+    
+    .button a {
+        padding: 12px 22px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Tablets pequenos (768px) */
+@media (max-width: 768px) {
+    .agendamento {
+        padding: 30px 10px;
+        min-height: auto;
+    }
+    
+    .card_agenda {
+        max-width: 95%;
+        min-height: 500px;
+        padding: 30px 25px;
+        margin: 10px auto;
+    }
+    
+    .calendario, .horas {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    
+    /* Calendário em tablets */
+    .calendar-container {
+        max-width: 100%;
+    }
+    
+    .calendar-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 18px;
+    }
+    
+    .calendar-header h1 {
+        font-size: 20px;
+        margin-bottom: 0;
+    }
+    
+    .nav-buttons {
+        justify-content: center;
+    }
+    
+    .nav-buttons button {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+    
+    .weekdays {
+        padding: 8px 0;
+    }
+    
+    .weekdays div {
+        padding: 8px 5px;
+        font-size: 13px;
+    }
+    
+    .days {
+        gap: 3px;
+        padding: 12px;
+    }
+    
+    .days div {
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .calendar-footer {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 15px;
+        text-align: center;
+    }
+    
+    .event-indicator {
+        justify-content: center;
+        font-size: 13px;
+    }
+    
+    .selected-date {
+        font-size: 13px;
+    }
+    
+    /* Horas em tablets */
+    .container {
+        max-width: 100%;
+    }
+    
+    .time-display {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .selected-time {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+    
+    .time-display .selected-date {
+        font-size: 1rem;
+    }
+    
+    .select-button {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+    
+    /* Modal em tablets */
+    .modal-content {
+        width: 85%;
+        max-width: 350px;
+        padding: 25px;
+    }
+    
+    .modal-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
+    .time-inputs {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .time-input input {
+        width: 65px;
+        height: 48px;
+        font-size: 1.3rem;
+    }
+    
+    /* Botões em tablets */
+    .button {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .button a {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    }
+}
+
+/* Smartphones grandes (481px - 640px) */
+@media (max-width: 640px) {
+    .agendamento {
+        padding: 20px 8px;
+    }
+    
+    .card_agenda {
+        max-width: 98%;
+        min-height: 450px;
+        padding: 25px 20px;
+        border-radius: 12px;
+    }
+    
+    .calendar-header {
+        padding: 15px;
+    }
+    
+    .calendar-header h1 {
+        font-size: 18px;
+    }
+    
+    .nav-buttons button {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+    
+    .weekdays div {
+        padding: 6px 3px;
+        font-size: 12px;
+    }
+    
+    .days {
+        gap: 2px;
+        padding: 10px;
+    }
+    
+    .days div {
+        height: 36px;
+        font-size: 13px;
+    }
+    
+    .selected-time {
+        font-size: 1.8rem;
+    }
+    
+    .time-display {
+        padding: 18px;
+    }
+    
+    .select-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+    
+    .button a {
+        padding: 9px 15px;
+        font-size: 0.85rem;
+        min-width: 100px;
+    }
+}
+
+/* Smartphones médios (481px) */
+@media (max-width: 480px) {
+    .agendamento {
+        padding: 15px 5px;
+    }
+    
+    .card_agenda {
+        max-width: 100%;
+        min-height: 400px;
+        padding: 20px 15px;
+        border-radius: 10px;
+        margin: 5px auto;
+    }
+    
+    .calendario, .horas {
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+    
+    /* Calendário em smartphones */
+    .calendar-header {
+        padding: 12px;
+    }
+    
+    .calendar-header h1 {
+        font-size: 16px;
+    }
+    
+    .nav-buttons {
+        gap: 8px;
+    }
+    
+    .nav-buttons button {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+    
+    .weekdays {
+        padding: 5px 0;
+    }
+    
+    .weekdays div {
+        padding: 5px 2px;
+        font-size: 11px;
+    }
+    
+    .days {
+        gap: 1px;
+        padding: 8px;
+    }
+    
+    .days div {
+        height: 32px;
+        font-size: 12px;
+    }
+    
+    .calendar-footer {
+        padding: 10px 12px;
+    }
+    
+    .event-indicator {
+        font-size: 12px;
+    }
+    
+    .selected-date {
+        font-size: 12px;
+    }
+    
+    /* Horas em smartphones */
+    .time-display {
+        padding: 15px;
+        margin-bottom: 12px;
+    }
+    
+    .selected-time {
+        font-size: 1.6rem;
+        margin-bottom: 6px;
+    }
+    
+    .time-display .selected-date {
+        font-size: 0.9rem;
+    }
+    
+    .select-button {
+        padding: 12px 18px;
+        font-size: 0.85rem;
+    }
+    
+    /* Modal em smartphones */
+    .modal-content {
+        width: 92%;
+        max-width: none;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .modal-title {
+        font-size: 1.2rem;
+        margin-bottom: 18px;
+    }
+    
+    .time-inputs {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 18px;
+    }
+    
+    .time-input input {
+        width: 60px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .modal-button {
+        width: 100%;
+        padding: 12px 20px;
+    }
+    
+    /* Botões em smartphones */
+    .button {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .button a {
+        width: 100%;
+        padding: 12px 15px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+}
+
+/* Smartphones pequenos (321px - 400px) */
+@media (max-width: 400px) {
+    .agendamento {
+        padding: 10px 3px;
+    }
+    
+    .card_agenda {
+        padding: 18px 12px;
+        min-height: 350px;
+        border-radius: 8px;
+    }
+    
+    .calendar-header h1 {
+        font-size: 15px;
+    }
+    
+    .nav-buttons button {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    
+    .days div {
+        height: 30px;
+        font-size: 11px;
+    }
+    
+    .weekdays div {
+        font-size: 10px;
+    }
+    
+    .selected-time {
+        font-size: 1.4rem;
+    }
+    
+    .time-display {
+        padding: 12px;
+    }
+    
+    .select-button {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .button a {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .time-input input {
+        width: 55px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Smartphones muito pequenos (320px) */
+@media (max-width: 320px) {
+    .agendamento {
+        padding: 8px 2px;
+    }
+    
+    .card_agenda {
+        padding: 15px 10px;
+        min-height: 320px;
+        width: 98%;
+        border-radius: 6px;
+    }
+    
+    .calendario, .horas {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    /* Calendário muito pequeno */
+    .calendar-container {
+        border-radius: 8px;
+    }
+    
+    .calendar-header {
+        padding: 10px;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .calendar-header h1 {
+        font-size: 14px;
+    }
+    
+    .nav-buttons {
+        gap: 5px;
+    }
+    
+    .nav-buttons button {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+        border-radius: 6px;
+    }
+    
+    .weekdays {
+        padding: 4px 0;
+    }
+    
+    .weekdays div {
+        padding: 4px 1px;
+        font-size: 9px;
+    }
+    
+    .days {
+        gap: 1px;
+        padding: 6px;
+    }
+    
+    .days div {
+        height: 28px;
+        font-size: 10px;
+        border-radius: 4px;
+    }
+    
+    .calendar-footer {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+    
+    .event-indicator {
+        font-size: 10px;
+        gap: 5px;
+    }
+    
+    .event-dot {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .selected-date {
+        font-size: 10px;
+    }
+    
+    /* Horas muito pequeno */
+    .time-display {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+    
+    .selected-time {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    
+    .time-display .selected-date {
+        font-size: 0.8rem;
+    }
+    
+    .select-button {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        border-radius: 6px;
+    }
+    
+    /* Modal muito pequeno */
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .close-button {
+        top: 10px;
+        right: 10px;
+        font-size: 1.2rem;
+    }
+    
+    .modal-title {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    
+    .time-inputs {
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .time-input label {
+        font-size: 0.8rem;
+        margin-bottom: 6px;
+    }
+    
+    .time-input input {
+        width: 50px;
+        height: 38px;
+        font-size: 1rem;
+        border-radius: 6px;
+    }
+    
+    .modal-buttons {
+        gap: 8px;
+    }
+    
+    .modal-button {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+        border-radius: 6px;
+    }
+    
+    /* Botões muito pequeno */
+    .button {
+        gap: 6px;
+    }
+    
+    .button a {
+        padding: 8px 10px;
+        font-size: 0.75rem;
+        border-radius: 6px;
+    }
+}
+
+/* Landscape em smartphones */
+@media (max-height: 500px) and (orientation: landscape) {
+    .agendamento {
+        padding: 10px 5px;
+        min-height: auto;
+    }
+    
+    .card_agenda {
+        min-height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .calendario, .horas {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .calendar-header {
+        padding: 8px 12px;
+    }
+    
+    .days div {
+        height: 28px;
+    }
+    
+    .time-display {
+        padding: 12px;
+    }
+    
+    .selected-time {
+        font-size: 1.4rem;
+    }
+}
+ /* ==============================================Pedido =========================================== */
+/* Barra fixa do resumo */
+.container2 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 40vh;            /* até 40% da tela */
+    background: #fff;
+    border-top: 2px solid #ddd;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: 'Arial', sans-serif;
+    z-index: 9999;
+    overflow-y: auto;            /* scroll interno se passar do limite */
+}
+
+/* Título */
+.container2 h2 {
+    font-size: 1.2rem;
+    text-align: left;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+/* Resumo do pedido */
+#resumo-pedido {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+    margin-bottom: 0.8rem;
+}
+
+/* Itens do pedido */
+#resumo-pedido div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* Total final */
+.total-final {
+    border-top: 1px solid #ddd;
+    padding-top: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-final h3 {
+    font-size: 1rem;
+    color: #222;
+    margin: 0;
+}
+
+.total-final span {
+    font-weight: bold;
+    color: var(--cor-terciaria, #007bff);
+}
+
+/* Botão finalizar */
+.btn-finalizar {
+    background-color: var(--cor-primaria, #007bff);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+
+.btn-finalizar:hover {
+    background-color: var(--cor-botao-primario-hover, #0056b3);
+    transform: scale(1.05);
+}
+
+/* Responsividade para mobile */
+@media (max-width: 480px) {
+    .container2 {
+        max-height: 50vh;   /* em telas pequenas, ocupa mais altura */
+        padding: 0.8rem 1rem;
+    }
+
+    .total-final {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .btn-finalizar {
+        width: 100%;
+        margin-left: 0;
+        text-align: center;
+    }
+}
+
+/* ================================================oculto=============================================== */
+#oculto10 {
+    display: none;
+}
