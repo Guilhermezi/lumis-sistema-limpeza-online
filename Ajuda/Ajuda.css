@@ -462,24 +462,7 @@
             min-height: 100vh;
         }
 
-        .faq-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--cor-texto);
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--cor-texto-secundario);
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-        }
+        
 
         .faq-category {
             margin-bottom: 3rem;
