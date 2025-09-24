@@ -495,7 +495,7 @@
 .services {
   padding: 4rem 2rem;
   background: var(--cor-fundo);
-  position: relative; /* NOVO: necessário para posicionar os botões corretamente */
+  position: relative; 
 }
 
 .services-content {
@@ -516,7 +516,7 @@
   scroll-behavior: smooth;
   gap: 2rem;
 
-  scrollbar-width: none; 
+  scrollbar-width: none;
 }
 .services-grid::-webkit-scrollbar {
   height: 8px;
@@ -537,7 +537,7 @@
 .prev-btn,
 .next-btn {
   position: absolute;
-  top: 60%; 
+  top: 50%;
   transform: translateY(-50%);
   background: var(--cor-primaria);
   color: #fff;
@@ -555,12 +555,13 @@
   opacity: 1;
 }
 
+/* Responsivo: ajusta a posição dos botões em telas menores */
 .prev-btn {
-  left: 20rem;
+  left: 2rem;
 }
 
 .next-btn {
-  right: 20rem;
+  right: 2rem;
 }
 
 .service-card {
@@ -628,6 +629,74 @@
 .learn-more:hover {
   color: var(--cor-botao-primario-hover);
 }
+
+/*===========RESPONSIVIDADE===========*/
+
+@media (max-width: 1024px) {
+  .service-card {
+    flex: 0 0 85%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .prev-btn,
+  .next-btn {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  .service-card {
+    flex: 0 0 90%;
+    padding: 1.5rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .prev-btn,
+  .next-btn {
+    top: auto;
+    bottom: -2rem;
+    transform: none;
+    padding: 0.6rem;
+    font-size: 1rem;
+  }
+
+  .prev-btn {
+    left: 1rem;
+  }
+
+  .next-btn {
+    right: 1rem;
+  }
+
+  .service-card {
+    flex: 0 0 95%;
+    padding: 1.2rem;
+  }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+}
+
 
 /*============SEÇÃO SOBRE============*/
 .about {
