@@ -454,6 +454,15 @@ body{
     border-color: var(--cor-fundo);
 }
 
+a {
+    color: var(--cor-primaria);
+    
+}
+
+a:hover {
+    font-weight: bold;
+}
+
 .container form{
     background-color: var(--cor-fundo);
     display: flex;
@@ -966,15 +975,6 @@ p a {
             color: var(--cor-texto-secundario);
         }
 
-        .terms a {
-            color: var(--cor-primaria);
-            text-decoration: none;
-        }
-
-        .terms a:hover {
-            text-decoration: underline;
-        }
-
         /* Media query para mostrar o formulário mobile apenas em telas menores */
         @media (max-width: 767px) {
             .container {
@@ -985,12 +985,3 @@ p a {
                 display: block;
             }
         }
-
-a {
-    color: var(--cor-primaria);
-    font-weight: bold;
-}
-
-a:hover {
-    text-decoration: underline;
-}
