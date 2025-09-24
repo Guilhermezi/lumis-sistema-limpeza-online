@@ -1027,7 +1027,7 @@ footer {
 }
 
 .prev, .next {
-  background: #3ac37a;
+  background: #50BF87;
   border: none;
   padding: 10px;
   font-size: 20px;
@@ -1043,7 +1043,7 @@ footer {
 
 .dot {
   height: 15px;
-  width: 15px;
+  width: 20px;
   margin: 0 5px;
   display: inline-block;
   border-radius: 50%;
