@@ -652,6 +652,12 @@
             text-decoration: none;
             display: inline-block;
         }
+        .btn-secondary:hover {
+            background: var(--cor-primaria);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(80, 191, 135, 0.3);
+        }
 
         /* Project Section */
         .projeto-section {

@@ -808,7 +808,7 @@
 .planos {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 40px;
 }
 
 .Texto_card {
@@ -882,10 +882,10 @@ p i {
 
 /*Plano Básico*/
 .Plano_basico{
-    width: 250px;
+    width: 260px;
     align-self:flex-end;
     flex: 1.2;
-    max-width: 250px;
+    max-width: 260px;
     border-radius: 15px;
     border: 2px solid var(--cor-primaria);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -901,7 +901,7 @@ p i {
             padding: 12px 0;
             border-radius: 30px;
             position: absolute;
-            top: -15px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
@@ -930,7 +930,7 @@ p i {
             padding: 12px 0;
             border-radius: 30px;
             position: absolute;
-            top: -15px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
