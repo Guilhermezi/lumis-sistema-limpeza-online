@@ -493,89 +493,140 @@
 
 /*============SEÇÃO SERVIÇOS============*/
 .services {
-    padding: 4rem 2rem;
-    background: var(--cor-fundo);
+  padding: 4rem 2rem;
+  background: var(--cor-fundo);
+  position: relative; /* NOVO: necessário para posicionar os botões corretamente */
 }
 
 .services-content {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    color: var(--cor-texto);
-    margin-bottom: 3rem;
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--cor-texto);
+  margin-bottom: 3rem;
 }
 
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+  display: flex; 
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 2rem;
+
+  scrollbar-width: none; 
+}
+.services-grid::-webkit-scrollbar {
+  height: 8px;
+  background: transparent;
+  transition: opacity 0.3s;
+  opacity: 0; 
+}
+
+.services-grid:hover::-webkit-scrollbar {
+  opacity: 1;
+}
+
+.services-grid::-webkit-scrollbar-thumb {
+  background: var(--cor-primaria);
+  border-radius: 4px;
+}
+
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 60%; 
+  transform: translateY(-50%);
+  background: var(--cor-primaria);
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 2;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+  opacity: 1;
+}
+
+.prev-btn {
+  left: 20rem;
+}
+
+.next-btn {
+  right: 20rem;
 }
 
 .service-card {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 75%; 
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--cor-primaria);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--cor-primaria);
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(80, 191, 135, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(80, 191, 135, 0.2);
 }
 
 .service-icon {
-    width: 80px;
-    height: 80px;
-    background: rgba(80, 191, 135, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-    font-size: 2rem;
-    color: var(--cor-primaria);
+  width: 80px;
+  height: 80px;
+  background: rgba(80, 191, 135, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 2rem;
+  color: var(--cor-primaria);
 }
 
 .service-card h3 {
-    color: var(--cor-primaria);
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
+  color: var(--cor-primaria);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
 }
 
 .service-card p {
-    color: var(--cor-texto);
-    margin-bottom: 1.5rem;
+  color: var(--cor-texto);
+  margin-bottom: 1.5rem;
 }
 
 .learn-more {
-    color: var(--cor-primaria);
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+  color: var(--cor-primaria);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .learn-more:hover {
-    color: var(--cor-botao-primario-hover);
+  color: var(--cor-botao-primario-hover);
 }
 
 /*============SEÇÃO SOBRE============*/
