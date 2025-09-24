@@ -551,10 +551,9 @@
 .tipo_servico {
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 70vh; /* REDUZIDO de 100vh para 70vh */
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
 }
 
 .residencial, .comercial {
@@ -657,14 +656,14 @@
   opacity: 0.7;
 }
 
-/* Estilos dos títulos */
+/* Estilos dos títulos - REDUZIDOS */
 .residencial h1, .comercial h1 {
   position: absolute;
-  bottom: 120px;
+  bottom: 80px; /* REDUZIDO de 120px para 80px */
   left: 50%;
   transform: translateX(-50%);
   color: white;
-  font-size: 2.5rem;
+  font-size: 2rem; /* REDUZIDO de 2.5rem para 2rem */
   font-weight: bold;
   text-align: center;
   z-index: 3;
@@ -672,43 +671,43 @@
   transition: all 0.4s ease;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px; /* REDUZIDO de 15px para 12px */
   white-space: nowrap;
 }
 
 .residencial h1 i, .comercial h1 i {
-  font-size: 3rem;
+  font-size: 2.2rem; /* REDUZIDO de 3rem para 2.2rem */
 }
 
-/* Efeito hover nos títulos */
+/* Efeito hover nos títulos - REDUZIDOS */
 .residencial:hover h1, .comercial:hover h1 {
-  bottom: 140px;
-  font-size: 3rem;
+  bottom: 90px; /* REDUZIDO de 140px para 90px */
+  font-size: 2.2rem; /* REDUZIDO de 3rem para 2.2rem */
   text-shadow: 3px 3px 12px rgba(0,0,0,0.8);
 }
 
-/* Estilos das setas */
+/* Estilos das setas - REDUZIDOS */
 .residencial h2, .comercial h2 {
   position: absolute;
-  bottom: 60px;
+  bottom: 40px; /* REDUZIDO de 60px para 40px */
   left: 50%;
   transform: translateX(-50%);
   color: var(--cor-terciaria);
-  font-size: 2rem;
+  font-size: 1.6rem; /* REDUZIDO de 2rem para 1.6rem */
   z-index: 3;
   transition: all 0.4s ease;
   text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
 }
 
-/* Animação das setas no hover */
+/* Animação das setas no hover - REDUZIDAS */
 .residencial:hover h2 {
   transform: translateX(-30%);
-  font-size: 2.5rem;
+  font-size: 1.8rem; /* REDUZIDO de 2.5rem para 1.8rem */
 }
 
 .comercial:hover h2 {
   transform: translateX(-70%);
-  font-size: 2.5rem;
+  font-size: 1.8rem; /* REDUZIDO de 2.5rem para 1.8rem */
 }
 
 /* Responsividade */
@@ -719,9 +718,9 @@
   }
   
   .residencial, .comercial {
-    height: 50vh;
+    height: 40vh; /* REDUZIDO de 50vh para 40vh */
     flex: 1;
-    min-height: 300px;
+    min-height: 250px; /* REDUZIDO de 300px para 250px */
   }
   
   /* Remove efeitos de hover problemáticos no mobile */
@@ -764,49 +763,94 @@
   }
   
   .residencial h1, .comercial h1 {
-    font-size: 1.8rem;
-    bottom: 100px;
+    font-size: 1.6rem; /* REDUZIDO de 1.8rem para 1.6rem */
+    bottom: 70px; /* REDUZIDO de 100px para 70px */
   }
   
   .residencial h1 i, .comercial h1 i {
-    font-size: 2rem;
+    font-size: 1.8rem; /* REDUZIDO de 2rem para 1.8rem */
   }
   
   /* Mantém posição fixa dos títulos no mobile */
   .residencial:hover h1, .comercial:hover h1 {
-    font-size: 1.8rem;
-    bottom: 100px;
+    font-size: 1.6rem; /* REDUZIDO de 1.8rem para 1.6rem */
+    bottom: 70px; /* REDUZIDO de 100px para 70px */
   }
   
-  /* Mantém setas no lugar no mobile */
+  /* Mantém setas no lugar no mobile - REDUZIDAS */
+  .residencial h2, .comercial h2 {
+    bottom: 30px; /* REDUZIDO */
+    font-size: 1.4rem; /* REDUZIDO */
+  }
+  
   .residencial:hover h2 {
     transform: translateX(-50%);
-    font-size: 2rem;
+    font-size: 1.4rem; /* REDUZIDO de 2rem para 1.4rem */
   }
   
   .comercial:hover h2 {
     transform: translateX(-50%);
-    font-size: 2rem;
+    font-size: 1.4rem; /* REDUZIDO de 2rem para 1.4rem */
   }
 }
 
 @media (max-width: 480px) {
+  .tipo_servico {
+    height: auto;
+  }
+  
+  .residencial, .comercial {
+    height: 35vh; /* REDUZIDO ainda mais */
+    min-height: 200px; /* REDUZIDO de 250px */
+  }
+  
   .residencial h1, .comercial h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem; /* REDUZIDO de 1.4rem para 1.3rem */
     gap: 8px;
+    bottom: 60px; /* REDUZIDO */
   }
   
   .residencial h1 i, .comercial h1 i {
-    font-size: 1.6rem;
+    font-size: 1.5rem; /* REDUZIDO de 1.6rem para 1.5rem */
   }
   
   .residencial:hover h1, .comercial:hover h1 {
-    font-size: 1.6rem;
+    font-size: 1.3rem; /* REDUZIDO de 1.6rem para 1.3rem */
+    bottom: 60px;
+  }
+  
+  .residencial h2, .comercial h2 {
+    bottom: 25px; /* REDUZIDO */
+    font-size: 1.2rem; /* REDUZIDO */
+  }
+  
+  .residencial:hover h2, .comercial:hover h2 {
+    font-size: 1.2rem; /* REDUZIDO */
   }
 }
 
-/* ==================================serviço=============================================== */
-
+/* Telas muito pequenas */
+@media (max-width: 320px) {
+  .residencial, .comercial {
+    height: 30vh;
+    min-height: 180px;
+  }
+  
+  .residencial h1, .comercial h1 {
+    font-size: 1.1rem;
+    bottom: 50px;
+    gap: 6px;
+  }
+  
+  .residencial h1 i, .comercial h1 i {
+    font-size: 1.3rem;
+  }
+  
+  .residencial h2, .comercial h2 {
+    bottom: 20px;
+    font-size: 1rem;
+  }
+}
 
 /* ===========================oculto======================================================= */
 #oculto1 {
@@ -842,7 +886,6 @@
   box-sizing: border-box;       /* garante que padding não aumente largura */
   color: var(--cor-texto);
 }
-/* =========================================responsividade========================== */
 /* ===================== Responsividade Geral ===================== */
 
 /* Para telas pequenas (320px até 480px) */
@@ -981,7 +1024,7 @@
 }
 
 .card h1 {
-  font-size: 2rem;
+  font-size: 1.4rem;
   color: var(--cor-texto);
   margin-bottom: 15px;
   font-family: var(--h2-font);
@@ -1016,19 +1059,24 @@
   color: var(--cor-primaria);
 }
 .edit {
-    font-size: 2rem;
+    font-size: 1.4rem;
 }
 
 /* ============================ COMODOS E HORARIO ============================ */
+.arrume {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
 
 .comodos p, .comodos ul li p {
   font-size: 1rem;
   color: var(--cor-texto-secundario);
-  margin-top: 10px;
+  margin-top: 5px;
 }
+
 .comodos h3 {
   font-size: 1.4rem;
-  margin-top: 25px;
   margin-bottom: 10px;
   font-family: var(--h2-font);
 }
@@ -1040,7 +1088,7 @@
 
 .horario h3 {
   font-size: 1.4rem;
-  margin-top: 25px;
+  margin-top: 5px;
   margin-bottom: 10px;
   font-family: var(--h2-font);
 }
@@ -1051,6 +1099,339 @@
   margin-bottom: 15px;
 }
 
+/* ============================botão de comodos e horario=============================== */
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+  margin: 15px 0;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.btn-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border: 2px solid var(--cor-terciaria);
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  transition: all 0.3s ease;
+  background: #fff;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.btn-circle:hover {
+  background: var(--cor-terciaria);
+  color: #fff;  
+}
+
+.value {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  background-color: whitesmoke;
+}
+
+.label {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+}
+
+.info {
+  min-width: 60px;
+}
+
+/* ============================ RESPONSIVIDADE ============================ */
+
+/* Tablets pequenos e smartphones grandes (768px e abaixo) */
+@media (max-width: 768px) {
+  .arrume {
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 15px;
+  }
+  
+  .comodos h3, .horario h3 {
+    font-size: 1.3rem;
+  }
+  
+  .comodos p, .comodos ul li p, .horario p {
+    font-size: 0.95rem;
+  }
+  
+  .counter {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 15px 0;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  
+  .btn-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    display: flex;
+    flex-shrink: 0;
+  }
+  
+  .value {
+    font-size: 18px;
+  }
+  
+  .label {
+    font-size: 14px;
+  }
+  
+  .info {
+    min-width: 60px;
+    text-align: center;
+  }
+}
+
+/* Smartphones médios (480px e abaixo) */
+@media (max-width: 480px) {
+  .arrume {
+    padding: 0 10px;
+    gap: 25px;
+  }
+  
+  .comodos h3, .horario h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  
+  .comodos p, .comodos ul li p, .horario p {
+    font-size: 0.9rem;
+  }
+  
+  .comodos ul {
+    padding-left: 15px;
+  }
+  
+  .counter {
+    gap: 12px;
+    margin: 10px 0;
+    justify-content: center;
+  }
+  
+  .btn-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    border-width: 1.5px;
+  }
+  
+  .value {
+    font-size: 15px;
+  }
+  
+  .label {
+    font-size: 12px;
+  }
+  
+  .info {
+    min-width: 45px;
+  }
+}
+
+/* Smartphones pequenos (320px - 400px) */
+@media (max-width: 400px) {
+  .arrume {
+    padding: 0 8px;
+    gap: 20px;
+  }
+  
+  .comodos h3, .horario h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  
+  .comodos p, .comodos ul li p, .horario p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  
+  .horario p {
+    margin-bottom: 12px;
+  }
+  
+  .comodos ul {
+    padding-left: 12px;
+    margin-top: 4px;
+  }
+  
+  .counter {
+    gap: 10px;
+    margin: 8px 0;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+  
+  .btn-circle {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+    border-width: 1px;
+  }
+  
+  .value {
+    font-size: 14px;
+  }
+  
+  .label {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+  
+  .info {
+    min-width: 40px;
+  }
+}
+
+/* Smartphones muito pequenos (320px) */
+@media (max-width: 320px) {
+  .arrume {
+    padding: 0 5px;
+    gap: 15px;
+  }
+  
+  .comodos h3, .horario h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  .comodos p, .comodos ul li p, .horario p {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+  
+  .horario p {
+    margin-bottom: 10px;
+  }
+  
+  .comodos ul {
+    padding-left: 10px;
+    margin-top: 3px;
+  }
+  
+  .counter {
+    gap: 8px;
+    margin: 6px 0;
+    justify-content: center;
+  }
+  
+  .btn-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  
+  .value {
+    font-size: 13px;
+  }
+  
+  .label {
+    font-size: 10px;
+    line-height: 1.1;
+  }
+  
+  .info {
+    min-width: 35px;
+  }
+}
+
+.comodos p, .comodos ul li p {
+  font-size: 1rem;
+  color: var(--cor-texto-secundario);
+  margin-top: 5px;
+}
+.comodos h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  font-family: var(--h2-font);
+}
+
+.comodos ul {
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.horario h3 {
+  font-size: 1.4rem;
+  margin-top: 5px;
+
+  margin-bottom: 10px;
+  font-family: var(--h2-font);
+}
+
+.horario p {
+  font-size: 1rem;
+  color: var(--cor-texto-secundario);
+  margin-bottom: 15px;
+}
+
+/* ============================botão de comodos e horario=============================== */
+.counter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+      margin: 15px 0;
+    }
+
+    .btn-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 35px;
+      height: 35px;
+      border: 2px solid var(--cor-terciaria);
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: #000;
+      transition: all 0.3s ease;
+      background: #fff;
+      user-select: none;
+    }
+
+    .btn-circle:hover {
+      background: var(--cor-terciaria);
+      color: #fff;  
+    }
+
+    .value {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      background-color: whitesmoke;
+
+    }
+
+    .label {
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+    }
+
+    .info {
+      min-width: 60px;
+    }
 
 /* ============================ ESPAÇAMENTOS ENTRE SEÇÕES ============================ */
 .botao, .Tipo_Pesado, .Tipo_Pesado2, .Tipo_Imovel, .comodos, .horario {
@@ -1140,7 +1521,9 @@ p i {
 }
 
 .Proximo {
-    margin-top: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .Proximo a{
     text-decoration: none;
@@ -1375,7 +1758,7 @@ p i {
         }
         
         .nav-buttons button:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(68, 68, 68, 0.3);
         }
         
         .weekdays {
