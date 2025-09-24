@@ -199,7 +199,7 @@
         }
 
         /* Hero Section */
-        .hero-vidros {
+        .hero-carros {
             background: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
             padding: 8rem 2rem 4rem;
             min-height: 500px;
@@ -210,7 +210,7 @@
             overflow: hidden;
         }
 
-        .hero-vidros::before {
+        .hero-carros::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -355,51 +355,8 @@
             display: flex;
             justify-content: center;
         }
-
-     .vidro-visual {
-    width: 300px;
-    height: 200px;
-    background: linear-gradient(135deg, rgba(173, 216, 230, 0.3), rgba(135, 206, 235, 0.5));
-    border-radius: 8px;
-    position: relative;
-    box-shadow: 
-        0 8px 32px rgba(0,0,0,0.1),
-        inset 0 2px 4px rgba(255,255,255,0.4);
-    border: 1px solid rgba(255,255,255,0.3);
-    backdrop-filter: blur(10px);
-}
-
-.vidro-visual::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, 
-        transparent 40%, 
-        rgba(255,255,255,0.8) 42%, 
-        rgba(255,255,255,0.4) 44%, 
-        transparent 46%);
-    border-radius: 8px;
-    pointer-events: none;
-}
-
-.vidro-visual::after {
-    content: '';
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 30px;
-    height: 30px;
-    background: radial-gradient(circle, rgba(255,255,255,0.9) 30%, transparent 70%);
-    border-radius: 50%;
-    opacity: 0.6;
-    box-shadow: 
-        100px 0 0 -10px rgba(255,255,255,0.4),
-        50px 50px 0 -15px rgba(255,255,255,0.3),
-        150px 80px 0 -20px rgba(255,255,255,0.2);
-}
+        /*carro visual*/
+        
         /* Processo de Limpeza */
         .processo-section {
             padding: 4rem 2rem;
@@ -786,7 +743,7 @@
                 max-width: 300px;
             }
 
-            .vidro-visual {
+            .estofado-visual {
                 width: 250px;
                 height: 160px;
             }
