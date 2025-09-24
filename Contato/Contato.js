@@ -37,3 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.stopPropagation();
             });
         });
+
+        document.getElementById("contatoForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // impede a página de recarregar
+    alert("Formulário enviado com sucesso!");
+    // Aqui você poderia enviar os dados via fetch/AJAX se quiser
+  });

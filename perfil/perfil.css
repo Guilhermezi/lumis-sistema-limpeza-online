@@ -1295,3 +1295,16 @@ footer {
         display: none;
     }
 }
+.avatar {
+  width: 80px;   /* largura do círculo */
+  height: 80px;  /* altura do círculo */
+  border-radius: 50%; /* faz o corte redondo */
+  overflow: hidden;   /* esconde o que sobra da imagem */
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* cobre todo o espaço */
+  object-position: center top; /* centraliza no topo (mostra mais a parte da cabeça) */
+}

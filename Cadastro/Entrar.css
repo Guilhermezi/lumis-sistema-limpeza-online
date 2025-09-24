@@ -456,11 +456,11 @@ body{
 
 a {
     color: var(--cor-primaria);
-    font-weight: bold;
+    
 }
 
 a:hover {
-    text-decoration: underline;
+    font-weight: bold;
 }
 
 .container form{
@@ -973,15 +973,6 @@ p a {
             margin-top: 20px;
             font-size: 0.8rem;
             color: var(--cor-texto-secundario);
-        }
-
-        .terms a {
-            color: var(--cor-primaria);
-            text-decoration: none;
-        }
-
-        .terms a:hover {
-            text-decoration: underline;
         }
 
         /* Media query para mostrar o formulário mobile apenas em telas menores */

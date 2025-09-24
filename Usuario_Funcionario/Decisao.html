@@ -6,14 +6,14 @@
     <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
 
     <!-- Link para o arquivo CSS -->
-    <link rel="stylesheet" href="Entrar_Mobile.css">
+    <link rel="stylesheet" href="Decisao.css">
 
     <!-- Link para o RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <title>Lumis</title>
 </head>
 <body>
-     <header>
+    <header>
         <div id="logo-headers">
             <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
         </div>
@@ -47,55 +47,58 @@
         </nav>
     </header>
 
-    <main>
-        
-        <!-- Cadastro e Entrar do celular -->
-    <section class="mobile-cadastro-section">
-        <div class="cadastro-container">
-            <div class="icon-cadastro">
-                <i class="ri-user-line"></i>
-            </div>
-            
-            <h2 class="Cadastrotitle">Entrar</h2>
-            <span class="texto-secundario">Preencha os dados abaixo para entrar na sua conta</span>
-
-            <form id="cadastroForm" action="../perfil/perfil.html" method="get">
-                <div class="grupo-formulario">
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" placeholder="guilherme@gmail.com" name="email" required>
-
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" placeholder="Fo084@3$&l" name="senha" required>
-
-                </div>
-
-                <button type="submit">Entrar</button>
-            </form>
-
-            <div class="social-login">
-                <div class="social-divider">Ou continue com</div>
-                <div class="social-buttons">
-                    <button class="social-btn google">
-                        <i class="ri-google-line"></i>
-                    </button>
-                    <button class="social-btn facebook">
-                        <i class="ri-facebook-circle-fill"></i>
-                    </button>
-                    <button class="social-btn apple">
-                        <i class="ri-apple-fill"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <p class="ja-tem-conta">Já tem não uma conta? <a href="../Cadastro/Cadastro.html">Cadastre-se aqui</a></p>
-            
-            <div class="terms">
-                <p>Ao se cadastrar, você concorda com nossos <a href="../Termo_Uso/Termo_uso.html">Termos de Uso</a> e <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>.</p>
+    <!-- Modal de Escolha -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Bem-vindo ao Clinic+</h2>
+            <div class="auth-options">
+                <button id="btn-login" class="auth-option">Entrar</button>
+                <button id="btn-cadastro" class="auth-option">Cadastrar</button>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Tela de Cadastro com links -->
+    <main class="content" id="main-content">
+        <div class="type-container">
+            <h1>Cadastre-se como</h1>
+            <div class="type-options">
+                <a href="../Cadastro/Cadastro.html" class="type-link" data-type="paciente-cadastro">
+                    <i class="ri-user-line"></i>
+                    <span>Usuário</span>
+                </a>
+                <a href="../Cadastro_Trabalhador/Cadastro_Trabalhador.html" class="type-link" data-type="medico-cadastro">
+                    <i class="ri-user-2-line"></i>
+                    <span>Trabalhador</span>
+                </a>
+            </div>
+            <div class="toggle-section">
+                <p>Já tem uma conta? <a class="toggle-link" id="show-login">Faça login</a></p>
+            </div>
+        </div>
     </main>
-    <script src="Entrar_Mobile.js"></script>
+
+    <!-- Tela de Seleção de Tipo de Usuário (Login) com links -->
+    <main class="content hidden" id="login-type-content">
+        <div class="type-container">
+            <h1>Entrar como</h1>
+            <div class="type-options">
+                <a href="../Cadastro/Cadastro.html" class="type-link" data-type="paciente-login">
+                    <i class="ri-user-line"></i>
+                    <span>Usuário</span>
+                </a>
+                <a href="../Cadastro_Trabalhador/Cadastro_Trabalhador.html" class="type-link" data-type="medico-login">
+                    <i class="ri-user-2-line"></i>
+                    <span>Trabalhador</span>
+                </a>
+            </div>
+            <div class="toggle-section">
+                <p>Não tem uma conta? <a class="toggle-link" id="show-cadastro">Cadastre-se</a></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="Decisao.js"></script>
 </body>
 </html>
