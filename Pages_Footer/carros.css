@@ -356,7 +356,51 @@
             justify-content: center;
         }
         /*carro visual*/
-        
+                .semaforo-visual {
+            width: 120px;
+            height: 320px;
+            background: #2c3e50;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 2px solid rgba(0,0,0,0.3);
+            padding: 25px 0;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .luz {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 2px solid rgba(0,0,0,0.4);
+        }
+
+        .luz-vermelha {
+            background: radial-gradient(circle, #ff4757, #c44569);
+        }
+
+        .luz-amarela {
+            background: radial-gradient(circle, #ffa502, #ff6348);
+        }
+
+        .luz-verde {
+            background: radial-gradient(circle, #2ed573, #1e90ff);
+        }
+
+        .poste-visual {
+            width: 20px;
+            height: 150px;
+            background: linear-gradient(135deg, rgba(108, 117, 125, 0.9), rgba(73, 80, 87, 0.9));
+            border-radius: 0 0 10px 10px;
+            margin: 20px auto 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
         /* Processo de Limpeza */
         .processo-section {
             padding: 4rem 2rem;
