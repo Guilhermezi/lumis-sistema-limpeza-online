@@ -962,3 +962,128 @@ footer {
     from { transform: translateX(-100%); }
     to { transform: translateX(0); }
 }
+
+
+/* ====================== Carrossel da Seção de Comentários ====================== */
+.testimonials {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.testimonials h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  width: 100%;
+}
+
+.carousel-item {
+  flex: 0 0 100%; /* Cada slide ocupa 100% da largura do container */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 45%;
+  min-width: 300px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.card img.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  margin: 5px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.stars {
+  color: gold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.prev, .next {
+  background: var(--cor-primaria);
+  border: none;
+  padding: 12px 16px;
+  font-size: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 15px;
+  color: var(--cor-fundo);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.prev:hover, .next:hover {
+  background: var(--cor-botao-primario-hover);
+  transform: scale(1.1);
+}
+
+.indicators {
+  margin-top: 20px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #bbb;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dot.active {
+  background: var(--cor-primaria);
+  transform: scale(1.2);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .carousel-item {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+  
+  .prev, .next {
+    padding: 10px 14px;
+    font-size: 16px;
+    margin: 0 10px;
+  }
+}
