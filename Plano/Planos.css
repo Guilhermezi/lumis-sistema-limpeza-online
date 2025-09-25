@@ -44,7 +44,7 @@
         p{
             font-family: var(--p-font);
             color: var(--cor-texto);
-            padding: 3px;
+            /* padding: 3px; */
         }
 
         /*=================body=================*/
@@ -766,7 +766,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap; /* permite quebrar linha quando não couber */
-    gap: 200px;
+    gap: 100px;
 }
 
 
@@ -799,7 +799,7 @@
 /*============Planos===========*/
 .container_planos {
     display: flex;
-    max-width: 80%;
+    max-width: 75%;
     border-radius: 10px;
     background-color: var(--cor-fundo);
     
@@ -809,7 +809,7 @@
 .planos {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 20px;
 }
 
 .Texto_card {
