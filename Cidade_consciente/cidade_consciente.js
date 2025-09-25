@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function getSlidesPerView() {
         const width = window.innerWidth;
-        if (width >= 1024) return 3;
-        if (width >= 768) return 2;
+        if (width >= 450) return 1;
+        if (width >= 770) return 2;
         return 1;
     }
 

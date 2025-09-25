@@ -511,6 +511,9 @@
             to { transform: translateX(0); }
         }
 
+        span{
+            color: var(--cor-primaria);
+        }
 /*=====================Footer=================*/
         footer {
             background-color: #262726;
