@@ -46,6 +46,11 @@
             color: var(--cor-texto);
         }
 
+        .Texto_Form{
+            padding: 5px;
+            margin: 5px 0;
+        }
+
         /*=================body=================*/
         * {
             margin: 0;
