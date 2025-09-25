@@ -369,35 +369,35 @@
     /* Janelas organizadas por andares */
     background-image:
         /* 8º andar */
-        linear-gradient(#2C3E50, #34495E), linear-gradient(#F1C40F, #F39C12), 
-        linear-gradient(#2C3E50, #34495E), linear-gradient(#2C3E50, #34495E),
+        linear-gradient(#1A1A2E, #16213E), linear-gradient(#E94560, #F39C12), 
+        linear-gradient(#1A1A2E, #16213E), linear-gradient(#1A1A2E, #16213E),
         
         /* 7º andar */
-        linear-gradient(#F1C40F, #F39C12), linear-gradient(#2C3E50, #34495E),
-        linear-gradient(#2C3E50, #34495E), linear-gradient(#F1C40F, #F39C12),
+        linear-gradient(#E94560, #F39C12), linear-gradient(#1A1A2E, #16213E),
+        linear-gradient(#1A1A2E, #16213E), linear-gradient(#E94560, #F39C12),
         
         /* 6º andar */
-        linear-gradient(#2C3E50, #34495E), linear-gradient(#2C3E50, #34495E),
-        linear-gradient(#F1C40F, #F39C12), linear-gradient(#2C3E50, #34495E),
+        linear-gradient(#1A1A2E, #16213E), linear-gradient(#1A1A2E, #16213E),
+        linear-gradient(#E94560, #F39C12), linear-gradient(#1A1A2E, #16213E),
         
         /* 5º andar */
-        linear-gradient(#F1C40F, #F39C12), linear-gradient(#F1C40F, #F39C12),
-        linear-gradient(#2C3E50, #34495E), linear-gradient(#F1C40F, #F39C12),
+        linear-gradient(#E94560, #F39C12), linear-gradient(#E94560, #F39C12),
+        linear-gradient(#1A1A2E, #16213E), linear-gradient(#E94560, #F39C12),
         
         /* 4º andar */
-        linear-gradient(#2C3E50, #34495E), linear-gradient(#F1C40F, #F39C12),
-        linear-gradient(#2C3E50, #34495E), linear-gradient(#2C3E50, #34495E),
+        linear-gradient(#1A1A2E, #16213E), linear-gradient(#E94560, #F39C12),
+        linear-gradient(#1A1A2E, #16213E), linear-gradient(#1A1A2E, #16213E),
         
         /* 3º andar */
-        linear-gradient(#F1C40F, #F39C12), linear-gradient(#2C3E50, #34495E),
-        linear-gradient(#F1C40F, #F39C12), linear-gradient(#2C3E50, #34495E),
+        linear-gradient(#E94560, #F39C12), linear-gradient(#1A1A2E, #16213E),
+        linear-gradient(#E94560, #F39C12), linear-gradient(#1A1A2E, #16213E),
         
         /* 2º andar */
-        linear-gradient(#2C3E50, #34495E), linear-gradient(#2C3E50, #34495E),
-        linear-gradient(#2C3E50, #34495E), linear-gradient(#F1C40F, #F39C12),
+        linear-gradient(#1A1A2E, #16213E), linear-gradient(#1A1A2E, #16213E),
+        linear-gradient(#1A1A2E, #16213E), linear-gradient(#E94560, #F39C12),
         
         /* Térreo - porta principal simples */
-        linear-gradient(180deg, #8B4513, #A0522D);
+        linear-gradient(180deg, #6B4226, #8B5A3C);
     
     background-size:
         /* Janelas normais 4x7 andares */
