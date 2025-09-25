@@ -38,46 +38,88 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
      
- // ======================// Carrossel da seção de Comentários// ======================
-let currentIndex = 0;
-const items = document.querySelectorAll(".carousel-item");
-const dots = document.querySelectorAll(".dot");
+ // ====================== Carrossel da Seção de Comentários ======================
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.carousel');
+    const items = document.querySelectorAll('.carousel-item');
+    const dots = document.querySelectorAll('.dot');
+    const nextBtn = document.querySelector('.next');
+    const prevBtn = document.querySelector('.prev');
+    
+    let currentIndex = 0;
+    let autoPlayInterval;
+    const intervalTime = 5000; // 5 segundos
 
-function showSlide(index) {
-  if (index >= items.length) currentIndex = 0;
-  else if (index < 0) currentIndex = items.length - 1;
-  else currentIndex = index;
+    // Função principal para atualizar o carrossel
+    function updateCarousel() {
+        // Atualiza a posição do carrossel com transição suave
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        
+        // Atualiza os indicadores (dots)
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
 
-  items.forEach((item, i) => {
-    item.style.transform = `translateX(${-100 * currentIndex}%)`;
-  });
+    // Avança para o próximo slide
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % items.length;
+        updateCarousel();
+    }
 
-  dots.forEach(dot => dot.classList.remove("active"));
-  dots[currentIndex].classList.add("active");
-}
+    // Volta para o slide anterior
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateCarousel();
+    }
 
-document.querySelector(".next").addEventListener("click", () => showSlide(currentIndex + 1));
-document.querySelector(".prev").addEventListener("click", () => showSlide(currentIndex - 1));
-dots.forEach((dot, i) => dot.addEventListener("click", () => showSlide(i)));
+    // Vai para um slide específico
+    function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+    }
 
-// Automático a cada 5 segundos
-setInterval(() => {
-  showSlide(currentIndex + 1);
-}, 5000);
+    // Inicia o autoplay
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, intervalTime);
+    }
 
-showSlide(0);
+    // Para e reinicia o autoplay (quando há interação do usuário)
+    function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+    }
 
-// --------------------
-// 🚀 Autoplay (a cada 5s)
-// --------------------
-let autoPlay = setInterval(nextSlide, 8000);
+    // Event listeners para os botões de navegação
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoPlay();
+    });
 
-// Se o usuário clicar em algo, reseta o autoplay para não travar
-function resetAutoPlay() {
-  clearInterval(autoPlay);
-  autoPlay = setInterval(nextSlide, 5000);
-}
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoPlay();
+    });
 
-nextBtn.addEventListener('click', resetAutoPlay);
-prevBtn.addEventListener('click', resetAutoPlay);
-indicators.forEach(dot => dot.addEventListener('click', resetAutoPlay));
+    // Event listeners para os dots (indicadores)
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            goToSlide(index);
+            resetAutoPlay();
+        });
+    });
+
+    // Inicializa o carrossel
+    updateCarousel();
+    startAutoPlay();
+    
+    // Pausa o autoplay quando o mouse está sobre o carrossel
+    carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+    });
+    
+    // Retoma o autoplay quando o mouse sai do carrossel
+    carousel.addEventListener('mouseleave', () => {
+        startAutoPlay();
+    });
+});
