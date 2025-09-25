@@ -199,7 +199,7 @@
         }
 
         /* Hero Section */
-        .hero-estofados {
+        .hero-empresarial {
             background: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
             padding: 8rem 2rem 4rem;
             min-height: 500px;
@@ -210,7 +210,7 @@
             overflow: hidden;
         }
 
-        .hero-estofados::before {
+        .hero-empresarial::before {
             content: '';
             position: absolute;
             top: -50%;
