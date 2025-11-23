@@ -47,3 +47,64 @@ Sinta-se livre para usar, modificar e distribuir, desde que mantido o devido cr�
 - Diego Rodrigues Jordão dos Santos
 - Douglas Soares Silva
 - Guilherme Izidio Nogueira
+
+English version:
+# Lumis - Online Cleaning System
+
+## 🌐 Website Link
+The project is available on GitHub Pages via the link below:
+
+🔗 [Lumis - Online Cleaning System](https://guilhermezi.github.io/lumis-sistema-limpeza-online/)
+
+## 🧹 Project Objective
+Lumis is a system developed to facilitate the hiring and organization of cleaning services, serving **residential, commercial, and urban** environments.
+
+The goal is to offer practicality, transparency, and efficiency for both clients and service providers.
+
+---
+
+## 🛠️ Technologies Used
+- **HTML5** → Page structure
+- **CSS3** → Styling and responsiveness
+- **JavaScript (ES6+)** → Interactivity and system logic
+- *(Add other technologies if they are included in the future, e.g., Node.js, APIs, database, etc.)*
+
+---
+
+## 🤝 How to Contribute
+1. Fork the project.
+
+2. Create a branch for your feature or fix:
+
+- `feature/feature-name`
+
+- `bugfix/bug-name`
+3. Make descriptive commits using the infinitive (e.g., `Add login page`).
+
+4. Open a Pull Request describing the changes.
+
+5. Wait for at least one colleague to review before approval.
+
+---
+
+## ▶️ How to Run the Project
+1. Clone the repository:
+
+``bash
+
+git clone https://github.com/Guilhermezi/lumis-sistema-limpeza-online.git
+Open the index.html file in your browser.
+
+(or use an extension like Live Server to run locally).
+
+## 📜 License
+This project is licensed under the MIT license.
+
+Feel free to use, modify, and distribute it, provided proper credit is given.
+
+## 👥 Group Members
+- Ana Beatriz Araujo Fagundes
+- Arthur Ozorio Silva
+- Diego Rodrigues Jordão dos Santos
+- Douglas Soares Silva
+- Guilherme Izidio Nogueira
