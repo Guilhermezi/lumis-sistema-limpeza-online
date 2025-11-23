@@ -385,6 +385,40 @@
         <div class="total-final">
             <h3>Total: <span id="valor-total">R$ 0,00</span></h3>
             <button id="finalizar-pedido" class="btn-finalizar" href="../Servicos/Servicos.html">Finalizar Pedido</button>
+            <div id="modal-pagamento" class="modal-pagamento">
+    <div class="conteudo-modal-pagamento">
+        <button id="fechar-modal" class="btn-fechar-modal">✕</button>
+        
+        <h2 class="titulo-modal">Escolha o método de pagamento</h2>
+        
+        <div class="grade-metodos-pagamento">
+            <button class="metodo-pagamento" data-metodo="pix">
+                <i class="ri-pix-fill icone-pagamento"></i>
+                <span>PIX</span>
+            </button>
+            
+            <button class="metodo-pagamento" data-metodo="credito">
+                <i class="ri-bank-card-fill icone-pagamento"></i>
+                <span>Cartão de Crédito</span>
+            </button>
+            
+            <button class="metodo-pagamento" data-metodo="debito">
+                <i class="ri-bank-card-fill icone-pagamento"></i>
+                <span>Cartão de Débito</span>
+            </button>
+            
+            <button class="metodo-pagamento" data-metodo="boleto">
+                <i class="ri-wallet-2-fill icone-pagamento"></i>
+                <span>Boleto Bancário</span>
+            </button>
+        </div>
+
+        <div class="acoes-modal">
+            <button id="cancelar-pagamento" class="btn-cancelar">Cancelar</button>
+            <button id="confirmar-pagamento" class="btn-confirmar">Confirmar</button>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 <script src="finalizar.js"></script>    
