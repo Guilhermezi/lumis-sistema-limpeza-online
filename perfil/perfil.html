@@ -4,30 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
-    
-    <!-- Link para o arquivo CSS -->
-    <link rel="stylesheet" href="perfil.css">
-    <!-- Link para o arquivo js-->
-     <script src="perfil.js"></script>
 
-    <!-- Link para o RemixIcon -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="perfil.css">
+    <script src="perfil.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <title>Lumis - Perfil</title>
 </head>
 <body>
+
     <header>
         <div id="logo-headers">
             <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
         </div>
-
         <nav>
-            <!-- Botão hamburguer -->
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-
             <ul id="menu">
                 <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
                 <li class="has-submenu">
@@ -38,7 +34,6 @@
                         <li><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
                     </ul>
                 </li>
-                <!-- Item adicional para mobile -->
                 <li class="mobile-only-item"><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
                 <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
                 <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
@@ -48,251 +43,326 @@
             </ul>
         </nav>
     </header>
-    
-    <main>
-        <div class="profile-container">
-            <!-- Seção de Informações do Usuário -->
-            <div class="informações_usuário">
-                <section class="profile-card">
-                    <div class="user-header">
-                        <div class="avatar-container">
-                            <img src="../IMG/foto_usuario.png" alt="Foto do usuário" class="user-avatar">
-                            <button class="edit-avatar-btn" aria-label="Editar foto de perfil">
-                                <i class="ri-camera-line"></i>
-                            </button>
-                        </div>
-                        <div class="user-info">
-                            <h2>Maria de Souza</h2>
-                            <div class="rating">
-                                <div class="stars">
-                                    <i class="ri-star-fill"></i>
-                                    <i class="ri-star-fill"></i>
-                                    <i class="ri-star-fill"></i>
-                                    <i class="ri-star-fill"></i>
-                                    <i class="ri-star-half-line"></i>
-                                </div>
-                                <span class="rating-text">4.5 (128 avaliações)</span>
-                            </div>
-                        </div>
-                        <button class="edit-profile-btn">
-                            <i class="ri-edit-line"></i> Editar perfil
-                        </button>
+
+    <main class="profile-page">
+
+        <!-- ========== PROFILE HERO ========== -->
+        <section class="profile-hero">
+            <div class="hero-cover">
+                <div class="hero-cover-overlay"></div>
+            </div>
+            <div class="hero-profile">
+                <div class="hero-avatar-wrap">
+                    <img src="../IMG/foto_usuario.png" alt="Foto do usuário" class="hero-avatar">
+                    <button class="avatar-edit" aria-label="Editar foto">
+                        <i class="ri-camera-line"></i>
+                    </button>
+                </div>
+                <div class="hero-info">
+                    <div class="hero-name-row">
+                        <h1>Maria de Souza</h1>
+                        <span class="badge badge-client"><i class="ri-user-heart-line"></i> Cliente</span>
                     </div>
-                </section>
-                <section class="infos_usuario">
-                    <table>
-                        <tr>
-                            <td id="infos"><h2>Nome completo</h2><p>Maria de Souza</p></td>
-                        </tr>
-                            <tr>
-                                <td id="infos"><h2>Telefone</h2><p>+55 (11) 98765-4321</p></td>
-                            </tr>
-                        <tr>
-                            <td id="infos"><h2>E-mail</h2><p>maria.desouza@gmail.com</p></td>
-                        </tr>
-                        <tr>
-                            <td id="infos"><h2>Endereço</h2><p>Rua das Flores, 123 - São Paulo/SP</p></td>
-                        </tr>
-                               </table>
+                    <div class="hero-meta">
+                        <span class="meta-item"><i class="ri-map-pin-2-fill"></i> São Paulo, SP</span>
+                        <span class="meta-divider"></span>
+                        <span class="meta-item"><i class="ri-calendar-fill"></i> Membro desde 2022</span>
+                    </div>
+                    <div class="hero-rating">
+                        <div class="stars-inline">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-line"></i>
+                        </div>
+                        <span class="rating-score">4.5</span>
+                        <span class="rating-count">(128 avaliações)</span>
+                    </div>
+                </div>
+                <button class="btn-edit-profile">
+                    <i class="ri-edit-line"></i> Editar perfil
+                </button>
+            </div>
+        </section>
+
+        <!-- ========== STATS BAR ========== -->
+        <section class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="ri-service-line"></i></div>
+                <div class="stat-info">
+                    <span class="stat-number" data-target="47">0</span>
+                    <span class="stat-label">Serviços</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="ri-star-smile-line"></i></div>
+                <div class="stat-info">
+                    <span class="stat-number" data-target="128">0</span>
+                    <span class="stat-label">Avaliações</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="ri-heart-3-line"></i></div>
+                <div class="stat-info">
+                    <span class="stat-number" data-target="5">0</span>
+                    <span class="stat-label">Favoritos</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="ri-repeat-line"></i></div>
+                <div class="stat-info">
+                    <span class="stat-number" data-target="12">0</span>
+                    <span class="stat-label">Recorrentes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <div class="profile-layout">
+
+            <!-- LEFT COLUMN -->
+            <div class="profile-main">
+
+                <!-- Personal Info -->
+                <section class="card card-info">
+                    <div class="card-header">
+                        <h2><i class="ri-user-3-line"></i> Informações Pessoais</h2>
+                        <button class="card-action"><i class="ri-more-2-fill"></i></button>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Nome completo</span>
+                            <span class="info-value">Maria de Souza</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">E-mail</span>
+                            <span class="info-value">maria.desouza@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Telefone</span>
+                            <span class="info-value">+55 (11) 98765-4321</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Endereço</span>
+                            <span class="info-value">Rua das Flores, 123 - São Paulo/SP</span>
+                        </div>
+                    </div>
                 </section>
 
-                <!-- Próximas Visitas -->
-                <section class="next_visits-card">
-                    <div class="proximas_visitas">
-                        <div class="section-title">
-                            <h2><i class="ri-calendar-event-line"></i> Próximas Visitas</h2>
-                        </div>
-                        
-                        <div class="visits-container">
-                            <div class="visit-card">
-                                <div class="visit-date">
-                                    <span class="day">10</span>
-                                    <span class="month">Jun</span>
-                                    <span class="year">2025</span>
-                                </div>
-                                <div class="visit-details">
+                <!-- Upcoming Visits -->
+                <section class="card card-visits">
+                    <div class="card-header">
+                        <h2><i class="ri-calendar-event-line"></i> Próximas Visitas</h2>
+                        <a href="#" class="card-link">Ver todas <i class="ri-arrow-right-s-line"></i></a>
+                    </div>
+                    <div class="visits-list">
+                        <div class="visit-item">
+                            <div class="visit-date-badge">
+                                <span class="visit-day">10</span>
+                                <span class="visit-month">Jun</span>
+                            </div>
+                            <div class="visit-content">
+                                <div class="visit-top">
                                     <h4>Terça-feira</h4>
-                                    <p>Limpeza rápida - 2 horas</p>
-                                    <div class="visit-time">
-                                        <i class="ri-time-line"></i> 14:00 - 16:00
-                                    </div>
+                                    <span class="visit-status status-upcoming">Agendada</span>
                                 </div>
-                                <div class="visit-actions">
-                                    <button class="btn-confirm" title="Confirmar visita">
-                                        <i class="ri-check-line"></i>
-                                    </button>
-                                    <button class="btn-cancel" title="Cancelar visita">
-                                        <i class="ri-close-line"></i>
-                                    </button>
+                                <p>Limpeza rápida - 2 horas</p>
+                                <div class="visit-time">
+                                    <i class="ri-time-line"></i> 14:00 - 16:00
                                 </div>
                             </div>
-                        
-                            <div class="visit-card">
-                                <div class="visit-date">
-                                    <span class="day">20</span>
-                                    <span class="month">Jun</span>
-                                    <span class="year">2025</span>
-                                </div>
-                                <div class="visit-details">
+                            <div class="visit-actions">
+                                <button class="btn-icon btn-confirm" title="Confirmar"><i class="ri-check-line"></i></button>
+                                <button class="btn-icon btn-cancel" title="Cancelar"><i class="ri-close-line"></i></button>
+                            </div>
+                        </div>
+                        <div class="visit-item">
+                            <div class="visit-date-badge">
+                                <span class="visit-day">20</span>
+                                <span class="visit-month">Jun</span>
+                            </div>
+                            <div class="visit-content">
+                                <div class="visit-top">
                                     <h4>Sexta-feira</h4>
-                                    <p>Limpeza localizada - 3 horas</p>
-                                    <div class="visit-time">
-                                        <i class="ri-time-line"></i> 09:00 - 12:00
-                                    </div>
+                                    <span class="visit-status status-upcoming">Agendada</span>
                                 </div>
-                                <div class="visit-actions">
-                                    <button class="btn-confirm" title="Confirmar visita">
-                                        <i class="ri-check-line"></i>
-                                    </button>
-                                    <button class="btn-cancel" title="Cancelar visita">
-                                        <i class="ri-close-line"></i>
-                                    </button>
+                                <p>Limpeza localizada - 3 horas</p>
+                                <div class="visit-time">
+                                    <i class="ri-time-line"></i> 09:00 - 12:00
                                 </div>
+                            </div>
+                            <div class="visit-actions">
+                                <button class="btn-icon btn-confirm" title="Confirmar"><i class="ri-check-line"></i></button>
+                                <button class="btn-icon btn-cancel" title="Cancelar"><i class="ri-close-line"></i></button>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="calendar-preview">
-                        <img id="calendario" src="..\IMG\Calendário.jpeg" alt="Visualização do calendário">
-                        <button class="btn-secondary full-width">
-                            <i class="ri-calendar-2-line"></i> Ver calendário completo
-                        </button>
+                </section>
+
+                <!-- Activity Timeline -->
+                <section class="card card-activity">
+                    <div class="card-header">
+                        <h2><i class="ri-time-line"></i> Atividade Recente</h2>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot dot-green"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">Hoje, 09:30</span>
+                                <p>Serviço de limpeza concluído por <strong>Jorge Silva</strong></p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot dot-blue"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">22 Mai, 14:00</span>
+                                <p>Avaliação enviada para <strong>Jorge Silva</strong> - 5 estrelas</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot dot-green"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">20 Mai, 10:00</span>
+                                <p>Serviço de limpeza pós-reforma concluído</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot dot-orange"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">15 Mai, 08:45</span>
+                                <p>Visita agendada para <strong>10 de Junho</strong></p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot dot-blue"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">10 Mai, 16:20</span>
+                                <p>Novo profissional favorito: <strong>Ana Ribeiro</strong></p>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
 
-            <!-- Seção de Informações de Serviços -->
-            <div class="profissional-sidebar">
-                <!-- Profissional Recorrente -->
-                <section class="service-card">
-                    <div class="section-title">
+            <!-- RIGHT COLUMN (Sidebar) -->
+            <div class="profile-sidebar">
+
+                <!-- Preferred Professional -->
+                <section class="card card-professional">
+                    <div class="card-header">
                         <h2><i class="ri-user-star-line"></i> Profissional Preferido</h2>
                     </div>
-                    
-                    <div class="professional-info">
-                        <div class="pro-header">
-                            <div class="avatar">
-                                <img src="../IMG/foto_profissional_recorrente.png" alt="Jorge Silva">
-                            </div>
-                            <div class="pro-details">
-                                <h3>Jorge Silva</h3>
-                                <div class="rating">
-                                    <div class="stars">
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                    </div>
-                                    <span class="rating-text">4.9 (86 avaliações)</span>
+                    <div class="pro-profile">
+                        <div class="pro-avatar-wrap">
+                            <img src="../IMG/foto_profissional_recorrente.png" alt="Jorge Silva" class="pro-avatar">
+                            <span class="pro-status online"></span>
+                        </div>
+                        <div class="pro-identity">
+                            <h3>Jorge Silva</h3>
+                            <div class="pro-rating">
+                                <div class="stars-inline sm">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
                                 </div>
+                                <span>4.9</span>
                             </div>
                         </div>
-
-                        <div class="pro-services">
-                            <div class="service-detail">
-                                <i class="ri-brush-line"></i>
-                                <div>
-                                    <h4>Tipos de limpeza</h4>
-                                    <p>Residencial, Empresarial, Pós-reforma</p>
-                                </div>
-                            </div>
-                            
-                            <div class="service-detail">
-                                <i class="ri-map-pin-line"></i>
-                                <div>
-                                    <h4>Região de atuação</h4>
-                                    <p>São Paulo e arredores</p>
-                                </div>
-                            </div>
-                            
-                            <div class="service-detail">
-                                <i class="ri-money-dollar-circle-line"></i>
-                                <div>
-                                    <h4>Valor mínimo</h4>
-                                    <p>R$ 150,00</p>
-                                </div>
-                            </div>
-                            
-                            <div class="service-detail">
-                                <i class="ri-forbid-line"></i>
-                                <div>
-                                    <h4>Não realiza</h4>
-                                    <p>Lavar roupa, estofados e dentro de armários</p>
-                                </div>
+                    </div>
+                    <div class="pro-details">
+                        <div class="pro-detail-row">
+                            <i class="ri-brush-line"></i>
+                            <div>
+                                <span class="detail-label">Especialidades</span>
+                                <span class="detail-value">Residencial, Empresarial, Pós-reforma</span>
                             </div>
                         </div>
-                        
-                        <div class="pro-actions">
-                            <button class="btn-primary">
-                                <i class="ri-calendar-line"></i> Agendar
-                            </button>
-                            <button class="btn-secondary">
-                                <i class="ri-message-2-line"></i> Mensagem
-                            </button>
+                        <div class="pro-detail-row">
+                            <i class="ri-map-pin-line"></i>
+                            <div>
+                                <span class="detail-label">Região</span>
+                                <span class="detail-value">São Paulo e arredores</span>
+                            </div>
                         </div>
+                        <div class="pro-detail-row">
+                            <i class="ri-money-dollar-circle-line"></i>
+                            <div>
+                                <span class="detail-label">Valor mínimo</span>
+                                <span class="detail-value">R$ 150,00</span>
+                            </div>
+                        </div>
+                        <div class="pro-detail-row">
+                            <i class="ri-forbid-line"></i>
+                            <div>
+                                <span class="detail-label">Não realiza</span>
+                                <span class="detail-value">Lavar roupa, estofados e dentro de armários</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pro-actions">
+                        <button class="btn-primary"><i class="ri-calendar-line"></i> Agendar</button>
+                        <button class="btn-secondary"><i class="ri-message-2-line"></i> Mensagem</button>
                     </div>
                 </section>
 
-                <div class="comentarios">
-                    <div class="section-title">
-                        <h2><i class="ri-chat-3-line"></i> Meus Comentários</h2>
+                <!-- Reviews -->
+                <section class="card card-reviews">
+                    <div class="card-header">
+                        <h2><i class="ri-chat-3-line"></i> Minhas Avaliações</h2>
                     </div>
-                    <div class="comments-container">
-                        <div class="comment-card">
-                            <div class="comment-header">
-                                <span class="comment-date">15/05/2023</span>
-                                <div class="comment-rating">
+                    <div class="reviews-list">
+                        <div class="review-item">
+                            <div class="review-top">
+                                <div class="review-stars">
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                 </div>
+                                <span class="review-date">15/05/2023</span>
                             </div>
-                            <p class="comment-text">Ótimo serviço! O Jorge foi extremamente profissional e cuidadoso com meus móveis. A limpeza ficou impecável e ele ainda deu dicas para manter a casa organizada por mais tempo.</p>
-                            <button class="read-more-btn">Ler mais <i class="ri-arrow-right-s-line"></i></button>
+                            <p class="review-text">Ótimo serviço! O Jorge foi extremamente profissional e cuidadoso com meus móveis. A limpeza ficou impecável e ele ainda deu dicas para manter a casa organizada por mais tempo.</p>
+                            <button class="review-toggle">Ler mais <i class="ri-arrow-down-s-line"></i></button>
                         </div>
-                        <div class="comment-card">
-                            <div class="comment-header">
-                                <span class="comment-date">02/04/2023</span>
-                                <div class="comment-rating">
+                        <div class="review-item">
+                            <div class="review-top">
+                                <div class="review-stars">
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-line"></i>
                                 </div>
+                                <span class="review-date">02/04/2023</span>
                             </div>
-                            <p class="comment-text">Serviço muito bom, mas atrasou 20 minutos. A limpeza em si foi excelente, superou minhas expectativas. Recomendo, mas espero que sejam mais pontuais da próxima vez.</p>
-                            <button class="read-more-btn">Ler mais <i class="ri-arrow-right-s-line"></i></button>
+                            <p class="review-text">Serviço muito bom, mas atrasou 20 minutos. A limpeza em si foi excelente, superou minhas expectativas. Recomendo, mas espero que sejam mais pontuais da próxima vez.</p>
+                            <button class="review-toggle">Ler mais <i class="ri-arrow-down-s-line"></i></button>
                         </div>
-                        <div class="comment-card">
-                            <div class="comment-header">
-                                <span class="comment-date">18/03/2023</span>
-                                <div class="comment-rating">
+                        <div class="review-item">
+                            <div class="review-top">
+                                <div class="review-stars">
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-half-line"></i>
                                 </div>
+                                <span class="review-date">18/03/2023</span>
                             </div>
-                            <p class="comment-text">Contratei o serviço de limpeza pós-reforma e fiquei muito satisfeita. O profissional foi atencioso e meticuloso. Só não dou 5 estrelas porque algumas manchas mais difíceis não saíram completamente.</p>
-                            <button class="read-more-btn">Ler mais <i class="ri-arrow-right-s-line"></i></button>
+                            <p class="review-text">Contratei o serviço de limpeza pós-reforma e fiquei muito satisfeita. O profissional foi atencioso e meticuloso. Só não dou 5 estrelas porque algumas manchas mais difíceis não saíram completamente.</p>
+                            <button class="review-toggle">Ler mais <i class="ri-arrow-down-s-line"></i></button>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
-
-            
         </div>
     </main>
-    
-    <footer id="Footer">
-        <div class="footer-content">
 
-    <footer id="Footer">
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-footer">
@@ -300,23 +370,20 @@
                 <div class="socials">
                     <a href="https://www.facebook.com/profile.php?id=61580024704625" target="_blank"><i class="ri-facebook-circle-fill"></i></a>
                     <a href="https://www.instagram.com/lumisstartup/?next=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
-                    <a href="#"><i class="ri-linkedin-fill"></i></a target="_blank">
+                    <a href="#"><i class="ri-linkedin-fill"></i></a>
                     <a href="https://x.com/LumisStartup" target="_blank"><i class="ri-twitter-x-fill"></i></a>
                 </div>
             </div>
-            
-               
-          <div class="footer-section links">
+            <div class="footer-section links">
                 <h2 class="Footer-Titulo">Links Rápidos</h2>
                 <ul>
                     <li><a href="../index.html">Início</a></li>
                     <li><a href="../Sobre/Sobre.html">Sobre</a></li>
                     <li><a href="../Servicos/Servicos.html">Serviços</a></li>
-                    <li><a href="../Planos/Planos.html">Planos</a></li>
+                    <li><a href="../Plano/Plano.html">Planos</a></li>
                     <li><a href="../Contato/Contato.html">Contato</a></li>
                 </ul>
             </div>
-            
             <div class="footer-section">
                 <h2 class="Footer-Titulo">Tipos de Serviços</h2>
                 <ul>
@@ -327,7 +394,6 @@
                     <li><a href="../Pages_Footer/empresarial.html">Empresarial</a></li>
                 </ul>
             </div>
-            
             <div class="footer-section">
                 <h2 class="Footer-Titulo">Localização</h2>
                 <p class="P-Color">Av. Amador Bueno da Veiga;</p>
@@ -335,16 +401,14 @@
                 <p class="P-Color">Cidade: São Paulo - SP;</p>
                 <p class="P-Color">CEP: 03890-000</p>
             </div>
-            
             <div class="footer-section">
                 <h2 class="Footer-Titulo">Contato</h2>
                 <p class="P-Color">Telefone: (11) 98121-4352</p>
                 <p class="P-Color">Email: <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
             </div>
         </div>
-        
         <div class="subfooter">
-            <p class="P-Color">© Lumis. Todos os direitos reservados.</p>
+            <p class="P-Color">&copy; Lumis. Todos os direitos reservados.</p>
             <div class="subfooter-links">
                 <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>
                 <span>|</span>
@@ -352,9 +416,6 @@
             </div>
         </div>
     </footer>
-    
+
 </body>
 </html>
-
-
-
