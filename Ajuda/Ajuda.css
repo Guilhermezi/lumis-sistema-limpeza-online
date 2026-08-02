@@ -5,7 +5,7 @@
 
 /* FAQ Section */
 .faq {
-    padding: 6rem 2rem 4rem;
+    padding: 4rem 2rem 4rem;
     background: var(--cor-fundo);
     min-height: 100vh;
 }
@@ -135,6 +135,16 @@ details[open] summary::after {
     transform: translateY(-2px);
 }
 
-span {
+.faq-content-text span {
     color: var(--cor-primaria);
+}
+
+/* ==== Lumis dark mode ==== */
+[data-theme="dark"] .faq-content-text code {
+    background: #24403a;
+}
+
+[data-theme="dark"] details {
+    background: var(--white);
+    border: 1px solid #3a3a3a;
 }

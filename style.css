@@ -46,6 +46,49 @@
     --small-font-size: .813rem;
 }
 
+/*================DARK MODE================*/
+[data-theme="dark"] {
+    --cor-primaria: #5dd49a;
+    --cor-secundaria: #4dcfbb;
+    --cor-terciaria: #6aa3d4;
+    --cor-botao-primario-hover: #3fa872;
+    --cor-botao-secundario-hover: #38a893;
+    --cor-botao-terciario-hover: #4a7eb5;
+    --cor-fundo: #1a1a1a;
+    --cor-texto: #e0e0e0;
+    --cor-texto-secundario: #a0a0a0;
+    --cor-botao-texto: #1a1a1a;
+    --cor-botao-texto-hover: #333333;
+    --white: #242424;
+    --light-gray: #2a2a2a;
+    --shadow-sm: 0 2px 6px rgba(0,0,0,0.4);
+    --shadow-md: 0 5px 15px rgba(0,0,0,0.4);
+    --shadow-lg: 0 5px 20px rgba(0,0,0,0.4);
+    --shadow-hover: 0 10px 30px rgba(80, 191, 135, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --cor-primaria: #5dd49a;
+        --cor-secundaria: #4dcfbb;
+        --cor-terciaria: #6aa3d4;
+        --cor-botao-primario-hover: #3fa872;
+        --cor-botao-secundario-hover: #38a893;
+        --cor-botao-terciario-hover: #4a7eb5;
+        --cor-fundo: #1a1a1a;
+        --cor-texto: #e0e0e0;
+        --cor-texto-secundario: #a0a0a0;
+        --cor-botao-texto: #1a1a1a;
+        --cor-botao-texto-hover: #333333;
+        --white: #242424;
+        --light-gray: #2a2a2a;
+        --shadow-sm: 0 2px 6px rgba(0,0,0,0.4);
+        --shadow-md: 0 5px 15px rgba(0,0,0,0.4);
+        --shadow-lg: 0 5px 20px rgba(0,0,0,0.4);
+        --shadow-hover: 0 10px 30px rgba(80, 191, 135, 0.25);
+    }
+}
+
 h1 { font-family: var(--h1-font); color: var(--cor-texto); }
 h2 { font-family: var(--h2-font); color: var(--cor-texto); }
 h3 { font-family: var(--h3-font); color: var(--cor-texto); }
@@ -63,6 +106,7 @@ body {
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     padding-top: 70px;
+    transition: background-color 250ms ease, color 250ms ease;
 }
 
 /* ============================================
@@ -83,6 +127,7 @@ header {
     z-index: 1000;
     height: 70px;
     box-sizing: border-box;
+    transition: background-color 250ms ease;
 }
 
 /*==========LOGO============*/
@@ -214,7 +259,133 @@ nav ul li:hover > a {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/*============== MENU HAMBURGUER ==============*/
+/*==============NAV CONTROLS (tema + idioma)===========*/
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Espaço entre os controles e o botão Login no header */
+nav > .nav-controls {
+    margin-left: 16px;
+}
+
+.Mode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 2px solid var(--cor-texto-secundario);
+    border-radius: 8px;
+    padding: 0;
+    background: transparent;
+    color: var(--cor-texto);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.25s ease, background-color 0.25s ease,
+                border-color 0.25s ease, transform 0.2s ease;
+}
+
+.Mode:hover {
+    color: var(--cor-primaria);
+    background-color: rgba(80, 191, 135, 0.1);
+    border-color: var(--cor-primaria);
+    transform: translateY(-1px);
+}
+
+.Mode:active { transform: scale(0.95); }
+
+.Mode svg {
+    pointer-events: none;
+    transition: transform 0.4s ease;
+}
+
+.Mode:hover svg { transform: rotate(15deg); }
+
+.LangSelector {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.LangBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 2px solid var(--cor-texto-secundario);
+    border-radius: 8px;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.35rem;
+    flex-shrink: 0;
+    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.2s ease;
+}
+
+.LangBtn:hover {
+    border-color: var(--cor-primaria);
+    background-color: rgba(80, 191, 135, 0.1);
+    transform: translateY(-1px);
+}
+
+.LangBtn:active { transform: scale(0.95); }
+
+.LangDropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--white);
+    border: 1px solid var(--cor-texto-secundario);
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    z-index: 9999;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+.LangDropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.LangOption {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--cor-texto);
+    font-family: var(--p-font);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.LangOption:hover {
+    background-color: rgba(80, 191, 135, 0.1);
+    color: var(--cor-primaria);
+}
+
+.LangOption.ativo { color: var(--cor-primaria); font-weight: 700; }
+.LangOption .flag { font-size: 1.2rem; }
+
+/*==============MENU HAMBURGUER============*/
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -423,8 +594,20 @@ footer {
    ESTILOS ESPECIFICOS DO INDEX
    ============================================ */
 
-/*============SECAO HERO============*/
-.hero {
+/*============SECAO HERO (GLOBAL - padrão único)============*/
+/* Todos os heros do site compartilham esta base */
+.hero,
+.hero-cidade,
+.hero-carros,
+.hero-vidros,
+.hero-estofados,
+.hero-empresarial,
+.services-hero,
+.plans-hero,
+.contact-hero,
+.decision-hero,
+.auth-hero,
+.ajuda-hero {
     background: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
     padding: 8rem 2rem 4rem;
     min-height: 500px;
@@ -435,7 +618,32 @@ footer {
     overflow: hidden;
 }
 
-.hero::before {
+/* Camadas de fundo das páginas que usam div (ex.: .hero-bg, .auth-hero-bg) */
+.hero-bg,
+.plans-hero-bg,
+.contact-hero-bg,
+.decision-hero-bg,
+.auth-hero-bg,
+.ajuda-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* Decoração radial 1 (superior direita) */
+.hero::before,
+.hero-cidade::before,
+.hero-carros::before,
+.hero-vidros::before,
+.hero-estofados::before,
+.hero-empresarial::before,
+.ajuda-hero::before,
+.hero-bg::before,
+.plans-hero-bg::before,
+.contact-hero-bg::before,
+.decision-hero-bg::before,
+.auth-hero-bg::before,
+.ajuda-hero-bg::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -444,9 +652,23 @@ footer {
     height: 100%;
     background: radial-gradient(circle, rgba(80,191,135,0.1) 0%, transparent 70%);
     animation: float 6s ease-in-out infinite;
+    border-radius: 50%;
 }
 
-.hero::after {
+/* Decoração radial 2 (inferior esquerda) */
+.hero::after,
+.hero-cidade::after,
+.hero-carros::after,
+.hero-vidros::after,
+.hero-estofados::after,
+.hero-empresarial::after,
+.ajuda-hero::after,
+.hero-bg::after,
+.plans-hero-bg::after,
+.contact-hero-bg::after,
+.decision-hero-bg::after,
+.auth-hero-bg::after,
+.ajuda-hero-bg::after {
     content: '';
     position: absolute;
     bottom: -50%;
@@ -455,6 +677,7 @@ footer {
     height: 100%;
     background: radial-gradient(circle, rgba(61,190,169,0.1) 0%, transparent 70%);
     animation: float 8s ease-in-out infinite reverse;
+    border-radius: 50%;
 }
 
 @keyframes float {
@@ -469,7 +692,19 @@ footer {
     z-index: 2;
 }
 
-.hero-text h1 {
+/* Título dos heros (exceto .hero, que é o vídeo do Sobre) */
+.hero-text h1,
+.hero-cidade h1,
+.hero-carros h1,
+.hero-vidros h1,
+.hero-estofados h1,
+.hero-empresarial h1,
+.services-hero h1,
+.plans-hero h1,
+.contact-hero h1,
+.decision-hero h1,
+.auth-hero h1,
+.ajuda-hero h1 {
     font-size: clamp(2rem, 6vw, 3.5rem);
     color: var(--cor-texto);
     margin-bottom: 1rem;
@@ -477,11 +712,28 @@ footer {
     font-weight: 700;
 }
 
-.hero-text .highlight {
+.hero-text .highlight,
+.services-hero h1 .highlight,
+.plans-hero h1 .highlight,
+.contact-hero h1 .highlight,
+.decision-hero h1 .highlight,
+.auth-hero h1 .highlight,
+.ajuda-hero h1 .highlight {
     color: var(--cor-primaria);
 }
 
-.hero-text p {
+.hero-text p,
+.hero-cidade p,
+.hero-carros p,
+.hero-vidros p,
+.hero-estofados p,
+.hero-empresarial p,
+.services-hero p,
+.plans-hero p,
+.contact-hero p,
+.decision-hero p,
+.auth-hero p,
+.ajuda-hero p {
     font-size: clamp(1rem, 3vw, 1.2rem);
     color: var(--cor-texto-secundario);
     margin-bottom: 2rem;
@@ -495,6 +747,29 @@ footer {
     gap: 1rem;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+/* Pílulas de destaque dos heros (tag) */
+.hero-tag,
+.plans-tag,
+.contact-tag,
+.decision-tag,
+.auth-tag,
+.ajuda-tag,
+.home-tag,
+.cidade-tag,
+.sobre-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(80, 191, 135, 0.1);
+    color: var(--cor-primaria);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(80, 191, 135, 0.2);
 }
 
 /*============SECAO SERVICOS============*/
@@ -1015,4 +1290,114 @@ footer {
 @keyframes slideIn {
     from { transform: translateX(-100%); }
     to { transform: translateX(0); }
+}
+
+/* ============================================
+   HERO GLOBAL - RESPONSIVO
+   ============================================ */
+@media (max-width: 768px) {
+    .hero,
+    .hero-cidade,
+    .hero-carros,
+    .hero-vidros,
+    .hero-estofados,
+    .hero-empresarial,
+    .services-hero,
+    .plans-hero,
+    .contact-hero,
+    .decision-hero,
+    .auth-hero,
+    .ajuda-hero {
+        padding: 6rem 1rem 2.5rem;
+    }
+
+    .hero-text h1,
+    .hero-cidade h1,
+    .hero-carros h1,
+    .hero-vidros h1,
+    .hero-estofados h1,
+    .hero-empresarial h1,
+    .services-hero h1,
+    .plans-hero h1,
+    .contact-hero h1,
+    .decision-hero h1,
+    .auth-hero h1,
+    .ajuda-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero-text p,
+    .hero-cidade p,
+    .hero-carros p,
+    .hero-vidros p,
+    .hero-estofados p,
+    .hero-empresarial p,
+    .services-hero p,
+    .plans-hero p,
+    .contact-hero p,
+    .decision-hero p,
+    .auth-hero p,
+    .ajuda-hero p {
+        font-size: 0.95rem;
+    }
+}
+
+/* ============================================
+   DARK MODE - AJUSTES DE CORES FIXAS
+   ============================================ */
+/* Todos os heros do site seguem o mesmo padrão no dark mode */
+[data-theme="dark"] .hero,
+[data-theme="dark"] .hero-cidade,
+[data-theme="dark"] .hero-carros,
+[data-theme="dark"] .hero-vidros,
+[data-theme="dark"] .hero-estofados,
+[data-theme="dark"] .hero-empresarial,
+[data-theme="dark"] .services-hero,
+[data-theme="dark"] .plans-hero,
+[data-theme="dark"] .contact-hero,
+[data-theme="dark"] .decision-hero,
+[data-theme="dark"] .auth-hero,
+[data-theme="dark"] .ajuda-hero,
+[data-theme="dark"] .hero-bg,
+[data-theme="dark"] .plans-hero-bg,
+[data-theme="dark"] .contact-hero-bg,
+[data-theme="dark"] .decision-hero-bg,
+[data-theme="dark"] .auth-hero-bg,
+[data-theme="dark"] .ajuda-hero-bg {
+    background: linear-gradient(135deg, #20281f, var(--cor-fundo));
+}
+
+[data-theme="dark"] .card {
+    border-color: #3a3a3a;
+    background: #2a2a2a;
+}
+
+[data-theme="dark"] .testimonials {
+    background: #1f1f1f;
+}
+
+[data-theme="dark"] .dot {
+    background: #555555;
+}
+
+[data-theme="dark"] .prev,
+[data-theme="dark"] .next {
+    color: #1a1a1a;
+}
+
+[data-theme="dark"] img {
+    filter: brightness(0.92) contrast(1.02);
+}
+
+[data-theme="dark"] header img,
+[data-theme="dark"] .logo-footer {
+    filter: none;
+}
+
+[data-theme="dark"] .submenu {
+    border: 1px solid #3a3a3a;
+}
+
+[data-theme="dark"] nav ul li a {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
 }

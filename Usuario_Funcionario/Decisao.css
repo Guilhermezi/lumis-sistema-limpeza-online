@@ -1,48 +1,55 @@
 /* ============================================
-   DECISAO.CSS - Estilos especificos
+   DECISAO.CSS - Estilos especificos da pagina de decisao de acesso
    Depende de: ../style.css (Design System global)
    ============================================ */
 
-/* ============ CONTEÚDO PRINCIPAL ============ */
-.content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    width: 100%;
+.decision-page {
+    overflow-x: hidden;
 }
 
-.type-container {
-    max-width: 600px;
+.section-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/*================= CARTAO DE ESCOLHA =================*/
+.decision-section {
+    padding: 2rem 0 4rem;
+    background: var(--cor-fundo);
+}
+
+.decision-card {
+    max-width: 640px;
     width: 100%;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
+    padding: 2.5rem;
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
     text-align: center;
 }
 
-.type-container h1 {
-    color: var(--cor-primaria);
+.decision-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
     margin-bottom: 2rem;
-    font-size: 2rem;
 }
 
-.type-options {
+.decision-options {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin: 2rem 0;
+    gap: 1.5rem;
     flex-wrap: wrap;
 }
 
-.type-link {
-    background: #fff;
+.decision-option {
+    background: var(--white);
     border: 2px solid var(--cor-primaria);
-    border-radius: 10px;
-    padding: 1.5rem;
-    width: 150px;
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.5rem;
+    width: 220px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
@@ -51,168 +58,88 @@
     text-decoration: none;
 }
 
-.type-link:hover {
+.decision-option:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(80, 191, 135, 0.2);
+    box-shadow: var(--shadow-hover);
     background: rgba(80, 191, 135, 0.05);
-    text-decoration: none;
 }
 
-.type-link i {
-    font-size: 2rem;
+.decision-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(80, 191, 135, 0.1);
     color: var(--cor-primaria);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
     margin-bottom: 1rem;
+    transition: all 0.3s ease;
 }
 
-.type-link span {
-    font-weight: 600;
+.decision-option:hover .decision-icon {
+    background: var(--cor-primaria);
+    color: var(--white);
+    transform: scale(1.05);
+}
+
+.decision-option strong {
+    font-weight: 700;
     color: var(--cor-texto);
     font-family: var(--h2-font);
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
 }
 
-.toggle-section {
+.decision-option-desc {
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.5;
+}
+
+.decision-toggle {
     margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.toggle-section p {
+.decision-toggle p {
     color: var(--cor-texto-secundario);
-    margin-bottom: 0;
+    margin: 0;
+    font-size: 0.95rem;
 }
 
-.toggle-link {
-    color: var(--cor-primaria);
-    font-weight: 600;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    cursor: pointer;
-}
-
-.toggle-link:hover {
-    text-decoration: underline;
-    color: var(--cor-botao-primario-hover);
-}
-
-/* Para ocultar elementos */
-.hidden {
-    display: none;
-}
-
-/* ============ MODAL ============ */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 2rem;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    position: relative;
-    animation: modalFadeIn 0.3s;
-}
-
-@keyframes modalFadeIn {
-    from {opacity: 0; transform: translateY(-50px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-.close-modal {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--cor-texto-secundario);
-    transition: color 0.3s ease;
-}
-
-.close-modal:hover {
-    color: var(--cor-primaria);
-}
-
-.modal-content h2 {
-    color: var(--cor-primaria);
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.auth-options {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.auth-option {
-    padding: 1rem;
+.decision-toggle-link {
+    background: none;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: var(--h1-font);
-}
-
-.auth-option:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-#btn-login {
-    background-color: var(--cor-primaria);
-    color: white;
-}
-
-#btn-login:hover {
-    background-color: var(--cor-botao-primario-hover);
-}
-
-#btn-cadastro {
-    background-color: #fff;
     color: var(--cor-primaria);
-    border: 2px solid var(--cor-primaria);
+    font-family: var(--p-font);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-#btn-cadastro:hover {
-    background-color: rgba(80, 191, 135, 0.1);
+.decision-toggle-link:hover {
+    color: var(--cor-botao-primario-hover);
+    text-decoration: underline;
 }
 
-/* ============ RESPONSIVIDADE ============ */
+/*================= Responsividade =================*/
 @media (max-width: 768px) {
-    .type-options {
-        flex-direction: column;
-        align-items: center;
+
+    .decision-card {
+        padding: 1.75rem 1.25rem;
     }
 
-    .type-link {
+    .decision-option {
         width: 100%;
-        max-width: 250px;
-    }
-
-    .content {
-        padding: 1rem;
+        max-width: 260px;
     }
 }
 
-@media (max-width: 480px) {
-    .type-container {
-        padding: 1.5rem;
-    }
-
-    .modal-content {
-        padding: 1.5rem;
-    }
+/* ==== Lumis dark mode ==== */
+[data-theme="dark"] .decision-option {
+    color: var(--cor-texto);
 }

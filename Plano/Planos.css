@@ -3,385 +3,422 @@
    Depende de: ../style.css (Design System global)
    ============================================ */
 
-/*================= Titulo Planos =================*/
-.Titulo {
-    margin-top: 40px;
+.plans-page {
+    overflow-x: hidden;
+}
+
+.section-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/*================= ESTATISTICAS =================*/
+.plans-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 2rem 1.5rem;
+    background: var(--white);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    flex-wrap: wrap;
+}
+
+.plans-stat {
     text-align: center;
+}
+
+.plans-stat-number {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 800;
     font-family: var(--h1-font);
     color: var(--cor-primaria);
-    font-size: 1.90rem;
+    line-height: 1.2;
 }
 
-.destaque {
+.plans-stat-number .plus {
+    font-size: 0.6em;
+    font-weight: 700;
     color: var(--cor-terciaria);
 }
 
-/*====================Estatisticas================*/
-.container_estatisticas {
-    display: flex;
-    max-width: 80%;
-    background-color: var(--cor-fundo);
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: var(--radius-md);
-}
-
-.informacoes {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 100px;
-}
-
-.distancia_borda {
-    margin-left: 10px;
-}
-
-.familias {
-    border-left: 4px solid var(--cor-terciaria);
-}
-
-.lixos {
-    border-left: 4px solid var(--cor-secundaria);
-}
-
-.experiencia {
-    border-left: 4px solid var(--cor-terciaria);
-}
-
-/*============Planos - Container===========*/
-.container_planos {
-    display: flex;
-    max-width: 75%;
-    border-radius: var(--radius-md);
-    background-color: var(--cor-fundo);
-    margin: 55px auto;
-}
-
-.planos {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-/*============Textos dos Cards===========*/
-.Texto_card {
-    font-size: 14px;
+.plans-stat-label {
+    font-size: 0.8rem;
     color: var(--cor-texto-secundario);
+    font-weight: 500;
 }
 
-.mes {
-    font-size: 12px;
+.plans-stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/*================= PLANOS =================*/
+.pricing-section {
+    padding: 4rem 0;
+    background: var(--cor-fundo);
+}
+
+.plans-subtitle {
+    text-align: center;
     color: var(--cor-texto-secundario);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin: -1.5rem auto 3rem;
 }
 
-.Preco {
-    color: var(--cor-primaria);
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    align-items: center;
 }
 
-/*============Botoes dos Planos===========*/
-.button1 {
-    display: block;
-    background-color: var(--cor-terciaria);
-    color: var(--white);
-    text-align: center;
-    padding: 12px;
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    font-weight: bold;
-    margin: 20px 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.button1:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px var(--cor-botao-terciario-hover);
-}
-
-.button2 {
-    display: block;
-    background-color: var(--cor-fundo);
-    color: var(--cor-terciaria);
-    border: 2px solid var(--cor-terciaria);
-    text-align: center;
-    padding: 12px;
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    font-weight: bold;
-    margin: 20px 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.button2:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px var(--cor-botao-terciario-hover);
-}
-
-/*============Separadores===========*/
-.linha_horizontal {
-    border: none;
-    height: 1px;
-    background-color: var(--cor-terciaria);
-}
-
-/*============Icones===========*/
-p i {
-    color: var(--cor-primaria);
-    font-size: 19px;
-    margin: 10px;
-}
-
-/*============Plano Basico===========*/
-.Plano_basico {
-    width: 260px;
-    align-self: flex-end;
-    flex: 1.2;
-    max-width: 260px;
+.pricing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-lg);
-    border: 2px solid var(--cor-primaria);
+    padding: 2rem 1.5rem;
     box-shadow: var(--shadow-sm);
-    padding: 5px 25px;
+    transition: all 0.3s ease;
+    height: 100%;
 }
 
-/*============Plano Regular===========*/
-.Topo_regular {
+.pricing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(80, 191, 135, 0.25);
+}
+
+.pricing-featured {
+    border: 2px solid transparent;
+    background:
+        linear-gradient(var(--white), var(--white)) padding-box,
+        linear-gradient(to right, var(--cor-primaria), var(--cor-terciaria)) border-box;
+    box-shadow: var(--shadow-md);
+    transform: scale(1.04);
+    z-index: 1;
+}
+
+.pricing-featured:hover {
+    transform: scale(1.04) translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
+
+.pricing-accent .pricing-icon {
+    background: rgba(80, 138, 191, 0.1);
+    color: var(--cor-terciaria);
+}
+
+.pricing-accent .pricing-badge {
+    background: linear-gradient(to left, var(--cor-primaria), var(--cor-terciaria));
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
     background: linear-gradient(to right, var(--cor-primaria), var(--cor-terciaria));
     color: var(--white);
-    font-weight: bold;
-    text-align: center;
-    padding: 12px 0;
-    border-radius: 30px;
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
+    font-family: var(--h1-font);
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.4rem 1.1rem;
+    border-radius: 20px;
+    white-space: nowrap;
     box-shadow: 0 5px 15px rgba(80, 191, 135, 0.3);
 }
 
-.Plano_regular {
-    flex: 1.5;
-    position: relative;
-    max-width: 320px;
-    border-radius: var(--radius-lg);
-    padding: 30px 25px;
-    border: 2px solid transparent;
-    background:
-        linear-gradient(white, white) padding-box,
-        linear-gradient(to right, var(--cor-primaria), var(--cor-terciaria)) border-box;
-    box-shadow: var(--shadow-sm);
-}
-
-/*============Plano Premium===========*/
-.Topo_premium {
-    background: linear-gradient(to left, var(--cor-primaria), var(--cor-terciaria));
-    color: var(--white);
-    font-weight: bold;
-    text-align: center;
-    padding: 12px 0;
-    border-radius: 30px;
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    box-shadow: 0 5px 15px rgba(80, 191, 135, 0.3);
-}
-
-.Plano_premium {
-    flex: 1.5;
-    position: relative;
-    max-width: 320px;
-    border-radius: var(--radius-lg);
-    padding: 30px 25px;
-    border: 2px solid transparent;
-    background:
-        linear-gradient(white, white) padding-box,
-        linear-gradient(to left, var(--cor-primaria), var(--cor-terciaria)) border-box;
-    box-shadow: var(--shadow-sm);
-}
-
-/*============Plano Personalizado===========*/
-.Plano_personalizado {
-    width: 260px;
-    flex: 1.2;
-    align-self: flex-end;
-    max-width: 260px;
-    border-radius: var(--radius-lg);
-    border: 2px solid var(--cor-primaria);
-    box-shadow: var(--shadow-sm);
-    padding: 5px 25px;
-}
-
-/*============Depoimento===========*/
-.Depoimento-img img {
-    width: 250px;
-    border-radius: var(--radius-lg);
-}
-
-.Conteiner_depoimento {
+.pricing-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(80, 191, 135, 0.1);
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 60px auto;
-    max-width: 80%;
-}
-
-.Texto_depoimento {
-    font-size: 18px;
-    max-width: 600px;
-    margin-left: 40px;
-}
-
-.Destaque {
+    justify-content: center;
+    font-size: 1.5rem;
     color: var(--cor-primaria);
-    font-weight: bold;
+    margin-bottom: 1.25rem;
+    transition: all 0.3s ease;
 }
 
-.Destaque2 {
+.pricing-card:hover .pricing-icon {
+    background: var(--cor-primaria);
+    color: var(--white);
+    transform: scale(1.05);
+}
+
+.pricing-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.pricing-desc {
+    font-size: 0.85rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    flex-grow: 0;
+    min-height: 2.6em;
+}
+
+.pricing-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.pricing-currency {
+    font-family: var(--h1-font);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--cor-texto-secundario);
+}
+
+.pricing-amount {
+    font-family: var(--h1-font);
+    font-weight: 800;
+    font-size: 2.1rem;
+    line-height: 1;
+    color: var(--cor-primaria);
+}
+
+.pricing-period {
+    font-size: 0.85rem;
+    color: var(--cor-texto-secundario);
+}
+
+.pricing-custom {
     color: var(--cor-terciaria);
-    font-weight: bold;
+    font-size: 1.3rem;
+    line-height: 1.4;
 }
 
-.linha_horizontal2 {
+.pricing-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+}
+
+.pricing-divider {
     border: none;
     height: 1px;
-    background-color: var(--cor-terciaria);
-    margin: 20px 0;
+    background-color: rgba(0, 0, 0, 0.08);
+    margin: 1.25rem 0 1rem;
 }
 
-/* ============================================
-   RESPONSIVIDADE ESPECIFICA DOS PLANOS
-   ============================================ */
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
 
-/*=== Estatisticas ===*/
+.pricing-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.45;
+}
+
+.pricing-features li i {
+    color: var(--cor-primaria);
+    font-size: 1.05rem;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+}
+
+/*================= DEPOIMENTO =================*/
+.plans-testimonial {
+    padding: 4rem 0;
+    background: var(--white);
+}
+
+.testimonial-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.testimonial-media {
+    text-align: center;
+}
+
+.testimonial-media img {
+    max-width: 100%;
+    width: 380px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.testimonial-stars {
+    display: flex;
+    gap: 3px;
+    color: #F59E0B;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.testimonial-quote {
+    font-family: var(--h3-font);
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--cor-texto);
+    margin: 0 0 1.75rem;
+}
+
+.testimonial-quote strong {
+    color: var(--cor-primaria);
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: var(--h1-font);
+    flex-shrink: 0;
+}
+
+.testimonial-author strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.testimonial-author span {
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+}
+
+/*================= CTA =================*/
+.plans-cta {
+    padding: 4rem 0;
+    background: var(--cor-fundo);
+}
+
+.cta-content {
+    text-align: center;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.cta-content p {
+    color: var(--cor-texto-secundario);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/*================= RESPONSIVIDADE =================*/
+@media (max-width: 1100px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .pricing-featured {
+        transform: none;
+    }
+
+    .pricing-featured:hover {
+        transform: translateY(-6px);
+    }
+}
+
 @media (max-width: 768px) {
-    .informacoes {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-}
 
-/*=== Planos ===*/
-@media (max-width: 1200px) {
-    .container_planos {
-        max-width: 90%;
+    .plans-stats {
+        gap: 1.25rem;
+        padding: 1.5rem 1rem;
     }
 
-    .planos {
-        gap: 15px;
+    .plans-stat-divider {
+        display: none;
     }
 
-    .Plano_basico, .Plano_personalizado {
-        width: 220px;
+    .plans-stat {
+        flex: 0 0 45%;
     }
 
-    .Plano_regular, .Plano_premium {
-        width: 260px;
-    }
-}
-
-@media (max-width: 992px) {
-    .planos {
-        flex-wrap: wrap;
-        justify-content: center;
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+        max-width: 420px;
+        margin: 0 auto;
     }
 
-    .Plano_basico, .Plano_regular, .Plano_premium, .Plano_personalizado {
-        width: 45%;
-        margin-bottom: 40px;
-        align-self: stretch;
+    .plans-subtitle {
+        margin-bottom: 2rem;
     }
 
-    .Plano_basico, .Plano_personalizado {
-        align-self: stretch;
-    }
-}
-
-@media (max-width: 768px) {
-    .container_planos {
-        max-width: 95%;
-        margin: 30px auto;
+    .testimonial-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
-    .planos {
+    .testimonial-media img {
+        width: 280px;
+    }
+
+    .cta-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .cta-buttons {
         flex-direction: column;
         align-items: center;
     }
+}
 
-    .Plano_basico, .Plano_regular, .Plano_premium, .Plano_personalizado {
-        width: 100%;
-        max-width: 400px;
-        margin-bottom: 50px;
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.75rem;
     }
 
-    .Topo_regular, .Topo_premium {
-        width: 70%;
+    .plans-stat-number {
+        font-size: 1.4rem;
     }
 }
 
-@media (max-width: 460px) {
-    .container_planos {
-        max-width: 90%;
-    }
-
-    .Plano_basico, .Plano_regular, .Plano_premium, .Plano_personalizado {
-        padding: 20px 15px;
-    }
-
-    .Topo_regular, .Topo_premium {
-        font-size: 0.9rem;
-        padding: 10px 0;
-        width: 80%;
-    }
-
-    .Preco {
-        font-size: 1.7rem;
-    }
-
-    .button1, .button2 {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-}
-
-/*=== Depoimento ===*/
-@media (max-width: 991px) {
-    .Conteiner_depoimento {
-        flex-direction: column;
-        align-items: center;
-        margin: 40px auto;
-        max-width: 90%;
-        padding: 0 15px;
-    }
-
-    .Texto_depoimento {
-        max-width: 100%;
-        margin-left: 0;
-        text-align: center;
-    }
-
-    .Depoimento {
-        font-size: 16px;
-    }
-}
-
-@media (max-width: 460px) {
-    .Depoimento {
-        font-size: 14px;
-    }
-
-    .Conteiner_depoimento {
-        margin: 30px auto;
-        padding: 0 10px;
-    }
-
-    .Texto_depoimento {
-        font-size: 0.9rem;
-    }
-
-    .linha_horizontal2 {
-        margin: 15px 0;
-    }
-}
+/* ==== Lumis dark mode ==== */

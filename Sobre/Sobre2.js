@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         indicators.forEach(indicator => indicator.classList.remove('active'));
         
         // Adicionar a classe active ao item e indicador atual
-        items[currentIndex].classList.add('active');
-        indicators[currentIndex].classList.add('active');
+        items[currentIndex]?.classList.add('active');
+        indicators[currentIndex]?.classList.add('active');
     }
     
     // Avançar para o próximo slide

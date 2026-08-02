@@ -3,6 +3,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script>
+        try {
+            var temaSalvo = localStorage.getItem('tema');
+            document.documentElement.setAttribute('data-theme',
+                temaSalvo || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
@@ -17,7 +26,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <title>Lumis</title>
 </head>
-<body>
+<body data-page="nav">
     <header>
         <div id="logo-headers">
             <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
@@ -32,23 +41,48 @@
             </div>
 
             <ul id="menu">
-                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> <span data-i18n="nav-inicio">Início</span></a></li>
                 <li class="has-submenu">
                     <a href="../Sobre/Sobre.html">
-                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                        <i class="ri-information-line"></i> <span data-i18n="nav-sobre">Sobre</span> <i class="ri-arrow-down-s-line"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                        <li><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
                     </ul>
                 </li>
                 <!-- Item adicional para mobile -->
-                <li class="mobile-only-item"><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
-                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
-                <li><a href="#"><i class="ri-wallet-3-line"></i> Planos</a></li>
-                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
-                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
-                <li><a class="bntCadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
+                <li class="mobile-only-item"><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
+                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> <span data-i18n="nav-servicos">Serviços</span></a></li>
+                <li><a href="#"><i class="ri-wallet-3-line"></i> <span data-i18n="nav-planos">Planos</span></a></li>
+                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> <span data-i18n="nav-contato">Contato</span></a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> <span data-i18n="nav-ajuda">Ajuda</span></a></li>
+                <li><a class="bntCadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> <span data-i18n="nav-login">Login</span></a></li>
             </ul>
+        
+            <div class="nav-controls">
+                <button class="Mode" id="themeToggle" aria-label="Alternar tema">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+
+                <div class="LangSelector">
+                    <button class="LangBtn" id="langToggle" aria-label="Selecionar idioma">
+                        &#127479;&#127479;
+                    </button>
+                    <div class="LangDropdown" id="langDropdown">
+                        <a data-lang="pt" class="LangOption ativo">
+                            <span class="flag">&#127463;&#127479;</span> <span data-i18n="lang-portugues">Português</span>
+                        </a>
+                        <a data-lang="en" class="LangOption">
+                            <span class="flag">&#127482;&#127480;</span> <span data-i18n="lang-ingles">English</span>
+                        </a>
+                        <a data-lang="es" class="LangOption">
+                            <span class="flag">&#127466;&#127480;</span> <span data-i18n="lang-espanhol">Español</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -58,7 +92,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-footer">
-                <p><span class="P-Color">Especialistas em limpeza sustentável</span></p>
+                <p><span class="P-Color" data-i18n="footer-tagline">Especialistas em limpeza sustentável</span></p>
                 <div class="socials">
                     <a href="https://www.facebook.com/profile.php?id=61580024704625" target="_blank"><i class="ri-facebook-circle-fill"></i></a>
                     <a href="https://www.instagram.com/lumisstartup/?next=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
@@ -68,48 +102,48 @@
             </div>
             
             <div class="footer-section links">
-                <h2 class="Footer-Titulo">Links Rápidos</h2>
+                <h2 class="Footer-Titulo" data-i18n="footer-links">Links Rápidos</h2>
                 <ul>
-                    <li><a href="../index.html">Início</a></li>
-                    <li><a href="../Sobre/Sobre.html">Sobre</a></li>
-                    <li><a href="../Servicos/Servicos.html">Serviços</a></li>
-                    <li><a href="#">Planos</a></li>
-                    <li><a href="../Contato/Contato.html">Contato</a></li>
+                    <li><a href="../index.html" data-i18n="footer-inicio">Início</a></li>
+                    <li><a href="../Sobre/Sobre.html" data-i18n="footer-sobre">Sobre</a></li>
+                    <li><a href="../Servicos/Servicos.html" data-i18n="footer-servicos">Serviços</a></li>
+                    <li><a href="#" data-i18n="footer-planos">Planos</a></li>
+                    <li><a href="../Contato/Contato.html" data-i18n="footer-contato">Contato</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h2 class="Footer-Titulo">Tipos de Serviços</h2>
+                <h2 class="Footer-Titulo" data-i18n="footer-tipos">Tipos de Serviços</h2>
                 <ul>
-                    <li><a href="#">Estofados</a></li>
-                    <li><a href="#">Vidros</a></li>
-                    <li><a href="#">Carros</a></li>
-                    <li><a href="#">Escritórios</a></li>
-                    <li><a href="#">Empresarial</a></li>
+                    <li><a href="#" data-i18n="footer-estofados">Estofados</a></li>
+                    <li><a href="#" data-i18n="footer-vidros">Vidros</a></li>
+                    <li><a href="#" data-i18n="footer-carros">Carros</a></li>
+                    <li><a href="#" data-i18n="footer-escritorios">Escritórios</a></li>
+                    <li><a href="#" data-i18n="footer-empresarial">Empresarial</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h2 class="Footer-Titulo">Localização</h2>
+                <h2 class="Footer-Titulo" data-i18n="footer-localizacao">Localização</h2>
                 <p class="P-Color">Rua: Av. Amador Bueno da Veiga;</p>
-                <p class="P-Color">Endereço: 4430;</p>
-                <p class="P-Color">Cidade: São Paulo - SP;</p>
-                <p class="P-Color">CEP: 03890-000</p>
+                <p class="P-Color" data-i18n="footer-endereco">Endereço: 4430;</p>
+                <p class="P-Color" data-i18n="footer-cidade">Cidade: São Paulo - SP;</p>
+                <p class="P-Color" data-i18n="footer-cep">CEP: 03890-000</p>
             </div>
             
             <div class="footer-section">
-                <h2 class="Footer-Titulo">Contato</h2>
-                <p class="P-Color">Telefone: (11) 98121-4352</p>
-                <p class="P-Color">Email: <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
+                <h2 class="Footer-Titulo" data-i18n="footer-contato-t">Contato</h2>
+                <p class="P-Color" data-i18n="footer-telefone">Telefone: (11) 98121-4352</p>
+                <p class="P-Color"><span data-i18n="footer-email">Email:</span> <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
             </div>
         </div>
         
         <div class="subfooter">
-            <p class="P-Color">© Lumis. Todos os direitos reservados.</p>
+            <p class="P-Color" data-i18n="footer-direitos">© Lumis. Todos os direitos reservados.</p>
             <div class="subfooter-links">
-                <a href="#">Política de Privacidade</a>
+                <a href="#" data-i18n="footer-politica">Política de Privacidade</a>
                 <span>|</span>
-                <a href="#">Termos de Uso</a>
+                <a href="#" data-i18n="footer-termos">Termos de Uso</a>
             </div>
         </div>
     </footer>
@@ -117,5 +151,6 @@
                 
 
     <script src="Submenu.js"></script>
+    <script src="../tema-idioma.js"></script>
 </body>
 </html>

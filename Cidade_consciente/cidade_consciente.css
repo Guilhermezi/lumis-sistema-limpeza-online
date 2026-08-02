@@ -3,40 +3,6 @@
    Depende de: ../style.css (Design System global)
    ============================================ */
 
-/* Hero Section */
-.hero-cidade {
-    background: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
-    padding: 8rem 2rem 4rem;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-cidade::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(80,191,135,0.1) 0%, transparent 70%);
-    animation: float 6s ease-in-out infinite;
-}
-
-.hero-cidade::after {
-    content: '';
-    position: absolute;
-    bottom: -50%;
-    left: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(61,190,169,0.1) 0%, transparent 70%);
-    animation: float 8s ease-in-out infinite reverse;
-}
-
 /* Project Section */
 .projeto-section {
     padding: 4rem 2rem;
@@ -518,4 +484,22 @@
         gap: 1.5rem;
         padding: 1.5rem;
     }
+}
+
+/* ==== Lumis dark mode ==== */
+[data-theme="dark"] .status-badge {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--cor-texto);
+}
+[data-theme="dark"] .sistema-info {
+    color: var(--cor-texto-secundario);
+}
+[data-theme="dark"] .dot {
+    background: #4a4a4a;
+}
+
+/* ==== Lumis dark mode ==== */
+[data-theme="dark"] .projeto-section,
+[data-theme="dark"] .parceiros-section {
+    background: var(--white);
 }

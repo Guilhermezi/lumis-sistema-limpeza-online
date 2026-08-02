@@ -3,183 +3,222 @@
    Depende de: ../style.css (Design System global)
    ============================================ */
 
-/*========== Cadastro ===========*/
-
-body{
-    background-color: var(--cor-primaria);
-    background: linear-gradient(to right, var(--cor-fundo), var(--cor-primaria));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
+.auth-page {
+    overflow-x: hidden;
 }
 
-.container{
-    background-color: var(--cor-fundo);
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+.section-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/*================= SECAO AUTH =================*/
+.auth-section {
+    padding: 2rem 0 4rem;
+    background: var(--cor-fundo);
+}
+
+/*========= Card principal =========*/
+.auth-card {
+    background-color: var(--white);
+    border-radius: 28px;
+    box-shadow: var(--shadow-lg);
     position: relative;
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 520px;
+    margin: 0 auto;
 }
 
-.container p{
-    font-size: 18px;
-    line-height: 20px;
-    letter-spacing: 0.3px;
-    margin: 20px 0;
-}
-
-.container span{
-    font-size: 16px;
-}
-
-.container a{
+.auth-card a {
     color: var(--cor-texto);
-    font-size: 15px;
+    font-size: 14px;
     text-decoration: none;
-    margin: 15px 0 10px;
 }
 
-.container button{
-    background-color: var(--cor-terciaria);
-    color: var(--cor-botao-texto);
-    font-size: 12px;
-    padding: 10px 45px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-.container button:hover{
-    background-color: var(--cor-botao-terciario-hover);
-    color: var(--cor-botao-texto-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.container button.hidden{
-    background-color: transparent;
-    border-color: var(--cor-fundo);
-}
-
-a {
-    color: var(--cor-primaria);
-    
-}
-
-a:hover {
-    font-weight: bold;
-}
-
-.container form{
-    background-color: var(--cor-fundo);
+/*========= Formularios =========*/
+.auth-card form {
+    background-color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 40px;
+    padding: 0 2.5rem;
     height: 100%;
 }
 
-.container input{
-    background-color: #eee;
-    border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
-    border-radius: 8px;
-    width: 100%;
-    outline: none;
-}
-
-.form-container{
+.form-container {
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
 }
 
-.sign-in{
+.sign-in {
     left: 0;
     width: 50%;
     z-index: 2;
 }
 
-.container.active .sign-in{
+.auth-card.active .sign-in {
     transform: translateX(100%);
 }
 
-.sign-up{
+.sign-up {
     left: 0;
     width: 50%;
     opacity: 0;
     z-index: 1;
 }
 
-.container.active .sign-up{
+.auth-card.active .sign-up {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
-    animation: move 0.6s;
+    animation: authMove 0.6s;
 }
 
-@keyframes move{
-    0%, 49.99%{
+@keyframes authMove {
+    0%, 49.99% {
         opacity: 0;
         z-index: 1;
     }
-    50%, 100%{
+    50%, 100% {
         opacity: 1;
         z-index: 5;
     }
 }
 
+.auth-card h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+/*========= Campos =========*/
+.auth-field {
+    width: 100%;
+    margin-bottom: 0.9rem;
+}
+
+.auth-field label {
+    display: block;
+    font-family: var(--h1-font);
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 0.35rem;
+}
+
+.auth-field input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: var(--radius-sm);
+    font-family: var(--p-font);
+    font-size: 0.95rem;
+    color: var(--cor-texto);
+    background: var(--white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.auth-field input::placeholder {
+    color: #aaa;
+}
+
+.auth-field input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(80, 191, 135, 0.15);
+}
+
+.auth-forgot {
+    align-self: flex-end;
+    font-size: 0.85rem;
+    color: var(--cor-terciaria) !important;
+    margin: 0.25rem 0 0.75rem;
+}
+
+.auth-forgot:hover {
+    text-decoration: underline;
+}
+
+.auth-submit {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-family: var(--h1-font);
+    font-weight: 600;
+}
+
+/*========= Social login =========*/
+.social-login {
+    width: 100%;
+    margin: 0.75rem 0;
+}
+
 .social-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 0.6rem;
 }
 
 .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    cursor: pointer;
+    font-size: 1.15rem;
+    transition: all 0.3s ease;
 }
 
-        .social-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
+.social-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
 
-        .social-btn.google {
-            color: #DB4437;
-        }
+.social-btn.google {
+    color: #DB4437;
+}
 
-        .social-btn.facebook {
-            color: #4267B2;
-        }
+.social-btn.facebook {
+    color: #4267B2;
+}
 
-        .social-btn.apple {
-            color: #000;
-        }
+.social-btn.apple {
+    color: #000;
+}
 
-.toggle-container{
+.social-btn.linkedin {
+    color: #0A66C2;
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    color: var(--cor-texto-secundario);
+    font-size: 0.85rem;
+    margin: 0.75rem 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/*========= Toggle (painel animado) =========*/
+.toggle-container {
     position: absolute;
     top: 0;
     left: 50%;
@@ -187,33 +226,31 @@ a:hover {
     height: 100%;
     overflow: hidden;
     transition: all 0.6s ease-in-out;
-    border-radius: 150px 0 0 100px;
+    border-radius: 140px 0 0 100px;
     z-index: 1000;
 }
 
-.container.active .toggle-container{
+.auth-card.active .toggle-container {
     transform: translateX(-100%);
-    border-radius: 0 150px 100px 0;
+    border-radius: 0 140px 100px 0;
 }
 
-.toggle{
-    background-color: var(--cor-primaria);
-    height: 100%;
+.toggle {
     background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
-    color: var(--cor-fundo);
+    height: 100%;
+    color: var(--white);
     position: relative;
     left: -100%;
-    height: 100%;
     width: 200%;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
 }
 
-.container.active .toggle{
+.auth-card.active .toggle {
     transform: translateX(50%);
 }
 
-.toggle-panel{
+.toggle-panel {
     position: absolute;
     width: 50%;
     height: 100%;
@@ -221,383 +258,175 @@ a:hover {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 30px;
+    padding: 0 2rem;
     text-align: center;
     top: 0;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
 }
 
-.toggle-left{
+.toggle-panel h2,
+.toggle-panel p {
+    color: var(--white);
+}
+
+.toggle-panel h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.toggle-panel p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0.75rem 0 1.5rem;
+}
+
+.toggle-panel a {
+    color: var(--white);
+    text-decoration: underline;
+    font-size: 0.85rem;
+    margin-top: 1.25rem;
+}
+
+.toggle-panel a:hover {
+    color: var(--cor-botao-texto-hover);
+}
+
+.toggle-left {
     transform: translateX(-200%);
 }
 
-.container.active .toggle-left{
+.auth-card.active .toggle-left {
     transform: translateX(0);
 }
 
-.toggle-right{
+.toggle-right {
     right: 0;
     transform: translateX(0);
 }
 
-.container.active .toggle-right{
+.auth-card.active .toggle-right {
     transform: translateX(200%);
 }
 
-/* ============ RESPONSIVIDADE PARA O FORMULÁRIO ============ */
-        @media (max-width: 868px) {
-            .container {
-                width: 90%;
-                height: auto;
-                min-height: 500px;
-            }
-            
-            .toggle-container {
-                display: none;
-            }
-            
-            .sign-in, .sign-up {
-                width: 100%;
-            }
-            
-            .container.active .sign-in {
-                transform: translateX(0);
-                opacity: 0;
-                pointer-events: none;
-            }
-            
-            .container.active .sign-up {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            
-            .form-container {
-                width: 100%;
-            }
-            
-            /* Alternância entre login e cadastro em mobile */
-            .mobile-toggle {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
-            }
-            
-            .mobile-toggle button {
-                background: none;
-                border: none;
-                color: var(--cor-primaria);
-                font-weight: bold;
-                cursor: pointer;
-                text-decoration: underline;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                border-radius: 20px;
-            }
-            
-            .container form {
-                padding: 0 20px;
-            }
-            
-            .social-buttons {
-                flex-wrap: wrap;
-            }
-            
-            .social-btn {
-                width: 40px;
-                height: 40px;
-            }
-        }
-
-        /* Para dispositivos muito pequenos */
-        @media (max-width: 360px) {
-            .container {
-                width: 95%;
-            }
-            
-            .container h1 {
-                font-size: 1.5rem;
-            }
-            
-            .container p {
-                font-size: 14px;
-            }
-        }
-
-        /* Estilo para o toggle mobile (será mostrado apenas em mobile) */
-        .mobile-toggle {
-            display: none;
-            justify-content: center;
-            gap: 15px;
-            padding: 10px;
-            background-color: var(--cor-fundo);
-            border-radius: 20px
-        }
-        
-        @media (max-width: 868px) {
-            .mobile-toggle {  
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-/*==Formulario de Cadastro==*/
-.icon-cadastro {
-    text-align: center;
-    font-size: 3.5rem;
-    color: var(--cor-primaria);
-}
-
-.texto-secundario {
-    font-family: var(--p-font);
-    color: var(--cor-texto-secundario);
-    text-align: center;
-}
-
-.cadastro-section {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: var(--cor-fundo);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.cadastro-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.Cadastrotitle {
-    font-family: var(--h2-font);
-    font-size: 1.8rem;
-    color: var(--cor-primaria);
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.cadastroForm label {
-    font-family: var(--p-font);
-    font-size: 1rem;
-    color: var(--cor-texto);
-    margin-bottom: 5px;
-}
-
-.grupo-formulario {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-#nome, #email, #senha, #confirmarSenha {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-family: var(--p-font);
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-
-button[type="submit"] {
-    width: 100%;
-    background-color: var(--cor-terciaria);
-    color: var(--cor-botao-texto);
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
+.toggle-btn {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius-sm);
     font-family: var(--h1-font);
-    font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
 }
 
-button[type="submit"]:hover {
-    background-color: var(--cor-botao-terciario-hover);
-    transform: translateY(-2px);
-}
-
-p a {
+.toggle-btn:hover {
+    background: var(--white);
     color: var(--cor-primaria);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
 }
 
-/*==Formulario de Cadastro Mobile==*/
-        .mobile-cadastro-section {
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: var(--cor-fundo);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: none; /* Oculto por padrão */
-        }
+/*========= Toggle mobile (abas) =========*/
+.auth-mobile-toggle {
+    display: none;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 460px;
+    margin: 1.5rem auto 0;
+}
 
-        .icon-cadastro {
-            text-align: center;
-            font-size: 3.5rem;
-            color: var(--cor-primaria);
-        }
+.auth-tab {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--cor-primaria);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--cor-primaria);
+    font-family: var(--h1-font);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-        .texto-secundario {
-            font-family: var(--p-font);
-            color: var(--cor-texto-secundario);
-            text-align: center;
-        }
+.auth-tab.active {
+    background: var(--cor-primaria);
+    color: var(--white);
+}
 
-        .cadastro-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 80px;
-        }
+/*========= Termos =========*/
+.auth-terms {
+    text-align: center;
+    max-width: 460px;
+    margin: 1.5rem auto 0;
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.6;
+}
 
-        .Cadastrotitle {
-            font-family: var(--h2-font);
-            font-size: 1.8rem;
-            color: var(--cor-primaria);
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.auth-terms a {
+    color: var(--cor-primaria);
+    font-weight: 600;
+}
 
-        .cadastroForm label {
-            font-family: var(--p-font);
-            font-size: 1rem;
-            color: var(--cor-texto);
-            margin-bottom: 5px;
-        }
+.auth-terms a:hover {
+    text-decoration: underline;
+}
 
-        .grupo-formulario {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+/*================= Responsividade =================*/
+@media (max-width: 868px) {
+    .auth-card {
+        width: 100%;
+        max-width: 460px;
+        min-height: 0;
+        border-radius: var(--radius-lg);
+    }
 
-        #nome, #email, #senha, #confirmarSenha {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-family: var(--p-font);
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
+    .toggle-container {
+        display: none;
+    }
 
-        button[type="submit"] {
-            width: 100%;
-            background-color: var(--cor-terciaria);
-            color: var(--cor-botao-texto);
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-family: var(--h1-font);
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 20px;
-        }
+    .auth-mobile-toggle {
+        display: flex;
+    }
 
-        button[type="submit"]:hover {
-            background-color: var(--cor-botao-terciario-hover);
-            transform: translateY(-2px);
-        }
+    .form-container {
+        position: static;
+        width: 100%;
+        height: auto;
+        display: none;
+    }
 
-        p a {
-            color: var(--cor-primaria);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
+    .form-container.sign-in {
+        display: block;
+    }
 
-        .ja-tem-conta {
-            text-align: center;
-            font-family: var(--p-font);
-            color: var(--cor-texto-secundario);
-            margin-top: 15px;
-        }
+    .auth-card.active .form-container.sign-in {
+        display: none;
+    }
 
-        .social-login {
-            margin: 20px 0;
-            text-align: center;
-        }
+    .auth-card.active .form-container.sign-up {
+        display: block;
+    }
 
-        .social-divider {
-            display: flex;
-            align-items: center;
-            margin: 20px 0;
-            color: var(--cor-texto-secundario);
-            font-size: 0.9rem;
-        }
+    .auth-card form {
+        height: auto;
+        padding: 2rem 1.5rem;
+    }
+}
 
-        .social-divider::before,
-        .social-divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background-color: #ddd;
-            margin: 0 10px;
-        }
+@media (max-width: 768px) {
+}
 
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
+@media (max-width: 480px) {
+    .auth-card form {
+        padding: 1.75rem 1.25rem;
+    }
 
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    .auth-mobile-toggle {
+        flex-direction: column;
+    }
+}
 
-        .social-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .social-btn.google {
-            color: #DB4437;
-        }
-
-        .social-btn.facebook {
-            color: #4267B2;
-        }
-
-        .social-btn.apple {
-            color: #000;
-        }
-        
-        .terms {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: var(--cor-texto-secundario);
-        }
-
-        /* Media query para mostrar o formulário mobile apenas em telas menores */
-        @media (max-width: 767px) {
-            .container {
-                display: none;
-            }
-            
-            .mobile-cadastro-section {
-                display: block;
-            }
-        }
+/* ==== Lumis dark mode ==== */

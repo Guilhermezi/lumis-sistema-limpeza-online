@@ -30,84 +30,6 @@
     font-size: 1.05rem;
 }
 
-/* ============ HERO ============ */
-.services-hero {
-    position: relative;
-    padding: 8rem 1.5rem 4rem;
-    text-align: center;
-    overflow: hidden;
-}
-
-.hero-bg {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #E8F5E8, var(--cor-fundo));
-    z-index: 0;
-}
-
-.hero-bg::before {
-    content: '';
-    position: absolute;
-    top: -30%;
-    right: -20%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(80,191,135,0.12) 0%, transparent 70%);
-    border-radius: 50%;
-}
-
-.hero-bg::after {
-    content: '';
-    position: absolute;
-    bottom: -20%;
-    left: -15%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(61,190,169,0.1) 0%, transparent 70%);
-    border-radius: 50%;
-}
-
-.services-hero .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 720px;
-    margin: 0 auto;
-}
-
-.hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: rgba(80, 191, 135, 0.1);
-    color: var(--cor-primaria);
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-    border: 1px solid rgba(80, 191, 135, 0.2);
-}
-
-.services-hero h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 1rem;
-}
-
-.services-hero h1 .highlight {
-    color: var(--cor-primaria);
-}
-
-.services-hero p {
-    color: var(--cor-texto-secundario);
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    max-width: 550px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 /* Search Box */
 .hero-search {
     max-width: 600px;
@@ -929,17 +851,6 @@
 
 /* ============ RESPONSIVE: MOBILE ============ */
 @media (max-width: 768px) {
-    .services-hero {
-        padding: 6rem 1rem 2.5rem;
-    }
-
-    .services-hero h1 {
-        font-size: 1.75rem;
-    }
-
-    .services-hero p {
-        font-size: 0.95rem;
-    }
 
     .search-box {
         flex-direction: column;
@@ -1057,4 +968,12 @@
 .cta-content.revealed {
     opacity: 1;
     transform: translateY(0);
+}
+/* ==== Lumis dark mode ==== */
+[data-theme="dark"] .card-fav:hover {
+    background: #3a2a2a;
+}
+
+[data-theme="dark"] .category-card {
+    color: var(--cor-texto);
 }

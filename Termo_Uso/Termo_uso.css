@@ -7,8 +7,23 @@
 header {
     background-color: var(--cor-primaria);
     color: var(--cor-botao-texto);
-    padding: 1.5rem;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    position: static;
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header h1 {
+    margin: 0;
     text-align: center;
+    flex: 1 1 auto;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
 }
 
 /* Layout da pagina */
@@ -67,4 +82,21 @@ a:hover {
 
 .footer-link {
     color: var(--cor-botao-texto);
+}
+
+[data-theme="dark"] section {
+    background-color: var(--white);
+}
+
+[data-theme="dark"] header {
+    background-color: #1f2f3f;
+    color: var(--cor-texto);
+}
+
+[data-theme="dark"] footer {
+    background-color: #1f2f3f;
+    color: var(--cor-texto);
+}
+[data-theme="dark"] .footer-link {
+    color: var(--cor-texto-secundario);
 }
