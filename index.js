@@ -1,13 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
+﻿document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('alternarMenu');
             const menu = document.getElementById('menu');
             
             menuToggle.addEventListener('click', function() {
-                this.classList.toggle('open');
-                menu.classList.toggle('active');
+                this.classList.toggle('aberto');
+                menu.classList.toggle('ativo');
                 
                 // Impede a rolagem da página quando o menu está aberto
-                if (menu.classList.contains('active')) {
+                if (menu.classList.contains('ativo')) {
                     document.body.style.overflow = 'hidden';
                 } else {
                     document.body.style.overflow = 'auto';
@@ -17,17 +17,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Fechar o menu ao clicar em um item (útil para mobile)
             document.querySelectorAll('#menu a').forEach(item => {
                 item.addEventListener('click', () => {
-                    menu.classList.remove('active');
-                    menuToggle.classList.remove('open');
+                    menu.classList.remove('ativo');
+                    menuToggle.classList.remove('aberto');
                     document.body.style.overflow = 'auto';
                 });
             });
             
             // Fechar o menu ao clicar fora dele
             document.addEventListener('click', function(event) {
-                if (!menu.contains(event.target) && !menuToggle.contains(event.target) && menu.classList.contains('active')) {
-                    menu.classList.remove('active');
-                    menuToggle.classList.remove('open');
+                if (!menu.contains(event.target) && !menuToggle.contains(event.target) && menu.classList.contains('ativo')) {
+                    menu.classList.remove('ativo');
+                    menuToggle.classList.remove('aberto');
                     document.body.style.overflow = 'auto';
                 }
             });
@@ -40,11 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
      
  // ====================== Carrossel da Seção de Comentários ======================
 document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.querySelector('.carousel');
-    const items = document.querySelectorAll('.carousel-item');
-    const dots = document.querySelectorAll('.dot');
-    const nextBtn = document.querySelector('.next');
-    const prevBtn = document.querySelector('.prev');
+    const carousel = document.querySelector('.carrossel-comentarios-faixa');
+    const items = document.querySelectorAll('.carrossel-comentario');
+    const dots = document.querySelectorAll('.ponto');
+    const nextBtn = document.querySelector('.proximo');
+    const prevBtn = document.querySelector('.anterior');
     
     let currentIndex = 0;
     let autoPlayInterval;
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Atualiza os indicadores (dots)
         dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
+            dot.classList.toggle('ativo', index === currentIndex);
         });
     }
 

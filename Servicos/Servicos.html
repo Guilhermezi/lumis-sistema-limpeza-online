@@ -1,493 +1,828 @@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script>
+        try {
+            var temaSalvo = localStorage.getItem('tema');
+            document.documentElement.setAttribute('data-theme',
+                temaSalvo || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
 
-    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="Servicos.css">
+    <script src="Servicos.js" defer></script>
 
-    <!-- Link para o RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <title>Lumis</title>
+    <title>Lumis - Serviços</title>
 </head>
-<body>
+<body data-page="servicos">
+
     <header>
-        <div id="logo-headers">
+        <div id="logo-cabecalhos">
             <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
         </div>
-
         <nav>
-            <!-- Botão hamburguer -->
-            <div class="menu-toggle" id="menuToggle">
+            <div class="alternar-menu" id="alternarMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-
             <ul id="menu">
-                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
-                <li class="has-submenu">
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> <span data-i18n="nav-inicio">Início</span></a></li>
+                <li class="tem-submenu">
                     <a href="../Sobre/Sobre.html">
-                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                        <i class="ri-information-line"></i> <span data-i18n="nav-sobre">Sobre</span> <i class="ri-arrow-down-s-line"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                        <li><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
                     </ul>
                 </li>
-                <!-- Item adicional para mobile -->
-                <li class="mobile-only-item"><a href="/Sobre/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
-                <li><a href="#"><i class="ri-tools-line"></i> Serviços</a></li>
-                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
-                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
-                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
-                <li><a class="bntCadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> Login</a></li>
+                <li class="item-somente-mobile"><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
+                <li><a href="#"><i class="ri-tools-line"></i> <span data-i18n="nav-servicos">Serviços</span></a></li>
+                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> <span data-i18n="nav-planos">Planos</span></a></li>
+                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> <span data-i18n="nav-contato">Contato</span></a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> <span data-i18n="nav-ajuda">Ajuda</span></a></li>
+                <li><a class="botao-cadastro" href="../Cadastro/Cadastro.html"><i class="ri-login-box-line"></i> <span data-i18n="nav-login">Login</span></a></li>
             </ul>
+        
+            <div class="controles-nav">
+                <button class="botao-tema" id="alternarTema" aria-label="Alternar tema">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+
+                <div class="seletor-idioma">
+                    <button class="botao-idioma" id="alternarIdioma" aria-label="Selecionar idioma">
+                        &#127479;&#127479;
+                    </button>
+                    <div class="dropdown-idioma" id="dropdownIdioma">
+                        <a data-lang="pt" class="opcao-idioma ativo">
+                            <span class="bandeira">&#127463;&#127479;</span> <span data-i18n="lang-portugues">Português</span>
+                        </a>
+                        <a data-lang="en" class="opcao-idioma">
+                            <span class="bandeira">&#127482;&#127480;</span> <span data-i18n="lang-ingles">English</span>
+                        </a>
+                        <a data-lang="es" class="opcao-idioma">
+                            <span class="bandeira">&#127466;&#127480;</span> <span data-i18n="lang-espanhol">Español</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </nav>
-    <script src="Servicos.js"></script>   
     </header>
-<!-- ==========================================================Residencial ou comercial============================= -->
- <section class="tipo_servico">
-    <div id="button1"class="residencial">
-        <h1><i class="ri-home-9-fill"></i>Limpeza Residencial</h1>
-        <h2 id="button1"><i class="ri-arrow-right-long-fill"></i></h2>
-        <div class="residencil_img">
-            <img src="../IMG/mulher_limpandoV2.png" alt="pessoa limpando uma casa">
-            <img id="" src="../IMG/mulher_sorrindoV2.png" alt="pessoa sorrindo">
-        </div>
-    </div>
-    <div id="button2" class="comercial">
-      <h1><i class="ri-building-fill"></i>Limpeza Comercial</h1>
-      <h2 id="button2" ><i class="ri-arrow-left-long-fill"></i></h2>
-      <div class="comercial_img">
-        <img src="../IMG/Funcionário_limpando.jpg" alt="pessoa limpando uma loja">
-        <img id="" src="../IMG/Funcionário_sorrindo.jpg" alt="pessoa sorrindo">
-      </div>
-    </div>
-    
-    <script src=""></script>
- </section>
- <!--==========================================================tipo de limpeza e outras opções  -->
- <section class="serviço">
-    <div id="oculto1" class="tipo_residencial">
-        <div class="titulo1">
-            <h1 id=""><i class="ri-home-9-fill"></i> Limpeza Residencial</h1>
-        </div>
-        <div class="card">
-            <h1> Escolha um serviço</h1>
-        <div class="botao">
-            <a href=""><i class="ri-sparkling-2-line"></i>Limpeza Padrão</a>
-            <a id="button3" href=""><i class="ri-delete-bin-5-line"></i>Limpeza Pesada</a>
-        </div>
-        <div id="oculto3" class="Tipo_Pesado">
-        <h1> Qual tipo de Limpeza Pesada</h1>
-        <a href="">Rotina</a>
-        <a href="">Pré-mudança</a>
-        <a href="">Pós-Obra</a>
-        </div>
-        <div class="Tipo_Imovel">
-            <label class="edit" for="servico">Tipo do imóvel:</label>
-        <select id="servico" name="servico">
-        <option value="casa">Casa</option>
-        <option value="casa_movel">Casa Móvel</option>
-        <option value="apartamento">Apartamento</option>
-        <option value="kitnets">Kitnets</option>
-        <option value="studios">Lofts e Studios</option>
-        </select>
 
-         <div class="Tipo_Imovel">
-            <label class="edit" for="servicoad">Adicionais</label>
-        <select id="servicoad" name="servicoad">
-        <option value="geladeira">Interior da geladeira</option>
-        <option value="janelas">Interior de janelas</option>
-        <option value="cozinha">Int. de armário de cozinha</option>
-        <option value="estofado">Aspirar tapete ou estofado</option>
-        <option value="externa">Área externa (até 20m²)</option>
-        <option value="vestuário">Organização de vestuário</option>
-        <option value="Lavar_roupas">Lavar roupas</option>
-        </select>
-        <p>Selecione opções extras para personalizar o serviço conforme sua necessidade.</p>
-        </div>
-        </div>
- <div class="arrume">
-    <div class="alinhamento_comodos">
-        <div class="comodos">
-            <h3>Cômodos</h3>
-             <!-- Banheiros -->
-  <div class="counter" data-label="banheiro">
-    <a href="#" class="btn-circle minus">−</a>
-    <div class="info">
-      <div class="value">1</div>
-      <div class="label">banheiro</div>
-    </div>
-    <a href="#" class="btn-circle plus">+</a>
-  </div>
+    <main class="servicos-pagina">
 
-  <!-- Quartos -->
-  <div class="counter" data-label="quarto">
-    <a href="#" class="btn-circle minus">−</a>
-    <div class="info">
-      <div class="value">2</div>
-      <div class="label">quartos</div>
-    </div>
-    <a href="#" class="btn-circle plus">+</a>
-  </div>
-   <p><i class="ri-checkbox-fill"></i>Cozinha e sala já incluso</p>
-   <ul>
-    <li>
-        <p>Para lavabos, adicione banheiros</p>
-    </li>
-    <li>
-        <p>Para demais cômodos, adicione quartos</p>
-    </li>
-   </ul>
-   </div>
-    </div>
-   <div class="alinhamento_horario">
-        <div class="horario">
-        <h3>Ajuste de Horas</h3>
-        <p>Faça as alterações necessrias</p>
-        <div class="counter" data-label="hora">
-    <a href="#" class="btn-circle minus">−</a>
-    <div class="info">
-      <div class="value">4</div>
-      <div class="label">horas</div>
-    </div>
-    <a href="#" class="btn-circle plus">+</a>
-  </div>
-  </div>
-  </div>
-  </div>
-        </div>
-  <div id="button5"class="Proximo">
-    <a>Proximo</a>
-  </div>
-    </div>
-    </div>
-<!-- ====================================================================comercial======================= -->
-<!-- ====================================================================comercial======================= -->
-<div id="oculto2" class="tipo_comercial">
-    <div class="titulo1">
-        <h1><i class="ri-building-fill"></i>Limpeza Comercial</h1>
-    </div>
-
-    <div id="button8" class="checkbox0">
-        <div class="empresas_check">
-            <input type="checkbox" id="Empresa">
-            <label for="Empresa" class="checkbox-label0">Local com vários andares?</label>
-        </div>
-        <div id="oculto8" class="Formulario">
-            <h2>Entre em Contato Conosco</h2>
-            <p>Se a sua empresa ocupa vários andares, precisamos de um planejamento eficiente para garantir que cada espaço seja limpo e organizado. Nosso serviço oferece agilidade e profissionalismo, cuidando de todas as áreas sem interromper suas atividades.</p>
-            
-            <form action="#" method="post">
-                <label for="Nome">Nome:</label>
-                <input type="Nome" id="nome" name="nome" required>
-
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="Telefone">Telefone:</label>
-                <input type="Telefone" id="Telefone" name="Telefone" required>
-
-                <label for="CEP">CEP</label>
-                <input type="CEP" id="CEP" name="CEP" required>
-
-                <label for="endereco">Endereço</label>
-                <input type="endereço" id="endereço" name="endereço" required>
-
-                <label for="mensagem">Mensagem:</label>
-                <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
-
-                <button type="submit">Enviar</button>
-            </form>
-        </div>
-    </div>
-
-    <div id="oculto9" class="card">
-        <h1>Escolha um serviço</h1>
-        <div class="botao">
-            <a href=""><i class="ri-sparkling-2-line"></i>Limpeza Padrão</a>
-            <a id="button4" href=""><i class="ri-delete-bin-5-line"></i>Limpeza Pesada</a>
-        </div>
-        <div id="oculto4" class="Tipo_Pesado2">
-            <h1>Qual tipo de Limpeza Pesada</h1>
-            <a href="">Rotina</a>
-            <a href="">Pré-mudança</a>
-            <a href="">Pós-Obra</a>
-        </div>
-
-        <div class="Tipo_Imovel">
-            <label class="edit" for="servico">Tipos de estabelecimento:</label>
-            <select id="servico" name="servico">
-                <option value="salao">Salão</option>
-                <option value="alimento">Alimentação e Bebidas</option>
-                <option value="moda">Moda e Acessórios</option>
-                <option value="Específicos">Produtos Específicos</option>
-                <option value="Especializados">Serviços Especializados</option>
-            </select>
-        </div>
-
-        <div class="Tipo_Imovel">
-            <label class="edit" for="servicoad">Adicionais</label>
-            <select id="servicoad" name="servicoad">
-                <option value="geladeira">Interior da geladeira</option>
-                <option value="janelas">Interior de janelas</option>
-                <option value="cozinha">Int. de armário de cozinha</option>
-                <option value="estofado">Aspirar tapete ou estofado</option>
-                <option value="externa">Área externa (até 20m²)</option>
-                <option value="vestuário">Organização de vestuário</option>
-                <option value="Lavar_roupas">Lavar roupas</option>
-            </select>
-            <p>Selecione opções extras para personalizar o serviço conforme sua necessidade.</p>
-        </div>
-
-        <!-- 🔹 Contadores adicionados -->
-        <div class="arrume">
-            <div class="alinhamento_comodos">
-                <div class="comodos">
-                    <h3>Cômodos</h3>
-                    <!-- Banheiros -->
-                    <div class="counter" data-label="banheiro">
-                        <a href="#" class="btn-circle minus">−</a>
-                        <div class="info">
-                            <div class="value">1</div>
-                            <div class="label">banheiro</div>
-                        </div>
-                        <a href="#" class="btn-circle plus">+</a>
+        <!-- ========== HERO ========== -->
+        <section class="servicos-hero">
+            <div class="hero-fundo"></div>
+            <div class="hero-conteudo">
+                <span class="hero-tag"><i class="ri-leaf-line"></i> <span data-i18n="servicos-hero-tag">Limpeza sustentável e profissional</span></span>
+                <h1 data-i18n="servicos-hero-titulo">Encontre o serviço de limpeza <span class="highlight">perfeito</span> para você</h1>
+                <p data-i18n="servicos-hero-sub">Profissionais verificados, avaliação garantida e resultados impecáveis. Agende em menos de 2 minutos.</p>
+                <div class="hero-busca">
+                    <div class="caixa-busca">
+                        <i class="ri-search-line"></i>
+                        <input type="text" placeholder="Buscar serviço, tipo de limpeza ou profissional..." id="campoBusca" data-i18n-placeholder="servicos-busca-placeholder">
+                        <button class="botao-busca" data-i18n="servicos-buscar">Buscar</button>
                     </div>
-
-                    <!-- Quartos -->
-                    <div class="counter" data-label="quarto">
-                        <a href="#" class="btn-circle minus">−</a>
-                        <div class="info">
-                            <div class="value">1</div>
-                            <div class="label">quarto</div>
-                        </div>
-                        <a href="#" class="btn-circle plus">+</a>
+                    <div class="tags-busca">
+                        <span class="tag-busca" data-filtro="residencial" data-i18n="servicos-tag-residencial">Residencial</span>
+                        <span class="tag-busca" data-filtro="comercial" data-i18n="servicos-tag-comercial">Comercial</span>
+                        <span class="tag-busca" data-filtro="pos-obra" data-i18n="servicos-tag-pos-obra">Pós-obra</span>
+                        <span class="tag-busca" data-filtro="estofados" data-i18n="servicos-tag-estofados">Estofados</span>
+                        <span class="tag-busca" data-filtro="vidros" data-i18n="servicos-tag-vidros">Vidros</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="alinhamento_horario">
-                <div class="horario">
-                    <h3>Ajuste de Horas</h3>
-                    <p>Faça as alterações necessárias</p>
-                    <div class="counter" data-label="hora">
-                        <a href="#" class="btn-circle minus">−</a>
-                        <div class="info">
-                            <div class="value">4</div>
-                            <div class="label">horas</div>
+        <!-- ========== STATS TRUST ========== -->
+        <section class="trust-bar">
+            <div class="trust-item">
+                <span class="trust-number" data-alvo="1200">0</span>
+                <span class="trust-label" data-i18n="servicos-trust-profissionais">Profissionais</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+                <span class="trust-number" data-alvo="15000">0</span>
+                <span class="trust-label" data-i18n="servicos-trust-servicos">Serviços realizados</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+                <span class="trust-number" data-alvo="4800">0</span>
+                <span class="trust-label" data-i18n="servicos-trust-avaliacoes">Avaliações 5 estrelas</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+                <span class="trust-number" data-alvo="98">0</span>
+                <span class="trust-label" data-i18n="servicos-trust-satisfacao">% Satisfação</span>
+            </div>
+        </section>
+
+        <!-- ========== CATEGORIES ========== -->
+        <section class="secao-categorias">
+            <div class="container-secao">
+                <div class="cabecalho-secao">
+                    <h2 data-i18n="servicos-categorias">Categorias</h2>
+                    <p data-i18n="servicos-categorias-sub">Escolha o tipo de serviço que melhor atende sua necessidade</p>
+                </div>
+                <div class="grade-categorias">
+                    <a href="#servicos" class="cartao-categoria" data-categoria="residencial">
+                        <div class="icone-categoria">
+                            <i class="ri-home-9-line"></i>
                         </div>
-                        <a href="#" class="btn-circle plus">+</a>
-                    </div>
+                        <h3 data-i18n="servicos-cat-residencial">Residencial</h3>
+                        <p data-i18n="servicos-cat-residencial-desc">Casas, apartamentos e kitnets</p>
+                    </a>
+                    <a href="#servicos" class="cartao-categoria" data-categoria="comercial">
+                        <div class="icone-categoria">
+                            <i class="ri-building-2-line"></i>
+                        </div>
+                        <h3 data-i18n="servicos-cat-comercial">Comercial</h3>
+                        <p data-i18n="servicos-cat-comercial-desc">Escritórios e lojas</p>
+                    </a>
+                    <a href="#servicos" class="cartao-categoria" data-categoria="pos-obra">
+                        <div class="icone-categoria">
+                            <i class="ri-hammer-line"></i>
+                        </div>
+                        <h3 data-i18n="servicos-cat-pos-obra">Pós-Obra</h3>
+                        <p data-i18n="servicos-cat-pos-obra-desc">Após reformas e construção</p>
+                    </a>
+                    <a href="#servicos" class="cartao-categoria" data-categoria="estofados">
+                        <div class="icone-categoria">
+                            <i class="ri-armchair-line"></i>
+                        </div>
+                        <h3 data-i18n="servicos-cat-estofados">Estofados</h3>
+                        <p data-i18n="servicos-cat-estofados-desc">Sofás, cadeiras e tapetes</p>
+                    </a>
+                    <a href="#servicos" class="cartao-categoria" data-categoria="vidros">
+                        <div class="icone-categoria">
+                            <i class="ri-window-line"></i>
+                        </div>
+                        <h3 data-i18n="servicos-cat-vidros">Vidros</h3>
+                        <p data-i18n="servicos-cat-vidros-desc">Janelas e fachadas de vidro</p>
+                    </a>
+                    <a href="#servicos" class="cartao-categoria" data-categoria="carros">
+                        <div class="icone-categoria">
+                            <i class="ri-car-line"></i>
+                        </div>
+                        <h3 data-i18n="servicos-cat-carros">Carros</h3>
+                        <p data-i18n="servicos-cat-carros-desc">Limpeza interna e externa</p>
+                    </a>
                 </div>
             </div>
-        </div>
-        <!-- 🔹 Fim dos contadores -->
+        </section>
 
-        <div id="button6" class="Proximo">
-            <a>Próximo</a>
-        </div>
-    </div>
-</div>
-<script src="botoes2.js"></script>
-<script src="botoes.js"></script>
-<script src="Contagem.js"></script>
-<script src="residencial_comercial.js"></script>
- </section>
- <!--=========================================================agendamento========================================  -->
- <section id="oculto5" class="agendamento">
- <div class="container">
-        <div class="Agendamento">
-            <div class="card_agenda">
-                <div class="Tipo_Imovel">
-            <label class="edit" for="agendamento">Agendamento</label>
-        <select id="agendamento" name="agendamento">
-        <option value="diarias">Diarias</option>
-        <option value="Semanal">Semanal</option>
-        <option value="quinzena">toda quinzena</option>
-        <select name="" id=""></select>
-                <div class="calendario">
-                    <div class="calendar-container">
-                        <div class="calendar-header">
-                            <h1 id="current-month">Dezembro 2023</h1>
-                            <div class="nav-buttons">
-                                <button id="prev-month">&lt;</button>
-                                <button id="today-btn">Hoje</button>
-                                <button id="next-month">&gt;</button>
+        <!-- ========== SERVICES + FILTERS ========== -->
+        <section class="servicos-secao" id="servicos">
+            <div class="container-secao">
+                <div class="servicos-layout">
+
+                    <!-- Filters Sidebar -->
+                    <aside class="filtros-lateral">
+                        <div class="filtros-cabecalho">
+                            <h3><i class="ri-filter-3-line"></i> <span data-i18n="servicos-filtros">Filtros</span></h3>
+                            <button class="filtros-limpar" id="limparFiltros" data-i18n="servicos-limpar-tudo">Limpar tudo</button>
+                        </div>
+
+                        <div class="grupo-filtro">
+                            <h4 data-i18n="servicos-categoria">Categoria</h4>
+                            <div class="opcoes-filtro">
+                                <label class="filtro-check">
+                                    <input type="checkbox" name="category" value="residencial" checked>
+                                    <span class="marca-verificacao"></span>
+                                    <span data-i18n="servicos-filter-residencial">Residencial</span>
+                                </label>
+                                <label class="filtro-check">
+                                    <input type="checkbox" name="category" value="comercial">
+                                    <span class="marca-verificacao"></span>
+                                    <span data-i18n="servicos-filter-comercial">Comercial</span>
+                                </label>
+                                <label class="filtro-check">
+                                    <input type="checkbox" name="category" value="pos-obra">
+                                    <span class="marca-verificacao"></span>
+                                    <span data-i18n="servicos-filter-pos-obra">Pós-Obra</span>
+                                </label>
+                                <label class="filtro-check">
+                                    <input type="checkbox" name="category" value="estofados">
+                                    <span class="marca-verificacao"></span>
+                                    <span data-i18n="servicos-filter-estofados">Estofados</span>
+                                </label>
+                                <label class="filtro-check">
+                                    <input type="checkbox" name="category" value="vidros">
+                                    <span class="marca-verificacao"></span>
+                                    <span data-i18n="servicos-filter-vidros">Vidros</span>
+                                </label>
                             </div>
                         </div>
-                        <div class="weekdays">
-                            <div>Dom</div>
-                            <div>Seg</div>
-                            <div>Ter</div>
-                            <div>Qua</div>
-                            <div>Qui</div>
-                            <div>Sex</div>
-                            <div>Sáb</div>
+
+                        <div class="grupo-filtro">
+                            <h4 data-i18n="servicos-cidade">Cidade</h4>
+                            <select class="filtro-selecao" id="filtroCidade">
+                                <option value="" data-i18n="servicos-cidades-todas">Todas as cidades</option>
+                                <option value="sao-paulo">São Paulo</option>
+                                <option value="campinas">Campinas</option>
+                                <option value="guarulhos">Guarulhos</option>
+                                <option value="santo-andre">Santo André</option>
+                            </select>
                         </div>
-                        <div class="days" id="calendar-days">
-                            </div>
-                        <div class="calendar-footer">
-                            <div class="event-indicator">
-                                <div class="event-dot"></div>
-                                <span>Dia com evento</span>
-                            </div>
-                            <div class="selected-date" id="selected-date">Nenhuma data selecionada</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="horas">
-                    <div class="container">
-                        <div class="time-display">
-                            <div class="selected-time" id="selected-time">12:00</div>
-                            </div>
-                        <button class="select-button" id="open-modal">Selecionar Horário</button>
-                    </div>
-                    <div class="modal" id="time-modal">
-                        <div class="modal-content">
-                            <button class="close-button" id="close-modal">&times;</button>
-                            <h2 class="modal-title">Selecionar Horário</h2>
-                            <div class="time-inputs">
-                                <div class="time-input">
-                                    <label for="modal-hours">Horas</label>
-                                    <input type="number" id="modal-hours" min="0" max="23" value="12">
-                                </div>
-                                <div class="time-input">
-                                    <label for="modal-minutes">Minutos</label>
-                                    <input type="number" id="modal-minutes" min="0" max="59" value="0">
+
+                        <div class="grupo-filtro">
+                            <h4 data-i18n="servicos-faixa-preco">Faixa de preço</h4>
+                            <div class="faixa-preco">
+                                <input type="range" min="50" max="500" value="500" class="controle-faixa" id="faixaPreco">
+                                <div class="rotulos-preco">
+                                    <span>R$ 50</span>
+                                    <span id="valorPreco">R$ 500</span>
                                 </div>
                             </div>
-                            <div class="modal-buttons">
-                                <button class="modal-button cancel-button" id="cancel-modal">Cancelar</button>
-                                <button class="modal-button confirm-button" id="confirm-time">Confirmar</button>
+                        </div>
+
+                        <div class="grupo-filtro">
+                            <h4 data-i18n="servicos-avaliacao-minima">Avaliação mínima</h4>
+                            <div class="filtro-avaliacao">
+                                <button class="botao-avaliacao ativo" data-avaliacao="0" data-i18n="servicos-avaliacao-todas">Todas</button>
+                                <button class="botao-avaliacao" data-avaliacao="4">
+                                    <i class="ri-star-fill"></i> 4+
+                                </button>
+                                <button class="botao-avaliacao" data-avaliacao="4.5">
+                                    <i class="ri-star-fill"></i> 4.5+
+                                </button>
+                                <button class="botao-avaliacao" data-avaliacao="4.8">
+                                    <i class="ri-star-fill"></i> 4.8+
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grupo-filtro">
+                            <h4 data-i18n="servicos-disponibilidade">Disponibilidade</h4>
+                            <div class="opcoes-filtro">
+                                <label class="filtro-check">
+                                    <input type="checkbox" name="availability" value="hoje">
+                                    <span class="marca-verificacao"></span>
+                                    <span data-i18n="servicos-disponibilidade-hoje">Disponível hoje</span>
+                                </label>
+                                <label class="filtro-check">
+                                    <input type="checkbox" name="availability" value="amanha">
+                                    <span class="marca-verificacao"></span>
+                                    <span data-i18n="servicos-disponibilidade-amanha">Amanhã</span>
+                                </label>
+                                <label class="filtro-check">
+                                    <input type="checkbox" name="availability" value="semana">
+                                    <span class="marca-verificacao"></span>
+                                    <span data-i18n="servicos-disponibilidade-semana">Esta semana</span>
+                                </label>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Services Grid -->
+                    <div class="servicos-principal">
+                        <div class="servicos-barra-topo">
+                            <div class="results-info">
+                                <span class="contagem-resultados" data-i18n="servicos-resultados-contagem">12 serviços encontrados</span>
+                            </div>
+                            <div class="controle-ordem">
+                                <label data-i18n="servicos-ordenar-por">Ordenar por:</label>
+                                <select id="selecaoOrdem">
+                                    <option value="relevancia" data-i18n="servicos-ord-relevancia">Relevância</option>
+                                    <option value="avaliacao" data-i18n="servicos-ord-melhor-avaliados">Melhor avaliados</option>
+                                    <option value="preco-menor" data-i18n="servicos-ord-menor-preco">Menor preço</option>
+                                    <option value="preco-maior" data-i18n="servicos-ord-maior-preco">Maior preço</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="servicos-grade" id="gradeServicos">
+
+                            <div class="cartao-servico" data-categoria="residencial" data-preco="120" data-avaliacao="4.9">
+                                <div class="cartao-imagem">
+                                    <img src="../IMG/Limpeza_padrao.png" alt="Limpeza Padrão Residencial">
+                                    <span class="cartao-selo" data-i18n="servicos-badge-mais-contratado">Mais contratado</span>
+                                    <button class="cartao-favorito" title="Favoritar"><i class="ri-heart-line"></i></button>
+                                </div>
+                                <div class="cartao-corpo">
+                                    <div class="cartao-categoria" data-i18n="servicos-cat-residencial">Residencial</div>
+                                    <h3 data-i18n="servicos-card-limpeza-padrao">Limpeza Padrão Residencial</h3>
+                                    <p data-i18n="servicos-card-limpeza-padrao-desc">Limpeza completa de casa ou apartamento com produtos ecológicos e profissionais treinados.</p>
+                                    <div class="cartao-meta">
+                                        <div class="cartao-avaliacao">
+                                            <i class="ri-star-fill"></i>
+                                            <span>4.9</span>
+                                            <span class="contagem-avaliacao">(312)</span>
+                                        </div>
+                                        <span class="cartao-localizacao"><i class="ri-map-pin-line"></i> São Paulo</span>
+                                    </div>
+                                    <div class="cartao-rodape">
+                                        <div class="card-price">
+                                            <span class="preco-a-partir" data-i18n="servicos-a-partir-de">A partir de</span>
+                                            <span class="valor-preco">R$ 120</span>
+                                        </div>
+                                        <button type="button" class="botao-primario botao-pequeno btn-agendar" data-i18n="servicos-agendar">Agendar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cartao-servico" data-categoria="residencial" data-preco="180" data-avaliacao="4.8">
+                                <div class="cartao-imagem">
+                                    <img src="../IMG/Limpeza_pesada.png" alt="Limpeza Pesada">
+                                    <button class="cartao-favorito" title="Favoritar"><i class="ri-heart-line"></i></button>
+                                </div>
+                                <div class="cartao-corpo">
+                                    <div class="cartao-categoria" data-i18n="servicos-cat-residencial">Residencial</div>
+                                    <h3 data-i18n="servicos-card-limpeza-pesada">Limpeza Pesada</h3>
+                                    <p data-i18n="servicos-card-limpeza-pesada-desc">Limpeza profunda para situações que exigem dedicação extra e produtos especializados.</p>
+                                    <div class="cartao-meta">
+                                        <div class="cartao-avaliacao">
+                                            <i class="ri-star-fill"></i>
+                                            <span>4.8</span>
+                                            <span class="contagem-avaliacao">(198)</span>
+                                        </div>
+                                        <span class="cartao-localizacao"><i class="ri-map-pin-line"></i> São Paulo</span>
+                                    </div>
+                                    <div class="cartao-rodape">
+                                        <div class="card-price">
+                                            <span class="preco-a-partir" data-i18n="servicos-a-partir-de">A partir de</span>
+                                            <span class="valor-preco">R$ 180</span>
+                                        </div>
+                                        <button type="button" class="botao-primario botao-pequeno btn-agendar" data-i18n="servicos-agendar">Agendar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cartao-servico" data-categoria="residencial" data-preco="220" data-avaliacao="4.7">
+                                <div class="cartao-imagem">
+                                    <img src="../IMG/Limpeza_localizada.png" alt="Pós-Obra">
+                                    <button class="cartao-favorito" title="Favoritar"><i class="ri-heart-line"></i></button>
+                                </div>
+                                <div class="cartao-corpo">
+                                    <div class="cartao-categoria" data-i18n="servicos-cat-pos-obra">Pós-Obra</div>
+                                    <h3 data-i18n="servicos-card-limpeza-pos-reforma">Limpeza Pós-Reforma</h3>
+                                    <p data-i18n="servicos-card-limpeza-pos-reforma-desc">Remoção de resíduos de construção, poeira fina e manchas de tinta com equipamentos profissionais.</p>
+                                    <div class="cartao-meta">
+                                        <div class="cartao-avaliacao">
+                                            <i class="ri-star-fill"></i>
+                                            <span>4.7</span>
+                                            <span class="contagem-avaliacao">(87)</span>
+                                        </div>
+                                        <span class="cartao-localizacao"><i class="ri-map-pin-line"></i> São Paulo</span>
+                                    </div>
+                                    <div class="cartao-rodape">
+                                        <div class="card-price">
+                                            <span class="preco-a-partir" data-i18n="servicos-a-partir-de">A partir de</span>
+                                            <span class="valor-preco">R$ 220</span>
+                                        </div>
+                                        <button type="button" class="botao-primario botao-pequeno btn-agendar" data-i18n="servicos-agendar">Agendar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cartao-servico" data-categoria="comercial" data-preco="150" data-avaliacao="4.9">
+                                <div class="cartao-imagem">
+                                    <img src="../IMG/pessoas_mesa.png" alt="Limpeza Comercial">
+                                    <span class="cartao-selo selo-pro" data-i18n="servicos-badge-verificado">Verificado</span>
+                                    <button class="cartao-favorito" title="Favoritar"><i class="ri-heart-line"></i></button>
+                                </div>
+                                <div class="cartao-corpo">
+                                    <div class="cartao-categoria" data-i18n="servicos-cat-comercial">Comercial</div>
+                                    <h3 data-i18n="servicos-card-limpeza-escritorios">Limpeza de Escritórios</h3>
+                                    <p data-i18n="servicos-card-limpeza-escritorios-desc">Manutenção diária ou semanal de ambientes corporativos com foco em produtividade.</p>
+                                    <div class="cartao-meta">
+                                        <div class="cartao-avaliacao">
+                                            <i class="ri-star-fill"></i>
+                                            <span>4.9</span>
+                                            <span class="contagem-avaliacao">(256)</span>
+                                        </div>
+                                        <span class="cartao-localizacao"><i class="ri-map-pin-line"></i> São Paulo</span>
+                                    </div>
+                                    <div class="cartao-rodape">
+                                        <div class="card-price">
+                                            <span class="preco-a-partir" data-i18n="servicos-a-partir-de">A partir de</span>
+                                            <span class="valor-preco">R$ 150</span>
+                                        </div>
+                                        <button type="button" class="botao-primario botao-pequeno btn-agendar" data-i18n="servicos-agendar">Agendar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cartao-servico" data-categoria="estofados" data-preco="90" data-avaliacao="4.6">
+                                <div class="cartao-imagem">
+                                    <img src="../IMG/Limpeza_rapida.png" alt="Estofados">
+                                    <button class="cartao-favorito" title="Favoritar"><i class="ri-heart-line"></i></button>
+                                </div>
+                                <div class="cartao-corpo">
+                                    <div class="cartao-categoria" data-i18n="servicos-cat-estofados">Estofados</div>
+                                    <h3 data-i18n="servicos-card-limpeza-estofados">Limpeza de Estofados</h3>
+                                    <p data-i18n="servicos-card-limpeza-estofados-desc">Higienização profunda de sofás, cadeiras e tapetes com aspiração e sanificação.</p>
+                                    <div class="cartao-meta">
+                                        <div class="cartao-avaliacao">
+                                            <i class="ri-star-fill"></i>
+                                            <span>4.6</span>
+                                            <span class="contagem-avaliacao">(143)</span>
+                                        </div>
+                                        <span class="cartao-localizacao"><i class="ri-map-pin-line"></i> São Paulo</span>
+                                    </div>
+                                    <div class="cartao-rodape">
+                                        <div class="card-price">
+                                            <span class="preco-a-partir" data-i18n="servicos-a-partir-de">A partir de</span>
+                                            <span class="valor-preco">R$ 90</span>
+                                        </div>
+                                        <button type="button" class="botao-primario botao-pequeno btn-agendar" data-i18n="servicos-agendar">Agendar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cartao-servico" data-categoria="vidros" data-preco="80" data-avaliacao="4.5">
+                                <div class="cartao-imagem">
+                                    <img src="../IMG/Trabalho_Limpo.png" alt="Vidros">
+                                    <button class="cartao-favorito" title="Favoritar"><i class="ri-heart-line"></i></button>
+                                </div>
+                                <div class="cartao-corpo">
+                                    <div class="cartao-categoria" data-i18n="servicos-cat-vidros">Vidros</div>
+                                    <h3 data-i18n="servicos-card-limpeza-vidros">Limpeza de Vidros</h3>
+                                    <p data-i18n="servicos-card-limpeza-vidros-desc">Limpeza de janelas, fachadas de vidro e superfícies envidraçadas com acabamento impecável.</p>
+                                    <div class="cartao-meta">
+                                        <div class="cartao-avaliacao">
+                                            <i class="ri-star-fill"></i>
+                                            <span>4.5</span>
+                                            <span class="contagem-avaliacao">(92)</span>
+                                        </div>
+                                        <span class="cartao-localizacao"><i class="ri-map-pin-line"></i> São Paulo</span>
+                                    </div>
+                                    <div class="cartao-rodape">
+                                        <div class="card-price">
+                                            <span class="preco-a-partir" data-i18n="servicos-a-partir-de">A partir de</span>
+                                            <span class="valor-preco">R$ 80</span>
+                                        </div>
+                                        <button type="button" class="botao-primario botao-pequeno btn-agendar" data-i18n="servicos-agendar">Agendar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cartao-servico" data-categoria="residencial" data-preco="160" data-avaliacao="4.8">
+                                <div class="cartao-imagem">
+                                    <img src="../IMG/Casa_Limpa.png" alt="Pré-Mudança">
+                                    <button class="cartao-favorito" title="Favoritar"><i class="ri-heart-line"></i></button>
+                                </div>
+                                <div class="cartao-corpo">
+                                    <div class="cartao-categoria" data-i18n="servicos-cat-residencial">Residencial</div>
+                                    <h3 data-i18n="servicos-card-limpeza-pre-mudanca">Limpeza Pré-Mudança</h3>
+                                    <p data-i18n="servicos-card-limpeza-pre-mudanca-desc">Preparação completa do imóvel para nova ocupação, deixando tudo pronto para receber.</p>
+                                    <div class="cartao-meta">
+                                        <div class="cartao-avaliacao">
+                                            <i class="ri-star-fill"></i>
+                                            <span>4.8</span>
+                                            <span class="contagem-avaliacao">(124)</span>
+                                        </div>
+                                        <span class="cartao-localizacao"><i class="ri-map-pin-line"></i> São Paulo</span>
+                                    </div>
+                                    <div class="cartao-rodape">
+                                        <div class="card-price">
+                                            <span class="preco-a-partir" data-i18n="servicos-a-partir-de">A partir de</span>
+                                            <span class="valor-preco">R$ 160</span>
+                                        </div>
+                                        <button type="button" class="botao-primario botao-pequeno btn-agendar" data-i18n="servicos-agendar">Agendar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cartao-servico" data-categoria="residencial" data-preco="140" data-avaliacao="4.7">
+                                <div class="cartao-imagem">
+                                    <img src="../IMG/Home_cidade.png" alt="Manutenção">
+                                    <button class="cartao-favorito" title="Favoritar"><i class="ri-heart-line"></i></button>
+                                </div>
+                                <div class="cartao-corpo">
+                                    <div class="cartao-categoria" data-i18n="servicos-cat-residencial">Residencial</div>
+                                    <h3 data-i18n="servicos-card-limpeza-rotina">Limpeza de Rotina</h3>
+                                    <p data-i18n="servicos-card-limpeza-rotina-desc">Serviço recorrente para manter sua casa sempre limpa e organizada com qualidade garantida.</p>
+                                    <div class="cartao-meta">
+                                        <div class="cartao-avaliacao">
+                                            <i class="ri-star-fill"></i>
+                                            <span>4.7</span>
+                                            <span class="contagem-avaliacao">(205)</span>
+                                        </div>
+                                        <span class="cartao-localizacao"><i class="ri-map-pin-line"></i> São Paulo</span>
+                                    </div>
+                                    <div class="cartao-rodape">
+                                        <div class="card-price">
+                                            <span class="preco-a-partir" data-i18n="servicos-a-partir-de">A partir de</span>
+                                            <span class="valor-preco">R$ 140</span>
+                                        </div>
+                                        <button type="button" class="botao-primario botao-pequeno btn-agendar" data-i18n="servicos-agendar">Agendar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="carregar-mais">
+                            <button class="botao-secundario" id="carregarMais" data-i18n="servicos-carregar-mais">Carregar mais serviços</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== HOW IT WORKS ========== -->
+        <section class="como-secao">
+            <div class="container-secao">
+                <div class="cabecalho-secao">
+                    <h2 data-i18n="servicos-como-funciona">Como funciona</h2>
+                    <p data-i18n="servicos-como-funciona-sub">Em poucos passos, seu serviço está agendado</p>
+                </div>
+                <div class="como-grade">
+                    <div class="como-etapa">
+                        <div class="step-number">01</div>
+                        <div class="step-icon"><i class="ri-search-eye-line"></i></div>
+                        <h3 data-i18n="servicos-passo1-titulo">Escolha o serviço</h3>
+                        <p data-i18n="servicos-passo1-desc">Navegue pelas categorias e encontre o serviço ideal para sua necessidade.</p>
+                    </div>
+                    <div class="como-conector"><i class="ri-arrow-right-line"></i></div>
+                    <div class="como-etapa">
+                        <div class="step-number">02</div>
+                        <div class="step-icon"><i class="ri-calendar-check-line"></i></div>
+                        <h3 data-i18n="servicos-passo2-titulo">Agende o dia</h3>
+                        <p data-i18n="servicos-passo2-desc">Escolha a data e horário que melhor se encaixa na sua rotina.</p>
+                    </div>
+                    <div class="como-conector"><i class="ri-arrow-right-line"></i></div>
+                    <div class="como-etapa">
+                        <div class="step-number">03</div>
+                        <div class="step-icon"><i class="ri-shield-check-line"></i></div>
+                        <h3 data-i18n="servicos-passo3-titulo">Receba com confiança</h3>
+                        <p data-i18n="servicos-passo3-desc">Profissional verificado realiza o serviço com garantia de qualidade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== TESTIMONIALS ========== -->
+        <section class="depoimentos-secao">
+            <div class="container-secao">
+                <div class="cabecalho-secao">
+                    <h2 data-i18n="servicos-depoimentos">O que nossos clientes dizem</h2>
+                    <p data-i18n="servicos-depoimentos-sub">Avaliações reais de quem já contratou</p>
+                </div>
+                <div class="depoimentos-grade">
+                    <div class="depoimento-cartao">
+                        <div class="depoimento-estrelas">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+                        <p data-i18n="servicos-depoimento1">"Excelente serviço! A profissional foi pontual, educada e deixou minha casa impecável. Com certeza vou contratar novamente."</p>
+                        <div class="depoimento-autor">
+                            <div class="author-avatar">M</div>
+                            <div>
+                                <strong>Maria Souza</strong>
+                                <span data-i18n="servicos-depoimento1-servico">Limpeza Residencial</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="depoimento-cartao">
+                        <div class="depoimento-estrelas">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+                        <p data-i18n="servicos-depoimento2">"Contratei a limpeza pós-reforma e o resultado superou minhas expectativas. Recomendo para quem precisa de um serviço rápido e de qualidade."</p>
+                        <div class="depoimento-autor">
+                            <div class="author-avatar">P</div>
+                            <div>
+                                <strong>Pedro Santos</strong>
+                                <span data-i18n="servicos-depoimento2-servico">Pós-Obra</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="depoimento-cartao">
+                        <div class="depoimento-estrelas">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-line"></i>
+                        </div>
+                        <p data-i18n="servicos-depoimento3">"Muito profissionalismo. O escritório ficou brilhando depois da limpeza. O app é fácil de usar e o agendamento foi super rápido."</p>
+                        <div class="depoimento-autor">
+                            <div class="author-avatar">A</div>
+                            <div>
+                                <strong>Ana Ribeiro</strong>
+                                <span data-i18n="servicos-depoimento3-servico">Limpeza Comercial</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
-<script src=""></script>
-<script src="botoes3.js"></script>
-<script src="calendario_horas.js"></script>
-<script src="botoes.js"></script>
- </section>
-<!--===========================================================total===========================================  -->
- <section id="oculto10" class="total">
-     <div class="container2">
-        <h2>Resumo do Pedido</h2>
-        <div id="resumo-pedido">
-            <!-- O resumo do pedido será inserido aqui via JavaScript -->
-        </div>
-        <div class="total-final">
-            <h3>Total: <span id="valor-total">R$ 0,00</span></h3>
-            <button id="finalizar-pedido" class="btn-finalizar" href="../Servicos/Servicos.html">Finalizar Pedido</button>
-            <div id="modal-pagamento" class="modal-pagamento">
-    <div class="conteudo-modal-pagamento">
-        <button id="fechar-modal" class="btn-fechar-modal">✕</button>
-        
-        <h2 class="titulo-modal">Escolha o método de pagamento</h2>
-        
-        <div class="grade-metodos-pagamento">
-            <button class="metodo-pagamento" data-metodo="pix">
-                <i class="ri-pix-fill icone-pagamento"></i>
-                <span>PIX</span>
-            </button>
-            
-            <button class="metodo-pagamento" data-metodo="credito">
-                <i class="ri-bank-card-fill icone-pagamento"></i>
-                <span>Cartão de Crédito</span>
-            </button>
-            
-            <button class="metodo-pagamento" data-metodo="debito">
-                <i class="ri-bank-card-fill icone-pagamento"></i>
-                <span>Cartão de Débito</span>
-            </button>
-            
-            <button class="metodo-pagamento" data-metodo="boleto">
-                <i class="ri-wallet-2-fill icone-pagamento"></i>
-                <span>Boleto Bancário</span>
-            </button>
-        </div>
+        </section>
 
-        <div class="acoes-modal">
-            <button id="cancelar-pagamento" class="btn-cancelar">Cancelar</button>
-            <button id="confirmar-pagamento" class="btn-confirmar">Confirmar</button>
-        </div>
-    </div>
-</div>
-        </div>
-    </div>
-<script src="finalizar.js"></script>    
-<script src="carrinho.js"></script>
- </section>
-<!-- ===============================================================footer========================================== -->
-  <footer id="Footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-footer">
-                <p><span class="P-Color">Especialistas em limpeza sustentável</span></p>
-                <div class="socials">
+        <!-- ========== CTA ========== -->
+        <section class="cta-secao">
+            <div class="container-secao">
+                <div class="cta-conteudo">
+                    <h2 data-i18n="servicos-cta-titulo">Pronto para transformar seu espaço?</h2>
+                    <p data-i18n="servicos-cta-sub">Cadastre-se agora e tenha acesso a profissionais verificados com os melhores preços.</p>
+                    <div class="cta-botoes">
+                        <a href="../Cadastro/Cadastro.html" class="botao-primario" data-i18n="servicos-cta-criar-conta">Criar conta gratuita</a>
+                        <a href="../Contato/Contato.html" class="botao-secundario" data-i18n="servicos-cta-falar-especialista">Falar com especialista</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="rodape-conteudo">
+            <div class="rodape-secao">
+                <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-rodape">
+                <p><span class="cor-p" data-i18n="footer-tagline">Especialistas em limpeza sustentável</span></p>
+                <div class="redes-sociais">
                     <a href="https://www.facebook.com/profile.php?id=61580024704625" target="_blank"><i class="ri-facebook-circle-fill"></i></a>
-                    <a href="https://www.instagram.com/lumisstartup/?next=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
-                    <a href="#"><i class="ri-linkedin-fill"></i></a target="_blank">
+                    <a href="https://www.instagram.com/lumisstartup/?proximo=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
+                    <a href="#"><i class="ri-linkedin-fill"></i></a>
                     <a href="https://x.com/LumisStartup" target="_blank"><i class="ri-twitter-x-fill"></i></a>
                 </div>
             </div>
-            
-             
-          <div class="footer-section links">
-                <h2 class="Footer-Titulo">Links Rápidos</h2>
+            <div class="rodape-secao links">
+                <h2 class="rodape-titulo" data-i18n="footer-links">Links Rápidos</h2>
                 <ul>
-                    <li><a href="../index.html">Início</a></li>
-                    <li><a href="../Sobre/Sobre.html">Sobre</a></li>
-                    <li><a href="../Servicos/Servicos.html">Serviços</a></li>
-                    <li><a href="../Planos/Planos.html">Planos</a></li>
-                    <li><a href="../Contato/Contato.html">Contato</a></li>
+                    <li><a href="../index.html" data-i18n="footer-inicio">Início</a></li>
+                    <li><a href="../Sobre/Sobre.html" data-i18n="footer-sobre">Sobre</a></li>
+                    <li><a href="../Servicos/Servicos.html" data-i18n="footer-servicos">Serviços</a></li>
+                    <li><a href="../Plano/Plano.html" data-i18n="footer-planos">Planos</a></li>
+                    <li><a href="../Contato/Contato.html" data-i18n="footer-contato">Contato</a></li>
                 </ul>
             </div>
-            
-            <div class="footer-section">
-                <h2 class="Footer-Titulo">Tipos de Serviços</h2>
+            <div class="rodape-secao">
+                <h2 class="rodape-titulo" data-i18n="footer-tipos">Tipos de Serviços</h2>
                 <ul>
-                    <li><a href="../Pages_Footer/estofados.html">Estofados</a></li>
-                    <li><a href="../Pages_Footer/vidros.html">Vidros</a></li>
-                    <li><a href="../Pages_Footer/carros.html">Carros</a></li>
-                    <li><a href="../Pages_Footer/escritorios.html">Escritórios</a></li>
-                    <li><a href="../Pages_Footer/empresarial.html">Empresarial</a></li>
+                    <li><a href="../Pages_Footer/estofados.html" data-i18n="footer-estofados">Estofados</a></li>
+                    <li><a href="../Pages_Footer/vidros.html" data-i18n="footer-vidros">Vidros</a></li>
+                    <li><a href="../Pages_Footer/carros.html" data-i18n="footer-carros">Carros</a></li>
+                    <li><a href="../Pages_Footer/escritorios.html" data-i18n="footer-escritorios">Escritórios</a></li>
+                    <li><a href="../Pages_Footer/empresarial.html" data-i18n="footer-empresarial">Empresarial</a></li>
                 </ul>
             </div>
-            
-            <div class="footer-section">
-                <h2 class="Footer-Titulo">Localização</h2>
-                <p class="P-Color">Av. Amador Bueno da Veiga;</p>
-                <p class="P-Color">Endereço: 4430;</p>
-                <p class="P-Color">Cidade: São Paulo - SP;</p>
-                <p class="P-Color">CEP: 03890-000</p>
+            <div class="rodape-secao">
+                <h2 class="rodape-titulo" data-i18n="footer-localizacao">Localização</h2>
+                <p class="cor-p" data-i18n="footer-endereco-rua">Av. Amador Bueno da Veiga;</p>
+                <p class="cor-p" data-i18n="footer-endereco">Endereço: 4430;</p>
+                <p class="cor-p" data-i18n="footer-cidade">Cidade: São Paulo - SP;</p>
+                <p class="cor-p" data-i18n="footer-cep">CEP: 03890-000</p>
             </div>
-            
-            <div class="footer-section">
-                <h2 class="Footer-Titulo">Contato</h2>
-                <p class="P-Color">Telefone: (11) 98121-4352</p>
-                <p class="P-Color">Email: <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
+            <div class="rodape-secao">
+                <h2 class="rodape-titulo" data-i18n="footer-contato-t">Contato</h2>
+                <p class="cor-p" data-i18n="footer-telefone">Telefone: (11) 98121-4352</p>
+                <p class="cor-p"><span data-i18n="footer-email">Email:</span> <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
             </div>
         </div>
-        
-        <div class="subfooter">
-            <p class="P-Color">© Lumis. Todos os direitos reservados.</p>
-            <div class="subfooter-links">
-                <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>
+        <div class="sub-rodape">
+            <p class="cor-p">&copy; Lumis. Todos os direitos reservados.</p>
+            <div class="sub-rodape-links">
+                <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html" data-i18n="footer-politica">Política de Privacidade</a>
                 <span>|</span>
-                <a href="../Termo_Uso/Termo_uso.html">Termos de Uso</a>
+                <a href="../Termo_Uso/Termo_uso.html" data-i18n="footer-termos">Termos de Uso</a>
             </div>
         </div>
     </footer>
-            
-                
 
-    <script src="Servicos.js"></script>
+    <!-- ========== MODAL DE AGENDAMENTO ========== -->
+    <div class="ag-modal" id="agModal" role="dialog" aria-modal="true" aria-labelledby="agTitulo" hidden>
+        <div class="ag-backdrop" data-ag-fechar></div>
+        <div class="ag-modal-content">
+            <button type="button" class="ag-fechar" data-ag-fechar aria-label="Fechar"><i class="ri-close-line"></i></button>
+
+            <div class="ag-modal-body">
+            <!-- Passo 1: dados do agendamento -->
+            <div class="ag-passo" data-passo="1">
+                <div class="ag-cabecalho">
+                    <span class="ag-selo" id="agServicoNome">Serviço</span>
+                    <h2 id="agTitulo" data-i18n="ag-titulo">Agende sua limpeza</h2>
+                    <p data-i18n="ag-subtitulo">Escolha as datas e personalize o serviço. O valor é calculado automaticamente.</p>
+                </div>
+
+                <div class="ag-layout">
+                    <div class="ag-formulario">
+                        <div class="ag-bloco">
+                            <h3><i class="ri-calendar-line"></i> <span data-i18n="ag-calendario">Escolha as datas</span></h3>
+                            <p class="ag-dica" data-i18n="ag-calendario-dica">Selecione uma ou mais datas. Cada data adiciona o valor do serviço.</p>
+                            <div class="ag-calendario-cabecalho">
+                                <button type="button" class="ag-calendario-nav" id="agMesPrev" aria-label="Mês anterior"><i class="ri-arrow-left-s-line"></i></button>
+                                <span class="ag-calendario-titulo" id="agCalendarioTitulo">Mês</span>
+                                <button type="button" class="ag-calendario-nav" id="agMesNext" aria-label="Próximo mês"><i class="ri-arrow-right-s-line"></i></button>
+                            </div>
+                            <div class="ag-calendario-semana">
+                                <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+                            </div>
+                            <div class="ag-calendario-grade" id="agCalendarioGrade"></div>
+                            <div class="ag-datas-selecionadas" id="agDatasLista"></div>
+                        </div>
+
+                        <div class="ag-bloco" id="agSteppers"></div>
+
+                        <div class="ag-bloco" id="agTipoBloco"></div>
+
+                        <div class="ag-bloco" id="agAdicionais"></div>
+
+                        <div class="ag-bloco">
+                            <h3><i class="ri-map-pin-line"></i> <span data-i18n="ag-localizacao">Localização</span></h3>
+                            <div class="ag-campo-duplo">
+                                <input type="text" id="agCep" class="ag-campo" placeholder="CEP" data-i18n-placeholder="ag-cep" inputmode="numeric">
+                                <input type="text" id="agCidade" class="ag-campo" placeholder="Cidade" data-i18n-placeholder="ag-cidade">
+                            </div>
+                            <div class="ag-campo-duplo ag-campo-grid-3">
+                                <input type="text" id="agEndereco" class="ag-campo" placeholder="Endereço" data-i18n-placeholder="ag-endereco">
+                                <input type="text" id="agNumero" class="ag-campo ag-campo-curto" placeholder="Número" data-i18n-placeholder="ag-numero">
+                            </div>
+                            <input type="text" id="agComplemento" class="ag-campo" placeholder="Complemento" data-i18n-placeholder="ag-complemento">
+                            <textarea id="agObservacoes" class="ag-campo ag-textarea" rows="2" placeholder="Observações (opcional)" data-i18n-placeholder="ag-observacoes"></textarea>
+                        </div>
+                    </div>
+
+                    <aside class="ag-carrinho">
+                        <h3><i class="ri-shopping-cart-line"></i> <span data-i18n="ag-carrinho">Seu pedido</span></h3>
+                        <div class="ag-carrinho-itens" id="agCarrinhoItens"></div>
+                        <div class="ag-carrinho-total">
+                            <span data-i18n="ag-total">Total</span>
+                            <strong id="agTotal">R$ 0,00</strong>
+                        </div>
+                        <button type="button" class="botao-primario ag-botao-finalizar" id="agFinalizar" data-i18n="ag-finalizar">Finalizar agendamento</button>
+                    </aside>
+                </div>
+
+                <div class="ag-empresa" id="agEmpresaCta" hidden>
+                    <p data-i18n="ag-empresa-texto">Tem uma empresa de grande porte ou precisa de um contrato recorrente?</p>
+                    <a href="../Contato/Contato.html" class="botao-secundario botao-pequeno" data-i18n="ag-empresa-botao">Falar com nossa equipe</a>
+                </div>
+            </div>
+
+            <!-- Passo 2: pagamento -->
+            <div class="ag-passo" data-passo="2" hidden>
+                <div class="ag-cabecalho">
+                    <h2 data-i18n="ag-pag-titulo">Como deseja pagar?</h2>
+                    <p data-i18n="ag-pag-subtitulo">Escolha o método de pagamento e confirme o agendamento.</p>
+                </div>
+                <div class="ag-pag-resumo">
+                    <span data-i18n="ag-pag-resumo">Resumo do pedido</span>
+                    <div class="ag-pag-resumo-info">
+                        <strong id="agPagServico">Serviço</strong>
+                        <b id="agPagTotal">R$ 0,00</b>
+                    </div>
+                </div>
+                <div class="ag-pag-opcoes">
+                    <button type="button" class="ag-pag-opcao" data-metodo="pix">
+                        <i class="ri-qr-code-line"></i>
+                        <span><strong data-i18n="ag-metodo-pix">Pix</strong><small data-i18n="ag-metodo-pix-desc">Pagamento instantâneo</small></span>
+                        <i class="ri-check-line ag-pag-check"></i>
+                    </button>
+                    <button type="button" class="ag-pag-opcao" data-metodo="cartao">
+                        <i class="ri-bank-card-line"></i>
+                        <span><strong data-i18n="ag-metodo-cartao">Cartão de crédito</strong><small data-i18n="ag-metodo-cartao-desc">Parcele em até 12x</small></span>
+                        <i class="ri-check-line ag-pag-check"></i>
+                    </button>
+                    <button type="button" class="ag-pag-opcao" data-metodo="boleto">
+                        <i class="ri-barcode-line"></i>
+                        <span><strong data-i18n="ag-metodo-boleto">Boleto</strong><small data-i18n="ag-metodo-boleto-desc">Vence em até 3 dias úteis</small></span>
+                        <i class="ri-check-line ag-pag-check"></i>
+                    </button>
+                    <button type="button" class="ag-pag-opcao" data-metodo="na-hora">
+                        <i class="ri-hand-coin-line"></i>
+                        <span><strong data-i18n="ag-metodo-na-hora">Pagamento na hora</strong><small data-i18n="ag-metodo-na-hora-desc">Pague em dinheiro ou cartão no dia do serviço</small></span>
+                        <i class="ri-check-line ag-pag-check"></i>
+                    </button>
+                </div>
+                <div class="ag-pag-detalhes" id="agPagDetalhes"></div>
+                <div class="ag-pag-acoes">
+                    <button type="button" class="botao-secundario" id="agVoltar" data-i18n="ag-voltar">Voltar</button>
+                    <button type="button" class="botao-primario" id="agConfirmar" data-i18n="ag-confirmar">Confirmar agendamento</button>
+                </div>
+            </div>
+
+            <!-- Passo 3: sucesso -->
+            <div class="ag-passo" data-passo="3" hidden>
+                <div class="ag-sucesso">
+                    <span class="ag-sucesso-icone"><i class="ri-check-line"></i></span>
+                    <h2 data-i18n="ag-sucesso-titulo">Agendamento confirmado!</h2>
+                    <p data-i18n="ag-sucesso-texto">Recebemos seu pedido e entraremos em contato para confirmar os detalhes.</p>
+                    <div class="ag-sucesso-info" id="agSucessoInfo"></div>
+                    <button type="button" class="botao-primario" data-ag-fechar data-i18n="ag-sucesso-fechar">Concluir</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="agendamento.js"></script>
+    <script src="../tema-idioma.js"></script>
 </body>
 </html>

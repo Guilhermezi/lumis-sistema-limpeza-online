@@ -1,43 +1,78 @@
-// Script para alternância entre login e cadastro
-        const container = document.getElementById('container');
-        const registerBtn = document.getElementById('register');
-        const loginBtn = document.getElementById('login');
-        const mobileRegisterBtn = document.getElementById('mobile-register');
-        const mobileLoginBtn = document.getElementById('mobile-login');
-
-        if (registerBtn) {
-            registerBtn.addEventListener('click', () => {
-                container.classList.add("active");
-            });
+﻿document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('alternarMenu');
+    const menu = document.getElementById('menu');
+    
+    menuToggle.addEventListener('click', function() {
+        this.classList.toggle('aberto');
+        menu.classList.toggle('ativo');
+        
+        // Impede a rolagem da página quando o menu está aberto
+        if (menu.classList.contains('ativo')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
         }
-
-        if (loginBtn) {
-            loginBtn.addEventListener('click', () => {
-                container.classList.remove("active");
-            });
+    });
+    
+    // Fechar o menu ao clicar em um item (útil para mobile)
+    document.querySelectorAll('#menu a').forEach(item => {
+        item.addEventListener('click', () => {
+            menu.classList.remove('ativo');
+            menuToggle.classList.remove('aberto');
+            document.body.style.overflow = 'auto';
+        });
+    });
+    
+    // Fechar o menu ao clicar fora dele
+    document.addEventListener('click', function(event) {
+        if (!menu.contains(event.target) && !menuToggle.contains(event.target) && menu.classList.contains('ativo')) {
+            menu.classList.remove('ativo');
+            menuToggle.classList.remove('aberto');
+            document.body.style.overflow = 'auto';
         }
+    });
+    
+    // Prevenir que cliques dentro do menu fechem ele
+    menu.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
 
-        if (mobileRegisterBtn) {
-            mobileRegisterBtn.addEventListener('click', () => {
-                container.classList.add("active");
-            });
-        }
+    // Alternância entre login e cadastro
+    const container = document.getElementById('container');
+    const registerBtn = document.getElementById('register');
+    const loginBtn = document.getElementById('login');
+    const mobileRegisterTab = document.getElementById('aba-cadastro-mobile');
+    const mobileLoginTab = document.getElementById('aba-login-mobile');
 
-        if (mobileLoginBtn) {
-            mobileLoginBtn.addEventListener('click', () => {
-                container.classList.remove("active");
-            });
-        }
+    if (registerBtn) {
+        registerBtn.addEventListener('click', () => {
+            container.classList.add('ativo');
+            mobileRegisterTab.classList.add('ativo');
+            mobileLoginTab.classList.remove('ativo');
+        });
+    }
 
-        // Menu mobile toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav ul');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            container.classList.remove('ativo');
+            mobileLoginTab.classList.add('ativo');
+            mobileRegisterTab.classList.remove('ativo');
+        });
+    }
 
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
-                menuToggle.classList.toggle('open');
-                nav.classList.toggle('active');
-            });
-        }
+    if (mobileRegisterTab) {
+        mobileRegisterTab.addEventListener('click', () => {
+            container.classList.add('ativo');
+            mobileRegisterTab.classList.add('ativo');
+            mobileLoginTab.classList.remove('ativo');
+        });
+    }
 
-
+    if (mobileLoginTab) {
+        mobileLoginTab.addEventListener('click', () => {
+            container.classList.remove('ativo');
+            mobileLoginTab.classList.add('ativo');
+            mobileRegisterTab.classList.remove('ativo');
+        });
+    }
+});

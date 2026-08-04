@@ -1,104 +1,133 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script>
+        try {
+            var temaSalvo = localStorage.getItem('tema');
+            document.documentElement.setAttribute('data-theme',
+                temaSalvo || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
 
+    <!-- Link para o Design System global -->
+    <link rel="stylesheet" href="../style.css">
     <!-- Link para o arquivo CSS -->
     <link rel="stylesheet" href="Decisao.css">
 
     <!-- Link para o RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <title>Lumis</title>
+    <title>Lumis - Login</title>
 </head>
-<body>
+<body data-page="decisao">
     <header>
-        <div id="logo-headers">
+        <div id="logo-cabecalhos">
             <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
         </div>
 
         <nav>
             <!-- Botão hamburguer -->
-            <div class="menu-toggle" id="menuToggle">
+            <div class="alternar-menu" id="alternarMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
 
             <ul id="menu">
-                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
-                <li class="has-submenu">
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> <span data-i18n="nav-inicio">Início</span></a></li>
+                <li class="tem-submenu">
                     <a href="../Sobre/Sobre.html">
-                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                        <i class="ri-information-line"></i> <span data-i18n="nav-sobre">Sobre</span> <i class="ri-arrow-down-s-line"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                        <li><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
                     </ul>
                 </li>
                 <!-- Item adicional para mobile -->
-                <li class="mobile-only-item"><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
-                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
-                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
-                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
-                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
-                <li><a class="bntCadastro" href="../Usuario_Funcionario/Decisao.html"><i class="ri-login-box-line"></i> Login</a></li>
+                <li class="item-somente-mobile"><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
+                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> <span data-i18n="nav-servicos">Serviços</span></a></li>
+                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> <span data-i18n="nav-planos">Planos</span></a></li>
+                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> <span data-i18n="nav-contato">Contato</span></a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> <span data-i18n="nav-ajuda">Ajuda</span></a></li>
+                <li><a class="botao-cadastro" href="../Usuario_Funcionario/Decisao.html"><i class="ri-login-box-line"></i> <span data-i18n="nav-login">Login</span></a></li>
             </ul>
+        
+            <div class="controles-nav">
+                <button class="botao-tema" id="alternarTema" aria-label="Alternar tema">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+
+                <div class="seletor-idioma">
+                    <button class="botao-idioma" id="alternarIdioma" aria-label="Selecionar idioma">
+                        &#127479;&#127479;
+                    </button>
+                    <div class="dropdown-idioma" id="dropdownIdioma">
+                        <a data-lang="pt" class="opcao-idioma ativo">
+                            <span class="bandeira">&#127463;&#127479;</span> <span data-i18n="lang-portugues">Português</span>
+                        </a>
+                        <a data-lang="en" class="opcao-idioma">
+                            <span class="bandeira">&#127482;&#127480;</span> <span data-i18n="lang-ingles">English</span>
+                        </a>
+                        <a data-lang="es" class="opcao-idioma">
+                            <span class="bandeira">&#127466;&#127480;</span> <span data-i18n="lang-espanhol">Español</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <!-- Modal de Escolha -->
-    <div id="auth-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Bem-vindo a Lumis</h2>
-            <div class="auth-options">
-                <button id="btn-login" class="auth-option">Entrar</button>
-                <button id="btn-cadastro" class="auth-option">Cadastrar</button>
-            </div>
-        </div>
-    </div>
+    <main class="decisao-pagina">
 
-    <!-- Tela de Cadastro com links -->
-    <main class="content" id="main-content">
-        <div class="type-container">
-            <h1>Cadastre-se como</h1>
-            <div class="type-options">
-                <a href="../Cadastro/Cadastro.html" class="type-link" data-type="paciente-cadastro">
-                    <i class="ri-user-line"></i>
-                    <span>Usuário</span>
-                </a>
-                <a href="../Cadastro_Trabalhador/Cadastro_Trabalhador.html" class="type-link" data-type="medico-cadastro">
-                    <i class="ri-user-2-line"></i>
-                    <span>Trabalhador</span>
-                </a>
+        <!-- ========== HERO ========== -->
+        <section class="decision-hero">
+            <div class="decisao-hero-fundo"></div>
+            <div class="hero-conteudo">
+                <span class="decision-tag"><i class="ri-user-heart-line"></i> <span data-i18n="decisao-acesso">Acesso Lumis</span></span>
+                <h1><span data-i18n="decisao-bem-vindo">Bem-vindo à</span> <span class="highlight">Lumis</span></h1>
+                <p data-i18n="decisao-subtitulo">Escolha o perfil que melhor se encaixa em você e comece agora.</p>
             </div>
-            <div class="toggle-section">
-                <p>Já tem uma conta? <a class="toggle-link" id="login-type-content">Faça login</a></p>
-            </div>
-        </div>
-    </main>
+        </section>
 
-    <!-- Tela de Seleção de Tipo de Usuário (Login) com links -->
-    <main class="content hidden" id="login-type-content">
-        <div class="type-container">
-            <h1>Entrar como</h1>
-            <div class="type-options">
-                <a href="../Cadastro/Cadastro.html" class="type-link" data-type="Usuario-login">
-                    <i class="ri-user-line"></i>
-                    <span>Usuário</span>
-                </a>
-                <a href="../Cadastro_Trabalhador/Cadastro_Trabalhador.html" class="type-link" data-type="Trabalhador">
-                    <i class="ri-user-2-line"></i>
-                    <span>Trabalhador</span>
-                </a>
+        <!-- ========== ESCOLHA ========== -->
+        <section class="decisao-secao">
+            <div class="container-secao">
+                <div class="decisao-cartao">
+                    <h2 id="tituloDecisao" data-i18n="decisao-cadastre-se-como">Cadastre-se como</h2>
+
+                    <div class="decisao-opcoes">
+                        <a href="../Cadastro/Cadastro.html" class="decisao-opcao">
+                            <span class="decisao-icone"><i class="ri-user-line"></i></span>
+                            <strong data-i18n="decisao-usuario">Usuário</strong>
+                            <span class="decisao-opcao-descricao" data-i18n="decisao-usuario-desc">Contrate serviços de limpeza e gerencie sua agenda.</span>
+                        </a>
+
+                        <a href="../Cadastro_Trabalhador/Cadastro_Trabalhador.html" class="decisao-opcao">
+                            <span class="decisao-icone"><i class="ri-user-2-line"></i></span>
+                            <strong data-i18n="decisao-trabalhador">Trabalhador</strong>
+                            <span class="decisao-opcao-descricao" data-i18n="decisao-trabalhador-desc">Ofereça seus serviços e encontre novas oportunidades.</span>
+                        </a>
+                    </div>
+
+                    <div class="decisao-toggle">
+                        <p>
+                            <span id="prefixoDecisaoToggle" data-i18n="decisao-ja-tem-conta">Já tem uma conta?</span>
+                            <button id="linkDecisaoToggle" class="decisao-toggle-link" data-i18n="decisao-faca-login">Faça login</button>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="toggle-section">
-                <p>Não tem uma conta? <a class="toggle-link" id="main-content">Cadastre-se</a></p>
-            </div>
-        </div>
+        </section>
+
     </main>
 
     <script src="Decisao.js"></script>
+    <script src="../tema-idioma.js"></script>
 </body>
 </html>

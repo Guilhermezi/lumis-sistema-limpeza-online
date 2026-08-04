@@ -1,127 +1,161 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt BR">
 <head>
+    <script>
+        try {
+            var temaSalvo = localStorage.getItem('tema');
+            document.documentElement.setAttribute('data-theme',
+                temaSalvo || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lumis - Cidade consciente</title>
     <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="cidade_consciente.css">
     <script src="cidade_consciente2.js"></script>
-    </head>
-    
 </head>
-<body>
+<body data-page="cidade">
  <header>
-        <div id="logo-headers">
+        <div id="logo-cabecalhos">
             <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
         </div>
 
         <nav>
-            <div class="menu-toggle" id="menuToggle">
+            <div class="alternar-menu" id="alternarMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
 
             <ul id="menu">
-                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
-                <li class="has-submenu">
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> <span data-i18n="nav-inicio">Início</span></a></li>
+                <li class="tem-submenu">
                     <a href="../Sobre/Sobre.html">
-                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                        <i class="ri-information-line"></i> <span data-i18n="nav-sobre">Sobre</span> <i class="ri-arrow-down-s-line"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="#"><i class="ri-earth-line"></i>Cidade consciente</a></li>
+                        <li><a href="#"><i class="ri-earth-line"></i><span data-i18n="nav-cidade">Cidade consciente</span></a></li>
                     </ul>
                 </li>
-                <li class="mobile-only-item"><a href="#"><i class="ri-earth-line"></i>Cidade consciente</a></li>
-                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
-                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
-                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
-                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
-                <li><a class="bntCadastro" href="../Usuario_Funcionario/Decisao.html"><i class="ri-login-box-line"></i> Login</a></li>
+                <li class="item-somente-mobile"><a href="#"><i class="ri-earth-line"></i><span data-i18n="nav-cidade">Cidade consciente</span></a></li>
+                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> <span data-i18n="nav-servicos">Serviços</span></a></li>
+                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> <span data-i18n="nav-planos">Planos</span></a></li>
+                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> <span data-i18n="nav-contato">Contato</span></a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> <span data-i18n="nav-ajuda">Ajuda</span></a></li>
+                <li><a class="botao-cadastro" href="../Usuario_Funcionario/Decisao.html"><i class="ri-login-box-line"></i> <span data-i18n="nav-login">Login</span></a></li>
             </ul>
+        
+            <div class="controles-nav">
+                <button class="botao-tema" id="alternarTema" aria-label="Alternar tema">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+
+                <div class="seletor-idioma">
+                    <button class="botao-idioma" id="alternarIdioma" aria-label="Selecionar idioma">
+                        &#127479;&#127479;
+                    </button>
+                    <div class="dropdown-idioma" id="dropdownIdioma">
+                        <a data-lang="pt" class="opcao-idioma ativo">
+                            <span class="bandeira">&#127463;&#127479;</span> <span data-i18n="lang-portugues">Português</span>
+                        </a>
+                        <a data-lang="en" class="opcao-idioma">
+                            <span class="bandeira">&#127482;&#127480;</span> <span data-i18n="lang-ingles">English</span>
+                        </a>
+                        <a data-lang="es" class="opcao-idioma">
+                            <span class="bandeira">&#127466;&#127480;</span> <span data-i18n="lang-espanhol">Español</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero-cidade">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Projeto cidade <span class="highlight">consciente</span></h1>
-                <p>Sustentabilidade e limpeza em um só lugar</p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn-primary">Junte-se a nós</a>
-                    <a href="#" class="btn-secondary">Contribua</a>
+        <div class="hero-conteudo">
+            <div class="hero-texto">
+                <span class="cidade-tag"><i class="ri-earth-line"></i> <span data-i18n="cidade-tag">Sustentabilidade e tecnologia</span></span>
+                <h1 data-i18n="cidade-hero-titulo">Projeto cidade <span class="highlight">consciente</span></h1>
+                <p data-i18n="cidade-hero-sub">Sustentabilidade e limpeza em um só lugar</p>
+                <div class="hero-botoes">
+                    <a href="#" class="botao-primario" data-i18n="cidade-hero-junte">Junte-se a nós</a>
+                    <a href="#" class="botao-secundario" data-i18n="cidade-hero-contribua">Contribua</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projeto Cidade Consciente -->
-    <section class="projeto-section">
-        <div class="projeto-content">
-            <h2 class="section-title">Projeto Cidade Consciente</h2>
-            <p class="projeto-description">
+    <section class="projeto-secao">
+        <div class="projeto-conteudo">
+            <h2 class="titulo-secao" data-i18n="cidade-projeto-titulo">Projeto Cidade Consciente</h2>
+            <p class="projeto-descricao" data-i18n="cidade-projeto-descricao">
                 Nossa tecnologia revoluciona a gestão de resíduos urbanos, utilizando 
                 sensores inteligentes que fornecem dados das lixeiras públicas em tempo real para otimizar a coleta seletiva das cidades.
             </p>
 
             <!-- LIXEIRA ORGANIZADA -->
-            <div class="monitor-container">
-                <div class="battery">
-                    <div class="battery-body">
-                        <div class="charge"></div>
+            <div class="container-monitor">
+                <div class="bateria">
+                    <div class="corpo-bateria">
+                        <div class="carga"></div>
                     </div>
-                    <div class="status-atual" id="statusAtual">
+                    <div class="status-atual" id="statusAtual" data-i18n="cidade-status-monitorando">
                         Monitorando...
                     </div>
                 </div>
                 
                 <div class="legenda">
-                    <div class="status-badge disponivel">
-                        <div class="color-indicator"></div>
-                        <span>0-25% - Disponível</span>
+                    <div class="selo-status disponivel">
+                        <div class="indicador-cor"></div>
+                        <span data-i18n="cidade-status-disponivel">0-25% - Disponível</span>
                     </div>
                     
-                    <div class="status-badge atencao">
-                        <div class="color-indicator"></div>
-                        <span>26-50% - Atenção</span>
+                    <div class="selo-status atencao">
+                        <div class="indicador-cor"></div>
+                        <span data-i18n="cidade-status-atencao">26-50% - Atenção</span>
                     </div>
                     
-                    <div class="status-badge prioridade">
-                        <div class="color-indicator"></div>
-                        <span>51-75% - Coleta Prioritária</span>
+                    <div class="selo-status prioridade">
+                        <div class="indicador-cor"></div>
+                        <span data-i18n="cidade-status-prioritaria">51-75% - Coleta Prioritária</span>
                     </div>
                     
-                    <div class="status-badge coletar">
-                        <div class="color-indicator"></div>
-                        <span>76-95% - Coleta imediata</span>
+                    <div class="selo-status coletar">
+                        <div class="indicador-cor"></div>
+                        <span data-i18n="cidade-status-imediata">76-95% - Coleta imediata</span>
                     </div>
                 </div>
             </div>
 
-            <p class="sistema-info">O sistema atualiza automaticamente o status e prioriza coletas necessárias ao redor das cidades</p>
-            <button class="saiba-mais-btn">Saiba mais</button>
+            <p class="sistema-info" data-i18n="cidade-sistema-info">O sistema atualiza automaticamente o status e prioriza coletas necessárias ao redor das cidades</p>
+            <button class="saiba-mais-btn" data-i18n="cidade-saiba-mais">Saiba mais</button>
         </div>
     </section>
 
     <!-- Conheça Mais Section -->
     <section class="conheca-section">
         <div class="conheca-content">
-            <div class="projeto-card">
+            <div class="cartao-projeto">
                 <div class="projeto-info">
-                    <h3>Projeto Cidade Consciente</h3>
-                    <p>O projeto Cidade Consciente é uma iniciativa da Lumis que une tecnologia com sustentabilidade, e tem como objetivo promover cidades mais sustentáveis.</p>
+                    <h3 data-i18n="cidade-conheca-titulo">Projeto Cidade Consciente</h3>
+                    <p data-i18n="cidade-conheca-descricao">O projeto Cidade Consciente é uma iniciativa da Lumis que une tecnologia com sustentabilidade, e tem como objetivo promover cidades mais sustentáveis.</p>
                     
-                    <ul class="projeto-features">
-                        <li>Monitoramento em tempo real</li>
-                        <li>Redução de custos operacionais</li>
-                        <li>Coleta seletiva otimizada por rotas</li>
-                        <li>Educação ambiental integrada</li>
+                    <ul class="projeto-recursos">
+                        <li data-i18n="cidade-feature-monitoramento">Monitoramento em tempo real</li>
+                        <li data-i18n="cidade-feature-reducao-custos">Redução de custos operacionais</li>
+                        <li data-i18n="cidade-feature-coleta-rotas">Coleta seletiva otimizada por rotas</li>
+                        <li data-i18n="cidade-feature-educacao">Educação ambiental integrada</li>
                     </ul>
 
-                    <button class="btn-conhecer">Conheça nossos serviços oferecidos</button>
+                    <button class="botao-conhecer" data-i18n="cidade-conheca-btn">Conheça nossos serviços oferecidos</button>
                 </div>
 
                 <img src="../IMG/projetocidade_consciente.jpg" alt="Infográfico do projeto" class="projeto-imagem">
@@ -132,7 +166,7 @@
     <!-- Parceiros Section -->
     <section class="parceiros-section">
   <div class="parceiros-content">
-    <h2 class="section-title">Parceiros e Patrocinadores</h2>
+    <h2 class="titulo-secao" data-i18n="cidade-parceiros-titulo">Parceiros e Patrocinadores</h2>
 
     <div class="carrossel-wrapper">
       <div class="parceiros-grid">
@@ -141,8 +175,8 @@
             <i class="ri-building-line"></i>
           </div>
           <h4>Empresa XYZ</h4>
-          <p>Líder em tecnologia sustentável para cidades inteligentes</p>
-          <button class="btn-parceiro">Conhecer</button>
+          <p data-i18n="cidade-parceiro1-desc">Líder em tecnologia sustentável para cidades inteligentes</p>
+          <button class="btn-parceiro" data-i18n="cidade-parceiro1-btn">Conhecer</button>
         </div>
 
         <div class="parceiro-card">
@@ -150,97 +184,98 @@
             <i class="ri-recycle-line"></i>
           </div>
           <h4>EcoTech Solutions</h4>
-          <p>Especializada em reciclagem e gestão de resíduos urbanos</p>
-          <button class="btn-parceiro">Conhecer</button>
+          <p data-i18n="cidade-parceiro2-desc">Especializada em reciclagem e gestão de resíduos urbanos</p>
+          <button class="btn-parceiro" data-i18n="cidade-parceiro2-btn">Conhecer</button>
         </div>
 
         <div class="parceiro-card">
           <div class="parceiro-icon">
             <i class="ri-team-line"></i>
           </div>
-          <h4>Comunidade</h4>
-          <p>Engajamento cidadão para uma cidade mais sustentável</p>
-          <button class="btn-parceiro">Conhecer</button>
+          <h4 data-i18n="cidade-parceiro3-nome">Comunidade</h4>
+          <p data-i18n="cidade-parceiro3-desc">Engajamento cidadão para uma cidade mais sustentável</p>
+          <button class="btn-parceiro" data-i18n="cidade-parceiro3-btn">Conhecer</button>
         </div>
 
         <div class="parceiro-card">
           <div class="parceiro-icon">
             <i class="ri-government-line"></i>
           </div>
-          <h4>Órgãos de inovação</h4>
-          <p>Apoio governamental para projetos de sustentabilidade</p>
-          <button class="btn-parceiro">Conhecer</button>
+          <h4 data-i18n="cidade-parceiro4-nome">Órgãos de inovação</h4>
+          <p data-i18n="cidade-parceiro4-desc">Apoio governamental para projetos de sustentabilidade</p>
+          <button class="btn-parceiro" data-i18n="cidade-parceiro4-btn">Conhecer</button>
         </div>
       </div>
     </div>
 
-    <div class="dots-navigation">
-      <div class="dot active"></div>
-      <div class="dot"></div>
+    <div class="navegacao-pontos">
+      <div class="ponto ativo"></div>
+      <div class="ponto"></div>
     </div>
   </div>
 </section>
 
-    <footer id="Footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-footer">
-                <p><span class="P-Color">Especialistas em limpeza sustentável</span></p>
-                <div class="socials">
+    <footer id="rodape">
+        <div class="rodape-conteudo">
+            <div class="rodape-secao">
+                <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-rodape">
+                <p><span class="cor-p" data-i18n="footer-tagline">Especialistas em limpeza sustentável</span></p>
+                <div class="redes-sociais">
                     <a href="https://www.facebook.com/profile.php?id=61580024704625" target="_blank"><i class="ri-facebook-circle-fill"></i></a>
-                    <a href="https://www.instagram.com/lumisstartup/?next=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
+                    <a href="https://www.instagram.com/lumisstartup/?proximo=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
                     <a href="#" target="_blank"><i class="ri-linkedin-fill"></i></a>
                     <a href="https://x.com/LumisStartup" target="_blank"><i class="ri-twitter-x-fill"></i></a>
                 </div>
             </div>
             
-           <div class="footer-section links">
-                <h2 class="Footer-Titulo">Links Rápidos</h2>
+           <div class="rodape-secao links">
+                <h2 class="rodape-titulo" data-i18n="footer-links">Links Rápidos</h2>
                 <ul>
-                    <li><a href="../index.html">Início</a></li>
-                    <li><a href="../Sobre/Sobre.html">Sobre</a></li>
-                    <li><a href="../Servicos/Servicos.html">Serviços</a></li>
-                    <li><a href="../Planos/Planos.html">Planos</a></li>
-                    <li><a href="../Contato/Contato.html">Contato</a></li>
+                    <li><a href="../index.html" data-i18n="footer-inicio">Início</a></li>
+                    <li><a href="../Sobre/Sobre.html" data-i18n="footer-sobre">Sobre</a></li>
+                    <li><a href="../Servicos/Servicos.html" data-i18n="footer-servicos">Serviços</a></li>
+                    <li><a href="../Plano/Plano.html" data-i18n="footer-planos">Planos</a></li>
+                    <li><a href="../Contato/Contato.html" data-i18n="footer-contato">Contato</a></li>
                 </ul>
             </div>
             
-            <div class="footer-section">
-                <h2 class="Footer-Titulo">Tipos de Serviços</h2>
+            <div class="rodape-secao">
+                <h2 class="rodape-titulo" data-i18n="footer-tipos">Tipos de Serviços</h2>
                 <ul>
-                    <li><a href="../Pages_Footer/estofados.html">Estofados</a></li>
-                    <li><a href="../Pages_Footer/vidros.html">Vidros</a></li>
-                    <li><a href="../Pages_Footer/carros.html">Carros</a></li>
-                    <li><a href="../Pages_Footer/escritorios.html">Escritórios</a></li>
-                    <li><a href="../Pages_Footer/empresarial.html">Empresarial</a></li>
+                    <li><a href="../Pages_Footer/estofados.html" data-i18n="footer-estofados">Estofados</a></li>
+                    <li><a href="../Pages_Footer/vidros.html" data-i18n="footer-vidros">Vidros</a></li>
+                    <li><a href="../Pages_Footer/carros.html" data-i18n="footer-carros">Carros</a></li>
+                    <li><a href="../Pages_Footer/escritorios.html" data-i18n="footer-escritorios">Escritórios</a></li>
+                    <li><a href="../Pages_Footer/empresarial.html" data-i18n="footer-empresarial">Empresarial</a></li>
                 </ul>
             </div>
             
             
-            <div class="footer-section">
-                <h2 class="Footer-Titulo">Localização</h2>
-                <p class="P-Color">Av. Amador Bueno da Veiga;</p>
-                <p class="P-Color">Endereço: 4430;</p>
-                <p class="P-Color">Cidade: São Paulo - SP;</p>
-                <p class="P-Color">CEP: 03890-000</p>
+            <div class="rodape-secao">
+                <h2 class="rodape-titulo" data-i18n="footer-localizacao">Localização</h2>
+                <p class="cor-p" data-i18n="footer-endereco-rua">Av. Amador Bueno da Veiga;</p>
+                <p class="cor-p" data-i18n="footer-endereco">Endereço: 4430;</p>
+                <p class="cor-p" data-i18n="footer-cidade">Cidade: São Paulo - SP;</p>
+                <p class="cor-p" data-i18n="footer-cep">CEP: 03890-000</p>
             </div>
             
-            <div class="footer-section">
-                <h2 class="Footer-Titulo">Contato</h2>
-                <p class="P-Color">Telefone: (11) 98121-4352</p>
-                <p class="P-Color">Email: <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
+            <div class="rodape-secao">
+                <h2 class="rodape-titulo" data-i18n="footer-contato-t">Contato</h2>
+                <p class="cor-p" data-i18n="footer-telefone">Telefone: (11) 98121-4352</p>
+                <p class="cor-p"><span data-i18n="footer-email">Email:</span> <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
             </div>
         </div>
         
-        <div class="subfooter">
-            <p class="P-Color">© Lumis. Todos os direitos reservados.</p>
-            <div class="subfooter-links">
-                <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>
+        <div class="sub-rodape">
+            <p class="cor-p" data-i18n="footer-direitos">© Lumis. Todos os direitos reservados.</p>
+            <div class="sub-rodape-links">
+                <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html" data-i18n="footer-politica">Política de Privacidade</a>
                 <span>|</span>
-                <a href="../Termo_Uso/Termo_uso.html">Termos de Uso</a>
+                <a href="../Termo_Uso/Termo_uso.html" data-i18n="footer-termos">Termos de Uso</a>
             </div>
         </div>
     </footer>
-    </body>
+        <script src="../tema-idioma.js"></script>
+</body>
     <script src="cidade_consciente.js"></script>
     </html>

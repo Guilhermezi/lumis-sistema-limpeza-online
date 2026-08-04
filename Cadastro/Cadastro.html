@@ -1,11 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+    <script>
+        try {
+            var temaSalvo = localStorage.getItem('tema');
+            document.documentElement.setAttribute('data-theme',
+                temaSalvo || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
+
+    <!-- Design System global -->
+    <link rel="stylesheet" href="../style.css">
 
     <!-- Link para o arquivo CSS -->
     <link rel="stylesheet" href="Entrar.css">
@@ -13,160 +25,181 @@
     <!-- Link para o RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 
-
-    <title>Lumis</title>
+    <title>Lumis - Login</title>
 
 </head>
-    
-<body>
+
+<body data-page="cadastro">
     <header>
-        <div id="logo-headers">
+        <div id="logo-cabecalhos">
             <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
         </div>
 
         <nav>
             <!-- Botão hamburguer -->
-            <div class="menu-toggle" id="menuToggle">
+            <div class="alternar-menu" id="alternarMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
 
             <ul id="menu">
-                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
-                <li class="has-submenu">
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> <span data-i18n="nav-inicio">Início</span></a></li>
+                <li class="tem-submenu">
                     <a href="../Sobre/Sobre.html">
-                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                        <i class="ri-information-line"></i> <span data-i18n="nav-sobre">Sobre</span> <i class="ri-arrow-down-s-line"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="../Cidade_consciente/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                        <li><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
                     </ul>
                 </li>
                 <!-- Item adicional para mobile -->
-                <li class="mobile-only-item"><a href="../Cidade_consciente/Cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
-                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
-                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
-                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
-                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
-                <li><a class="bntCadastro" href="../Usuario_Funcionario/Decisao.html"><i class="ri-login-box-line"></i> Login</a></li>
+                <li class="item-somente-mobile"><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
+                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> <span data-i18n="nav-servicos">Serviços</span></a></li>
+                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> <span data-i18n="nav-planos">Planos</span></a></li>
+                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> <span data-i18n="nav-contato">Contato</span></a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> <span data-i18n="nav-ajuda">Ajuda</span></a></li>
+                <li><a class="botao-cadastro" href="../Usuario_Funcionario/Decisao.html"><i class="ri-login-box-line"></i> <span data-i18n="nav-login">Login</span></a></li>
             </ul>
+        
+            <div class="controles-nav">
+                <button class="botao-tema" id="alternarTema" aria-label="Alternar tema">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+
+                <div class="seletor-idioma">
+                    <button class="botao-idioma" id="alternarIdioma" aria-label="Selecionar idioma">
+                        &#127479;&#127479;
+                    </button>
+                    <div class="dropdown-idioma" id="dropdownIdioma">
+                        <a data-lang="pt" class="opcao-idioma ativo">
+                            <span class="bandeira">&#127463;&#127479;</span> <span data-i18n="lang-portugues">Português</span>
+                        </a>
+                        <a data-lang="en" class="opcao-idioma">
+                            <span class="bandeira">&#127482;&#127480;</span> <span data-i18n="lang-ingles">English</span>
+                        </a>
+                        <a data-lang="es" class="opcao-idioma">
+                            <span class="bandeira">&#127466;&#127480;</span> <span data-i18n="lang-espanhol">Español</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form action="../perfil/perfil.html" method="get">
-                <h1>Criar conta</h1>
-                <div class="social-login">
-                    <div class="social-buttons">
-                        <a class="social-btn google"><i class="ri-google-line"></i></a>
-                        <a class="social-btn facebook"><i class="ri-facebook-circle-fill"></i></a>
-                        <a class="social-btn apple"><i class="ri-apple-fill"></i></a>
-                        <a class="social-btn linkedin"><i class="ri-linkedin-fill"></i></a>
+    <main class="auth-pagina">
+
+        <!-- ========== HERO ========== -->
+        <section class="auth-hero">
+            <div class="auth-hero-fundo"></div>
+            <div class="hero-conteudo">
+                <span class="auth-tag"><i class="ri-login-box-line"></i> <span data-i18n="cadastro-acesse-conta">Acesse sua conta</span></span>
+                <h1><span data-i18n="cadastro-bem-vindo">Bem-vindo à</span> <span class="highlight">Lumis</span></h1>
+                <p data-i18n="cadastro-subtitulo">Entre ou crie sua conta para contratar serviços, acompanhar sua agenda e gerenciar tudo em um só lugar.</p>
+            </div>
+        </section>
+
+        <!-- ========== AUTH ========== -->
+        <section class="auth-secao">
+            <div class="container-secao">
+
+                <div class="auth-cartao" id="container">
+
+                    <!-- Cadastro -->
+                    <div class="container-formulario cadastrar">
+                        <form action="../perfil/perfil.html" method="get">
+                            <h1 data-i18n="cadastro-criar-conta">Criar conta</h1>
+                            <div class="login-social">
+                                <div class="botoes-sociais">
+                                    <a class="botao-social google" aria-label="Cadastrar com Google"><i class="ri-google-line"></i></a>
+                                    <a class="botao-social facebook" aria-label="Cadastrar com Facebook"><i class="ri-facebook-circle-fill"></i></a>
+                                    <a class="botao-social apple" aria-label="Cadastrar com Apple"><i class="ri-apple-fill"></i></a>
+                                    <a class="botao-social linkedin" aria-label="Cadastrar com LinkedIn"><i class="ri-linkedin-fill"></i></a>
+                                </div>
+                            </div>
+                            <span class="auth-divisor" data-i18n="cadastro-ou-email">ou use o email para se cadastrar</span>
+
+                            <div class="auth-campo">
+                                <label for="cadastro-nome" data-i18n="cadastro-nome-completo">Nome Completo</label>
+                                <input type="text" id="cadastro-nome" name="name" placeholder="Nome Completo" data-i18n-placeholder="cadastro-nome-completo-placeholder" required>
+                            </div>
+                            <div class="auth-campo">
+                                <label for="cadastro-email" data-i18n="cadastro-email">Email</label>
+                                <input type="email" id="cadastro-email" name="email" placeholder="seuemail@exemplo.com" required>
+                            </div>
+                            <div class="auth-campo">
+                                <label for="cadastro-senha" data-i18n="cadastro-senha">Senha</label>
+                                <input type="password" id="cadastro-senha" name="password" placeholder="••••••••" required>
+                            </div>
+
+                            <button type="submit" class="botao-primario auth-enviar" data-i18n="cadastro-btn-criar-conta">Criar conta</button>
+                        </form>
                     </div>
-                </div>
-                <span>ou use o email para se cadastrar</span>
-                <input type="name" placeholder="Nome Completo" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Senha" required>
-                <button type="submit">Cadastro</button>
-            </form>
-        </div>
 
-        <div class="form-container sign-in">
-            <form action="../perfil/perfil.html" method="get">
-                <h1>Entrar</h1>
-                <div class="social-login">
-                    <div class="social-buttons">
-                        <a class="social-btn google"><i class="ri-google-line"></i></a>
-                        <a class="social-btn facebook"><i class="ri-facebook-circle-fill"></i></a>
-                        <a class="social-btn apple"><i class="ri-apple-fill"></i></a>
-                        <a class="social-btn linkedin"><i class="ri-linkedin-fill"></i></a>
+                    <!-- Login -->
+                    <div class="container-formulario entrar">
+                        <form action="../perfil/perfil.html" method="get">
+                            <h1 data-i18n="cadastro-entrar">Entrar</h1>
+                            <div class="login-social">
+                                <div class="botoes-sociais">
+                                    <a class="botao-social google" aria-label="Entrar com Google"><i class="ri-google-line"></i></a>
+                                    <a class="botao-social facebook" aria-label="Entrar com Facebook"><i class="ri-facebook-circle-fill"></i></a>
+                                    <a class="botao-social apple" aria-label="Entrar com Apple"><i class="ri-apple-fill"></i></a>
+                                    <a class="botao-social linkedin" aria-label="Entrar com LinkedIn"><i class="ri-linkedin-fill"></i></a>
+                                </div>
+                            </div>
+                            <span class="auth-divisor" data-i18n="cadastro-ou-senha">ou use sua senha de e-mail</span>
+
+                            <div class="auth-campo">
+                                <label for="entrar-email" data-i18n="cadastro-email">Email</label>
+                                <input type="email" id="entrar-email" name="email" placeholder="seuemail@exemplo.com" required>
+                            </div>
+                            <div class="auth-campo">
+                                <label for="entrar-senha" data-i18n="cadastro-senha">Senha</label>
+                                <input type="password" id="entrar-senha" name="password" placeholder="••••••••" required>
+                            </div>
+
+                            <a href="#" class="auth-esqueci" data-i18n="cadastro-esqueceu-senha">Esqueceu sua senha?</a>
+                            <button type="submit" class="botao-primario auth-enviar" data-i18n="cadastro-btn-entrar">Entrar</button>
+                        </form>
                     </div>
-                </div>
-                <span>ou use sua senha de E-mail</span>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Senha" required>
-                <a href="#">esqueceu sua senha?</a>
-                <button type="submit">Entrar</button>
 
-            </form>
-        </div>
+                    <!-- Painel animado -->
+                    <div class="container-toggle">
+                        <div class="toggle">
+                            <div class="painel-toggle toggle-esquerda">
+                                <h2 data-i18n="cadastro-bem-vindo-volta">Bem-vindo de volta!</h2>
+                                <p data-i18n="cadastro-toggle-left-desc">Insira seus dados pessoais para usar todos os recursos do site</p>
+                                <button class="botao-toggle" id="login" data-i18n="cadastro-toggle-entrar">Entrar</button>
+                                <a href="../Cadastro_Trabalhador/Cadastro_Trabalhador.html" data-i18n="cadastro-entrar-contribuidor">Entrar como contribuidor</a>
+                            </div>
+                            <div class="painel-toggle toggle-direita">
+                                <h2 data-i18n="cadastro-ola-bem-vindo">Olá, seja bem-vindo!</h2>
+                                <p data-i18n="cadastro-toggle-right-desc">Cadastre-se com seus dados pessoais para acessar todos os recursos do site</p>
+                                <button class="botao-toggle" id="register" data-i18n="cadastro-toggle-criar-conta">Criar conta</button>
+                                <a href="../Cadastro_Trabalhador/Cadastro_Trabalhador.html" data-i18n="cadastro-criar-conta-contribuidor">Criar conta de contribuidor</a>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Bem vindo de volta!</h1>
-                    <p>Insira seus dados pessoais para usar todos os recursos do site</p>
-                    <button class="hidden" id="login">Entrar</button>  
-                    <a  href="../Cadastro_Trabalhador/Cadastro_Trabalhador.html">Entrar como contribuidor</a>
                 </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>Olá, seja bem-vindo!</h1>
-                    <p>Cadastre-se com seus dados pessoais para acessar todos os recursos do site</p>
-                    <button class="hidden" id="register">Criar conta</button>
-                    <a href="../Cadastro_Trabalhador/Cadastro_Trabalhador.html">Criar conta de contribuidor</a> 
+
+                <!-- Toggle mobile (apenas telas menores) -->
+                <div class="auth-toggle-mobile">
+                    <button class="auth-aba ativo" id="aba-login-mobile" data-i18n="cadastro-mobile-entrar">Entrar</button>
+                    <button class="auth-aba" id="aba-cadastro-mobile" data-i18n="cadastro-mobile-criar-conta">Criar conta</button>
                 </div>
+
+                <p class="auth-termos" data-i18n="cadastro-termos">Ao continuar, você concorda com nossos <a href="../Termo_Uso/Termo_uso.html">Termos de Uso</a> e <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>.</p>
+
             </div>
-        </div>
-    </div>
-    
-     <!-- Toggle mobile (só aparece em telas menores) -->
-        <div class="mobile-toggle">
-            <p>Não tem uma conta? <button id="mobile-register">Cadastre-se</button></p>
-            <p>Já tem uma conta? <button id="mobile-login">Entrar</button></p>
-        </div> 
+        </section>
 
-<!-- Cadastro e Entrar do celular -->
-    <section class="mobile-cadastro-section">
-        <div class="cadastro-container">
-            <div class="icon-cadastro">
-                <i class="ri-user-add-line"></i>
-            </div>
-            
-            <h2 class="Cadastrotitle">Criar Conta</h2>
-            <span class="texto-secundario">Preencha os dados abaixo para criar sua conta</span>
+    </main>
 
-            <form id="cadastroForm" action="../perfil/perfil.html" method="get">
-                <div class="grupo-formulario">
-                    <label for="nome">Nome Completo:</label>
-                    <input type="text" id="nome" placeholder="Guilherme Izidio Nogueira" name="nome" required>
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" placeholder="guilherme@gmail.com" name="email" required>
-
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" placeholder="Fo084@3$&l" name="senha" required>
-
-                    <label for="confirmarSenha">Confirmar Senha:</label>
-                    <input type="password" id="confirmarSenha" placeholder="Fo084@3$&l" name="confirmarSenha" required>
-                </div>
-
-                <button type="submit">Cadastrar</button>
-            </form>
-
-            <div class="social-login">
-                <div class="social-divider">Ou continue com</div>
-                <div class="social-buttons">
-                    <button class="social-btn google">
-                        <i class="ri-google-line"></i>
-                    </button>
-                    <button class="social-btn facebook">
-                        <i class="ri-facebook-circle-fill"></i>
-                    </button>
-                    <button class="social-btn apple">
-                        <i class="ri-apple-fill"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <p class="ja-tem-conta">Já tem uma conta? <a href="../Entrar/Entrar_Mobile.html">Faça login aqui</a></p>
-            
-            <div class="terms">
-                <p>Ao se cadastrar, você concorda com nossos <a href="../Termo_Uso/Termo_uso.html">Termos de Uso</a> e <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>.</p>
-            </div>
-        </div>
-    </section>
     <script src="Entrar.js"></script>
+    <script src="../tema-idioma.js"></script>
 </body>
 </html>

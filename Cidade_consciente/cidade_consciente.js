@@ -1,8 +1,8 @@
-
+﻿
         // Carrossel de Parceiros
         document.addEventListener("DOMContentLoaded", () => {
     const grid = document.querySelector(".parceiros-grid");
-    const dots = document.querySelectorAll(".dot");
+    const dots = document.querySelectorAll(".ponto");
 
     let currentSlide = 0;
 
@@ -24,7 +24,7 @@
         grid.style.transform = `translateX(-${offset}px)`;
 
         dots.forEach((dot, i) => {
-            dot.classList.toggle("active", i === currentSlide);
+            dot.classList.toggle("ativo", i === currentSlide);
         });
     }
 

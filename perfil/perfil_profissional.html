@@ -1,287 +1,465 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script>
+        try {
+            var temaSalvo = localStorage.getItem('tema');
+            document.documentElement.setAttribute('data-theme',
+                temaSalvo || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../IMG/Logo_Sem_Nome.png" type="image/x-icon">
-    
-    <!-- Link para o arquivo CSS -->
-    <link rel="stylesheet" href="perfil.css">
-    <!-- Link para o arquivo js-->
-     <script src="perfil.js"></script>
 
-    <!-- Link para o RemixIcon -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="perfil.css">
+    <script src="perfil.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <title>Lumis - Perfil</title>
+    <title>Lumis - Perfil Profissional</title>
 </head>
-<body>
+<body data-page="perfil-pro">
+
     <header>
-        <div id="logo-headers">
+        <div id="logo-cabecalhos">
             <a href="../index.html"><img src="../IMG/Logo_Sem_Nome.png" alt="Logo da Empresa" id="logo"></a>
         </div>
-
         <nav>
-            <!-- Botão hamburguer -->
-            <div class="menu-toggle" id="menuToggle">
+            <div class="alternar-menu" id="alternarMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-
             <ul id="menu">
-                <li><a href="../index.html"><i class="ri-home-2-line"></i> Início</a></li>
-                <li class="has-submenu">
+                <li><a href="../index.html"><i class="ri-home-2-line"></i> <span data-i18n="nav-inicio">Início</span></a></li>
+                <li class="tem-submenu">
                     <a href="../Sobre/Sobre.html">
-                        <i class="ri-information-line"></i> Sobre <i class="ri-arrow-down-s-line"></i>
+                        <i class="ri-information-line"></i> <span data-i18n="nav-sobre">Sobre</span> <i class="ri-arrow-down-s-line"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
+                        <li><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
                     </ul>
                 </li>
-                <!-- Item adicional para mobile -->
-                <li class="mobile-only-item"><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> Cidade consciente</a></li>
-                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> Serviços</a></li>
-                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> Planos</a></li>
-                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> Contato</a></li>
-                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> Ajuda</a></li>
-                <li><a class="bntCadastro" href="../Usuario_Funcionario/Decisao.html"><i class="ri-login-box-line"></i> Login</a></li>
+                <li class="item-somente-mobile"><a href="../Cidade_consciente/cidade_consciente.html"><i class="ri-earth-line"></i> <span data-i18n="nav-cidade">Cidade consciente</span></a></li>
+                <li><a href="../Servicos/Servicos.html"><i class="ri-tools-line"></i> <span data-i18n="nav-servicos">Serviços</span></a></li>
+                <li><a href="../Plano/Plano.html"><i class="ri-wallet-3-line"></i> <span data-i18n="nav-planos">Planos</span></a></li>
+                <li><a href="../Contato/Contato.html"><i class="ri-chat-2-line"></i> <span data-i18n="nav-contato">Contato</span></a></li>
+                <li><a href="../Ajuda/Ajuda.html"><i class="ri-question-line"></i> <span data-i18n="nav-ajuda">Ajuda</span></a></li>
+                <li><a class="botao-cadastro" href="../Usuario_Funcionario/Decisao.html"><i class="ri-login-box-line"></i> <span data-i18n="nav-login">Login</span></a></li>
             </ul>
+        
+            <div class="controles-nav">
+                <button class="botao-tema" id="alternarTema" aria-label="Alternar tema">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+
+                <div class="seletor-idioma">
+                    <button class="botao-idioma" id="alternarIdioma" aria-label="Selecionar idioma">
+                        &#127479;&#127479;
+                    </button>
+                    <div class="dropdown-idioma" id="dropdownIdioma">
+                        <a data-lang="pt" class="opcao-idioma ativo">
+                            <span class="bandeira">&#127463;&#127479;</span> <span data-i18n="lang-portugues">Português</span>
+                        </a>
+                        <a data-lang="en" class="opcao-idioma">
+                            <span class="bandeira">&#127482;&#127480;</span> <span data-i18n="lang-ingles">English</span>
+                        </a>
+                        <a data-lang="es" class="opcao-idioma">
+                            <span class="bandeira">&#127466;&#127480;</span> <span data-i18n="lang-espanhol">Español</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
-    
-        <main>
-        <div class="profile-container">
-            <!-- Seção de Perfil do Profissional -->
-            <div class="informações_profissional">
-                <section class="profile-card">
-                    <div class="user-header">
-                        <div class="avatar-container">
-                            <div class="avatar">
-                                <img src="../IMG/foto_profissional_recorrente.png" alt="Jorge Silva">
-                            </div>
-                            <button class="edit-avatar-btn" aria-label="Editar foto de perfil">
-                                <i class="ri-camera-line"></i>
-                            </button>
-                        </div>
-                        <div class="user-info">
-                            <h2>Jorge Silva</h2>
-                            <div class="rating">
-                                <div class="stars">
-                                    <i class="ri-star-fill"></i>
-                                    <i class="ri-star-fill"></i>
-                                    <i class="ri-star-fill"></i>
-                                    <i class="ri-star-fill"></i>
-                                    <i class="ri-star-fill"></i>
-                                </div>
-                                <span class="rating-text">4.9 (86 avaliações)</span>
-                            </div>
-                        </div>
-                        <button class="edit-profile-btn">
-                            <i class="ri-edit-line"></i> Editar perfil
+
+    <main class="perfil-pagina">
+
+        <!-- ========== PROFILE HERO ========== -->
+        <section class="perfil-hero">
+            <div class="hero-capa hero-capa--pro">
+                <div class="hero-cover-overlay"></div>
+            </div>
+            <div class="hero-perfil">
+                <div class="hero-avatar-envoltorio">
+                    <img src="../IMG/foto_profissional_recorrente.png" alt="Jorge Silva" class="hero-avatar">
+                    <button class="avatar-editar" aria-label="Editar foto">
+                        <i class="ri-camera-line"></i>
+                    </button>
+                </div>
+                <div class="hero-informacoes">
+                    <div class="hero-linha-nome">
+                        <h1>Jorge Silva</h1>
+                        <span class="selo selo-pro"><i class="ri-shield-star-line"></i> <span data-i18n="perfil-pro-badge-profissional">Profissional</span></span>
+                        <button class="botao-editar-perfil">
+                            <i class="ri-edit-line"></i> <span data-i18n="perfil-pro-editar-perfil">Editar perfil</span>
                         </button>
                     </div>
-                </section>
-                <!-- Informações Profissionais -->
-                <section class="infos_profissional">
-                    <table>
-                        <tr>
-                            <td class="infos"><h2>Especialidades</h2><p>Residencial, Empresarial, Pós-reforma</p></td>
-                        </tr>
-                        <tr>
-                            <td class="infos"><h2>Região de atuação</h2><p>São Paulo e arredores</p></td>
-                        </tr>
-                        <tr>
-                            <td class="infos"><h2>Valor mínimo</h2><p>R$ 150,00</p></td>
-                        </tr>
-                        <tr>
-                            <td class="infos"><h2>Não realiza</h2><p>Lavar roupa, estofados e dentro de armários</p></td>
-                        </tr>
-                        <tr>
-                            <td class="infos"><h2>Contato</h2><p>jorge.limpeza@gmail.com | +55 (11) 99999-0000</p></td>
-                        </tr>
-                    </table>
-                </section>
-                <!-- Próximas Visitas do Profissional -->
-                <section class="next_visits-card">
-                    <div class="proximas_visitas">
-                        <div class="section-title">
-                            <h2><i class="ri-calendar-event-line"></i> Próximas Visitas</h2>
+                    <div class="hero-meta">
+                        <span class="item-meta"><i class="ri-map-pin-2-fill"></i> São Paulo e arredores</span>
+                        <span class="divisor-meta"></span>
+                        <span class="item-meta"><i class="ri-calendar-fill"></i> <span data-i18n="perfil-pro-membro-desde">Membro desde 2021</span></span>
+                    </div>
+                    <div class="hero-avaliacao">
+                        <div class="estrelas-inline">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-line"></i>
                         </div>
-                        <div class="visits-container">
-                            <div class="visit-card">
-                                <div class="visit-date">
-                                    <span class="day">10</span>
-                                    <span class="month">Jun</span>
-                                    <span class="year">2025</span>
+                        <span class="nota-avaliacao">4.9</span>
+                        <span class="contagem-avaliacao" data-i18n="perfil-pro-rating-count">(86 avaliações)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== STATS BAR ========== -->
+        <section class="barra-estatisticas">
+            <div class="cartao-estatistica">
+                <div class="icone-estatistica"><i class="ri-service-line"></i></div>
+                <div class="info-estatistica">
+                    <span class="numero-estatistica" data-alvo="312">0</span>
+                    <span class="rotulo-estatistica" data-i18n="perfil-pro-stat-servicos">Serviços</span>
+                </div>
+            </div>
+            <div class="cartao-estatistica">
+                <div class="icone-estatistica"><i class="ri-star-smile-line"></i></div>
+                <div class="info-estatistica">
+                    <span class="numero-estatistica" data-alvo="86">0</span>
+                    <span class="rotulo-estatistica" data-i18n="perfil-pro-stat-avaliacoes">Avaliações</span>
+                </div>
+            </div>
+            <div class="cartao-estatistica">
+                <div class="icone-estatistica"><i class="ri-thumb-up-line"></i></div>
+                <div class="info-estatistica">
+                    <span class="numero-estatistica" data-alvo="98">0</span>
+                    <span class="rotulo-estatistica" data-i18n="perfil-pro-stat-aprovacao">% Aprovação</span>
+                </div>
+            </div>
+            <div class="cartao-estatistica">
+                <div class="icone-estatistica"><i class="ri-repeat-line"></i></div>
+                <div class="info-estatistica">
+                    <span class="numero-estatistica" data-alvo="67">0</span>
+                    <span class="rotulo-estatistica" data-i18n="perfil-pro-stat-recorrentes">Recorrentes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <div class="perfil-layout">
+
+            <!-- LEFT COLUMN -->
+            <div class="perfil-principal">
+
+                <!-- Professional Info -->
+                <section class="cartao card-info">
+                    <div class="cartao-cabecalho">
+                        <h2><i class="ri-briefcase-line"></i> <span data-i18n="perfil-pro-info-titulo">Informações Profissionais</span></h2>
+                        <button class="cartao-acao"><i class="ri-more-2-fill"></i></button>
+                    </div>
+                    <div class="grade-informacoes">
+                        <div class="item-informacao">
+                            <span class="rotulo-informacao" data-i18n="perfil-pro-info-label-especialidades">Especialidades</span>
+                            <span class="valor-informacao" data-i18n="perfil-pro-info-valor-especialidades">Residencial, Empresarial, Pós-reforma</span>
+                        </div>
+                        <div class="item-informacao">
+                            <span class="rotulo-informacao" data-i18n="perfil-pro-info-label-regiao">Região de atuação</span>
+                            <span class="valor-informacao">São Paulo e arredores</span>
+                        </div>
+                        <div class="item-informacao">
+                            <span class="rotulo-informacao" data-i18n="perfil-pro-info-label-valor">Valor mínimo</span>
+                            <span class="valor-informacao">R$ 150,00</span>
+                        </div>
+                        <div class="item-informacao">
+                            <span class="rotulo-informacao" data-i18n="perfil-pro-info-label-contato">Contato</span>
+                            <span class="valor-informacao">jorge.limpeza@gmail.com</span>
+                        </div>
+                        <div class="item-informacao">
+                            <span class="rotulo-informacao" data-i18n="perfil-pro-info-label-telefone">Telefone</span>
+                            <span class="valor-informacao">+55 (11) 99999-0000</span>
+                        </div>
+                        <div class="item-informacao">
+                            <span class="rotulo-informacao" data-i18n="perfil-pro-info-label-nao-realiza">Não realiza</span>
+                            <span class="valor-informacao" data-i18n="perfil-pro-info-valor-nao-realiza">Lavar roupa, estofados e dentro de armários</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upcoming Visits -->
+                <section class="cartao card-visits">
+                    <div class="cartao-cabecalho">
+                        <h2><i class="ri-calendar-event-line"></i> <span data-i18n="perfil-pro-visitas-titulo">Próximas Visitas</span></h2>
+                        <a href="#" class="cartao-link"><span data-i18n="perfil-pro-visitas-ver-todas">Ver todas</span> <i class="ri-arrow-right-s-line"></i></a>
+                    </div>
+                    <div class="lista-visitas">
+                        <div class="visita-item">
+                            <div class="visita-data-selo">
+                                <span class="visita-dia">10</span>
+                                <span class="visita-mes">Jun</span>
+                            </div>
+                            <div class="visita-conteudo">
+                                <div class="visita-topo">
+                                    <h4 data-i18n="perfil-pro-visita1-dia">Terça-feira</h4>
+                                    <span class="visita-status status-proximos" data-i18n="perfil-pro-visita-status-agendada">Agendada</span>
                                 </div>
-                                <div class="visit-details">
-                                    <h4>Terça-feira</h4>
-                                    <p>Limpeza rápida - 2 horas</p>
-                                    <div class="visit-time">
-                                        <i class="ri-time-line"></i> 14:00 - 16:00
-                                    </div>
-                                </div>
-                                <div class="visit-actions">
-                                    <button class="btn-confirm" title="Confirmar visita">
-                                        <i class="ri-check-line"></i>
-                                    </button>
-                                    <button class="btn-cancel" title="Cancelar visita">
-                                        <i class="ri-close-line"></i>
-                                    </button>
+                                <p data-i18n="perfil-pro-visita1-servico">Limpeza rápida - 2 horas</p>
+                                <div class="visita-hora">
+                                    <i class="ri-time-line"></i> 14:00 - 16:00
                                 </div>
                             </div>
-                            <div class="visit-card">
-                                <div class="visit-date">
-                                    <span class="day">20</span>
-                                    <span class="month">Jun</span>
-                                    <span class="year">2025</span>
+                            <div class="visita-acoes">
+                                <button class="botao-icone botao-confirmar" title="Confirmar"><i class="ri-check-line"></i></button>
+                                <button class="botao-icone botao-cancelar" title="Cancelar"><i class="ri-close-line"></i></button>
+                            </div>
+                        </div>
+                        <div class="visita-item">
+                            <div class="visita-data-selo">
+                                <span class="visita-dia">20</span>
+                                <span class="visita-mes">Jun</span>
+                            </div>
+                            <div class="visita-conteudo">
+                                <div class="visita-topo">
+                                    <h4 data-i18n="perfil-pro-visita2-dia">Sexta-feira</h4>
+                                    <span class="visita-status status-proximos" data-i18n="perfil-pro-visita-status-agendada">Agendada</span>
                                 </div>
-                                <div class="visit-details">
-                                    <h4>Sexta-feira</h4>
-                                    <p>Limpeza localizada - 3 horas</p>
-                                    <div class="visit-time">
-                                        <i class="ri-time-line"></i> 09:00 - 12:00
-                                    </div>
+                                <p data-i18n="perfil-pro-visita2-servico">Limpeza localizada - 3 horas</p>
+                                <div class="visita-hora">
+                                    <i class="ri-time-line"></i> 09:00 - 12:00
                                 </div>
-                                <div class="visit-actions">
-                                    <button class="btn-confirm" title="Confirmar visita">
-                                        <i class="ri-check-line"></i>
-                                    </button>
-                                    <button class="btn-cancel" title="Cancelar visita">
-                                        <i class="ri-close-line"></i>
-                                    </button>
-                                </div>
+                            </div>
+                            <div class="visita-acoes">
+                                <button class="botao-icone botao-confirmar" title="Confirmar"><i class="ri-check-line"></i></button>
+                                <button class="botao-icone botao-cancelar" title="Cancelar"><i class="ri-close-line"></i></button>
                             </div>
                         </div>
                     </div>
-                    <div class="calendar-preview">
-                        <img id="calendario" src="..\IMG\Calendário.jpeg" alt="Visualização do calendário">
-                        <button class="btn-secondary full-width">
-                            <i class="ri-calendar-2-line"></i> Ver calendário completo
-                        </button>
+                </section>
+
+                <!-- Activity Timeline -->
+                <section class="cartao card-activity">
+                    <div class="cartao-cabecalho">
+                        <h2><i class="ri-time-line"></i> <span data-i18n="perfil-pro-atividade-titulo">Atividade Recente</span></h2>
+                    </div>
+                    <div class="linha-do-tempo">
+                        <div class="linha-do-tempo-item">
+                            <div class="linha-do-tempo-ponto ponto-verde"></div>
+                            <div class="linha-do-tempo-conteudo">
+                                <span class="linha-do-tempo-data" data-i18n="perfil-pro-timeline-data1">Hoje, 09:30</span>
+                                <p data-i18n="perfil-pro-timeline-servico-concluido">Serviço concluído para <strong>Maria de Souza</strong> - Limpeza Residencial</p>
+                            </div>
+                        </div>
+                        <div class="linha-do-tempo-item">
+                            <div class="linha-do-tempo-ponto ponto-azul"></div>
+                            <div class="linha-do-tempo-conteudo">
+                                <span class="linha-do-tempo-data">22 Mai, 14:00</span>
+                                <p data-i18n="perfil-pro-timeline-avaliacao">Avaliação recebida de <strong>Ana Ribeiro</strong> - 5 estrelas</p>
+                            </div>
+                        </div>
+                        <div class="linha-do-tempo-item">
+                            <div class="linha-do-tempo-ponto ponto-verde"></div>
+                            <div class="linha-do-tempo-conteudo">
+                                <span class="linha-do-tempo-data">20 Mai, 10:00</span>
+                                <p data-i18n="perfil-pro-timeline-pos-reforma">Serviço pós-reforma concluído para <strong>Pedro Santos</strong></p>
+                            </div>
+                        </div>
+                        <div class="linha-do-tempo-item">
+                            <div class="linha-do-tempo-ponto ponto-laranja"></div>
+                            <div class="linha-do-tempo-conteudo">
+                                <span class="linha-do-tempo-data">15 Mai, 08:45</span>
+                                <p data-i18n="perfil-pro-timeline-agendamento">Novo agendamento confirmado para <strong>10 de Junho</strong></p>
+                            </div>
+                        </div>
+                        <div class="linha-do-tempo-item">
+                            <div class="linha-do-tempo-ponto ponto-azul"></div>
+                            <div class="linha-do-tempo-conteudo">
+                                <span class="linha-do-tempo-data">10 Mai, 16:20</span>
+                                <p data-i18n="perfil-pro-timeline-cliente-recorrente">Novo cliente recorrente: <strong>Lucas Martins</strong></p>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
-            <!-- Seção de Comentários -->
-            <div class="profissional-sidebar">
-                <div class="comentarios">
-                    <div class="section-title">
-                        <h2><i class="ri-chat-3-line"></i> Comentários de Clientes</h2>
+
+            <!-- RIGHT COLUMN (Sidebar) -->
+            <div class="perfil-lateral">
+
+                <!-- Agenda / Calendário -->
+                <section class="cartao card-calendar">
+                    <div class="cartao-cabecalho">
+                        <h2><i class="ri-calendar-check-line"></i> <span data-i18n="perfil-pro-agenda-titulo">Agenda</span></h2>
                     </div>
-                    <div class="comments-container">
-                        <div class="comment-card">
-                            <div class="comment-header">
-                                <span class="comment-date">15/05/2023</span>
-                                <div class="comment-rating">
+                    <div class="calendario-widget">
+                        <div class="calendario-cabecalho">
+                            <h3 id="mes-atual">Mês</h3>
+                            <div class="botoes-nav">
+                                <button id="mes-anterior" aria-label="Mês anterior"><i class="ri-arrow-left-s-line"></i></button>
+                                <button id="botao-hoje" data-i18n="perfil-pro-cal-hoje">Hoje</button>
+                                <button id="mes-proximo" aria-label="Próximo mês"><i class="ri-arrow-right-s-line"></i></button>
+                            </div>
+                        </div>
+                        <div class="dias-semana">
+                            <div data-i18n="perfil-pro-cal-dom">Dom</div>
+                            <div data-i18n="perfil-pro-cal-seg">Seg</div>
+                            <div data-i18n="perfil-pro-cal-ter">Ter</div>
+                            <div data-i18n="perfil-pro-cal-qua">Qua</div>
+                            <div data-i18n="perfil-pro-cal-qui">Qui</div>
+                            <div data-i18n="perfil-pro-cal-sex">Sex</div>
+                            <div data-i18n="perfil-pro-cal-sab">Sáb</div>
+                        </div>
+                        <div class="dias" id="dias-calendario"></div>
+                        <div class="hora-exibicao">
+                            <div class="hora-selecionada" id="hora-selecionada">12:00</div>
+                            <div class="data-selecionada" id="data-selecionada">Nenhuma data selecionada</div>
+                            <button class="select-button" id="abrir-modal" data-i18n="perfil-pro-selecionar-horario">Selecionar Horário</button>
+                        </div>
+                        <div class="calendario-rodape">
+                            <div class="indicador-evento">
+                                <div class="ponto-evento"></div>
+                                <span data-i18n="perfil-pro-cal-dia-evento">Dia com evento</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Client Reviews -->
+                <section class="cartao card-reviews">
+                    <div class="cartao-cabecalho">
+                        <h2><i class="ri-chat-3-line"></i> <span data-i18n="perfil-pro-avaliacoes-clientes-titulo">Avaliações de Clientes</span></h2>
+                    </div>
+                    <div class="lista-avaliacoes">
+                        <div class="avaliacao-item">
+                            <div class="avaliacao-topo">
+                                <div class="avaliacao-estrelas">
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                 </div>
+                                <span class="avaliacao-data">15/05/2023</span>
                             </div>
-                            <p class="comment-text">Ótimo serviço! O Jorge foi extremamente profissional e cuidadoso com meus móveis. A limpeza ficou impecável e ele ainda deu dicas para manter a casa organizada por mais tempo.</p>
-                            <button class="read-more-btn">Ler mais <i class="ri-arrow-right-s-line"></i></button>
+                            <p class="avaliacao-texto" data-i18n="perfil-pro-review1-texto">Ótimo serviço! O Jorge foi extremamente profissional e cuidadoso com meus móveis. A limpeza ficou impecável e ele ainda deu dicas para manter a casa organizada por mais tempo.</p>
+                            <button class="avaliacao-toggle"><span data-i18n="perfil-pro-review-ler-mais">Ler mais</span> <i class="ri-arrow-down-s-line"></i></button>
                         </div>
-                        <div class="comment-card">
-                            <div class="comment-header">
-                                <span class="comment-date">02/04/2023</span>
-                                <div class="comment-rating">
+                        <div class="avaliacao-item">
+                            <div class="avaliacao-topo">
+                                <div class="avaliacao-estrelas">
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-line"></i>
                                 </div>
+                                <span class="avaliacao-data">02/04/2023</span>
                             </div>
-                            <p class="comment-text">Serviço muito bom, mas atrasou 20 minutos. A limpeza em si foi excelente, superou minhas expectativas. Recomendo, mas espero que sejam mais pontuais da próxima vez.</p>
-                            <button class="read-more-btn">Ler mais <i class="ri-arrow-right-s-line"></i></button>
+                            <p class="avaliacao-texto" data-i18n="perfil-pro-review2-texto">Serviço muito bom, mas atrasou 20 minutos. A limpeza em si foi excelente, superou minhas expectativas. Recomendo, mas espero que sejam mais pontuais da próxima vez.</p>
+                            <button class="avaliacao-toggle"><span data-i18n="perfil-pro-review-ler-mais">Ler mais</span> <i class="ri-arrow-down-s-line"></i></button>
                         </div>
-                        <div class="comment-card">
-                            <div class="comment-header">
-                                <span class="comment-date">18/03/2023</span>
-                                <div class="comment-rating">
+                        <div class="avaliacao-item">
+                            <div class="avaliacao-topo">
+                                <div class="avaliacao-estrelas">
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-half-line"></i>
                                 </div>
+                                <span class="avaliacao-data">18/03/2023</span>
                             </div>
-                            <p class="comment-text">Contratei o serviço de limpeza pós-reforma e fiquei muito satisfeita. O profissional foi atencioso e meticuloso. Só não dou 5 estrelas porque algumas manchas mais difíceis não saíram completamente.</p>
-                            <button class="read-more-btn">Ler mais <i class="ri-arrow-right-s-line"></i></button>
+                            <p class="avaliacao-texto" data-i18n="perfil-pro-review3-texto">Contratei o serviço de limpeza pós-reforma e fiquei muito satisfeita. O profissional foi atencioso e meticuloso. Só não dou 5 estrelas porque algumas manchas mais difíceis não saíram completamente.</p>
+                            <button class="avaliacao-toggle"><span data-i18n="perfil-pro-review-ler-mais">Ler mais</span> <i class="ri-arrow-down-s-line"></i></button>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
-        </main>
-    
-    <footer id="Footer">
-        <div class="footer-content">
+    </main>
 
-    <footer id="Footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-footer">
-                <p><span class="P-Color">Especialistas em limpeza sustentável</span></p>
-                <div class="socials">
+    <footer>
+        <div class="rodape-conteudo">
+            <div class="rodape-secao">
+                <img src="../IMG/Logo_com_nome.png" alt="Logo da Lumis" class="logo-rodape">
+                <p><span class="cor-p" data-i18n="footer-tagline">Especialistas em limpeza sustentável</span></p>
+                <div class="redes-sociais">
                     <a href="https://www.facebook.com/profile.php?id=61580024704625" target="_blank"><i class="ri-facebook-circle-fill"></i></a>
-                    <a href="https://www.instagram.com/lumisstartup/?next=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
-                    <a href="#"><i class="ri-linkedin-fill"></i></a target="_blank">
+                    <a href="https://www.instagram.com/lumisstartup/?proximo=%2F" target="_blank"><i class="ri-instagram-fill"></i></a>
+                    <a href="#"><i class="ri-linkedin-fill"></i></a>
                     <a href="https://x.com/LumisStartup" target="_blank"><i class="ri-twitter-x-fill"></i></a>
                 </div>
             </div>
-            
-            <div class="footer-section links">
-                <h2 class="Footer-Titulo">Links Rápidos</h2>
+            <div class="rodape-secao links">
+                <h2 class="rodape-titulo" data-i18n="footer-links">Links Rápidos</h2>
                 <ul>
-                    <li><a href="../index.html">Início</a></li>
-                    <li><a href="../Sobre/Sobre.html">Sobre</a></li>
-                    <li><a href="../Servicos/Servicos.html">Serviços</a></li>
-                    <li><a href="#">Planos</a></li>
-                    <li><a href="../Contato/Contato.html">Contato</a></li>
+                    <li><a href="../index.html" data-i18n="footer-inicio">Início</a></li>
+                    <li><a href="../Sobre/Sobre.html" data-i18n="footer-sobre">Sobre</a></li>
+                    <li><a href="../Servicos/Servicos.html" data-i18n="footer-servicos">Serviços</a></li>
+                    <li><a href="../Plano/Plano.html" data-i18n="footer-planos">Planos</a></li>
+                    <li><a href="../Contato/Contato.html" data-i18n="footer-contato">Contato</a></li>
                 </ul>
             </div>
-            
-            <div class="footer-section">
-                <h2 class="Footer-Titulo">Tipos de Serviços</h2>
+            <div class="rodape-secao">
+                <h2 class="rodape-titulo" data-i18n="footer-tipos">Tipos de Serviços</h2>
                 <ul>
-                    <li><a href="../Pages_Footer/estofados.html">Estofados</a></li>
-                    <li><a href="../Pages_Footer/vidros.html">Vidros</a></li>
-                    <li><a href="../Pages_Footer/carros.html">Carros</a></li>
-                    <li><a href="../Pages_Footer/escritorios.html">Escritórios</a></li>
-                    <li><a href="../Pages_Footer/escritorios.html">Empresarial</a></li>
+                    <li><a href="../Pages_Footer/estofados.html" data-i18n="footer-estofados">Estofados</a></li>
+                    <li><a href="../Pages_Footer/vidros.html" data-i18n="footer-vidros">Vidros</a></li>
+                    <li><a href="../Pages_Footer/carros.html" data-i18n="footer-carros">Carros</a></li>
+                    <li><a href="../Pages_Footer/escritorios.html" data-i18n="footer-escritorios">Escritórios</a></li>
+                    <li><a href="../Pages_Footer/empresarial.html" data-i18n="footer-empresarial">Empresarial</a></li>
                 </ul>
             </div>
-            
-            <div class="footer-section">
-                <h2 class="Footer-Titulo">Localização</h2>
-                <p class="P-Color">Av. Amador Bueno da Veiga;</p>
-                <p class="P-Color">Endereço: 4430;</p>
-                <p class="P-Color">Cidade: São Paulo - SP;</p>
-                <p class="P-Color">CEP: 03890-000</p>
+            <div class="rodape-secao">
+                <h2 class="rodape-titulo" data-i18n="footer-localizacao">Localização</h2>
+                <p class="cor-p" data-i18n="footer-endereco-rua">Av. Amador Bueno da Veiga;</p>
+                <p class="cor-p" data-i18n="footer-endereco">Endereço: 4430;</p>
+                <p class="cor-p" data-i18n="footer-cidade">Cidade: São Paulo - SP;</p>
+                <p class="cor-p" data-i18n="footer-cep">CEP: 03890-000</p>
             </div>
-            
-            <div class="footer-section">
-                <h2 class="Footer-Titulo">Contato</h2>
-                <p class="P-Color">Telefone: (11) 98121-4352</p>
-                <p class="P-Color">Email: <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
+            <div class="rodape-secao">
+                <h2 class="rodape-titulo" data-i18n="footer-contato-t">Contato</h2>
+                <p class="cor-p" data-i18n="footer-telefone">Telefone: (11) 98121-4352</p>
+                <p class="cor-p"><span data-i18n="footer-email">Email:</span> <a href="mailto:lumisstartup@gmail.com">lumisstartup@gmail.com</a></p>
             </div>
         </div>
-        
-        <div class="subfooter">
-            <p class="P-Color">© Lumis. Todos os direitos reservados.</p>
-            <div class="subfooter-links">
-                <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html">Política de Privacidade</a>
+        <div class="sub-rodape">
+            <p class="cor-p">&copy; Lumis. Todos os direitos reservados.</p>
+            <div class="sub-rodape-links">
+                <a href="../Politica_de_Privacidade/Politica_de_Privacidade.html" data-i18n="footer-politica">Política de Privacidade</a>
                 <span>|</span>
-                <a href="../Termo_Uso/Termo_uso.html">Termos de Uso</a>
+                <a href="../Termo_Uso/Termo_uso.html" data-i18n="footer-termos">Termos de Uso</a>
             </div>
         </div>
     </footer>
-    
+
+    <!-- Modal de seleção de horário -->
+    <div class="modal" id="modal-hora">
+        <div class="modal-conteudo">
+            <button class="botao-fechar" id="fechar-modal" aria-label="Fechar">&times;</button>
+            <h2 class="modal-titulo" data-i18n="perfil-pro-modal-titulo">Selecionar Horário</h2>
+            <div class="hora-campos">
+                <div class="hora-campo">
+                    <label for="modal-horas" data-i18n="perfil-pro-modal-horas">Horas</label>
+                    <input type="number" id="modal-horas" min="0" max="23" value="12" placeholder="Horas" data-i18n-placeholder="perfil-pro-modal-horas-placeholder">
+                </div>
+                <div class="hora-campo">
+                    <label for="modal-minutos" data-i18n="perfil-pro-modal-minutos">Minutos</label>
+                    <input type="number" id="modal-minutos" min="0" max="59" value="0" placeholder="Minutos" data-i18n-placeholder="perfil-pro-modal-minutos-placeholder">
+                </div>
+            </div>
+            <div class="modal-botoes">
+                <button class="modal-botao botao-cancelar" id="cancelar-modal" data-i18n="perfil-pro-modal-cancelar">Cancelar</button>
+                <button class="modal-botao botao-confirmar" id="confirmar-hora" data-i18n="perfil-pro-modal-confirmar">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../Servicos/calendario_horas.js"></script>
+    <script src="../tema-idioma.js"></script>
 </body>
 </html>
-
-
-

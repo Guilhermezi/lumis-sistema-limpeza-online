@@ -1,4 +1,4 @@
-
+﻿
 document.addEventListener('DOMContentLoaded', function() {
     // VARIÁVEIS COMPARTILHADAS E ELEMENTOS DO DOM
     let currentDate = new Date();
@@ -19,22 +19,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const eventDays = [5, 12, 19, 25];
 
     // Elementos do Calendário
-    const monthElement = document.getElementById('current-month');
-    const daysContainer = document.getElementById('calendar-days');
-    const prevMonthButton = document.getElementById('prev-month');
-    const nextMonthButton = document.getElementById('next-month');
-    const todayButton = document.getElementById('today-btn');
+    const monthElement = document.getElementById('mes-atual');
+    const daysContainer = document.getElementById('dias-calendario');
+    const prevMonthButton = document.getElementById('mes-anterior');
+    const nextMonthButton = document.getElementById('mes-proximo');
+    const todayButton = document.getElementById('botao-hoje');
 
     // Elementos do Seletor de Hora
-    const selectedDateElement = document.getElementById('selected-date');
-    const selectedTimeElement = document.getElementById('selected-time');
-    const openModalButton = document.getElementById('open-modal');
-    const closeModalButton = document.getElementById('close-modal');
-    const cancelModalButton = document.getElementById('cancel-modal');
-    const confirmTimeButton = document.getElementById('confirm-time');
-    const timeModal = document.getElementById('time-modal');
-    const modalHoursInput = document.getElementById('modal-hours');
-    const modalMinutesInput = document.getElementById('modal-minutes');
+    const selectedDateElement = document.getElementById('data-selecionada');
+    const selectedTimeElement = document.getElementById('hora-selecionada');
+    const openModalButton = document.getElementById('abrir-modal');
+    const closeModalButton = document.getElementById('fechar-modal');
+    const cancelModalButton = document.getElementById('cancelar-modal');
+    const confirmTimeButton = document.getElementById('confirmar-hora');
+    const timeModal = document.getElementById('modal-hora');
+    const modalHoursInput = document.getElementById('modal-horas');
+    const modalMinutesInput = document.getElementById('modal-minutos');
 
     // FUNÇÕES DO CALENDÁRIO
     function renderCalendar() {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         for (let i = 0; i < firstDay; i++) {
             const emptyDay = document.createElement('div');
-            emptyDay.classList.add('empty');
+            emptyDay.classList.add('vazio');
             daysContainer.appendChild(emptyDay);
         }
 
@@ -58,18 +58,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentYear === today.getFullYear() &&
                 currentMonth === today.getMonth() &&
                 i === today.getDate()) {
-                dayElement.classList.add('today');
+                dayElement.classList.add('hoje');
             }
 
             if (eventDays.includes(i)) {
-                dayElement.classList.add('has-event');
+                dayElement.classList.add('tem-evento');
             }
             
             // Verifica se este dia é o dia selecionado atualmente e adiciona a classe
             if (currentYear === selectedDate.getFullYear() &&
                 currentMonth === selectedDate.getMonth() &&
                 i === selectedDate.getDate()) {
-                dayElement.classList.add('selected');
+                dayElement.classList.add('selecionado');
             }
 
             dayElement.addEventListener('click', function() {
@@ -81,15 +81,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function selectDate(day) {
-        const previouslySelected = document.querySelector('.selected');
+        const previouslySelected = document.querySelector('.selecionado');
         if (previouslySelected) {
-            previouslySelected.classList.remove('selected');
+            previouslySelected.classList.remove('selecionado');
         }
 
         const days = daysContainer.childNodes;
         for (let i = 0; i < days.length; i++) {
-            if (days[i].textContent == day && !days[i].classList.contains('empty')) {
-                days[i].classList.add('selected');
+            if (days[i].textContent == day && !days[i].classList.contains('vazio')) {
+                days[i].classList.add('selecionado');
                 selectedDate = new Date(currentYear, currentMonth, day);
                 break;
             }
