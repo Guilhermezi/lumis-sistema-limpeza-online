@@ -34,7 +34,7 @@ O objetivo é oferecer praticidade, transparência e eficiência tanto para clie
 1. Clone o repositório:
    ```bash
    git clone https://github.com/Guilhermezi/lumis-sistema-limpeza-online.git
-Abra o arquivo index.html em seu navegador.
+Abra o arquivo View/index.html em seu navegador.
 (ou utilize uma extensão como Live Server para rodar localmente).
 
 ## 📜 Licença
@@ -93,7 +93,7 @@ The goal is to offer practicality, transparency, and efficiency for both clients
 ``bash
 
 git clone https://github.com/Guilhermezi/lumis-sistema-limpeza-online.git
-Open the index.html file in your browser.
+Open the View/index.html file in your browser.
 
 (or use an extension like Live Server to run locally).
 
