@@ -1,3 +1,14 @@
+// ====================== Loading Screen ======================
+window.addEventListener('load', function() {
+    const ls = document.getElementById('loading-screen');
+    if (ls) {
+        setTimeout(function() {
+            ls.classList.add('hidden');
+            setTimeout(function() { ls.remove(); }, 600);
+        }, 600);
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menuToggle');
             const menu = document.getElementById('menu');
