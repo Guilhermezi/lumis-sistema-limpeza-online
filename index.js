@@ -1,4 +1,15 @@
-﻿document.addEventListener('DOMContentLoaded', function() {
+﻿// ====================== Tela de Carregamento ======================
+window.addEventListener('load', function() {
+    const tc = document.getElementById('tela-carregamento');
+    if (tc) {
+        setTimeout(function() {
+            tc.classList.add('oculto');
+            setTimeout(function() { tc.remove(); }, 600);
+        }, 600);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('alternarMenu');
             const menu = document.getElementById('menu');
             
