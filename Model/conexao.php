@@ -2,7 +2,7 @@
     // Conexão com o banco de dados
     $host = "localhost"; 
     // nome do banco de dados
-    $dbname = "db_lumis";
+    $dbname = "lumis";
     // nome do usuário do banco de dados
     $user = "root";
     // senha do usuário do banco de dados
