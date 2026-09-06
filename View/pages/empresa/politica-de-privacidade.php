@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>
+        try {
+            var temaSalvo = localStorage.getItem('tema');
+            document.documentElement.setAttribute('data-theme',
+                temaSalvo || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - Projeto Lumis</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/politica-de-privacidade.css">
+    <link rel="shortcut icon" href="../../img/Logo_Sem_Nome.png" type="image/x-icon">
+</head>
+<body data-page="politica">
+            <?php
+$base = '../';
+$active = '';
+$tituloI18n = 'politica-titulo';
+$titulo = 'Política de Privacidade - Projeto Lumis';
+include __DIR__ . '/../../partials/header-minimo.php';
+?>
+
+    <div class="container">
+        <p class="last-update" data-i18n="politica-atualizacao">Última atualização: 15 de Setembro de 2025</p>
+
+        <section id="introducao">
+            <p data-i18n="politica-introducao-texto">O Projeto Lumis valoriza a privacidade e a segurança dos dados de seus usuários. Esta Política de Privacidade explica como coletamos, usamos, compartilhamos e protegemos suas informações pessoais.</p>
+        </section>
+
+        <section id="coleta-uso">
+            <h2 data-i18n="politica-coleta-titulo">1. Coleta e Uso de Informações Pessoais</h2>
+            <p data-i18n="politica-coleta-intro">Coletamos os seguintes tipos de informações para fornecer e melhorar nossos serviços:</p>
+            
+            <h3 data-i18n="politica-coleta-voluntarios-titulo">1.1. Dados fornecidos voluntariamente:</h3>
+            <ul>
+                <li><span data-i18n="politica-coleta-voluntario-1"><strong>Dados de identificação:</strong> Nome completo, e-mail, telefone, endereço</span></li>
+                <li><span data-i18n="politica-coleta-voluntario-2"><strong>Dados profissionais:</strong> Para profissionais de Limpeza, coletamos informações sobre especialidade e serviços oferecidos</span></li>
+                <li><span data-i18n="politica-coleta-voluntario-3"><strong>Dados de agendamento:</strong> Data, horário, tipo de serviço solicitado e endereço</span></li>
+                <li><span data-i18n="politica-coleta-voluntario-4"><strong>Preferências de atendimento:</strong> Informações sobre restrições ou preferências de atendimento</span></li>
+            </ul>
+            
+            <h3 data-i18n="politica-coleta-automaticos-titulo">1.2. Dados coletados automaticamente:</h3>
+            <ul>
+                <li><span data-i18n="politica-coleta-automatico-1"><strong>Dados de uso:</strong> Informações sobre como você utiliza nossa plataforma</span></li>
+                <li><span data-i18n="politica-coleta-automatico-2"><strong>Dados de dispositivo:</strong> Endereço IP, tipo de navegador, versão do sistema operacional</span></li>
+            </ul>
+            
+            <h3 data-i18n="politica-coleta-finalidades-titulo">1.3. Finalidades do uso dos dados:</h3>
+            <ul>
+                <li data-i18n="politica-coleta-finalidade-1">Facilitar o agendamento, remarcação e cancelamento de consultas</li>
+                <li data-i18n="politica-coleta-finalidade-2">Comunicação entre contratante e profissionais de limpeza</li>
+                <li data-i18n="politica-coleta-finalidade-3">Melhorar nossos serviços e experiência do usuário</li>
+                <li data-i18n="politica-coleta-finalidade-4">Cumprir obrigações legais e regulatórias</li>
+            </ul>
+        </section>
+
+        <section id="compartilhamento">
+            <h2 data-i18n="politica-compartilhamento-titulo">2. Compartilhamento de Dados</h2>
+            <p data-i18n="politica-compartilhamento-intro">Seus dados pessoais podem ser compartilhados apenas nas seguintes situações:</p>
+            <ul>
+                <li><span data-i18n="politica-compartilhamento-1"><strong>Com profissionais de limpeza:</strong> Para viabilizar o agendamento e atendimento, compartilhamos informações necessárias com o profissional escolhido</span></li>
+                <li><span data-i18n="politica-compartilhamento-2"><strong>Prestadores de serviços:</strong> Com empresas que nos auxiliam na operação da plataforma (hospedagem, análise de dados), sempre com contratos de confidencialidade</span></li>
+                <li><span data-i18n="politica-compartilhamento-3"><strong>Obrigação legal:</strong> Quando necessário para cumprir determinação judicial, requisição de autoridade competente ou para proteger nossos direitos</span></li>
+                <li><span data-i18n="politica-compartilhamento-4"><strong>Com seu consentimento:</strong> Em outras situações, somente com sua autorização prévia</span></li>
+            </ul>
+            <p data-i18n="politica-compartilhamento-nota">Não vendemos, alugamos ou comercializamos seus dados pessoais para terceiros.</p>
+        </section>
+
+        <section id="protecao">
+            <h2 data-i18n="politica-protecao-titulo">3. Proteção e Segurança das Informações</h2>
+            <p data-i18n="politica-protecao-intro">Implementamos medidas técnicas e administrativas para proteger suas informações pessoais:</p>
+            <ul>
+                <li data-i18n="politica-protecao-1">Uso de criptografia para transmissão e armazenamento de dados sensíveis</li>
+                <li data-i18n="politica-protecao-2">Controles de acesso para limitar quem pode acessar suas informações</li>
+                <li data-i18n="politica-protecao-3">Monitoramento regular de nossos sistemas para detectar vulnerabilidades</li>
+                <li data-i18n="politica-protecao-4">Treinamento de nossa equipe sobre práticas de proteção de dados</li>
+            </ul>
+            <p data-i18n="politica-protecao-nota">Apesar de nossas medidas, nenhum sistema de segurança é infalível. Em caso de incidente de segurança que possa causar risco relevante, comunicaremos aos afetados e à autoridade nacional de proteção de dados.</p>
+        </section>
+
+        <section id="direitos-usuario">
+            <h2 data-i18n="politica-direitos-titulo">4. Direitos do Usuário</h2>
+            <p data-i18n="politica-direitos-intro">Você tem os seguintes direitos em relação aos seus dados pessoais:</p>
+            <ul>
+                <li><span data-i18n="politica-direito-1"><strong>Acesso:</strong> Solicitar uma cópia das informações que mantemos sobre você</span></li>
+                <li><span data-i18n="politica-direito-2"><strong>Correção:</strong> Solicitar a retificação de dados incompletos, inexatos ou desatualizados</span></li>
+                <li><span data-i18n="politica-direito-3"><strong>Exclusão:</strong> Solicitar a eliminação de dados desnecessários ou excessivos, ou tratados em desconformidade com a lei</span></li>
+                <li><span data-i18n="politica-direito-4"><strong>Portabilidade:</strong> Solicitar a transferência de seus dados para outro fornecedor de serviço</span></li>
+                <li><span data-i18n="politica-direito-5"><strong>Revogação de consentimento:</strong> Retirar seu consentimento a qualquer momento, quando o tratamento estiver baseado nessa fundamentação</span></li>
+            </ul>
+            <p data-i18n="politica-direitos-nota">Para exercer esses direitos, entre em contato conosco através dos canais indicados no final desta política.</p>
+        </section>
+
+        <section id="cookies">
+            <h2 data-i18n="politica-cookies-titulo">5. Uso de Cookies e Tecnologias Similares</h2>
+            <p data-i18n="politica-cookies-intro">Utilizamos cookies e tecnologias similares para melhorar sua experiência em nossa plataforma:</p>
+            <ul>
+                <li><span data-i18n="politica-cookie-1"><strong>Cookies essenciais:</strong> Necessários para o funcionamento básico da plataforma</span></li>
+                <li><span data-i18n="politica-cookie-2"><strong>Cookies de desempenho:</strong> Coletam informações sobre como os visitantes usam nossa plataforma</span></li>
+                <li><span data-i18n="politica-cookie-3"><strong>Cookies de funcionalidade:</strong> Lembram choices que você faz para melhorar sua experiência</span></li>
+            </ul>
+            <p data-i18n="politica-cookies-nota">Você pode configurar seu navegador para recusar cookies, mas isso pode limitar sua experiência em nossa plataforma.</p>
+        </section>
+
+        <section id="alteracoes-politica">
+            <h2 data-i18n="politica-alteracoes-titulo">6. Alterações na Política de Privacidade</h2>
+            <p data-i18n="politica-alteracoes-texto">Podemos atualizar esta Política de Privacidade periodicamente. Notificaremos sobre mudanças significativas publicando a nova política em nossa plataforma ou enviando uma comunicação direta. O uso continuado de nossos serviços após tais modificações constitui aceitação da nova política.</p>
+        </section>
+
+        <section id="contato">
+            <h2 data-i18n="politica-contato-titulo">7. Canal de Contato</h2>
+            <p data-i18n="politica-contato-intro">Para exercer seus direitos, tirar dúvidas ou fazer reclamações sobre esta Política de Privacidade ou o tratamento de seus dados pessoais, entre em contato conosco:</p>
+            <ul>
+                <li><span data-i18n="politica-contato-encarregado"><strong>Encarregado de Proteção de Dados:</strong> Guilherme Izidio</span></li>
+                <li><span data-i18n="politica-contato-email"><strong>E-mail:</strong> lumisstartup@gmail.com</span></li>
+                <li><span data-i18n="politica-contato-telefone"><strong>Telefone:</strong> (11) 98121-4352</span></li>
+                <li><span data-i18n="politica-contato-endereco"><strong>Endereço:</strong> Rua: Av. Amador Bueno da Veiga, N°4430, São Paulo</span></li>
+            </ul>
+        </section>
+    </div>
+
+    <?php include __DIR__ . '/../../partials/footer.php'; ?>
+    <script src="../../../Controller/tema-idioma.js"></script>
+</body>
+</html>

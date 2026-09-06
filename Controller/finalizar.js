@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.removeItem('carrinho');
             
             // Redireciona
-            window.location.href = 'Servicos.html';
+            window.location.href = 'empresa/servicos.php';
             
             fecharModal();
         });

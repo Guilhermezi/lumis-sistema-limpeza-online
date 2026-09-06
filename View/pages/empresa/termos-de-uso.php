@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>
+        try {
+            var temaSalvo = localStorage.getItem('tema');
+            document.documentElement.setAttribute('data-theme',
+                temaSalvo || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Uso </title>
+    <link rel="shortcut icon" href="../../img/Logo_Sem_Nome.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/termos-de-uso.css">
+</head>
+<body data-page="termo">
+            <?php
+$base = '../';
+$active = '';
+$tituloI18n = 'termo-titulo';
+$titulo = 'Termos de Uso - Projeto Lumis';
+include __DIR__ . '/../../partials/header-minimo.php';
+?>
+
+    <div class="container">
+        <section id="aceitacao-termos">
+            <h2 data-i18n="termo-aceitacao-titulo">1. Aceitação dos Termos</h2>
+            <p data-i18n="termo-aceitacao-texto">Ao acessar e utilizar a plataforma Lumis, você concorda em cumprir e ficar vinculado a estes Termos de Uso. Se você não concordar com qualquer parte destes termos, não poderá utilizar nossos serviços.</p>
+        </section>
+
+        <section id="cadastro-usuarios">
+            <h2 data-i18n="termo-cadastro-titulo">2. Cadastro de Usuários</h2>
+            <p data-i18n="termo-cadastro-intro">Para utilizar os serviços do Projeto Lumis, é necessário criar uma conta fornecendo informações precisas e completas:</p>
+            <ul>
+                <li data-i18n="termo-cadastro-1">Pacientes devem fornecer nome completo, e-mail, telefone e endereço</li>
+                <li data-i18n="termo-cadastro-2">Profissionais devem fornecer além dos dados pessoais, informações sobre formação, especialidade e registro profissional</li>
+                <li data-i18n="termo-cadastro-3">É de responsabilidade do usuário manter suas informações atualizadas</li>
+                <li data-i18n="termo-cadastro-4">Cada usuário pode manter apenas uma conta na plataforma</li>
+                <li data-i18n="termo-cadastro-5">Menores de 18 anos devem ter consentimento dos responsáveis para utilizar a plataforma</li>
+            </ul>
+        </section>
+
+        <section id="uso-plataforma">
+            <h2 data-i18n="termo-uso-titulo">3. Uso da Plataforma</h2>
+            <p data-i18n="termo-uso-intro">O Projeto Lumis disponibiliza uma plataforma para agendamento de consultas médicas, odontológicas e de estética. Ao utilizar nossos serviços, você concorda em:</p>
+            <ul>
+                <li data-i18n="termo-uso-1">Utilizar a plataforma apenas para fins legítimos de agendamento de consultas</li>
+                <li data-i18n="termo-uso-2">Fornecer informações verdadeiras e precisas</li>
+                <li data-i18n="termo-uso-3">Respeitar os horários agendados e as políticas de cancelamento</li>
+                <li data-i18n="termo-uso-4">Não utilizar a plataforma para atividades fraudulentas ou ilegais</li>
+                <li data-i18n="termo-uso-5">Não reproduzir, duplicar, copiar, vender ou revender nossos serviços</li>
+            </ul>
+        </section>
+
+        <section id="responsabilidades">
+            <h2 data-i18n="termo-responsabilidades-titulo">4. Responsabilidades</h2>
+            <h3 data-i18n="termo-responsabilidades-usuarios-titulo">4.1. Dos Usuários</h3>
+            <ul>
+                <li data-i18n="termo-responsabilidade-usuario-1">Mantêm a confidencialidade de suas credenciais de acesso</li>
+                <li data-i18n="termo-responsabilidade-usuario-2">São responsáveis por todas as atividades realizadas em sua conta</li>
+                <li data-i18n="termo-responsabilidade-usuario-3">Devem comunicar imediatamente qualquer uso não autorizado de sua conta</li>
+                <li data-i18n="termo-responsabilidade-usuario-4">Comprometem-se a utilizar a plataforma de forma ética e responsável</li>
+            </ul>
+
+            <h3 data-i18n="termo-responsabilidades-plataforma-titulo">4.2. Da Plataforma</h3>
+            <ul>
+                <li data-i18n="termo-responsabilidade-plataforma-1">Fornecer o serviço de acordo com estes Termos de Uso</li>
+                <li data-i18n="termo-responsabilidade-plataforma-2">Manter a plataforma funcionando com a menor quantidade possível de interrupções</li>
+                <li data-i18n="termo-responsabilidade-plataforma-3">Proteger os dados pessoais dos usuários de acordo com a legislação aplicável</li>
+                <li data-i18n="termo-responsabilidade-plataforma-4">Nós nos isentamos de responsabilidade por danos diretos ou indiretos decorrentes do uso da plataforma</li>
+            </ul>
+        </section>
+
+        <section id="alteracoes-termos">
+            <h2 data-i18n="termo-alteracoes-titulo">5. Alterações dos Termos</h2>
+            <p data-i18n="termo-alteracoes-texto">O Projeto Lumis se reserva o direito de modificar estes Termos de Uso a qualquer momento. As alterações entrarão em vigor após sua publicação na plataforma. O uso continuado dos serviços após tais modificações constitui sua aceitação dos novos termos.</p>
+        </section>
+
+        <section id="suporte">
+            <h2 data-i18n="termo-suporte-titulo">6. Contato para Suporte</h2>
+            <p data-i18n="termo-suporte-intro">Em caso de dúvidas sobre estes Termos de Uso ou problemas com a plataforma, entre em contato conosco:</p>
+            <ul>
+                <li data-i18n="termo-suporte-email">E-mail: suporte@projetolumis.com</li>
+                <li data-i18n="termo-suporte-telefone">Telefone: (11) 3456-7890</li>
+                <li data-i18n="termo-suporte-horario">Horário de atendimento: Segunda a sexta, das 9h às 18h</li>
+            </ul>
+        </section>
+    </div>
+
+    <?php include __DIR__ . '/../../partials/footer.php'; ?>
+    <script src="../../../Controller/tema-idioma.js"></script>
+</body>
+</html>

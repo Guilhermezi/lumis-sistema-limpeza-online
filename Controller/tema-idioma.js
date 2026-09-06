@@ -1345,7 +1345,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "cadastro-criar-conta-contribuidor": "Criar conta de contribuidor",
                 "cadastro-mobile-entrar": "Entrar",
                 "cadastro-mobile-criar-conta": "Criar conta",
-                "cadastro-termos": "Ao continuar, você concorda com nossos <a href=\"Termo_uso.html\">Termos de Uso</a> e <a href=\"Politica_de_Privacidade.html\">Política de Privacidade</a>."
+                "cadastro-termos": "Ao continuar, você concorda com nossos <a href=\"../empresa/termos-de-uso.php\">Termos de Uso</a> e <a href=\"../empresa/politica-de-privacidade.php\">Política de Privacidade</a>."
             },
             "en": {
                 "cadastro-acesse-conta": "Access your account",
@@ -1372,7 +1372,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "cadastro-criar-conta-contribuidor": "Create contributor account",
                 "cadastro-mobile-entrar": "Log in",
                 "cadastro-mobile-criar-conta": "Create account",
-                "cadastro-termos": "By continuing, you agree to our <a href=\"Termo_uso.html\">Terms of Use</a> and <a href=\"Politica_de_Privacidade.html\">Privacy Policy</a>."
+                "cadastro-termos": "By continuing, you agree to our <a href=\"../empresa/termos-de-uso.php\">Terms of Use</a> and <a href=\"../empresa/politica-de-privacidade.php\">Privacy Policy</a>."
             },
             "es": {
                 "cadastro-acesse-conta": "Accede a tu cuenta",
@@ -1399,7 +1399,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "cadastro-criar-conta-contribuidor": "Crear cuenta de colaborador",
                 "cadastro-mobile-entrar": "Iniciar sesión",
                 "cadastro-mobile-criar-conta": "Crear cuenta",
-                "cadastro-termos": "Al continuar, aceptas nuestros <a href=\"Termo_uso.html\">Términos de Uso</a> y nuestra <a href=\"Politica_de_Privacidade.html\">Política de Privacidad</a>."
+                "cadastro-termos": "Al continuar, aceptas nuestros <a href=\"../empresa/termos-de-uso.php\">Términos de Uso</a> y nuestra <a href=\"../empresa/politica-de-privacidade.php\">Política de Privacidad</a>."
             }
         },
         "cadastro-trabalhador":         {
@@ -1428,7 +1428,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "cadastro-trabalhador-criar-conta-usuario": "Criar conta de usuário",
                 "cadastro-trabalhador-mobile-entrar": "Entrar",
                 "cadastro-trabalhador-mobile-criar-conta": "Criar conta",
-                "cadastro-trabalhador-termos": "Ao continuar, você concorda com nossos <a href=\"Termo_uso.html\">Termos de Uso</a> e <a href=\"Politica_de_Privacidade.html\">Política de Privacidade</a>."
+                "cadastro-trabalhador-termos": "Ao continuar, você concorda com nossos <a href=\"../empresa/termos-de-uso.php\">Termos de Uso</a> e <a href=\"../empresa/politica-de-privacidade.php\">Política de Privacidade</a>."
             },
             "en": {
                 "cadastro-trabalhador-contribuidores": "Lumis Contributors",
@@ -1455,7 +1455,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "cadastro-trabalhador-criar-conta-usuario": "Create user account",
                 "cadastro-trabalhador-mobile-entrar": "Log in",
                 "cadastro-trabalhador-mobile-criar-conta": "Create account",
-                "cadastro-trabalhador-termos": "By continuing, you agree to our <a href=\"Termo_uso.html\">Terms of Use</a> and <a href=\"Politica_de_Privacidade.html\">Privacy Policy</a>."
+                "cadastro-trabalhador-termos": "By continuing, you agree to our <a href=\"../empresa/termos-de-uso.php\">Terms of Use</a> and <a href=\"../empresa/politica-de-privacidade.php\">Privacy Policy</a>."
             },
             "es": {
                 "cadastro-trabalhador-contribuidores": "Colaboradores Lumis",
@@ -1482,7 +1482,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "cadastro-trabalhador-criar-conta-usuario": "Crear cuenta de usuario",
                 "cadastro-trabalhador-mobile-entrar": "Iniciar sesión",
                 "cadastro-trabalhador-mobile-criar-conta": "Crear cuenta",
-                "cadastro-trabalhador-termos": "Al continuar, aceptas nuestros <a href=\"Termo_uso.html\">Términos de Uso</a> y nuestra <a href=\"Politica_de_Privacidade.html\">Política de Privacidad</a>."
+                "cadastro-trabalhador-termos": "Al continuar, aceptas nuestros <a href=\"../empresa/termos-de-uso.php\">Términos de Uso</a> y nuestra <a href=\"../empresa/politica-de-privacidade.php\">Política de Privacidad</a>."
             }
         },
         "perfil":         {
