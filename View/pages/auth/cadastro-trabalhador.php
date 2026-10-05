@@ -56,7 +56,9 @@ include __DIR__ . '/../../partials/header.php';
 
                     <!-- Cadastro -->
                     <div class="form-container sign-up">
-                        <form action="perfil_profissional.html" method="get">
+                        <form class="auth-form" data-auth-form="cadastro" data-auth-tipo="profissional"
+                              data-auth-redirecionar="<?= $base ?>perfil-profissional.php"
+                              action="../../../Controller/api/cadastro.php" method="post" novalidate>
                             <h1 data-i18n="cadastro-trabalhador-criar-conta">Criar conta</h1>
                             <div class="social-login">
                                 <div class="social-buttons">
@@ -77,9 +79,35 @@ include __DIR__ . '/../../partials/header.php';
                                 <input type="email" id="signup-email" name="email" placeholder="seuemail@exemplo.com" required>
                             </div>
                             <div class="auth-field">
-                                <label for="signup-password" data-i18n="cadastro-trabalhador-senha">Senha</label>
-                                <input type="password" id="signup-password" name="password" placeholder="••••••••" required>
+                                <label for="signup-telefone" data-i18n="cadastro-trabalhador-telefone">Telefone</label>
+                                <input type="tel" id="signup-telefone" name="telefone" inputmode="numeric"
+                                       placeholder="(11) 98765-4321" data-i18n-placeholder="cadastro-trabalhador-telefone-placeholder"
+                                       data-mask-phone autocomplete="tel" required>
                             </div>
+                            <div class="auth-field">
+                                <label for="signup-nascimento" data-i18n="cadastro-trabalhador-nascimento">Data de nascimento</label>
+                                <input type="date" id="signup-nascimento" name="data_nascimento" autocomplete="bday">
+                            </div>
+                            <div class="auth-field">
+                                <label for="signup-regiao" data-i18n="cadastro-trabalhador-regiao">Região de atuação</label>
+                                <input type="text" id="signup-regiao" name="regiao_atuacao"
+                                       placeholder="Ex.: São Paulo - SP" data-i18n-placeholder="cadastro-trabalhador-regiao-placeholder" required>
+                            </div>
+                            <div class="auth-field">
+                                <label for="signup-experiencia" data-i18n="cadastro-trabalhador-experiencia">Experiência</label>
+                                <input type="text" id="signup-experiencia" name="experiencia"
+                                       placeholder="Ex.: 5 anos em limpeza residencial" data-i18n-placeholder="cadastro-trabalhador-experiencia-placeholder">
+                            </div>
+                            <div class="auth-field">
+                                <label for="signup-password" data-i18n="cadastro-trabalhador-senha">Senha</label>
+                                <input type="password" id="signup-password" name="senha" placeholder="••••••••" autocomplete="new-password" required>
+                            </div>
+                            <div class="auth-field">
+                                <label for="signup-confirmar" data-i18n="cadastro-trabalhador-confirmar-senha">Confirmar senha</label>
+                                <input type="password" id="signup-confirmar" name="senha_confirma" placeholder="••••••••" autocomplete="new-password" required>
+                            </div>
+
+                            <div class="auth-message" data-auth-mensagem role="status" aria-live="polite" hidden></div>
 
                             <button type="submit" class="btn-primary auth-submit" data-i18n="cadastro-trabalhador-btn-criar-conta">Criar conta</button>
                         </form>
@@ -87,7 +115,9 @@ include __DIR__ . '/../../partials/header.php';
 
                     <!-- Login -->
                     <div class="form-container sign-in">
-                        <form action="perfil_profissional.html" method="get">
+                        <form class="auth-form" data-auth-form="login" data-auth-tipo="profissional"
+                              data-auth-redirecionar="<?= $base ?>perfil-profissional.php"
+                              action="../../../Controller/api/login.php" method="post" novalidate>
                             <h1 data-i18n="cadastro-trabalhador-entrar">Entrar</h1>
                             <div class="social-login">
                                 <div class="social-buttons">
@@ -105,10 +135,12 @@ include __DIR__ . '/../../partials/header.php';
                             </div>
                             <div class="auth-field">
                                 <label for="login-password" data-i18n="cadastro-trabalhador-senha">Senha</label>
-                                <input type="password" id="login-password" name="password" placeholder="••••••••" required>
+                                <input type="password" id="login-password" name="senha" placeholder="••••••••" autocomplete="current-password" required>
                             </div>
 
                             <a href="#" class="auth-forgot" data-i18n="cadastro-trabalhador-esqueceu-senha">Esqueceu sua senha?</a>
+
+                            <div class="auth-message" data-auth-mensagem role="status" aria-live="polite" hidden></div>
                             <button type="submit" class="btn-primary auth-submit" data-i18n="cadastro-trabalhador-btn-entrar">Entrar</button>
                         </form>
                     </div>

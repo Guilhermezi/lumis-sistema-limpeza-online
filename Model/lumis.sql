@@ -33,15 +33,15 @@ DROP TABLE IF EXISTS Cliente;
 -- ============================================================
 
 CREATE TABLE Cliente (
-    id_cliente        INT            NOT NULL AUTO_INCREMENT,
-    nome_cliente      VARCHAR(100)   NOT NULL,
-    telefone_cliente  VARCHAR(15)    NOT NULL,
-    email_cliente     VARCHAR(100)   NOT NULL,
-    data_nascimento   DATE           DEFAULT NULL,
-    senha_cliente     VARCHAR(255)   NOT NULL,
-    foto_cliente      VARCHAR(255)   DEFAULT NULL,
+    id_cliente       INT            NOT NULL AUTO_INCREMENT,
+    nome             VARCHAR(100)   NOT NULL,
+    email            VARCHAR(100)   NOT NULL,
+    telefone         VARCHAR(15)    NOT NULL,
+    data_nascimento  DATE           DEFAULT NULL,
+    senha            VARCHAR(255)   NOT NULL,
+    foto             VARCHAR(255)   DEFAULT NULL,
     PRIMARY KEY (id_cliente),
-    UNIQUE KEY uk_cliente_email (email_cliente)
+    UNIQUE KEY uk_cliente_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Planos (
@@ -56,10 +56,11 @@ CREATE TABLE Planos (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Profissionais (
-    id_profissional      INT            NOT NULL AUTO_INCREMENT,
-    nome_profissional    VARCHAR(100)   NOT NULL,
+id_profissional      INT            NOT NULL AUTO_INCREMENT,
+    nome                 VARCHAR(100)   NOT NULL,
     email                VARCHAR(100)   NOT NULL,
-    telefone_profissional VARCHAR(15)   NOT NULL,
+    telefone             VARCHAR(15)    NOT NULL,
+    senha                VARCHAR(255)   NOT NULL,
     data_nascimento      DATE           DEFAULT NULL,
     experiencia          VARCHAR(50)    DEFAULT NULL,
     valor_minimo         DECIMAL(8,2)   DEFAULT NULL,

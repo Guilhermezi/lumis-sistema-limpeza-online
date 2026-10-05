@@ -1,5 +1,6 @@
 <?php
 $asset = $base === '' ? '../' : '../../';
+$controller = $asset . '../Controller/';
 ?>
 <header>
         <div id="logo-headers">
@@ -20,7 +21,13 @@ $asset = $base === '' ? '../' : '../../';
                 <li><a href="<?= $active === 'planos' ? '#' : $base . 'empresa/planos.php' ?>"><i class="ri-wallet-3-line"></i> <span data-i18n="nav-planos">Planos</span></a></li>
                 <li><a href="<?= $active === 'contato' ? '#' : $base . 'empresa/contato.php' ?>"><i class="ri-chat-2-line"></i> <span data-i18n="nav-contato">Contato</span></a></li>
                 <li><a href="<?= $active === 'ajuda' ? '#' : $base . 'empresa/ajuda.php' ?>"><i class="ri-question-line"></i> <span data-i18n="nav-ajuda">Ajuda</span></a></li>
-                <li><a class="bntCadastro" href="<?= $base ?>auth/decisao.php"><i class="ri-login-box-line"></i> <span data-i18n="nav-login">Login</span></a></li>
+                <li class="nav-auth">
+                    <a class="bntCadastro" id="authLoginLink" href="<?= $base ?>auth/decisao.php"><i class="ri-login-box-line"></i> <span data-i18n="nav-login">Login</span></a>
+                    <div class="auth-user" id="authUserBox" hidden>
+                        <span class="auth-user-hello"><span data-i18n="nav-hello">Olá,</span> <strong id="authUserName"></strong></span>
+                        <button type="button" class="auth-logout-btn" id="authLogoutBtn"><i class="ri-logout-box-r-line"></i> <span data-i18n="nav-logout">Sair</span></button>
+                    </div>
+                </li>
             </ul>
 
             <div class="nav-controls">
@@ -49,3 +56,4 @@ $asset = $base === '' ? '../' : '../../';
             </div>
         </nav>
     </header>
+    <script src="<?= $controller ?>Auth.js"></script>

@@ -21,7 +21,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <title>Lumis - Perfil Profissional</title>
 </head>
-<body data-page="perfil-pro">
+<body data-page="perfil-pro" data-auth-requer="profissional"
+      data-auth-login="auth/decisao.php" data-auth-home="index.php">
 
     <?php
 $base = '';

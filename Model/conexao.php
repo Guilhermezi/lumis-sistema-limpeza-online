@@ -8,15 +8,24 @@
     // senha do usuário do banco de dados
     $password = "";
 
+    // Opções de configuração do PDO
+    $opcoes = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // lança exceção em vez de retornar false
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,        // linhas como array associativo
+        PDO::ATTR_EMULATE_PREPARES   => false,                   // usa prepared statements nativas
+    ];
+
     // Tratamento de exceções para a conexão com o banco de dados
     try {
         // Criação da conexão PDO
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname", 
+        // o charset utf8mb4 no DSN garante a gravação correta de textos acentuados
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", 
         $user, 
-        $password
+        $password,
+        $opcoes
         );
     } catch (PDOException $e) {
-        // Exibe a mensagem de erro caso a conexão falhe
-        echo "Erro na conexão: " . $e->getMessage();
+        // encerra o script sem expor ao usuário o motivo da falha
+        http_response_code(500);
+        exit;
     }
-?>

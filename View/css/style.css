@@ -259,6 +259,59 @@ nav ul li:hover > a {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+[hidden] {
+    display: none !important;
+}
+
+.nav-auth {
+    display: flex;
+    align-items: center;
+}
+
+.auth-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.auth-user-hello {
+    font-family: var(--h1-font);
+    font-size: 0.9rem;
+    color: var(--cor-texto);
+}
+
+.auth-user-hello strong {
+    color: var(--cor-primaria);
+}
+
+.auth-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: 1px solid var(--cor-primaria);
+    color: var(--cor-primaria);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-family: var(--h1-font);
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.auth-logout-btn:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-botao-texto);
+}
+
+.auth-logout-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
 /*==============NAV CONTROLS (tema + idioma)===========*/
 .nav-controls {
     display: flex;

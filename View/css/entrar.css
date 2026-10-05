@@ -152,6 +152,64 @@
     font-weight: 600;
 }
 
+.auth-field.invalido input {
+    border-color: #e05252;
+    box-shadow: 0 0 0 3px rgba(224, 82, 82, 0.15);
+}
+
+.auth-message {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-family: var(--h1-font);
+    line-height: 1.4;
+    border: 1px solid transparent;
+}
+
+.auth-message.erro {
+    background-color: rgba(224, 82, 82, 0.12);
+    border-color: rgba(224, 82, 82, 0.45);
+    color: #b13c3c;
+}
+
+.auth-message.sucesso {
+    background-color: rgba(80, 191, 135, 0.12);
+    border-color: rgba(80, 191, 135, 0.45);
+    color: #2c7a56;
+}
+
+.auth-submit:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.auth-submit.carregando {
+    position: relative;
+    color: transparent;
+}
+
+.auth-submit.carregando::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: -0.55rem 0 0 -0.55rem;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: auth-girar 0.7s linear infinite;
+}
+
+@keyframes auth-girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /*========= Social login =========*/
 .social-login {
     width: 100%;
