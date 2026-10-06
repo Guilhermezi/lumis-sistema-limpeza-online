@@ -28,8 +28,18 @@
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 520px;
     margin: 0 auto;
+
+    /* Grid em vez de position:absolute.
+       Com os dois formulários em position:absolute, nenhum deles contava na
+       altura do pai, então o card ficava travado em 520px e o overflow:hidden
+       cortava o botão Continuar — não dava nem para rolar.
+
+       No grid, os dois forms caem na MESMA célula (grid-area: 1/1) e ficam
+       empilhados. O card passa a ter a altura do mais alto dos dois, e cada
+       form é escondido com opacity, sem sair do lugar. */
+    display: grid;
+    min-height: 520px;
 }
 
 .auth-card a {
@@ -45,50 +55,46 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 2.5rem;
-    height: 100%;
+    padding: 2rem 2.5rem;
+    /* height:100% tirado: no grid a célula já dá a altura, e forçar 100%
+       fazia o conteúdo estourar sem poder crescer */
+    margin: 0;
 }
 
+/* Os dois forms dividem a mesma célula do grid, então ficam empilhados e
+   o card cresce até o mais alto. opacity troca qual aparece. */
 .form-container {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    transition: all 0.6s ease-in-out;
+    grid-area: 1 / 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s;
 }
 
+/* Esconde sem tirar do grid: visibility tira do fluxo visual e impede
+   clicar no formulário invisible, sem quebrar a animação. */
 .sign-in {
-    left: 0;
-    width: 50%;
+    opacity: 1;
+    visibility: visible;
     z-index: 2;
 }
 
 .auth-card.active .sign-in {
-    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
 }
 
 .sign-up {
-    left: 0;
-    width: 50%;
     opacity: 0;
+    visibility: hidden;
     z-index: 1;
 }
 
 .auth-card.active .sign-up {
-    transform: translateX(100%);
     opacity: 1;
+    visibility: visible;
     z-index: 5;
-    animation: authMove 0.6s;
-}
-
-@keyframes authMove {
-    0%, 49.99% {
-        opacity: 0;
-        z-index: 1;
-    }
-    50%, 100% {
-        opacity: 1;
-        z-index: 5;
-    }
 }
 
 .auth-card h1 {
@@ -449,23 +455,12 @@
         display: flex;
     }
 
+    /* No mobile os dois forms ficam na MESMA célula do grid, então trocar por
+       display não funciona mais: quem controla a troca é opacity/visibility.
+       Aqui só se garante que a célula ocupe a largura toda. */
     .form-container {
-        position: static;
+        grid-area: 1 / 1;
         width: 100%;
-        height: auto;
-        display: none;
-    }
-
-    .form-container.sign-in {
-        display: block;
-    }
-
-    .auth-card.active .form-container.sign-in {
-        display: none;
-    }
-
-    .auth-card.active .form-container.sign-up {
-        display: block;
     }
 
     .auth-card form {

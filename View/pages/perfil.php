@@ -1,3 +1,10 @@
+<?php
+// Guarda do servidor + dados do usuário logado.
+// TEM que vir antes de qualquer HTML: se o <!DOCTYPE html> for impresso antes,
+// o session_start() falha com "headers already sent" e o exit corta a página
+// no primeiro doctype, entregando uma página em branco.
+require_once __DIR__ . '/../partials/usuario-dados.php';
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -39,35 +46,29 @@ include __DIR__ . '/../partials/header.php';
             </div>
             <div class="hero-profile">
                 <div class="hero-avatar-wrap">
-                    <img src="../img/foto_usuario.png" alt="Foto do usuário" class="hero-avatar">
+                    <img src="<?= htmlspecialchars($avatar) ?>" alt="Foto do usuário" class="hero-avatar">
                     <button class="avatar-edit" aria-label="Editar foto">
                         <i class="ri-camera-line"></i>
                     </button>
                 </div>
                 <div class="hero-info">
                     <div class="hero-name-row">
-                        <h1>Maria de Souza</h1>
+                        <h1><?= htmlspecialchars($nome) ?></h1>
                         <span class="badge badge-client"><i class="ri-user-heart-line"></i> <span data-i18n="perfil-badge-cliente">Cliente</span></span>
                         <button class="btn-edit-profile">
                             <i class="ri-edit-line"></i> <span data-i18n="perfil-editar-perfil">Editar perfil</span>
                         </button>
                     </div>
                     <div class="hero-meta">
-                        <span class="meta-item"><i class="ri-map-pin-2-fill"></i> São Paulo, SP</span>
+                        <?php if (!empty($nascimento)): ?>
+                        <span class="meta-item"><i class="ri-calendar-fill"></i> <span data-i18n="perfil-nascimento">Nascido em</span> <?= htmlspecialchars(date('d/m/Y', strtotime($nascimento))) ?></span>
                         <span class="meta-divider"></span>
-                        <span class="meta-item"><i class="ri-calendar-fill"></i> <span data-i18n="perfil-membro-desde">Membro desde 2022</span></span>
+                        <?php endif; ?>
+                        <span class="meta-item"><i class="ri-shield-check-line"></i> <span data-i18n="perfil-conta-verificada">Conta verificada</span></span>
                     </div>
-                    <div class="hero-rating">
-                        <div class="stars-inline">
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-half-line"></i>
-                        </div>
-                        <span class="rating-score">4.5</span>
-                        <span class="rating-count" data-i18n="perfil-rating-count">(128 avaliações)</span>
-                    </div>
+                    <?php /* A avaliação ficava fixa em 4.5 com 128 avaliações. Não existe
+                            tabela de avaliação no banco ainda, então_someu em vez de
+                            mostrar número inventado. Quando existir, é aqui que entra. */ ?>
                 </div>
             </div>
         </section>
@@ -119,20 +120,19 @@ include __DIR__ . '/../partials/header.php';
                     <div class="info-grid">
                         <div class="info-item">
                             <span class="info-label" data-i18n="perfil-info-label-nome">Nome completo</span>
-                            <span class="info-value">Maria de Souza</span>
+                            <span class="info-value"><?= htmlspecialchars($nome) ?></span>
                         </div>
                         <div class="info-item">
                             <span class="info-label" data-i18n="perfil-info-label-email">E-mail</span>
-                            <span class="info-value">maria.desouza@gmail.com</span>
+                            <span class="info-value"><?= htmlspecialchars($email) ?></span>
                         </div>
                         <div class="info-item">
                             <span class="info-label" data-i18n="perfil-info-label-telefone">Telefone</span>
-                            <span class="info-value">+55 (11) 98765-4321</span>
+                            <span class="info-value"><?= htmlspecialchars($telefoneFormatado) ?></span>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label" data-i18n="perfil-info-label-endereco">Endereço</span>
-                            <span class="info-value">Rua das Flores, 123 - São Paulo/SP</span>
-                        </div>
+                        <?php /* Endereço saiu daqui: a tabela Cliente não tem coluna de
+                                endereço. Mostrar "Rua das Flores, 123" era dado falso.
+                                Quando existir a coluna, este item volta com o valor real. */ ?>
                     </div>
                 </section>
 

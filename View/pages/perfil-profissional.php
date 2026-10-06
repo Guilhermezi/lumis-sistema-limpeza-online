@@ -1,3 +1,12 @@
+<?php
+// Guarda do servidor: sem sessão de profissional, não abre o perfil.
+// Sem isso a página respondia 200 para qualquer visitante, e a proteção do
+// JavaScript (data-auth-requer) é contornável — basta abrir a URL direto.
+//
+// Precisa vir antes de qualquer HTML, senão o session_start() falha com
+// "headers already sent" e a página sai em branco.
+require_once __DIR__ . '/../partials/usuario-profissional-dados.php';
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -39,23 +48,25 @@ include __DIR__ . '/../partials/header.php';
             </div>
             <div class="hero-profile">
                 <div class="hero-avatar-wrap">
-                    <img src="../img/foto_profissional_recorrente.png" alt="Jorge Silva" class="hero-avatar">
+                    <img src="<?= htmlspecialchars($avatar) ?>" alt="Foto do profissional" class="hero-avatar">
                     <button class="avatar-edit" aria-label="Editar foto">
                         <i class="ri-camera-line"></i>
                     </button>
                 </div>
                 <div class="hero-info">
                     <div class="hero-name-row">
-                        <h1>Jorge Silva</h1>
+                        <h1><?= htmlspecialchars($nome) ?></h1>
                         <span class="badge badge-pro"><i class="ri-shield-star-line"></i> <span data-i18n="perfil-pro-badge-profissional">Profissional</span></span>
                         <button class="btn-edit-profile">
                             <i class="ri-edit-line"></i> <span data-i18n="perfil-pro-editar-perfil">Editar perfil</span>
                         </button>
                     </div>
                     <div class="hero-meta">
-                        <span class="meta-item"><i class="ri-map-pin-2-fill"></i> São Paulo e arredores</span>
+                        <span class="meta-item"><i class="ri-map-pin-2-fill"></i> <?= htmlspecialchars($regiao) ?></span>
                         <span class="meta-divider"></span>
-                        <span class="meta-item"><i class="ri-calendar-fill"></i> <span data-i18n="perfil-pro-membro-desde">Membro desde 2021</span></span>
+                        <?php if ($verificado): ?>
+                        <span class="meta-item"><i class="ri-shield-check-line"></i> <span data-i18n="perfil-conta-verificada">Conta verificada</span></span>
+                        <?php endif; ?>
                     </div>
                     <div class="hero-rating">
                         <div class="stars-inline">
@@ -123,19 +134,19 @@ include __DIR__ . '/../partials/header.php';
                         </div>
                         <div class="info-item">
                             <span class="info-label" data-i18n="perfil-pro-info-label-regiao">Região de atuação</span>
-                            <span class="info-value">São Paulo e arredores</span>
+                            <span class="info-value"><?= htmlspecialchars($regiao) ?></span>
                         </div>
                         <div class="info-item">
                             <span class="info-label" data-i18n="perfil-pro-info-label-valor">Valor mínimo</span>
-                            <span class="info-value">R$ 150,00</span>
+                            <span class="info-value"><?= htmlspecialchars($valorMinimo) ?></span>
                         </div>
                         <div class="info-item">
                             <span class="info-label" data-i18n="perfil-pro-info-label-contato">Contato</span>
-                            <span class="info-value">jorge.limpeza@gmail.com</span>
+                            <span class="info-value"><?= htmlspecialchars($email) ?></span>
                         </div>
                         <div class="info-item">
                             <span class="info-label" data-i18n="perfil-pro-info-label-telefone">Telefone</span>
-                            <span class="info-value">+55 (11) 99999-0000</span>
+                            <span class="info-value"><?= htmlspecialchars($telefoneFormatado) ?></span>
                         </div>
                         <div class="info-item">
                             <span class="info-label" data-i18n="perfil-pro-info-label-nao-realiza">Não realiza</span>

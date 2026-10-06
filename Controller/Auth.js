@@ -1,12 +1,15 @@
 (function () {
     'use strict';
 
-    const API = new URL('api/', document.currentScript.src).href;
+    // Este script entra no <head> pelo partial do header, entao le document.currentScript
+    // no topo do IIFE: nesse ponto ele ainda aponta para o proprio Auth.js.
+    // (Se for importado/delay, currentScript vira null e o caminho abaixo quebra.)
+    const caminhoApi = new URL('api/', document.currentScript.src).href;
     const ENDPOINT = {
-        sessao: new URL('sessao.php', API).href,
-        login: new URL('login.php', API).href,
-        cadastro: new URL('cadastro.php', API).href,
-        logout: new URL('logout.php', API).href
+        sessao: new URL('sessao.php', caminhoApi).href,
+        login: new URL('login.php', caminhoApi).href,
+        cadastro: new URL('cadastro.php', caminhoApi).href,
+        logout: new URL('logout.php', caminhoApi).href
     };
 
     const PREFIXO_ERRO = 'auth-erro-';
@@ -14,18 +17,21 @@
 
     let usuario = null;
 
-    function traduzirMensagem(el, codigo, fallback) {
+    // chave = nome completo da traducao (ex.: 'auth-erro-email-invalido'), sem prefixo montado aqui
+    function traduzirMensagem(el, chave, fallback) {
         el.removeAttribute('data-i18n');
+        // limpa o texto anterior ANTES de tentar traduzir: sem isso, uma chave que nao
+        // existe no dicionario deixaria a mensagem antiga no lugar e ela passaria
+        // pelo teste de baixo como se tivesse sido traduzida
+        el.textContent = '';
 
-        if (codigo) {
-            el.setAttribute('data-i18n', PREFIXO_ERRO + codigo);
-            if (window.LumisI18n) {
-                window.LumisI18n.aplicar();
-                if (el.textContent.trim()) return;
-            }
-            el.removeAttribute('data-i18n');
+        if (chave && window.LumisI18n) {
+            el.setAttribute('data-i18n', chave);
+            window.LumisI18n.aplicar();
+            if (el.textContent.trim()) return;   // traduziu mesmo
         }
 
+        el.removeAttribute('data-i18n');
         el.textContent = fallback || '';
     }
 
@@ -110,7 +116,7 @@
         box.hidden = false;
         box.classList.toggle('erro', !codigo || codigo === 'servidor' ? false : true);
         box.classList.toggle('sucesso', !codigo);
-        traduzirMensagem(box, codigo, fallback);
+        traduzirMensagem(box, codigo ? PREFIXO_ERRO + codigo : null, fallback);
 
         if (campos) {
             marcarErrosCampos(form, campos);
@@ -174,7 +180,7 @@
         carregarBotao(botao, false);
 
         if (resposta?.ok) {
-            mostrar(form, null, null);
+            // sucesso usa o prefixo auth-ok-, nao auth-erro-: sao chaves diferentes no dicionario
             const box = boxMensagem(form);
             if (box) {
                 box.hidden = false;
@@ -223,8 +229,13 @@
 
     async function carregarSessao() {
         const resposta = await pedir(ENDPOINT.sessao, { method: 'GET' });
-        usuario = resposta?.logado ? resposta.usuario : null;
-        if (usuario) atualizarHeader();
+
+        // resposta.ok === false = a chamada falhou; nesse caso nao tocamos no header,
+        // senao um erro de rede deslogaria a pessoa na tela com a sessao ainda valida
+        if (!resposta || resposta.ok === false) return null;
+
+        usuario = resposta.logado ? resposta.usuario : null;
+        atualizarHeader();
         return usuario;
     }
 
@@ -238,11 +249,11 @@
         }
     }
 
-    async function guardarRota() {
+    // guarda de rota: so roda em pagina protegida, e reaproveita a sessao ja carregada
+    function guardarRota(atual) {
         const exigido = document.body.getAttribute('data-auth-requer');
         if (!exigido) return;
 
-        const atual = await carregarSessao();
         const entrada = document.body.getAttribute('data-auth-login');
 
         if (!atual) {
@@ -283,7 +294,13 @@
     function iniciar() {
         ligarFormularios();
         aplicarMascaras();
-        guardarRota();
+
+        // a sessao e sempre buscada, em qualquer pagina, para o header mostrar o usuario certo;
+        // a guarda reaproveita essa mesma promessa em vez de fazer uma segunda chamada
+        const sessao = carregarSessao();
+        if (document.body.getAttribute('data-auth-requer')) {
+            sessao.then(guardarRota);
+        }
     }
 
     if (document.readyState === 'loading') {

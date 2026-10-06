@@ -72,7 +72,7 @@ include __DIR__ . '/../../partials/header.php';
 
                             <div class="auth-field">
                                 <label for="signup-name" data-i18n="cadastro-trabalhador-nome-completo">Nome Completo</label>
-                                <input type="text" id="signup-name" name="name" placeholder="Nome Completo" data-i18n-placeholder="cadastro-trabalhador-nome-completo-placeholder" required>
+                                <input type="text" id="signup-name" name="nome" placeholder="Nome Completo" data-i18n-placeholder="cadastro-trabalhador-nome-completo-placeholder" required>
                             </div>
                             <div class="auth-field">
                                 <label for="signup-email" data-i18n="cadastro-trabalhador-email">Email</label>
