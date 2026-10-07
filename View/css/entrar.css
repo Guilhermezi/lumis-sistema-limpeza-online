@@ -59,13 +59,16 @@
     /* height:100% tirado: no grid a célula já dá a altura, e forçar 100%
        fazia o conteúdo estourar sem poder crescer */
     margin: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Os dois forms dividem a mesma célula do grid, então ficam empilhados e
-   o card cresce até o mais alto. opacity troca qual aparece. */
+/* Os dois formulários dividem a mesma célula para o card assumir a altura do
+   maior. No desktop cada um ocupa metade: login à esquerda e cadastro à
+   direita, acompanhando fisicamente o movimento do painel colorido. */
 .form-container {
     grid-area: 1 / 1;
-    width: 100%;
+    width: 50%;
     display: flex;
     align-items: center;
     transition: opacity 0.4s ease-in-out, visibility 0.4s;
@@ -74,6 +77,7 @@
 /* Esconde sem tirar do grid: visibility tira do fluxo visual e impede
    clicar no formulário invisible, sem quebrar a animação. */
 .sign-in {
+    justify-self: start;
     opacity: 1;
     visibility: visible;
     z-index: 2;
@@ -86,6 +90,7 @@
 }
 
 .sign-up {
+    justify-self: end;
     opacity: 0;
     visibility: hidden;
     z-index: 1;
@@ -163,6 +168,84 @@
     box-shadow: 0 0 0 3px rgba(224, 82, 82, 0.15);
 }
 
+.auth-field-error {
+    display: block;
+    margin-top: 0.35rem;
+    color: #b13c3c;
+    font-size: 0.78rem;
+}
+
+.auth-field-password {
+    position: relative;
+}
+
+.auth-field-password input {
+    padding-right: 3rem;
+}
+
+.auth-password-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 1.85rem;
+    border: 0;
+    background: transparent;
+    color: var(--cor-texto-secundario);
+    cursor: pointer;
+    padding: 0.35rem;
+    font-size: 1.1rem;
+}
+
+.auth-consent {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.6rem;
+}
+
+.auth-consent input {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.15rem;
+}
+
+.auth-consent label {
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+.auth-consent .auth-field-error {
+    grid-column: 1 / -1;
+}
+
+.auth-card-compact {
+    max-width: 460px;
+    min-height: 0;
+}
+
+/* Recuperação e redefinição têm apenas um formulário, portanto usam toda a
+   largura do card em vez da divisão de 50% do login/cadastro. */
+.auth-card-compact .form-container {
+    width: 100%;
+    justify-self: stretch;
+}
+
+.auth-help {
+    margin: 0.5rem 0 1.5rem;
+    text-align: center;
+    color: var(--cor-texto-secundario);
+}
+
+.auth-back {
+    margin-top: 1rem;
+    color: var(--cor-primaria) !important;
+}
+
+.auth-debug-link {
+    display: block;
+    margin-top: 0.5rem;
+    text-decoration: underline !important;
+}
+
 .auth-message {
     width: 100%;
     margin: 0.5rem 0;
@@ -214,53 +297,6 @@
     to {
         transform: rotate(360deg);
     }
-}
-
-/*========= Social login =========*/
-.social-login {
-    width: 100%;
-    margin: 0.75rem 0;
-}
-
-.social-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-}
-
-.social-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background: var(--white);
-    cursor: pointer;
-    font-size: 1.15rem;
-    transition: all 0.3s ease;
-}
-
-.social-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-}
-
-.social-btn.google {
-    color: #DB4437;
-}
-
-.social-btn.facebook {
-    color: #4267B2;
-}
-
-.social-btn.apple {
-    color: #000;
-}
-
-.social-btn.linkedin {
-    color: #0A66C2;
 }
 
 .auth-divider {
@@ -461,6 +497,7 @@
     .form-container {
         grid-area: 1 / 1;
         width: 100%;
+        justify-self: stretch;
     }
 
     .auth-card form {
@@ -479,6 +516,20 @@
 
     .auth-mobile-toggle {
         flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .form-container,
+    .toggle-container,
+    .toggle,
+    .toggle-panel,
+    .auth-tab {
+        transition: none;
+    }
+
+    .auth-submit.carregando::after {
+        animation-duration: 1.5s;
     }
 }
 

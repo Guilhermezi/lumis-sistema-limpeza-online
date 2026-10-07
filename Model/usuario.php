@@ -37,9 +37,17 @@
         ][$coluna] ?? null;                       // indexa pelo nome e devolve o limite
     }
 
+    function normalizarEmail($email){
+        return mb_strtolower(trim((string) $email), 'UTF-8');
+    }
+
     // Confere os dados do cadastro; devolve array vazio se estiver tudo certo
     function validarCadastro($dados, $cfg){
         $erros = [];                              // começa sem nenhum erro registrado
+
+        if (($dados['aceite_termos'] ?? '') !== '1'){
+            $erros['aceite_termos'] = 'obrigatorios';
+        }
 
         // ---- NOME ----
         $nome = trim($dados['nome'] ?? '');       // tira espaços das pontas; ?? '' evita campo ausente
@@ -50,10 +58,10 @@
         }
 
         // ---- EMAIL ----
-        $email = trim($dados['email'] ?? '');
+        $email = normalizarEmail($dados['email'] ?? '');
         if ($email === ''){
             $erros['email'] = 'obrigatorios';
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)){   // valida o formato do email
+        } elseif (mb_strlen($email) > limite('email') || !filter_var($email, FILTER_VALIDATE_EMAIL)){
             $erros['email'] = 'email-invalido';
         }
 
@@ -69,13 +77,15 @@
         $senha = $dados['senha'] ?? '';
         if ($senha === ''){
             $erros['senha'] = 'obrigatorios';
-        } elseif (mb_strlen($senha) < 6){         // mínimo de 6 caracteres
+        } elseif (mb_strlen($senha) < 10 || mb_strlen($senha) > 1024){
             $erros['senha'] = 'senha-curta';
         }
 
         // ---- CONFIRMAÇÃO DE SENHA ----
         $confirmar = $dados['senha_confirma'] ?? '';
-        if ($confirmar !== '' && $senha !== $confirmar){               // !== compara valor e tipo
+        if ($confirmar === ''){
+            $erros['senha_confirma'] = 'obrigatorios';
+        } elseif ($senha !== $confirmar){               // !== compara valor e tipo
             $erros['senha_confirma'] = 'senhas-diferentes';
         }
 
@@ -116,6 +126,7 @@
         $permitidas = array_merge($cfg['comuns'], $cfg['especificos']);
         // mantém só as que existem no tipo E chegaram no formulário (preserva a ordem do mapa)
         $colunas = array_values(array_intersect($permitidas, array_keys($dados)));
+        $colunas[] = 'termos_aceitos_em';
 
         $senha = password_hash($dados['senha'] ?? '', PASSWORD_DEFAULT);
 
@@ -130,10 +141,18 @@
                 $valores[$coluna] = $senha; 
                 continue; 
                 }
+            if ($coluna === 'email'){
+                $valores[$coluna] = normalizarEmail($dados[$coluna] ?? '');
+                continue;
+            }
             if ($coluna === 'telefone'){ 
                 $valores[$coluna] = $telefone; 
                 continue; 
                 }
+            if ($coluna === 'termos_aceitos_em'){
+                $valores[$coluna] = (new DateTimeImmutable())->format('Y-m-d H:i:s');
+                continue;
+            }
 
             // (string) converte para texto: se o campo vier null, vira '' em vez de dar erro no trim
             $valor = trim((string) ($dados[$coluna] ?? ''));
@@ -192,4 +211,50 @@
         $stmt->execute(['id' => $id]);
 
         return $stmt->fetch() ?: null;
+    }
+
+    function identificadorLogin(string $email, string $tipo): string{
+        return hash('sha256', $tipo . '|' . normalizarEmail($email));
+    }
+
+    function ipCliente(): string{
+        return substr((string) ($_SERVER['REMOTE_ADDR'] ?? 'desconhecido'), 0, 45);
+    }
+
+    function loginBloqueado(PDO $pdo, string $email, string $tipo): bool{
+        $desde = (new DateTimeImmutable('-15 minutes'))->format('Y-m-d H:i:s');
+        $stmt = $pdo->prepare(
+            'SELECT
+                (SELECT COUNT(*) FROM TentativaLogin
+                 WHERE identificador = :identificador AND sucesso = 0 AND criada_em >= :desde_conta) AS por_conta,
+                (SELECT COUNT(*) FROM TentativaLogin
+                 WHERE ip = :ip AND sucesso = 0 AND criada_em >= :desde_ip) AS por_ip'
+        );
+        $stmt->execute([
+            'identificador' => identificadorLogin($email, $tipo),
+            'ip' => ipCliente(),
+            'desde_conta' => $desde,
+            'desde_ip' => $desde,
+        ]);
+        $contagem = $stmt->fetch() ?: [];
+        return (int) ($contagem['por_conta'] ?? 0) >= 5 || (int) ($contagem['por_ip'] ?? 0) >= 20;
+    }
+
+    function registrarTentativaLogin(PDO $pdo, string $email, string $tipo, bool $sucesso): void{
+        $identificador = identificadorLogin($email, $tipo);
+        if ($sucesso){
+            $stmt = $pdo->prepare('DELETE FROM TentativaLogin WHERE identificador = :identificador');
+            $stmt->execute(['identificador' => $identificador]);
+            return;
+        }
+
+        $stmt = $pdo->prepare(
+            'INSERT INTO TentativaLogin (identificador, ip, sucesso) VALUES (:identificador, :ip, 0)'
+        );
+        $stmt->execute(['identificador' => $identificador, 'ip' => ipCliente()]);
+
+        // Mantém a tabela pequena sem depender de um cron para a limpeza básica.
+        if (random_int(1, 100) === 1){
+            $pdo->exec("DELETE FROM TentativaLogin WHERE criada_em < DATE_SUB(NOW(), INTERVAL 2 DAY)");
+        }
     }

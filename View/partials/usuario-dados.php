@@ -7,28 +7,54 @@ $raizPhp = dirname(__DIR__, 2);
 require_once $raizPhp . '/Model/conexao.php';
 require_once $raizPhp . '/Model/usuario.php';
 
+$dirPagina = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+$login = $dirPagina . '/auth/login.php';
+
+function redirecionarLoginCliente(string $login): void{
+    $_SESSION = [];
+    if (session_status() === PHP_SESSION_ACTIVE) session_destroy();
+    header('Location: ' . $login . '?motivo=login');
+    exit;
+}
+
 if (empty($_SESSION['usuario'])){
     // O Location é resolvido pelo navegador a partir do DOCUMENTO (/View/pages/perfil.php),
     // não a partir deste arquivo. Por isso não dá para escrever '../auth/login.php':
     // esse caminho apontaria para /View/auth/login.php, que não existe.
     // Aqui montamos o caminho a partir da pasta real da página que está rodando.
-    $dirPagina = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
-    header('Location: ' . $dirPagina . '/auth/login.php');
+    redirecionarLoginCliente($login);
+}
+
+if (($_SESSION['usuario']['tipo'] ?? '') !== 'cliente'){
+    header('Location: ' . $dirPagina . '/perfil-profissional.php');
     exit;
 }
+
+$agora = time();
+$iniciada = (int) ($_SESSION['auth_iniciada_em'] ?? $agora);
+$ultima = (int) ($_SESSION['auth_ultima_atividade'] ?? $agora);
+if (($agora - $ultima) > (int) (getenv('SESSION_IDLE_SECONDS') ?: 1800)
+    || ($agora - $iniciada) > (int) (getenv('SESSION_MAX_SECONDS') ?: 28800)){
+    redirecionarLoginCliente($login);
+}
+$_SESSION['auth_ultima_atividade'] = $agora;
 
 $usuario = $_SESSION['usuario'];
 
 $nome      = $usuario['nome'];
 $email     = $usuario['email'];
 $id        = (int) $usuario['id'];
-$ehCliente = $usuario['tipo'] === 'cliente';
 
 // Primeiro nome para saudações curtas
 $primeiroNome = trim(explode(' ', $nome)[0]);
 
 // Traz a linha completa do banco para pegar telefone, foto e o resto
 $linha = buscarUsuario($pdo, $id, $usuario['tipo']) ?? [];
+if (!$linha || (int) ($linha['auth_versao'] ?? 1) !== (int) ($usuario['auth_versao'] ?? 1)){
+    redirecionarLoginCliente($login);
+}
+$nome = $linha['nome'];
+$email = $linha['email'];
 
 // Monta (11) 98765-4321 a partir de 11987654321
 // 11 dígitos = 2 (DDD) + 5 (prefixo) + 4 (final). O último bloco sempre

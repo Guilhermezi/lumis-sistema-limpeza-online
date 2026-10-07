@@ -60,23 +60,15 @@ include __DIR__ . '/../../partials/header.php';
                               data-auth-redirecionar="<?= $base ?>perfil.php"
                               action="../../../Controller/api/cadastro.php" method="post" novalidate>
                             <h1 data-i18n="cadastro-criar-conta">Criar conta</h1>
-                            <div class="social-login">
-                                <div class="social-buttons">
-                                    <a class="social-btn google" aria-label="Cadastrar com Google"><i class="ri-google-line"></i></a>
-                                    <a class="social-btn facebook" aria-label="Cadastrar com Facebook"><i class="ri-facebook-circle-fill"></i></a>
-                                    <a class="social-btn apple" aria-label="Cadastrar com Apple"><i class="ri-apple-fill"></i></a>
-                                    <a class="social-btn linkedin" aria-label="Cadastrar com LinkedIn"><i class="ri-linkedin-fill"></i></a>
-                                </div>
-                            </div>
-                            <span class="auth-divider" data-i18n="cadastro-ou-email">ou use o email para se cadastrar</span>
+                            <span class="auth-divider" data-i18n="cadastro-ou-email">Use seu e-mail para se cadastrar</span>
 
                             <div class="auth-field">
                                 <label for="signup-name" data-i18n="cadastro-nome-completo">Nome Completo</label>
-                                <input type="text" id="signup-name" name="nome" placeholder="Nome Completo" data-i18n-placeholder="cadastro-nome-completo-placeholder" required>
+                                <input type="text" id="signup-name" name="nome" placeholder="Nome Completo" data-i18n-placeholder="cadastro-nome-completo-placeholder" autocomplete="name" maxlength="100" required>
                             </div>
                             <div class="auth-field">
                                 <label for="signup-email" data-i18n="cadastro-email">Email</label>
-                                <input type="email" id="signup-email" name="email" placeholder="seuemail@exemplo.com" required>
+                                <input type="email" id="signup-email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" maxlength="100" required>
                             </div>
                             <div class="auth-field">
                                 <label for="signup-telefone" data-i18n="cadastro-telefone">Telefone</label>
@@ -96,6 +88,10 @@ include __DIR__ . '/../../partials/header.php';
                                 <label for="signup-confirmar" data-i18n="cadastro-confirmar-senha">Confirmar senha</label>
                                 <input type="password" id="signup-confirmar" name="senha_confirma" placeholder="••••••••" autocomplete="new-password" required>
                             </div>
+                            <div class="auth-field auth-consent">
+                                <input type="checkbox" id="signup-terms" name="aceite_termos" value="1" required>
+                                <label for="signup-terms">Li e aceito os <a href="../empresa/termos-de-uso.php" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="../empresa/politica-de-privacidade.php" target="_blank" rel="noopener">Política de Privacidade</a>.</label>
+                            </div>
 
                             <div class="auth-message" data-auth-mensagem role="status" aria-live="polite" hidden></div>
 
@@ -109,26 +105,18 @@ include __DIR__ . '/../../partials/header.php';
                               data-auth-redirecionar="<?= $base ?>perfil.php"
                               action="../../../Controller/api/login.php" method="post" novalidate>
                             <h1 data-i18n="cadastro-entrar">Entrar</h1>
-                            <div class="social-login">
-                                <div class="social-buttons">
-                                    <a class="social-btn google" aria-label="Entrar com Google"><i class="ri-google-line"></i></a>
-                                    <a class="social-btn facebook" aria-label="Entrar com Facebook"><i class="ri-facebook-circle-fill"></i></a>
-                                    <a class="social-btn apple" aria-label="Entrar com Apple"><i class="ri-apple-fill"></i></a>
-                                    <a class="social-btn linkedin" aria-label="Entrar com LinkedIn"><i class="ri-linkedin-fill"></i></a>
-                                </div>
-                            </div>
-                            <span class="auth-divider" data-i18n="cadastro-ou-senha">ou use sua senha de e-mail</span>
+                            <span class="auth-divider" data-i18n="cadastro-ou-senha">Use seu e-mail e senha</span>
 
                             <div class="auth-field">
                                 <label for="login-email" data-i18n="cadastro-email">Email</label>
-                                <input type="email" id="login-email" name="email" placeholder="seuemail@exemplo.com" required>
+                                <input type="email" id="login-email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" maxlength="100" required>
                             </div>
                             <div class="auth-field">
                                 <label for="login-password" data-i18n="cadastro-senha">Senha</label>
                                 <input type="password" id="login-password" name="senha" placeholder="••••••••" autocomplete="current-password" required>
                             </div>
 
-                            <a href="#" class="auth-forgot" data-i18n="cadastro-esqueceu-senha">Esqueceu sua senha?</a>
+                            <a href="esqueci-senha.php?tipo=cliente" class="auth-forgot" data-i18n="cadastro-esqueceu-senha">Esqueceu sua senha?</a>
 
                             <div class="auth-message" data-auth-mensagem role="status" aria-live="polite" hidden></div>
 
@@ -158,8 +146,8 @@ include __DIR__ . '/../../partials/header.php';
 
                 <!-- Toggle mobile (apenas telas menores) -->
                 <div class="auth-mobile-toggle">
-                    <button class="auth-tab active" id="mobile-login-tab" data-i18n="cadastro-mobile-entrar">Entrar</button>
-                    <button class="auth-tab" id="mobile-register-tab" data-i18n="cadastro-mobile-criar-conta">Criar conta</button>
+                    <button class="auth-tab active" id="mobile-login-tab" role="tab" aria-selected="true" aria-controls="container" data-i18n="cadastro-mobile-entrar">Entrar</button>
+                    <button class="auth-tab" id="mobile-register-tab" role="tab" aria-selected="false" aria-controls="container" data-i18n="cadastro-mobile-criar-conta">Criar conta</button>
                 </div>
 
                 <p class="auth-terms" data-i18n="cadastro-termos">Ao continuar, você concorda com nossos <a href="../empresa/termos-de-uso.php">Termos de Uso</a> e <a href="../empresa/politica-de-privacidade.php">Política de Privacidade</a>.</p>

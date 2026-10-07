@@ -1,21 +1,27 @@
 (function () {
     'use strict';
 
-    // Este script entra no <head> pelo partial do header, entao le document.currentScript
-    // no topo do IIFE: nesse ponto ele ainda aponta para o proprio Auth.js.
-    // (Se for importado/delay, currentScript vira null e o caminho abaixo quebra.)
-    const caminhoApi = new URL('api/', document.currentScript.src).href;
+    // Resolve a URL da API pelo próprio arquivo, com fallback para carregamento
+    // deferido, quando document.currentScript pode ser nulo.
+    const scriptAuth = document.currentScript
+        || Array.from(document.scripts).find(script => /\/Auth\.js(?:\?|$)/.test(script.src));
+    const caminhoApi = new URL('api/', scriptAuth?.src || window.location.href).href;
+    const HOME = new URL('../../View/pages/index.php', caminhoApi).href;
     const ENDPOINT = {
         sessao: new URL('sessao.php', caminhoApi).href,
         login: new URL('login.php', caminhoApi).href,
         cadastro: new URL('cadastro.php', caminhoApi).href,
-        logout: new URL('logout.php', caminhoApi).href
+        logout: new URL('logout.php', caminhoApi).href,
+        recuperar: new URL('solicitar-recuperacao.php', caminhoApi).href,
+        redefinir: new URL('redefinir-senha.php', caminhoApi).href
     };
 
     const PREFIXO_ERRO = 'auth-erro-';
-    const MIN_SENHA = 6;
+    const MIN_SENHA = 10;
 
     let usuario = null;
+    let csrf = null;
+    let promessaSessao = null;
 
     // chave = nome completo da traducao (ex.: 'auth-erro-email-invalido'), sem prefixo montado aqui
     function traduzirMensagem(el, chave, fallback) {
@@ -62,20 +68,20 @@
     }
 
     function validar(form, dados) {
-        const ehCadastro = form.getAttribute('data-auth-form') === 'cadastro';
+        const tipoFormulario = form.getAttribute('data-auth-form');
+        const ehCadastro = tipoFormulario === 'cadastro' || tipoFormulario === 'redefinir';
         const erros = {};
 
-        Object.keys(dados).forEach(campo => {
-            if (dados[campo] === '' && form.querySelector('[name="' + campo + '"]')?.required) {
-                erros[campo] = 'obrigatorios';
-            }
+        form.querySelectorAll('[name][required]').forEach(input => {
+            const vazio = input.type === 'checkbox' ? !input.checked : !String(dados[input.name] || '').trim();
+            if (vazio) erros[input.name] = 'obrigatorios';
         });
 
         if (dados.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) {
             erros.email = 'email-invalido';
         }
 
-        if (dados.senha && dados.senha.length < MIN_SENHA) {
+        if (ehCadastro && dados.senha && (dados.senha.length < MIN_SENHA || dados.senha.length > 1024)) {
             erros.senha = 'senha-curta';
         }
 
@@ -83,7 +89,7 @@
             erros.senha_confirma = 'senhas-diferentes';
         }
 
-        if (dados.telefone && soDigitos(dados.telefone).length < 10) {
+        if (dados.telefone && (soDigitos(dados.telefone).length < 10 || soDigitos(dados.telefone).length > 11)) {
             erros.telefone = 'telefone-invalido';
         }
 
@@ -93,6 +99,10 @@
     function limparErrosCampos(form) {
         form.querySelectorAll('.auth-field').forEach(campo => {
             campo.classList.remove('invalido');
+            const input = campo.querySelector('input');
+            input?.removeAttribute('aria-invalid');
+            input?.removeAttribute('aria-describedby');
+            campo.querySelector('.auth-field-error')?.remove();
         });
     }
 
@@ -100,7 +110,18 @@
         Object.keys(campos || {}).forEach(nome => {
             const input = form.querySelector('[name="' + nome + '"]');
             if (input?.closest('.auth-field')) {
-                input.closest('.auth-field').classList.add('invalido');
+                const campo = input.closest('.auth-field');
+                campo.classList.add('invalido');
+                input.setAttribute('aria-invalid', 'true');
+                let detalhe = campo.querySelector('.auth-field-error');
+                if (!detalhe) {
+                    detalhe = document.createElement('span');
+                    detalhe.className = 'auth-field-error';
+                    detalhe.id = input.id + '-error';
+                    campo.appendChild(detalhe);
+                }
+                input.setAttribute('aria-describedby', detalhe.id);
+                traduzirMensagem(detalhe, PREFIXO_ERRO + campos[nome], 'Confira este campo.');
             }
         });
     }
@@ -114,7 +135,7 @@
         if (!box) return;
 
         box.hidden = false;
-        box.classList.toggle('erro', !codigo || codigo === 'servidor' ? false : true);
+        box.classList.toggle('erro', Boolean(codigo));
         box.classList.toggle('sucesso', !codigo);
         traduzirMensagem(box, codigo ? PREFIXO_ERRO + codigo : null, fallback);
 
@@ -141,9 +162,11 @@
             botao.dataset.rotulo = botao.dataset.rotulo || botao.textContent.trim();
             botao.disabled = true;
             botao.classList.add('carregando');
+            botao.setAttribute('aria-busy', 'true');
         } else {
             botao.disabled = false;
             botao.classList.remove('carregando');
+            botao.removeAttribute('aria-busy');
         }
     }
 
@@ -161,7 +184,7 @@
 
         const erros = validar(form, dados);
         if (Object.keys(erros).length) {
-            mostrar(form, 'obrigatorios', null, erros);
+            mostrar(form, erros[Object.keys(erros)[0]], null, erros);
             return;
         }
 
@@ -169,17 +192,54 @@
         dados._formulario = form.getAttribute('data-auth-form');
 
         const ehCadastro = dados._formulario === 'cadastro';
+        const ehRecuperacao = dados._formulario === 'recuperar';
+        const ehRedefinicao = dados._formulario === 'redefinir';
         carregarBotao(botao, true);
 
-        const resposta = await pedir(ehCadastro ? ENDPOINT.cadastro : ENDPOINT.login, {
+        if (!csrf) {
+            await (promessaSessao || carregarSessao());
+        }
+
+        const endpoint = ehCadastro ? ENDPOINT.cadastro
+            : ehRecuperacao ? ENDPOINT.recuperar
+                : ehRedefinicao ? ENDPOINT.redefinir
+                    : ENDPOINT.login;
+
+        const resposta = await pedir(endpoint, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrf || ''
+            },
             body: JSON.stringify(dados)
         });
 
         carregarBotao(botao, false);
 
         if (resposta?.ok) {
+            if (ehRecuperacao) {
+                const box = boxMensagem(form);
+                box.hidden = false;
+                box.classList.remove('erro');
+                box.classList.add('sucesso');
+                box.textContent = resposta.mensagem;
+                if (resposta.debug_url) {
+                    const link = document.createElement('a');
+                    link.href = resposta.debug_url;
+                    link.textContent = ' Abrir link de teste';
+                    link.className = 'auth-debug-link';
+                    box.appendChild(link);
+                }
+                form.querySelector('input[name="email"]')?.setAttribute('disabled', 'disabled');
+                botao.disabled = true;
+                return;
+            }
+
+            if (ehRedefinicao) {
+                window.location.href = resposta.redirect || 'login.php?senha=redefinida';
+                return;
+            }
+
             // sucesso usa o prefixo auth-ok-, nao auth-erro-: sao chaves diferentes no dicionario
             const box = boxMensagem(form);
             if (box) {
@@ -234,16 +294,21 @@
         // senao um erro de rede deslogaria a pessoa na tela com a sessao ainda valida
         if (!resposta || resposta.ok === false) return null;
 
+        csrf = resposta.csrf || csrf;
         usuario = resposta.logado ? resposta.usuario : null;
         atualizarHeader();
         return usuario;
     }
 
     async function sair() {
+        if (!csrf) await (promessaSessao || carregarSessao());
         carregarBotao(document.getElementById('authLogoutBtn'), true);
-        const resposta = await pedir(ENDPOINT.logout, { method: 'POST' });
+        const resposta = await pedir(ENDPOINT.logout, {
+            method: 'POST',
+            headers: { 'X-CSRF-Token': csrf || '' }
+        });
         if (resposta?.ok) {
-            window.location.href = resposta.redirect || document.body.getAttribute('data-auth-home') || '../index.php';
+            window.location.href = resposta.redirect || document.body.getAttribute('data-auth-home') || HOME;
         } else {
             carregarBotao(document.getElementById('authLogoutBtn'), false);
         }
@@ -274,6 +339,38 @@
         });
     }
 
+    function ligarSenhas() {
+        document.querySelectorAll('input[type="password"]').forEach(input => {
+            if (input.autocomplete === 'new-password') {
+                input.setAttribute('minlength', String(MIN_SENHA));
+                input.setAttribute('maxlength', '1024');
+            }
+            const campo = input.closest('.auth-field');
+            if (!campo || campo.querySelector('.auth-password-toggle')) return;
+            campo.classList.add('auth-field-password');
+            const botao = document.createElement('button');
+            botao.type = 'button';
+            botao.className = 'auth-password-toggle';
+            botao.setAttribute('aria-label', 'Mostrar senha');
+            botao.innerHTML = '<i class="ri-eye-line" aria-hidden="true"></i>';
+            botao.addEventListener('click', () => {
+                const mostrar = input.type === 'password';
+                input.type = mostrar ? 'text' : 'password';
+                botao.setAttribute('aria-label', mostrar ? 'Ocultar senha' : 'Mostrar senha');
+                botao.innerHTML = '<i class="' + (mostrar ? 'ri-eye-off-line' : 'ri-eye-line') + '" aria-hidden="true"></i>';
+            });
+            campo.appendChild(botao);
+        });
+    }
+
+    function avisarEstadoDaPagina() {
+        const params = new URLSearchParams(window.location.search);
+        const form = document.querySelector('form[data-auth-form="login"]');
+        if (!form) return;
+        if (params.get('motivo') === 'login') mostrar(form, 'needs-login');
+        if (params.get('senha') === 'redefinida') mostrar(form, null, 'Senha redefinida. Agora você já pode entrar.');
+    }
+
     function ligarFormularios() {
         document.querySelectorAll('form[data-auth-form]').forEach(form => {
             form.addEventListener('submit', evento => {
@@ -294,12 +391,14 @@
     function iniciar() {
         ligarFormularios();
         aplicarMascaras();
+        ligarSenhas();
+        avisarEstadoDaPagina();
 
         // a sessao e sempre buscada, em qualquer pagina, para o header mostrar o usuario certo;
         // a guarda reaproveita essa mesma promessa em vez de fazer uma segunda chamada
-        const sessao = carregarSessao();
+        promessaSessao = carregarSessao();
         if (document.body.getAttribute('data-auth-requer')) {
-            sessao.then(guardarRota);
+            promessaSessao.then(guardarRota);
         }
     }
 

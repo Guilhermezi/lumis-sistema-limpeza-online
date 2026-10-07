@@ -19,9 +19,21 @@ if (empty($_SESSION['usuario'])){
 }
 
 if ($_SESSION['usuario']['tipo'] !== 'profissional'){
-    header('Location: ' . $login);
+    header('Location: ' . $dirPagina . '/perfil.php');
     exit;
 }
+
+$agora = time();
+$iniciada = (int) ($_SESSION['auth_iniciada_em'] ?? $agora);
+$ultima = (int) ($_SESSION['auth_ultima_atividade'] ?? $agora);
+if (($agora - $ultima) > (int) (getenv('SESSION_IDLE_SECONDS') ?: 1800)
+    || ($agora - $iniciada) > (int) (getenv('SESSION_MAX_SECONDS') ?: 28800)){
+    $_SESSION = [];
+    session_destroy();
+    header('Location: ' . $login . '?motivo=login');
+    exit;
+}
+$_SESSION['auth_ultima_atividade'] = $agora;
 
 $usuario = $_SESSION['usuario'];
 
@@ -33,6 +45,14 @@ $primeiroNome = trim(explode(' ', $nome)[0]);
 
 // Linha completa do banco
 $linha = buscarUsuario($pdo, $id, 'profissional') ?? [];
+if (!$linha || (int) ($linha['auth_versao'] ?? 1) !== (int) ($usuario['auth_versao'] ?? 1)){
+    $_SESSION = [];
+    session_destroy();
+    header('Location: ' . $login . '?motivo=login');
+    exit;
+}
+$nome = $linha['nome'];
+$email = $linha['email'];
 
 // 11 dígitos = 2 (DDD) + 5 (prefixo) + 4 (final). O último bloco sempre
 // tem 4, então o substr precisa de comprimento explícito; sem ele, substr($d,5)

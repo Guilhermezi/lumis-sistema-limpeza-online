@@ -37,6 +37,11 @@
 // "headers already sent" ou "session already active" caso o arquivo seja
 // carregado duas vezes na mesma requisição.
 if (session_status() === PHP_SESSION_NONE){
+    ini_set('session.use_strict_mode', '1');
+    ini_set('session.use_only_cookies', '1');
+
+    $httpsAtivo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
 
     // Define as REGRAS do cookie de sessão antes de criá-lo.
     // Precisa ser antes de session_start(): depois de iniciado, já é tarde.
@@ -63,9 +68,9 @@ if (session_status() === PHP_SESSION_NONE){
         // executando ações como logged-in sem a pessoa ter clicado em nada.
         'samesite' => 'Lax',
 
-        // secure = o cookie só viaja por HTTPS. localhost fica true sem HTTPS
-        // justamente para o cookie não ser criado durante o desenvolvimento.
-        'secure' => !empty($_SERVER['HTTPS']),
+        // secure = o cookie só viaja por HTTPS. Também considera o protocolo
+        // informado pelo proxy reverso quando a aplicação está atrás de um.
+        'secure' => $httpsAtivo,
     ]);
 
     // Abre a sessão de verdade: cria/recupera o arquivo e liga o cookie.
@@ -216,6 +221,78 @@ function responderServidor(Throwable $e){
     responder(['ok' => false, 'erro' => 'servidor'], 500);
 }
 
+function exigirMetodo(string $metodo): void{
+    if (($_SERVER['REQUEST_METHOD'] ?? '') !== strtoupper($metodo)){
+        header('Allow: ' . strtoupper($metodo));
+        responder(['ok' => false, 'erro' => 'metodo-invalido'], 405);
+    }
+}
+
+function tokenCsrf(): string{
+    if (empty($_SESSION['csrf_token'])){
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function exigirCsrf(): void{
+    $recebido = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? ($_POST['_csrf'] ?? '');
+    if (!is_string($recebido) || !hash_equals(tokenCsrf(), $recebido)){
+        responderErro('sessao-expirada', [], 403);
+    }
+}
+
+function encerrarSessao(): void{
+    $_SESSION = [];
+    if (ini_get('session.use_cookies')){
+        $p = session_get_cookie_params();
+        setcookie(session_name(), '', [
+            'expires'  => time() - 42000,
+            'path'     => $p['path'],
+            'domain'   => $p['domain'],
+            'secure'   => $p['secure'],
+            'httponly' => $p['httponly'],
+            'samesite' => $p['samesite'] ?? 'Lax',
+        ]);
+    }
+    session_destroy();
+}
+
+function manterSessaoAtiva(): bool{
+    if (empty($_SESSION['usuario'])) return false;
+
+    $agora = time();
+    $iniciada = (int) ($_SESSION['auth_iniciada_em'] ?? $agora);
+    $ultima = (int) ($_SESSION['auth_ultima_atividade'] ?? $agora);
+    $limiteInativo = (int) (getenv('SESSION_IDLE_SECONDS') ?: 1800);
+    $limiteAbsoluto = (int) (getenv('SESSION_MAX_SECONDS') ?: 28800);
+
+    if (($agora - $ultima) > $limiteInativo || ($agora - $iniciada) > $limiteAbsoluto){
+        $_SESSION = [];
+        session_regenerate_id(true);
+        tokenCsrf();
+        return false;
+    }
+
+    $_SESSION['auth_ultima_atividade'] = $agora;
+    return true;
+}
+
+function abrirSessaoUsuario(array $usuario, string $tipo): void{
+    session_regenerate_id(true);
+    $agora = time();
+    $_SESSION['usuario'] = [
+        'id'    => (int) $usuario['id'],
+        'nome'  => $usuario['nome'],
+        'email' => $usuario['email'],
+        'tipo'  => $tipo,
+        'auth_versao' => (int) ($usuario['auth_versao'] ?? 1),
+    ];
+    $_SESSION['auth_iniciada_em'] = $agora;
+    $_SESSION['auth_ultima_atividade'] = $agora;
+    tokenCsrf();
+}
+
 
 // ----------------------------------------------------------------------------
 // helper: lerDados()
@@ -288,7 +365,7 @@ function tipoValido(?string $tipo): array{
     // forjando a requisição. Responde erro e NÃO DEIXA O SCRIPT SEGUIR
     // (o responderErro chama exit por dentro).
     if ($cfg === null){
-        responderErro('servidor');
+        responderErro('tipo-invalido', [], 400);
     }
 
     // a partir daqui $cfg tem forma de array com 'tabela', 'pk', 'comuns', etc.

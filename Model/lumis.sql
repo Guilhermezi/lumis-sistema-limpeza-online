@@ -12,6 +12,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- REMOCAO DAS TABELAS (ordem inversa de dependencia)
 -- ============================================================
 DROP TABLE IF EXISTS ItemAdicional;
+DROP TABLE IF EXISTS RecuperacaoSenha;
+DROP TABLE IF EXISTS TentativaLogin;
 DROP TABLE IF EXISTS ItemContratacao;
 DROP TABLE IF EXISTS Especialidade;
 DROP TABLE IF EXISTS Favorito;
@@ -40,6 +42,8 @@ CREATE TABLE Cliente (
     data_nascimento  DATE           DEFAULT NULL,
     senha            VARCHAR(255)   NOT NULL,
     foto             VARCHAR(255)   DEFAULT NULL,
+    termos_aceitos_em DATETIME      DEFAULT NULL,
+    auth_versao      INT            NOT NULL DEFAULT 1,
     PRIMARY KEY (id_cliente),
     UNIQUE KEY uk_cliente_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -67,8 +71,34 @@ id_profissional      INT            NOT NULL AUTO_INCREMENT,
     regiao_atuacao       VARCHAR(100)   NOT NULL,
     verificado           TINYINT(1)     DEFAULT 0,
     foto                 VARCHAR(255)   DEFAULT NULL,
+    termos_aceitos_em    DATETIME       DEFAULT NULL,
+    auth_versao          INT            NOT NULL DEFAULT 1,
     PRIMARY KEY (id_profissional),
     UNIQUE KEY uk_profissional_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE TentativaLogin (
+    id_tentativa   BIGINT       NOT NULL AUTO_INCREMENT,
+    identificador CHAR(64)     NOT NULL,
+    ip             VARCHAR(45)  NOT NULL,
+    sucesso        TINYINT(1)   NOT NULL DEFAULT 0,
+    criada_em      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_tentativa),
+    KEY idx_tentativa_conta_data (identificador, criada_em),
+    KEY idx_tentativa_ip_data (ip, criada_em)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE RecuperacaoSenha (
+    id_recuperacao BIGINT       NOT NULL AUTO_INCREMENT,
+    tipo           VARCHAR(20)  NOT NULL,
+    usuario_id     INT          NOT NULL,
+    token_hash     CHAR(64)     NOT NULL,
+    expira_em      DATETIME     NOT NULL,
+    usado_em       DATETIME     DEFAULT NULL,
+    criado_em      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_recuperacao),
+    UNIQUE KEY uk_recuperacao_token (token_hash),
+    KEY idx_recuperacao_usuario (tipo, usuario_id, expira_em)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Servicos (

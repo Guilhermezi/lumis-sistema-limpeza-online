@@ -8,24 +8,30 @@
     // um cookie já emitido precisa continuar válido, por isso só se configura
     // quando ainda não existe sessão.
     if (session_status() === PHP_SESSION_NONE){
+        ini_set('session.use_strict_mode', '1');
+        ini_set('session.use_only_cookies', '1');
+
+        $httpsAtivo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
         session_set_cookie_params([
             'lifetime' => 0,
             'path'     => '/',
             'httponly' => true,
             'samesite' => 'Lax',
-            'secure'   => !empty($_SERVER['HTTPS']),
+            'secure'   => $httpsAtivo,
         ]);
         session_start();
     }
 
     // Conexão com o banco de dados
-    $host = "localhost"; 
+    $host = getenv('DB_HOST') ?: 'localhost';
     // nome do banco de dados
-    $dbname = "lumis";
+    $dbname = getenv('DB_NAME') ?: 'lumis';
     // nome do usuário do banco de dados
-    $user = "root";
+    $user = getenv('DB_USER') ?: 'root';
     // senha do usuário do banco de dados
-    $password = "";
+    $password = getenv('DB_PASSWORD') ?: '';
+    $socket = getenv('DB_SOCKET') ?: '';
 
     // Opções de configuração do PDO
     $opcoes = [
@@ -38,7 +44,10 @@
     try {
         // Criação da conexão PDO
         // o charset utf8mb4 no DSN garante a gravação correta de textos acentuados
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", 
+        $dsn = $socket !== ''
+            ? "mysql:unix_socket=$socket;dbname=$dbname;charset=utf8mb4"
+            : "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+        $pdo = new PDO($dsn,
         $user, 
         $password,
         $opcoes

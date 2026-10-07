@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.getElementById('menuToggle');
     const menu = document.getElementById('menu');
     
-    menuToggle.addEventListener('click', function() {
+    menuToggle?.addEventListener('click', function() {
         this.classList.toggle('open');
-        menu.classList.toggle('active');
+        menu?.classList.toggle('active');
         
         // Impede a rolagem da página quando o menu está aberto
-        if (menu.classList.contains('active')) {
+        if (menu?.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Prevenir que cliques dentro do menu fechem ele
-    menu.addEventListener('click', function(event) {
+    menu?.addEventListener('click', function(event) {
         event.stopPropagation();
     });
 
@@ -44,35 +44,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileRegisterTab = document.getElementById('mobile-register-tab');
     const mobileLoginTab = document.getElementById('mobile-login-tab');
 
+    function atualizarAbas(cadastroAtivo) {
+        mobileRegisterTab?.classList.toggle('active', cadastroAtivo);
+        mobileLoginTab?.classList.toggle('active', !cadastroAtivo);
+        mobileRegisterTab?.setAttribute('aria-selected', String(cadastroAtivo));
+        mobileLoginTab?.setAttribute('aria-selected', String(!cadastroAtivo));
+    }
+
     if (registerBtn) {
         registerBtn.addEventListener('click', () => {
             container.classList.add('active');
-            mobileRegisterTab.classList.add('active');
-            mobileLoginTab.classList.remove('active');
+            atualizarAbas(true);
         });
     }
 
     if (loginBtn) {
         loginBtn.addEventListener('click', () => {
             container.classList.remove('active');
-            mobileLoginTab.classList.add('active');
-            mobileRegisterTab.classList.remove('active');
+            atualizarAbas(false);
         });
     }
 
     if (mobileRegisterTab) {
         mobileRegisterTab.addEventListener('click', () => {
             container.classList.add('active');
-            mobileRegisterTab.classList.add('active');
-            mobileLoginTab.classList.remove('active');
+            atualizarAbas(true);
         });
     }
 
     if (mobileLoginTab) {
         mobileLoginTab.addEventListener('click', () => {
             container.classList.remove('active');
-            mobileLoginTab.classList.add('active');
-            mobileRegisterTab.classList.remove('active');
+            atualizarAbas(false);
         });
     }
 });

@@ -32,10 +32,22 @@ O objetivo é oferecer praticidade, transparência e eficiência tanto para clie
 
 ## ▶️ Como Executar o Projeto
 1. Clone o repositório:
+
    ```bash
    git clone https://github.com/Guilhermezi/lumis-sistema-limpeza-online.git
-Abra o arquivo View/index.html em seu navegador.
-(ou utilize uma extensão como Live Server para rodar localmente).
+   ```
+
+2. Importe `Model/lumis.sql` no MySQL.
+3. Configure no servidor as variáveis de `.env.example`.
+4. Sirva a raiz com Apache/Nginx ou, em desenvolvimento:
+
+   ```bash
+   php -S localhost:8000
+   ```
+
+> A versão atual usa PHP e MySQL e não funciona pelo GitHub Pages/Live Server.
+> Em bancos já existentes, execute também
+> `Model/migrations/20261007_auth_hardening.sql`.
 
 ## 📜 Licença
 Este projeto está licenciado sob a licença MIT.
