@@ -61,7 +61,3 @@ $controller = $asset . '../Controller/';
         </nav>
     </header>
     <script src="<?= $controller ?>Auth.js"></script>
-    <!-- O menu hambúrguer mora aqui porque TODO página que inclui este header
-         tem o #menuToggle/#menu acima. Carregar junto evita ter que lembrar
-         de colocar a tag em cada uma das páginas. -->
-    <script src="<?= $controller ?>menu.js"></script>
