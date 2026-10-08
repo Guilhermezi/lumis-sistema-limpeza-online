@@ -286,6 +286,7 @@ nav ul li:hover > a {
     color: var(--cor-primaria);
 }
 
+.auth-profile-link,
 .auth-logout-btn {
     display: inline-flex;
     align-items: center;
@@ -302,6 +303,11 @@ nav ul li:hover > a {
     transition: var(--transition);
 }
 
+.auth-profile-link {
+    text-decoration: none;
+}
+
+.auth-profile-link:hover,
 .auth-logout-btn:hover {
     background-color: var(--cor-primaria);
     color: var(--cor-botao-texto);
@@ -1148,6 +1154,7 @@ footer {
         padding: 8px 14px;
         font-size: 0.9rem;
     }
+
 }
 
 @media (max-width: 768px) {
@@ -1226,6 +1233,26 @@ footer {
         width: 100%;
         font-size: 1.1rem;
         margin-left: 0;
+    }
+
+    .auth-user {
+        width: 100%;
+        margin: 12px 0 0;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .auth-user-hello {
+        padding: 0 20px;
+    }
+
+    .auth-profile-link,
+    .auth-logout-btn {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 14px 20px;
+        box-sizing: border-box;
+        font-size: 1rem;
     }
 
     /* Footer responsivo */

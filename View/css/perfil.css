@@ -80,6 +80,26 @@
     transform: scale(1.05);
 }
 
+.hero-avatar-placeholder,
+.pro-avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-terciaria));
+    color: var(--white);
+    font-family: var(--h1-font);
+    font-weight: 800;
+    user-select: none;
+}
+
+.hero-avatar-placeholder {
+    font-size: 2.2rem;
+}
+
+.pro-avatar-placeholder {
+    font-size: 1.15rem;
+}
+
 .avatar-edit {
     position: absolute;
     bottom: 4px;
@@ -221,6 +241,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
+    text-decoration: none;
 }
 
 .btn-edit-profile:hover {
@@ -390,6 +411,38 @@
 .card-link:hover {
     color: var(--cor-botao-primario-hover);
     gap: 0.5rem;
+}
+
+/* Estado exibido quando a consulta ao banco não retorna registros. */
+.profile-empty-state {
+    min-height: 120px;
+    padding: 1.5rem;
+    border: 1px dashed rgba(80, 191, 135, 0.35);
+    border-radius: var(--radius-md);
+    background: rgba(80, 191, 135, 0.04);
+    color: var(--cor-texto-secundario);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    text-align: center;
+}
+
+.profile-empty-state i {
+    color: var(--cor-primaria);
+    font-size: 1.8rem;
+}
+
+.profile-empty-state p,
+.review-person {
+    margin: 0;
+}
+
+.review-person {
+    color: var(--cor-texto-secundario);
+    font-size: 0.8rem;
+    margin-bottom: 0.45rem;
 }
 
 /* ============ INFO GRID ============ */

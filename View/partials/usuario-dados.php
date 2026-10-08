@@ -6,6 +6,7 @@
 $raizPhp = dirname(__DIR__, 2);
 require_once $raizPhp . '/Model/conexao.php';
 require_once $raizPhp . '/Model/usuario.php';
+require_once $raizPhp . '/Model/perfil.php';
 
 $dirPagina = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
 $login = $dirPagina . '/auth/login.php';
@@ -75,9 +76,19 @@ function formatarTelefone(string $digitos): string{
 $telefoneBruto    = $linha['telefone'] ?? '';
 $telefoneFormatado = $telefoneBruto !== '' ? formatarTelefone($telefoneBruto) : '—';
 
-// Avatar: usa a foto do banco se existir, senão cai na imagem padrão
+// Sem foto no banco, a view exibe as iniciais em vez de uma pessoa fictícia.
 $foto   = $linha['foto'] ?? null;
-$avatar = $foto ? $foto : '../img/foto_usuario.png';
+$avatar = $foto ?: null;
+$iniciaisAvatar = iniciaisPerfil($nome);
 
 // Data de nascimento vinda do banco; mostra só o ano na linha de meta
 $nascimento = $linha['data_nascimento'] ?? null;
+
+// Conteúdo do dashboard. Quando uma tabela ainda não possui registros, as
+// consultas retornam listas vazias e a página mostra um estado vazio honesto.
+$resumoPerfil = buscarResumoPerfilCliente($pdo, $id);
+$visitasPerfil = buscarVisitasPerfil($pdo, 'cliente', $id);
+$datasAgendaPerfil = buscarDatasAgendaPerfil($pdo, 'cliente', $id);
+$atividadesPerfil = buscarAtividadesPerfil($pdo, 'cliente', $id);
+$profissionalPreferido = buscarProfissionalPreferidoPerfil($pdo, $id);
+$avaliacoesPerfil = buscarAvaliacoesPerfil($pdo, 'cliente', $id);

@@ -25,6 +25,10 @@ $controller = $asset . '../Controller/';
                     <a class="bntCadastro" id="authLoginLink" href="<?= $base ?>auth/decisao.php"><i class="ri-login-box-line"></i> <span data-i18n="nav-login">Login</span></a>
                     <div class="auth-user" id="authUserBox" hidden>
                         <span class="auth-user-hello"><span data-i18n="nav-hello">Olá,</span> <strong id="authUserName"></strong></span>
+                        <a class="auth-profile-link" id="authProfileLink"
+                           data-cliente-url="<?= $base ?>perfil.php"
+                           data-profissional-url="<?= $base ?>perfil-profissional.php"
+                           href="<?= $base ?>perfil.php"><i class="ri-user-line"></i> <span data-i18n="nav-perfil">Meu perfil</span></a>
                         <button type="button" class="auth-logout-btn" id="authLogoutBtn"><i class="ri-logout-box-r-line"></i> <span data-i18n="nav-logout">Sair</span></button>
                     </div>
                 </li>
@@ -57,3 +61,7 @@ $controller = $asset . '../Controller/';
         </nav>
     </header>
     <script src="<?= $controller ?>Auth.js"></script>
+    <!-- O menu hambúrguer mora aqui porque TODO página que inclui este header
+         tem o #menuToggle/#menu acima. Carregar junto evita ter que lembrar
+         de colocar a tag em cada uma das páginas. -->
+    <script src="<?= $controller ?>menu.js"></script>

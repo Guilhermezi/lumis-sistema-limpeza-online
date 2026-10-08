@@ -1,35 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
-    // ============ HAMBURGER MENU ============
-    const menuToggle = document.getElementById('menuToggle');
-    const menu = document.getElementById('menu');
-
-    menuToggle.addEventListener('click', function() {
-        this.classList.toggle('open');
-        menu.classList.toggle('active');
-        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
-    });
-
-    document.querySelectorAll('#menu a').forEach(item => {
-        item.addEventListener('click', () => {
-            menu.classList.remove('active');
-            menuToggle.classList.remove('open');
-            document.body.style.overflow = 'auto';
-        });
-    });
-
-    document.addEventListener('click', function(event) {
-        if (!menu.contains(event.target) && !menuToggle.contains(event.target) && menu.classList.contains('active')) {
-            menu.classList.remove('active');
-            menuToggle.classList.remove('open');
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    menu.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-
     // ============ FAVORITE BUTTON ============
     document.querySelectorAll('.card-fav').forEach(btn => {
         btn.addEventListener('click', function(e) {

@@ -8,6 +8,7 @@
 $raizPhp = dirname(__DIR__, 2);
 require_once $raizPhp . '/Model/conexao.php';
 require_once $raizPhp . '/Model/usuario.php';
+require_once $raizPhp . '/Model/perfil.php';
 
 // Caminho da página atual, para o redirect não depender de "../" chutado
 $dirPagina = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
@@ -73,7 +74,8 @@ $telefoneBruto     = $linha['telefone'] ?? '';
 $telefoneFormatado = $telefoneBruto !== '' ? formatarTelefonePro($telefoneBruto) : '—';
 
 $foto   = $linha['foto'] ?? null;
-$avatar = $foto ? $foto : '../img/João Neves.png';
+$avatar = $foto ?: null;
+$iniciaisAvatar = iniciaisPerfil($nome);
 
 // Campos que só o profissional tem, direto do banco
 $regiao     = $linha['regiao_atuacao'] ?? '—';
@@ -86,3 +88,11 @@ $valorMinimo = isset($linha['valor_minimo']) && $linha['valor_minimo'] !== null
 $verificado = !empty($linha['verificado']);
 
 $nascimento = $linha['data_nascimento'] ?? null;
+
+// Dados reais que alimentam os cards do perfil profissional.
+$resumoPerfil = buscarResumoPerfilProfissional($pdo, $id);
+$especialidadesPerfil = buscarEspecialidadesPerfil($pdo, $id);
+$visitasPerfil = buscarVisitasPerfil($pdo, 'profissional', $id);
+$datasAgendaPerfil = buscarDatasAgendaPerfil($pdo, 'profissional', $id);
+$atividadesPerfil = buscarAtividadesPerfil($pdo, 'profissional', $id);
+$avaliacoesPerfil = buscarAvaliacoesPerfil($pdo, 'profissional', $id);

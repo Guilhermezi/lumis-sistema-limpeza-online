@@ -213,6 +213,88 @@
         return $stmt->fetch() ?: null;
     }
 
+    // Valida somente os campos que podem ser alterados na área de perfil.
+    // Senha e verificação profissional permanecem em fluxos separados.
+    function validarAtualizacaoPerfil(array $dados, array $cfg): array{
+        $erros = [];
+        $nome = trim((string) ($dados['nome'] ?? ''));
+        $email = normalizarEmail($dados['email'] ?? '');
+        $telefone = preg_replace('/\D/', '', (string) ($dados['telefone'] ?? ''));
+        $nascimento = trim((string) ($dados['data_nascimento'] ?? ''));
+
+        if (mb_strlen($nome) < 2 || mb_strlen($nome) > limite('nome')){
+            $erros['nome'] = 'nome-invalido';
+        }
+        if (mb_strlen($email) > limite('email') || !filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $erros['email'] = 'email-invalido';
+        }
+        if (strlen($telefone) < 10 || strlen($telefone) > 11){
+            $erros['telefone'] = 'telefone-invalido';
+        }
+        if ($nascimento !== ''){
+            $data = DateTime::createFromFormat('Y-m-d', $nascimento);
+            if (!$data || $data->format('Y-m-d') !== $nascimento || $data > new DateTime('today')){
+                $erros['data_nascimento'] = 'nascimento-invalido';
+            }
+        }
+
+        if (in_array('regiao_atuacao', $cfg['especificos'], true)){
+            $regiao = trim((string) ($dados['regiao_atuacao'] ?? ''));
+            $experiencia = trim((string) ($dados['experiencia'] ?? ''));
+            $valor = str_replace(',', '.', trim((string) ($dados['valor_minimo'] ?? '')));
+
+            if ($regiao === '' || mb_strlen($regiao) > limite('regiao_atuacao')){
+                $erros['regiao_atuacao'] = 'regiao-invalida';
+            }
+            if (mb_strlen($experiencia) > limite('experiencia')){
+                $erros['experiencia'] = 'experiencia-longa';
+            }
+            if ($valor !== '' && (!is_numeric($valor) || (float) $valor < 0 || (float) $valor > 999999.99)){
+                $erros['valor_minimo'] = 'valor-invalido';
+            }
+        }
+
+        return $erros;
+    }
+
+    function atualizarPerfil(PDO $pdo, int $id, string $tipo, array $dados, ?string $foto): bool{
+        $cfg = configTipo($tipo);
+        if (!$cfg){
+            return false;
+        }
+
+        $valores = [
+            'nome' => trim((string) $dados['nome']),
+            'email' => normalizarEmail($dados['email']),
+            'telefone' => preg_replace('/\D/', '', (string) $dados['telefone']),
+            'data_nascimento' => trim((string) ($dados['data_nascimento'] ?? '')) ?: null,
+            'foto' => $foto,
+        ];
+
+        if ($tipo === 'profissional'){
+            $valor = str_replace(',', '.', trim((string) ($dados['valor_minimo'] ?? '')));
+            $valores['experiencia'] = trim((string) ($dados['experiencia'] ?? '')) ?: null;
+            $valores['valor_minimo'] = $valor === '' ? null : number_format((float) $valor, 2, '.', '');
+            $valores['regiao_atuacao'] = trim((string) $dados['regiao_atuacao']);
+        }
+
+        $atribuicoes = array_map(static fn(string $coluna): string => $coluna . ' = :' . $coluna, array_keys($valores));
+        $valores['id'] = $id;
+        $sql = 'UPDATE ' . $cfg['tabela'] . ' SET ' . implode(', ', $atribuicoes)
+            . ' WHERE ' . $cfg['pk'] . ' = :id';
+
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($valores);
+            return true;
+        } catch (PDOException $e){
+            if (($e->errorInfo[1] ?? null) === 1062){
+                return false;
+            }
+            throw $e;
+        }
+    }
+
     function identificadorLogin(string $email, string $tipo): string{
         return hash('sha256', $tipo . '|' . normalizarEmail($email));
     }

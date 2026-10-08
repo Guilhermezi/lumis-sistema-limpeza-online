@@ -271,6 +271,7 @@
         const link = document.getElementById('authLoginLink');
         const box = document.getElementById('authUserBox');
         const nome = document.getElementById('authUserName');
+        const perfil = document.getElementById('authProfileLink');
 
         if (nome && usuario?.nome) {
             nome.textContent = usuario.nome.split(' ')[0];
@@ -279,6 +280,11 @@
         if (!link || !box) return;
 
         if (usuario) {
+            if (perfil) {
+                perfil.href = usuario.tipo === 'profissional'
+                    ? perfil.dataset.profissionalUrl
+                    : perfil.dataset.clienteUrl;
+            }
             link.hidden = true;
             box.hidden = false;
         } else {
