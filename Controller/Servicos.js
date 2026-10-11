@@ -1,271 +1,145 @@
-document.addEventListener('DOMContentLoaded', function() {
-
-    // ============ HAMBURGER MENU ============
-    const menuToggle = document.getElementById('menuToggle');
-    const menu = document.getElementById('menu');
-
-    menuToggle.addEventListener('click', function() {
-        this.classList.toggle('open');
-        menu.classList.toggle('active');
-        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
-    });
-
-    document.querySelectorAll('#menu a').forEach(item => {
-        item.addEventListener('click', () => {
-            menu.classList.remove('active');
-            menuToggle.classList.remove('open');
-            document.body.style.overflow = 'auto';
-        });
-    });
-
-    document.addEventListener('click', function(event) {
-        if (!menu.contains(event.target) && !menuToggle.contains(event.target) && menu.classList.contains('active')) {
-            menu.classList.remove('active');
-            menuToggle.classList.remove('open');
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    menu.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-
-    // ============ FAVORITE BUTTON ============
-    document.querySelectorAll('.card-fav').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.classList.toggle('active');
-            const icon = this.querySelector('i');
-            if (this.classList.contains('active')) {
-                icon.className = 'ri-heart-fill';
-            } else {
-                icon.className = 'ri-heart-line';
-            }
-        });
-    });
-
-    // ============ CATEGORY FILTER ============
-    document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-            const category = this.dataset.category;
-            const checkboxes = document.querySelectorAll('input[name="category"]');
-            checkboxes.forEach(cb => cb.checked = cb.value === category);
-            filterServices();
-        });
-    });
-
-    // ============ SEARCH TAGS ============
-    document.querySelectorAll('.search-tag').forEach(tag => {
-        tag.addEventListener('click', function() {
-            const filter = this.dataset.filter;
-            document.getElementById('searchInput').value = '';
-            const checkboxes = document.querySelectorAll('input[name="category"]');
-            checkboxes.forEach(cb => cb.checked = cb.value === filter);
-            filterServices();
-            document.getElementById('servicos').scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    // ============ SEARCH INPUT ============
-    document.getElementById('searchInput').addEventListener('input', function() {
-        const query = this.value.toLowerCase();
-        document.querySelectorAll('.service-card').forEach(card => {
-            const text = card.textContent.toLowerCase();
-            card.style.display = text.includes(query) ? '' : 'none';
-        });
-        updateResultsCount();
-    });
-
-    // ============ FILTER CHECKBOXES ============
-    document.querySelectorAll('.filter-check input').forEach(cb => {
-        cb.addEventListener('change', filterServices);
-    });
-
-    // ============ PRICE RANGE ============
+document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('servicesGrid');
+    const cards = grid ? Array.from(grid.querySelectorAll('.service-card')) : [];
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.querySelector('.search-btn');
     const priceRange = document.getElementById('priceRange');
     const priceValue = document.getElementById('priceValue');
-    if (priceRange) {
-        priceRange.addEventListener('input', function() {
-            priceValue.textContent = 'R$ ' + this.value;
-            filterServices();
-        });
-    }
+    const resultCount = document.querySelector('.results-count');
+    const emptyResult = document.getElementById('filterEmpty');
+    const sortSelect = document.getElementById('sortSelect');
 
-    // ============ RATING FILTER ============
-    document.querySelectorAll('.rating-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            filterServices();
-        });
-    });
+    const normalizeText = (value) => value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
 
-    // ============ CITY FILTER ============
-    document.getElementById('cityFilter').addEventListener('change', filterServices);
+    const selectedCategories = () => Array.from(
+        document.querySelectorAll('input[name="category"]:checked'),
+        (checkbox) => checkbox.value
+    );
 
-    // ============ CLEAR FILTERS ============
-    document.getElementById('clearFilters').addEventListener('click', function() {
-        document.querySelectorAll('.filter-check input').forEach(cb => cb.checked = false);
-        document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector('.rating-btn[data-rating="0"]').classList.add('active');
-        if (priceRange) {
-            priceRange.value = 500;
-            priceValue.textContent = 'R$ 500';
+    const updateResultCount = (visible) => {
+        if (resultCount) {
+            resultCount.dataset.count = String(visible);
+            const key = visible === 1 ? 'servicos-resultados-um' : 'servicos-resultados-varios';
+            resultCount.textContent = window.LumisI18n?.texto(key, { count: visible })
+                || `${visible} serviço${visible === 1 ? '' : 's'} encontrado${visible === 1 ? '' : 's'}`;
         }
-        document.getElementById('cityFilter').value = '';
-        document.getElementById('searchInput').value = '';
-        document.querySelectorAll('.service-card').forEach(card => card.style.display = '');
-        updateResultsCount();
+        if (emptyResult) emptyResult.hidden = visible !== 0 || cards.length === 0;
+    };
+
+    const filterServices = () => {
+        const query = normalizeText(searchInput?.value || '');
+        const categories = selectedCategories();
+        const maximumPrice = Number(priceRange?.value || Number.POSITIVE_INFINITY);
+        const minimumRating = Number(document.querySelector('.rating-btn.active')?.dataset.rating || 0);
+        let visible = 0;
+
+        cards.forEach((card) => {
+            const matchesSearch = query === '' || normalizeText(card.textContent).includes(query);
+            const matchesCategory = categories.length === 0 || categories.includes(card.dataset.category);
+            const matchesPrice = Number(card.dataset.price) <= maximumPrice;
+            const matchesRating = Number(card.dataset.rating) >= minimumRating;
+            const show = matchesSearch && matchesCategory && matchesPrice && matchesRating;
+            card.hidden = !show;
+            if (show) visible++;
+        });
+
+        updateResultCount(visible);
+    };
+
+    const selectOnlyCategory = (category) => {
+        document.querySelectorAll('input[name="category"]').forEach((checkbox) => {
+            checkbox.checked = checkbox.value === category;
+        });
+        if (searchInput) searchInput.value = '';
+        filterServices();
+    };
+
+    document.querySelectorAll('.category-card').forEach((categoryCard) => {
+        categoryCard.addEventListener('click', () => selectOnlyCategory(categoryCard.dataset.category));
     });
 
-    // ============ SORT ============
-    document.getElementById('sortSelect').addEventListener('change', function() {
-        const grid = document.getElementById('servicesGrid');
-        const cards = Array.from(grid.querySelectorAll('.service-card'));
-        const sortBy = this.value;
+    document.querySelectorAll('.search-tag').forEach((tag) => {
+        tag.addEventListener('click', () => {
+            selectOnlyCategory(tag.dataset.filter);
+            document.getElementById('servicos')?.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
 
+    searchInput?.addEventListener('input', filterServices);
+    searchButton?.addEventListener('click', () => {
+        filterServices();
+        document.getElementById('servicos')?.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.querySelectorAll('input[name="category"]').forEach((checkbox) => {
+        checkbox.addEventListener('change', filterServices);
+    });
+
+    priceRange?.addEventListener('input', () => {
+        if (priceValue) priceValue.textContent = `R$ ${Number(priceRange.value).toLocaleString('pt-BR')}`;
+        filterServices();
+    });
+
+    document.querySelectorAll('.rating-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.rating-btn').forEach((item) => item.classList.remove('active'));
+            button.classList.add('active');
+            filterServices();
+        });
+    });
+
+    document.getElementById('clearFilters')?.addEventListener('click', () => {
+        document.querySelectorAll('input[name="category"]').forEach((checkbox) => {
+            checkbox.checked = false;
+        });
+        document.querySelectorAll('.rating-btn').forEach((button) => button.classList.remove('active'));
+        document.querySelector('.rating-btn[data-rating="0"]')?.classList.add('active');
+        if (priceRange) {
+            priceRange.value = priceRange.max;
+            if (priceValue) priceValue.textContent = `R$ ${Number(priceRange.max).toLocaleString('pt-BR')}`;
+        }
+        if (searchInput) searchInput.value = '';
+        if (sortSelect) sortSelect.value = 'relevancia';
+        cards.sort((a, b) => Number(a.dataset.order) - Number(b.dataset.order));
+        cards.forEach((card) => grid?.appendChild(card));
+        filterServices();
+    });
+
+    sortSelect?.addEventListener('change', () => {
+        const sortBy = sortSelect.value;
         cards.sort((a, b) => {
-            if (sortBy === 'avaliacao') {
-                return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
-            } else if (sortBy === 'preco-menor') {
-                return parseInt(a.dataset.price) - parseInt(b.dataset.price);
-            } else if (sortBy === 'preco-maior') {
-                return parseInt(b.dataset.price) - parseInt(a.dataset.price);
-            }
-            return 0;
+            if (sortBy === 'avaliacao') return Number(b.dataset.rating) - Number(a.dataset.rating);
+            if (sortBy === 'preco-menor') return Number(a.dataset.price) - Number(b.dataset.price);
+            if (sortBy === 'preco-maior') return Number(b.dataset.price) - Number(a.dataset.price);
+            return Number(a.dataset.order) - Number(b.dataset.order);
         });
-
-        cards.forEach(card => grid.appendChild(card));
+        cards.forEach((card) => grid?.appendChild(card));
     });
 
-    // ============ FILTER LOGIC ============
-    function filterServices() {
-        const checkedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(cb => cb.value);
-        const maxPrice = parseInt(priceRange.value);
-        const activeRating = parseFloat(document.querySelector('.rating-btn.active')?.dataset.rating || 0);
-
-        document.querySelectorAll('.service-card').forEach(card => {
-            const category = card.dataset.category;
-            const price = parseInt(card.dataset.price);
-            const rating = parseFloat(card.dataset.rating);
-
-            const matchCategory = checkedCategories.length === 0 || checkedCategories.includes(category);
-            const matchPrice = price <= maxPrice;
-            const matchRating = rating >= activeRating;
-
-            card.style.display = (matchCategory && matchPrice && matchRating) ? '' : 'none';
-        });
-
-        updateResultsCount();
-    }
-
-    function updateResultsCount() {
-        const visible = document.querySelectorAll('.service-card:not([style*="display: none"])').length;
-        document.querySelector('.results-count').textContent = `${visible} serviço${visible !== 1 ? 's' : ''} encontrado${visible !== 1 ? 's' : ''}`;
-    }
-
-    // ============ LOAD MORE (simulated) ============
-    document.getElementById('loadMore')?.addEventListener('click', function() {
-        this.textContent = 'Carregando...';
-        this.disabled = true;
-        setTimeout(() => {
-            this.textContent = 'Nenhum mais serviço disponível';
-            this.style.opacity = '0.5';
-        }, 1000);
-    });
-
-    // ============ STAT COUNTER ANIMATION ============
-    function animateCounters() {
-        document.querySelectorAll('.trust-number').forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            if (!target) return;
-            const duration = 1800;
-            const step = target / (duration / 16);
-            let current = 0;
-            const update = () => {
-                current += step;
-                if (current >= target) {
-                    counter.textContent = target.toLocaleString('pt-BR');
-                    return;
-                }
-                counter.textContent = Math.floor(current).toLocaleString('pt-BR');
-                requestAnimationFrame(update);
-            };
-            update();
-        });
-    }
-
-    // ============ GSAP REVEAL ANIMATIONS ============
-    function initRevealAnimations() {
-        if (typeof gsap === 'undefined') {
-            document.querySelectorAll('.services-hero .hero-content, .trust-bar .trust-item, .category-card, .service-card, .how-step, .testimonial-card, .cta-content').forEach(el => {
-                el.classList.add('revealed');
-            });
-            animateCounters();
+    // Anima os números que vieram do banco sem depender de bibliotecas externas.
+    document.querySelectorAll('.trust-number').forEach((counter) => {
+        const target = Number(counter.dataset.target || 0);
+        if (target === 0) {
+            counter.textContent = '0';
             return;
         }
-
-        // Hero
-        gsap.to('.services-hero .hero-content', {
-            opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
-            onComplete: () => document.querySelector('.services-hero .hero-content')?.classList.add('revealed')
-        });
-
-        // Trust bar
-        gsap.to('.trust-bar .trust-item', {
-            opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', delay: 0.4,
-            onComplete: animateCounters
-        });
-
-        // Categories
-        gsap.to('.category-card', {
-            scrollTrigger: { trigger: '.categories-grid', start: 'top 85%', once: true },
-            opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out'
-        });
-
-        // Service cards
-        gsap.utils.toArray('.service-card').forEach((card, i) => {
-            gsap.to(card, {
-                scrollTrigger: { trigger: card, start: 'top 90%', once: true },
-                opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: i * 0.05
-            });
-        });
-
-        // How steps
-        gsap.to('.how-step', {
-            scrollTrigger: { trigger: '.how-grid', start: 'top 85%', once: true },
-            opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power3.out'
-        });
-
-        // Testimonials
-        gsap.to('.testimonial-card', {
-            scrollTrigger: { trigger: '.testimonials-grid', start: 'top 85%', once: true },
-            opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out'
-        });
-
-        // CTA
-        gsap.to('.cta-content', {
-            scrollTrigger: { trigger: '.cta-section', start: 'top 85%', once: true },
-            opacity: 1, y: 0, duration: 0.7, ease: 'power3.out'
-        });
-    }
-
-    // Load GSAP
-    if (typeof gsap === 'undefined') {
-        const gsapScript = document.createElement('script');
-        gsapScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
-        gsapScript.onload = () => {
-            const stScript = document.createElement('script');
-            stScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js';
-            stScript.onload = () => {
-                gsap.registerPlugin(ScrollTrigger);
-                initRevealAnimations();
-            };
-            document.head.appendChild(stScript);
+        const startedAt = performance.now();
+        const duration = 900;
+        const update = (now) => {
+            const progress = Math.min((now - startedAt) / duration, 1);
+            counter.textContent = Math.round(target * progress).toLocaleString('pt-BR');
+            if (progress < 1) requestAnimationFrame(update);
         };
-        document.head.appendChild(gsapScript);
-    } else {
-        initRevealAnimations();
-    }
+        requestAnimationFrame(update);
+    });
+
+    // O CSS inicia estes elementos ocultos para animação; esta classe os revela.
+    document.querySelectorAll('.services-hero .hero-content, .trust-bar .trust-item, .category-card, .service-card, .testimonial-card, .cta-content')
+        .forEach((element) => element.classList.add('revealed'));
+
+    filterServices();
 });

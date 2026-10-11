@@ -86,6 +86,58 @@ function estrelasPerfilCliente(int $nota): string
                 <?php endif; ?>
             </section>
 
+            <section class="card card-orders" data-csrf="<?= htmlspecialchars($csrfPerfil, ENT_QUOTES, 'UTF-8') ?>">
+                <div class="card-header"><h2><i class="ri-service-line"></i> Meus serviços</h2></div>
+                <p class="profile-section-help">Aqui você acompanha o profissional designado, salva-o nos favoritos e avalia o atendimento depois que a limpeza for concluída.</p>
+                <?php if (!$contratacoesPerfil): ?>
+                    <div class="profile-empty-state"><i class="ri-sparkling-line"></i><p>Seus agendamentos e o profissional designado aparecerão aqui.</p><a class="btn-primary btn-sm" href="empresa/servicos.php">Escolher um serviço</a></div>
+                <?php else: ?>
+                <div class="profile-orders-list">
+                    <?php foreach ($contratacoesPerfil as $contratacao): ?>
+                    <?php
+                        $statusServico = $contratacao['status_agenda'] ?: $contratacao['status_contratacao'];
+                        $servicoConcluido = stripos((string) $contratacao['status_contratacao'], 'conclu') === 0
+                            || stripos((string) $contratacao['status_agenda'], 'conclu') === 0;
+                    ?>
+                    <article class="profile-order">
+                        <div class="profile-order-heading">
+                            <div><h3><?= htmlspecialchars($contratacao['servicos'] ?: 'Serviço contratado') ?></h3><p><?= htmlspecialchars(date('d/m/Y', strtotime($contratacao['data_contratacao']))) ?><?= $contratacao['hora_inicio_contratacao'] ? ' às ' . htmlspecialchars(substr($contratacao['hora_inicio_contratacao'], 0, 5)) : '' ?></p></div>
+                            <span class="visit-status status-upcoming"><?= htmlspecialchars($statusServico) ?></span>
+                        </div>
+                        <p class="profile-order-pro"><i class="ri-user-star-line"></i> Profissional designado: <strong><?= htmlspecialchars($contratacao['profissional']) ?></strong></p>
+                        <p class="profile-order-payment">Pagamento: <?= htmlspecialchars($contratacao['status_pagamento'] ?: 'Pendente') ?> · R$ <?= number_format((float) $contratacao['valor_total'], 2, ',', '.') ?></p>
+                        <div class="profile-order-actions">
+                            <?php if ((int) ($contratacao['pode_cancelar'] ?? 0) === 1 && in_array(mb_strtolower((string) $statusServico), ['aguardando confirmação', 'confirmado'], true)): ?>
+                            <button type="button" class="btn-secondary btn-sm client-cancel-booking" data-contract-id="<?= (int) $contratacao['id_contratacao'] ?>">Cancelar agendamento</button>
+                            <p class="profile-action-message" role="status" hidden></p>
+                            <?php endif; ?>
+                            <button type="button" class="btn-secondary btn-sm profile-favorite-button" data-favorite-contract="<?= (int) $contratacao['id_contratacao'] ?>" data-favorito="<?= (int) $contratacao['favorito'] ?>" aria-pressed="<?= $contratacao['favorito'] ? 'true' : 'false' ?>">
+                                <i class="ri-heart-<?= $contratacao['favorito'] ? 'fill' : 'line' ?>"></i> <?= $contratacao['favorito'] ? 'Profissional favoritado' : 'Favoritar profissional' ?>
+                            </button>
+                            <?php if ($servicoConcluido && !(int) $contratacao['avaliado']): ?>
+                            <form class="profile-review-form" data-review-form>
+                                <input type="hidden" name="contratacao_id" value="<?= (int) $contratacao['id_contratacao'] ?>">
+                                <label>Como foi o serviço?
+                                    <select name="nota" required>
+                                        <option value="">Escolha uma nota</option><option value="5">★★★★★ — Excelente</option><option value="4">★★★★ — Muito bom</option><option value="3">★★★ — Bom</option><option value="2">★★ — Regular</option><option value="1">★ — Ruim</option>
+                                    </select>
+                                </label>
+                                <label>Comentário (opcional)<textarea name="comentario" maxlength="1000" rows="2" placeholder="Conte como foi sua experiência"></textarea></label>
+                                <button type="submit" class="btn-primary btn-sm">Enviar avaliação</button>
+                                <p class="profile-action-message" role="status" hidden></p>
+                            </form>
+                            <?php elseif ($servicoConcluido): ?>
+                            <span class="profile-reviewed-label"><i class="ri-checkbox-circle-line"></i> Serviço avaliado</span>
+                            <?php else: ?>
+                            <span class="profile-review-hint">A avaliação ficará disponível depois que o profissional concluir o serviço.</span>
+                            <?php endif; ?>
+                        </div>
+                    </article>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
+            </section>
+
             <section class="card card-activity">
                 <div class="card-header"><h2><i class="ri-time-line"></i> Atividade recente</h2></div>
                 <?php if (!$atividadesPerfil): ?>
@@ -104,6 +156,24 @@ function estrelasPerfilCliente(int $nota): string
         </div>
 
         <div class="profile-sidebar">
+            <section class="card card-plan">
+                <div class="card-header"><h2><i class="ri-vip-crown-line"></i> Meu plano</h2></div>
+                <?php if (!$planoPerfil): ?>
+                    <div class="profile-empty-state"><i class="ri-price-tag-3-line"></i><p>Você ainda não solicitou um plano.</p><a class="btn-primary btn-sm" href="empresa/planos.php">Ver planos</a></div>
+                <?php else: ?>
+                    <div class="profile-plan-details">
+                        <span class="profile-plan-label">Última solicitação</span>
+                        <h3><?= htmlspecialchars($planoPerfil['plano']) ?></h3>
+                        <p><?= htmlspecialchars($planoPerfil['status_assinatura']) ?></p>
+                        <div><span>Pagamento</span><strong><?= htmlspecialchars($planoPerfil['status_pagamento']) ?></strong></div>
+                        <div><span>Forma escolhida</span><strong><?= htmlspecialchars($planoPerfil['forma_pagamento']) ?></strong></div>
+                        <div><span>Valor</span><strong>R$ <?= number_format((float) $planoPerfil['valor_assinatura'], 2, ',', '.') ?></strong></div>
+                        <small>Este projeto registra a solicitação, mas não realiza cobrança real.</small>
+                    </div>
+                    <a class="btn-secondary btn-sm profile-plan-link" href="empresa/planos.php">Consultar planos</a>
+                <?php endif; ?>
+            </section>
+
             <section class="card card-calendar">
                 <div class="card-header"><h2><i class="ri-calendar-check-line"></i> Agenda</h2></div>
                 <div class="calendar-widget">
@@ -157,6 +227,8 @@ function estrelasPerfilCliente(int $nota): string
 
 <?php include __DIR__ . '/../partials/footer.php'; ?>
 <script>window.LumisProfileEvents = <?= json_encode($datasAgendaPerfil, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
+<script>window.LumisProfileCsrf = <?= json_encode($csrfPerfil) ?>;</script>
+<script src="../../Controller/acoes-perfil.js"></script>
 <script src="../../Controller/calendario_horas.js"></script>
 <script src="../../Controller/tema-idioma.js"></script>
 </body>

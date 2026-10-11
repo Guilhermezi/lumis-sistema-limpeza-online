@@ -1364,3 +1364,79 @@
 [data-theme="dark"] .cancel-button:hover {
     background: #4a4a4a;
 }
+
+.profile-orders-list {
+    display: grid;
+    gap: 1rem;
+}
+.profile-section-help { margin: -.35rem 0 1rem; color: var(--cor-texto-secundario); font-size: .88rem; line-height: 1.5; }
+
+.profile-order {
+    padding: 1rem;
+    border: 1px solid var(--border-color, rgba(80, 191, 135, .2));
+    border-radius: 14px;
+    background: var(--cor-fundo, #fff);
+}
+
+.profile-order-heading,
+.profile-order-heading > div,
+.profile-plan-details > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+}
+
+.profile-order-heading h3,
+.profile-plan-details h3 {
+    margin: 0 0 .25rem;
+    color: var(--cor-texto);
+    font-size: 1rem;
+}
+
+.profile-order-heading p,
+.profile-order-pro,
+.profile-order-payment,
+.profile-review-hint,
+.profile-plan-details small,
+.profile-plan-label {
+    color: var(--cor-texto-secundario);
+    font-size: .85rem;
+}
+
+.profile-order-heading p,
+.profile-order-pro,
+.profile-order-payment {
+    margin: .2rem 0;
+}
+
+.profile-order-pro { margin-top: .8rem; }
+.profile-order-actions { display: grid; justify-items: start; gap: .75rem; margin-top: .8rem; }
+.profile-review-form { display: grid; gap: .6rem; width: min(100%, 440px); }
+.profile-review-form label { display: grid; gap: .3rem; color: var(--cor-texto); font-size: .85rem; font-weight: 600; }
+.profile-review-form select,
+.profile-review-form textarea {
+    width: 100%;
+    padding: .65rem .75rem;
+    border: 1px solid var(--border-color, #d9e3dc);
+    border-radius: 9px;
+    background: var(--white, #fff);
+    color: var(--cor-texto);
+    font: inherit;
+}
+.profile-reviewed-label { display: inline-flex; align-items: center; gap: .4rem; color: var(--cor-primaria); font-weight: 700; }
+.profile-action-message { margin: .35rem 0; color: var(--cor-primaria); font-size: .85rem; }
+.profile-plan-details { display: grid; gap: .7rem; }
+.profile-plan-details > div { padding-top: .55rem; border-top: 1px solid var(--border-color, rgba(80, 191, 135, .2)); font-size: .88rem; }
+.profile-plan-details > div span { color: var(--cor-texto-secundario); }
+.profile-plan-details > div strong { color: var(--cor-texto); text-align: right; }
+.profile-plan-link { display: inline-flex; margin-top: 1rem; }
+.profile-empty-state .btn-sm { display: inline-flex; margin-top: .5rem; }
+
+@media (max-width: 560px) {
+    .profile-order-heading { align-items: flex-start; flex-direction: column; }
+    .profile-order-actions,
+    .profile-order-actions > button,
+    .profile-review-form,
+    .profile-order-actions .btn-sm { width: 100%; }
+}

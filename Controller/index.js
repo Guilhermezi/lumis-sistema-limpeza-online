@@ -1,125 +1,163 @@
-document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const menu = document.getElementById('menu');
-            
-            menuToggle.addEventListener('click', function() {
-                this.classList.toggle('open');
-                menu.classList.toggle('active');
-                
-                // Impede a rolagem da página quando o menu está aberto
-                if (menu.classList.contains('active')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            // Fechar o menu ao clicar em um item (útil para mobile)
-            document.querySelectorAll('#menu a').forEach(item => {
-                item.addEventListener('click', () => {
-                    menu.classList.remove('active');
-                    menuToggle.classList.remove('open');
-                    document.body.style.overflow = 'auto';
-                });
-            });
-            
-            // Fechar o menu ao clicar fora dele
-            document.addEventListener('click', function(event) {
-                if (!menu.contains(event.target) && !menuToggle.contains(event.target) && menu.classList.contains('active')) {
-                    menu.classList.remove('active');
-                    menuToggle.classList.remove('open');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            // Prevenir que cliques dentro do menu fechem ele
-            menu.addEventListener('click', function(event) {
-                event.stopPropagation();
-            });
-        });
-     
- // ====================== Carrossel da Seção de Comentários ======================
-document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.querySelector('.carousel');
-    const items = document.querySelectorAll('.carousel-item');
-    const dots = document.querySelectorAll('.dot');
-    const nextBtn = document.querySelector('.next');
-    const prevBtn = document.querySelector('.prev');
-    
+// Carrossel responsivo das avaliações reais exibidas na página inicial.
+document.addEventListener('DOMContentLoaded', () => {
+    const component = document.querySelector('.testimonial-carousel');
+    if (!component) return;
+
+    const viewport = component.querySelector('.testimonial-viewport');
+    const track = component.querySelector('.carousel');
+    const slides = Array.from(component.querySelectorAll('.testimonial-slide'));
+    const previousButton = component.querySelector('.prev');
+    const nextButton = component.querySelector('.next');
+    const pauseButton = component.querySelector('.testimonial-pause');
+    const progress = component.querySelector('.testimonial-progress-value');
+
+    if (!viewport || !track || slides.length === 0) return;
+
+    const autoplayDelay = 6000;
+    const swipeThreshold = 45;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let currentIndex = 0;
-    let autoPlayInterval;
-    const intervalTime = 5000; // 5 segundos
+    let itemsPerView = 1;
+    let autoplayTimer = null;
+    let pausedByUser = reducedMotion.matches;
+    let pointerStartX = null;
 
-    // Função principal para atualizar o carrossel
-    function updateCarousel() {
-        // Atualiza a posição do carrossel com transição suave
-        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-        
-        // Atualiza os indicadores (dots)
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
+    const calculateItemsPerView = () => {
+        if (window.innerWidth >= 1050) return 3;
+        if (window.innerWidth >= 700) return 2;
+        return 1;
+    };
+
+    const maximumIndex = () => Math.max(0, slides.length - itemsPerView);
+
+    const updatePauseButton = () => {
+        if (!pauseButton) return;
+        pauseButton.setAttribute('aria-pressed', String(pausedByUser));
+        pauseButton.setAttribute('aria-label', pausedByUser
+            ? 'Retomar rotação automática'
+            : 'Pausar rotação automática');
+        pauseButton.innerHTML = pausedByUser
+            ? '<i class="ri-play-mini-fill" aria-hidden="true"></i>'
+            : '<i class="ri-pause-mini-fill" aria-hidden="true"></i>';
+    };
+
+    const render = (animate = true) => {
+        currentIndex = Math.min(Math.max(currentIndex, 0), maximumIndex());
+        track.style.transition = animate ? '' : 'none';
+        track.style.transform = `translateX(-${slides[currentIndex].offsetLeft}px)`;
+
+        if (!animate) {
+            // Força o navegador a aplicar a posição antes de restaurar a animação.
+            void track.offsetWidth;
+            track.style.transition = '';
+        }
+
+        slides.forEach((slide, index) => {
+            const visible = index >= currentIndex && index < currentIndex + itemsPerView;
+            slide.setAttribute('aria-hidden', String(!visible));
         });
-    }
 
-    // Avança para o próximo slide
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % items.length;
-        updateCarousel();
-    }
+        if (progress) {
+            const viewedUntil = Math.min(currentIndex + itemsPerView, slides.length);
+            progress.style.width = `${(viewedUntil / slides.length) * 100}%`;
+        }
 
-    // Volta para o slide anterior
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + items.length) % items.length;
-        updateCarousel();
-    }
+        const hasMovement = maximumIndex() > 0;
+        if (previousButton) previousButton.disabled = !hasMovement;
+        if (nextButton) nextButton.disabled = !hasMovement;
+        if (pauseButton) pauseButton.disabled = !hasMovement;
+    };
 
-    // Vai para um slide específico
-    function goToSlide(index) {
-        currentIndex = index;
-        updateCarousel();
-    }
+    const stopAutoplay = () => {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+    };
 
-    // Inicia o autoplay
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(nextSlide, intervalTime);
-    }
+    const goTo = (index) => {
+        const lastIndex = maximumIndex();
+        if (lastIndex === 0) return;
+        currentIndex = index > lastIndex ? 0 : index < 0 ? lastIndex : index;
+        render();
+    };
 
-    // Para e reinicia o autoplay (quando há interação do usuário)
-    function resetAutoPlay() {
-        clearInterval(autoPlayInterval);
-        startAutoPlay();
-    }
+    const next = () => goTo(currentIndex + 1);
+    const previous = () => goTo(currentIndex - 1);
 
-    // Event listeners para os botões de navegação
-    nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAutoPlay();
+    const startAutoplay = () => {
+        stopAutoplay();
+        const interactionPaused = component.matches(':hover')
+            || component.contains(document.activeElement)
+            || document.hidden;
+        if (pausedByUser || interactionPaused || maximumIndex() === 0) return;
+        autoplayTimer = window.setInterval(next, autoplayDelay);
+    };
+
+    const restartAutoplay = () => {
+        stopAutoplay();
+        startAutoplay();
+    };
+
+    previousButton?.addEventListener('click', () => {
+        previous();
+        restartAutoplay();
     });
 
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAutoPlay();
+    nextButton?.addEventListener('click', () => {
+        next();
+        restartAutoplay();
     });
 
-    // Event listeners para os dots (indicadores)
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            goToSlide(index);
-            resetAutoPlay();
-        });
+    pauseButton?.addEventListener('click', () => {
+        pausedByUser = !pausedByUser;
+        updatePauseButton();
+        pausedByUser ? stopAutoplay() : startAutoplay();
     });
 
-    // Inicializa o carrossel
-    updateCarousel();
-    startAutoPlay();
-    
-    // Pausa o autoplay quando o mouse está sobre o carrossel
-    carousel.addEventListener('mouseenter', () => {
-        clearInterval(autoPlayInterval);
+    viewport.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        event.key === 'ArrowLeft' ? previous() : next();
+        restartAutoplay();
     });
-    
-    // Retoma o autoplay quando o mouse sai do carrossel
-    carousel.addEventListener('mouseleave', () => {
-        startAutoPlay();
+
+    viewport.addEventListener('pointerdown', (event) => {
+        pointerStartX = event.clientX;
     });
+
+    viewport.addEventListener('pointerup', (event) => {
+        if (pointerStartX === null) return;
+        const distance = event.clientX - pointerStartX;
+        pointerStartX = null;
+        if (Math.abs(distance) < swipeThreshold) return;
+        distance > 0 ? previous() : next();
+        restartAutoplay();
+    });
+
+    viewport.addEventListener('pointercancel', () => {
+        pointerStartX = null;
+    });
+
+    component.addEventListener('mouseenter', stopAutoplay);
+    component.addEventListener('mouseleave', startAutoplay);
+    component.addEventListener('focusin', stopAutoplay);
+    component.addEventListener('focusout', (event) => {
+        if (!component.contains(event.relatedTarget)) startAutoplay();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        document.hidden ? stopAutoplay() : startAutoplay();
+    });
+
+    window.addEventListener('resize', () => {
+        const newItemsPerView = calculateItemsPerView();
+        if (newItemsPerView === itemsPerView) return;
+        itemsPerView = newItemsPerView;
+        render(false);
+        restartAutoplay();
+    });
+
+    itemsPerView = calculateItemsPerView();
+    updatePauseButton();
+    render(false);
+    startAutoplay();
 });

@@ -92,3 +92,6 @@ $datasAgendaPerfil = buscarDatasAgendaPerfil($pdo, 'cliente', $id);
 $atividadesPerfil = buscarAtividadesPerfil($pdo, 'cliente', $id);
 $profissionalPreferido = buscarProfissionalPreferidoPerfil($pdo, $id);
 $avaliacoesPerfil = buscarAvaliacoesPerfil($pdo, 'cliente', $id);
+$planoPerfil = buscarPlanoPerfilCliente($pdo, $id);
+$contratacoesPerfil = buscarContratacoesPerfilCliente($pdo, $id);
+$csrfPerfil = (string) ($_SESSION['csrf_token'] ?? '');

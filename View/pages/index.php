@@ -1,3 +1,17 @@
+<?php
+require_once dirname(__DIR__, 2) . '/Model/conexao.php';
+require_once dirname(__DIR__, 2) . '/Model/home.php';
+
+$servicosHome = buscarServicosHome($pdo);
+$avaliacoesHome = buscarAvaliacoesHome($pdo, 12);
+$iconesServico = [
+    'residencial' => 'ri-home-4-line',
+    'comercial' => 'ri-building-line',
+    'estofados' => 'ri-sofa-line',
+    'vidros' => 'ri-window-line',
+    'carros' => 'ri-car-washing-line',
+];
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -48,32 +62,22 @@ include __DIR__ . '/../partials/header.php';
         <div class="services-content">
             <h2 class="section-title" data-i18n="home-services-title">Nossos Serviços</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="ri-home-4-line"></i>
-                    </div>
-                    <h3 data-i18n="home-services1-title">Limpeza Residencial</h3>
-                    <p data-i18n="home-services1-desc">Serviços completos de limpeza para sua casa, incluindo todos os cômodos com produtos de alta qualidade.</p>
-                    <a href="empresa/servicos.php" class="learn-more"><span data-i18n="home-services1-link">Saiba mais</span> <i class="ri-arrow-right-line"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="ri-building-line"></i>
-                    </div>
-                    <h3 data-i18n="home-services2-title">Limpeza Comercial</h3>
-                    <p data-i18n="home-services2-desc">Soluções profissionais de limpeza para escritórios, lojas e estabelecimentos comerciais.</p>
-                    <a href="empresa/servicos.php" class="learn-more"><span data-i18n="home-services2-link">Saiba mais</span> <i class="ri-arrow-right-line"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="ri-tools-line"></i>
-                    </div>
-                    <h3 data-i18n="home-services3-title">Limpeza Pós-Obra</h3>
-                    <p data-i18n="home-services3-desc">Remoção de resíduos de construção e limpeza especializada após reformas e obras.</p>
-                    <a href="empresa/servicos.php" class="learn-more"><span data-i18n="home-services3-link">Saiba mais</span> <i class="ri-arrow-right-line"></i></a>
-                </div>
+                <?php if (!$servicosHome): ?>
+                    <div class="home-empty-state home-empty-state-wide"><i class="ri-service-line"></i><h3>Catálogo em atualização</h3><p>Nenhum serviço está disponível no momento.</p></div>
+                <?php else: ?>
+                    <?php foreach ($servicosHome as $servico): ?>
+                    <article class="service-card">
+                        <div class="service-icon"><i class="<?= htmlspecialchars($iconesServico[$servico['tipo']] ?? 'ri-sparkling-2-line') ?>"></i></div>
+                        <h3><?= htmlspecialchars($servico['nome_servico']) ?></h3>
+                        <p><?= htmlspecialchars($servico['descricao_servico'] ?: 'Descrição em atualização.') ?></p>
+                        <div class="service-card-meta">
+                            <span>A partir de <strong>R$ <?= number_format((float) $servico['preco'], 2, ',', '.') ?></strong></span>
+                            <?php if ($servico['periodo']): ?><span><i class="ri-time-line"></i> <?= htmlspecialchars($servico['periodo']) ?></span><?php endif; ?>
+                        </div>
+                        <a href="empresa/servicos.php" class="learn-more">Ver serviço <i class="ri-arrow-right-line"></i></a>
+                    </article>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </section>
@@ -83,7 +87,7 @@ include __DIR__ . '/../partials/header.php';
         <div class="about-content">
             <div class="about-text">
                 <h2 data-i18n="home-about-title">Seu ambiente limpo e higienizado em um só lugar!</h2>
-                <p data-i18n="home-about-desc">Na Lumis, oferecemos serviços completos de limpeza e higienização com foco na sustentabilidade. Nossa equipe especializada utiliza produtos eco-friendly e técnicas modernas para garantir o melhor resultado.</p>
+                <p>A Lumis reúne clientes e profissionais de limpeza em uma plataforma para consultar serviços, organizar perfis e acompanhar agendamentos.</p>
                 <a href="empresa/sobre.php" class="btn-primary" data-i18n="home-about-btn">Conheça nossa história</a>
             </div>
             <div class="about-image">
@@ -101,40 +105,40 @@ include __DIR__ . '/../partials/header.php';
                     <div class="feature-icon">
                         <i class="ri-user-star-line"></i>
                     </div>
-                    <h4 data-i18n="home-why1-title">Profissionais Qualificados</h4>
-                    <p data-i18n="home-why1-desc">Equipe treinada e experiente</p>
+                    <h4>Perfis profissionais</h4>
+                    <p>Informações de atuação, experiência e avaliações reunidas no perfil</p>
                 </div>
 
                 <div class="feature-item">
                     <div class="feature-icon">
                         <i class="ri-leaf-line"></i>
                     </div>
-                    <h4 data-i18n="home-why2-title">Produtos Eco-friendly</h4>
-                    <p data-i18n="home-why2-desc">Sustentabilidade em primeiro lugar</p>
+                    <h4>Catálogo transparente</h4>
+                    <p>Descrição, duração e preço inicial cadastrados para cada serviço</p>
                 </div>
 
                 <div class="feature-item">
                     <div class="feature-icon">
                         <i class="ri-time-line"></i>
                     </div>
-                    <h4 data-i18n="home-why3-title">Pontualidade</h4>
-                    <p data-i18n="home-why3-desc">Compromisso com horários</p>
+                    <h4>Agenda organizada</h4>
+                    <p>Datas e horários aparecem diretamente no perfil do usuário</p>
                 </div>
 
                 <div class="feature-item">
                     <div class="feature-icon">
                         <i class="ri-shield-check-line"></i>
                     </div>
-                    <h4 data-i18n="home-why4-title">Garantia de Qualidade</h4>
-                    <p data-i18n="home-why4-desc">Satisfação garantida</p>
+                    <h4>Avaliações reais</h4>
+                    <p>Comentários vinculados a contratações registradas na plataforma</p>
                 </div>
 
                 <div class="feature-item">
                     <div class="feature-icon">
                         <i class="ri-24-hours-line"></i>
                     </div>
-                    <h4 data-i18n="home-why5-title">Flexibilidade de Horários</h4>
-                    <p data-i18n="home-why5-desc">Atendimento quando você precisar</p>
+                    <h4>Dados atualizáveis</h4>
+                    <p>Clientes e profissionais podem manter seus perfis atualizados</p>
                 </div>
             </div>
         </div>
@@ -146,23 +150,23 @@ include __DIR__ . '/../partials/header.php';
             <h2 class="section-title" data-i18n="home-work-title">Faça parte da nossa equipe</h2>
             <div class="work-grid">
                 <div class="work-card">
-                    <h4 data-i18n="home-work1-title">Oportunidades de crescimento</h4>
-                    <p data-i18n="home-work1-desc">Oferecemos um ambiente de trabalho que valoriza o desenvolvimento profissional e pessoal de nossos colaboradores.</p>
+                    <h4>Crie seu perfil profissional</h4>
+                    <p>Cadastre seus dados de contato, experiência e região de atuação.</p>
                 </div>
 
                 <div class="work-card">
-                    <h4 data-i18n="home-work2-title">Ambiente colaborativo</h4>
-                    <p data-i18n="home-work2-desc">Trabalhe em uma equipe unida, onde cada membro é valorizado e suas ideias são ouvidas e implementadas.</p>
+                    <h4>Apresente seus serviços</h4>
+                    <p>Suas especialidades ficarão reunidas no perfil profissional.</p>
                 </div>
 
                 <div class="work-card">
-                    <h4 data-i18n="home-work3-title">Benefícios atrativos</h4>
-                    <p data-i18n="home-work3-desc">Pacote completo de benefícios incluindo plano de saúde, vale-alimentação e programas de capacitação.</p>
+                    <h4>Organize sua agenda</h4>
+                    <p>Acompanhe visitas e atividades relacionadas às contratações.</p>
                 </div>
 
                 <div class="work-card">
-                    <h4 data-i18n="home-work4-title">Propósito sustentável</h4>
-                    <p data-i18n="home-work4-desc">Faça parte de uma empresa comprometida com a sustentabilidade e o cuidado com o meio ambiente.</p>
+                    <h4>Construa sua reputação</h4>
+                    <p>Receba avaliações de clientes após serviços registrados.</p>
                 </div>
             </div>
             <a href="auth/cadastro-trabalhador.php" class="btn-primary" style="margin-top: 2rem;" data-i18n="home-work-btn">Candidate-se agora</a>
@@ -170,54 +174,36 @@ include __DIR__ . '/../partials/header.php';
     </section>
 
     
-<section class="testimonials">
+    <section class="testimonials">
         <h2 data-i18n="home-test-title">Comentários</h2>
-        <!-- Carousel comentarios -->
-        <div class="carousel-container">
-            <button class="prev">&#10094;</button>
-
-            <div class="carousel">
-                    <!-- Slide 1 -->
-                    <div class="carousel-item">
-                        <div class="card">
-                            <img src="../img/João Neves.png" alt="João Neves" class="avatar">
-                            <h3>João Neves</h3>
-                            <div class="stars">★★★★★</div>
-                            <p data-i18n="home-test1">“Assinei o plano semanal e foi a melhor escolha! A equipe é pontual e deixa minha casa impecável toda semana.”</p>
-                        </div>
-                        <div class="card">
-                            <img src="../img/foto_usuario.png" alt="Maria de Souza" class="avatar"> 
-                            <h3>Maria de Souza</h3>
-                            <div class="stars">★★★★★</div>
-                            <p data-i18n="home-test2">“Fechamos o plano empresarial e o escritório nunca esteve tão bem cuidado. Atendimento excelente e serviço de primeira.”</p>
-                        </div>
-                    </div>
-
-                    <!-- Slide 2 -->
-                    <div class="carousel-item">
-                        <div class="card">
-                            <img src="../img/Ana Ribeiro.png" alt="Ana Ribeiro" class="avatar">
-                            <h3>Ana Ribeiro</h3>
-                            <div class="stars">★★★★★</div>
-                            <p data-i18n="home-test3">“Fiquei impressionada com a qualidade do serviço! Além de super cuidadosos com meus móveis, a equipe da Lumis é muito educada. Recomendo demais!”</p>
-                        </div>
-                        <div class="card">
-                            <img src="../img/Lucas Martins.png" alt="Lucas Martins" class="avatar">
-                            <h3>Lucas Martins</h3>
-                            <div class="stars">★★★★★</div>
-                            <p data-i18n="home-test4">“Assinei o plano mensal e já na primeira limpeza senti a diferença. Minha casa nunca esteve tão limpa e cheirosa!”</p>
-                        </div>
+        <?php if (!$avaliacoesHome): ?>
+            <div class="home-empty-state testimonials-empty"><i class="ri-chat-smile-2-line"></i><h3>Ainda não há avaliações publicadas</h3><p>Os comentários aparecerão aqui depois das primeiras contratações avaliadas.</p></div>
+        <?php else: ?>
+            <div class="testimonial-carousel" aria-label="Avaliações de clientes">
+                <div class="testimonial-toolbar">
+                    <div class="testimonial-controls">
+                        <button class="prev" type="button" aria-label="Ver avaliações anteriores"><i class="ri-arrow-left-s-line" aria-hidden="true"></i></button>
+                        <button class="testimonial-pause" type="button" aria-label="Pausar rotação automática" aria-pressed="false"><i class="ri-pause-mini-fill" aria-hidden="true"></i></button>
+                        <button class="next" type="button" aria-label="Ver próximas avaliações"><i class="ri-arrow-right-s-line" aria-hidden="true"></i></button>
                     </div>
                 </div>
-
-            <button class="next">&#10095;</button>
-        </div>
-
-        <!-- As bolinhas de navegação -->
-        <div class="indicators">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-        </div>
+                <div class="testimonial-viewport" tabindex="0" aria-label="Use as setas do teclado ou deslize para navegar">
+                    <div class="carousel">
+                        <?php foreach ($avaliacoesHome as $indice => $avaliacao): ?>
+                        <?php $nota = max(0, min(5, (int) $avaliacao['nota_avaliacao'])); ?>
+                        <article class="card testimonial-slide" aria-label="Avaliação <?= $indice + 1 ?> de <?= count($avaliacoesHome) ?>">
+                            <div class="testimonial-avatar-initials" aria-hidden="true"><?= htmlspecialchars(iniciaisHome($avaliacao['cliente'])) ?></div>
+                            <h3><?= htmlspecialchars(nomePublicoHome($avaliacao['cliente'])) ?></h3>
+                            <div class="stars" aria-label="<?= $nota ?> de 5 estrelas"><?= str_repeat('★', $nota) ?><?= str_repeat('☆', 5 - $nota) ?></div>
+                            <p>“<?= htmlspecialchars($avaliacao['comentario_avaliacao']) ?>”</p>
+                            <span class="testimonial-service"><?= htmlspecialchars($avaliacao['servico']) ?> · profissional <?= htmlspecialchars(nomePublicoHome($avaliacao['profissional'])) ?></span>
+                        </article>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="testimonial-progress" aria-hidden="true"><span class="testimonial-progress-value"></span></div>
+            </div>
+        <?php endif; ?>
     </section>
 
 <?php include __DIR__ . '/../partials/footer.php'; ?>

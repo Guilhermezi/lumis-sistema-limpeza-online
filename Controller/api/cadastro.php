@@ -1,8 +1,9 @@
 <?php
 // POST /Controller/api/cadastro.php
-// Cria a conta (cliente ou profissional) e já deixa o usuário logado.
+// Cria a conta (cliente ou profissional) e inicia a confirmação do e-mail.
 
 require __DIR__ . '/_bootstrap.php';
+require_once dirname(__DIR__, 2) . '/Model/email_verificacao.php';
 exigirMetodo('POST');
 exigirCsrf();
 
@@ -23,22 +24,20 @@ try {
         responderErro('email-em-uso', ['email' => 'email-em-uso'], 409);
     }
 
-    $usuarioSessao = [
+    $usuarioNovo = [
         'id' => $id,
         'nome' => trim($dados['nome']),
         'email' => normalizarEmail($dados['email']),
-        'auth_versao' => 1,
     ];
-    abrirSessaoUsuario($usuarioSessao, $dados['tipo']);
+    $verificacao = criarVerificacaoEmail($pdo, $dados['tipo'], $usuarioNovo, false);
+    if ($verificacao['debug_url']) {
+        $_SESSION['email_verificacao_debug_url'] = $verificacao['debug_url'];
+    }
 
     responder([
         'ok'       => true,
-        'redirect' => '../' . $cfg['perfil'],
-        'usuario'  => [
-            'nome'  => $usuarioSessao['nome'],
-            'email' => $usuarioSessao['email'],
-            'tipo'  => $dados['tipo'],
-        ],
+        'redirect' => 'verificar-email.php',
+        'mensagem' => 'Conta criada. Confirme seu e-mail para ativá-la.',
     ]);
 
 } catch (Throwable $e){

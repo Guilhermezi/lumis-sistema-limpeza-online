@@ -152,7 +152,6 @@ include __DIR__ . '/../../partials/header.php';
      <?php include __DIR__ . '/../../partials/footer.php'; ?>
       
     
-    <script src="../../../Controller/Ajuda.js"></script>
     <script src="../../../Controller/tema-idioma.js"></script>
 </body>
 </html>

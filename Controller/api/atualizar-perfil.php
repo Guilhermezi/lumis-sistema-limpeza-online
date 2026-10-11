@@ -2,6 +2,7 @@
 // Atualiza apenas o usuário autenticado. Aceita multipart/form-data para que a
 // foto e os campos textuais sejam enviados juntos, sempre protegidos por CSRF.
 require __DIR__ . '/_bootstrap.php';
+require_once dirname(__DIR__, 2) . '/Model/email_verificacao.php';
 exigirMetodo('POST');
 exigirCsrf();
 
@@ -26,6 +27,7 @@ if ($erros){
 }
 
 $fotoAnterior = $atual['foto'] ?? null;
+$emailAlterado = normalizarEmail($dados['email']) !== normalizarEmail($atual['email']);
 $novaFoto = $fotoAnterior;
 $arquivoNovo = null;
 
@@ -62,7 +64,7 @@ try {
         $novaFoto = '../uploads/avatars/' . $nomeArquivo;
     }
 
-    if (!atualizarPerfil($pdo, $id, $tipo, $dados, $novaFoto)){
+    if (!atualizarPerfil($pdo, $id, $tipo, $dados, $novaFoto, $emailAlterado)){
         if ($arquivoNovo && is_file($arquivoNovo)) unlink($arquivoNovo);
         responderErro('email-em-uso', ['email' => 'email-em-uso']);
     }
@@ -75,6 +77,26 @@ try {
 
     $_SESSION['usuario']['nome'] = trim((string) $dados['nome']);
     $_SESSION['usuario']['email'] = normalizarEmail($dados['email']);
+
+    if ($emailAlterado){
+        $verificacao = criarVerificacaoEmail($pdo, $tipo, [
+            'id' => $id,
+            'nome' => trim((string) $dados['nome']),
+            'email' => normalizarEmail($dados['email']),
+        ], false);
+        // Revoga o login e gira o ID, mas conserva o link de desenvolvimento
+        // para que o usuário consiga confirmar o endereço no ambiente local.
+        $_SESSION = [];
+        session_regenerate_id(true);
+        if ($verificacao['debug_url']) {
+            $_SESSION['email_verificacao_debug_url'] = $verificacao['debug_url'];
+        }
+        responder([
+            'ok' => true,
+            'mensagem' => 'E-mail atualizado. Confirme o novo endereço para entrar novamente.',
+            'redirect' => 'auth/verificar-email.php',
+        ]);
+    }
 
     responder([
         'ok' => true,

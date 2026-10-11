@@ -96,3 +96,4 @@ $visitasPerfil = buscarVisitasPerfil($pdo, 'profissional', $id);
 $datasAgendaPerfil = buscarDatasAgendaPerfil($pdo, 'profissional', $id);
 $atividadesPerfil = buscarAtividadesPerfil($pdo, 'profissional', $id);
 $avaliacoesPerfil = buscarAvaliacoesPerfil($pdo, 'profissional', $id);
+$csrfPerfil = (string) ($_SESSION['csrf_token'] ?? '');

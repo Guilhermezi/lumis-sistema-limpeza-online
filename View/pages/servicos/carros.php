@@ -172,6 +172,5 @@ include __DIR__ . '/../../partials/header-simples.php';
 
         <script src="../../../Controller/tema-idioma.js"></script>
 </body>
-    <script src="../../../Controller/pages_footer.js"></script>
 </body>
 </html>

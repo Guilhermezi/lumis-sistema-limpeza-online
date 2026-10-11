@@ -75,13 +75,26 @@ $especialidadesTexto = $especialidadesPerfil ? implode(', ', $especialidadesPerf
             </section>
 
             <section class="card card-visits">
-                <div class="card-header"><h2><i class="ri-calendar-event-line"></i> Próximas visitas</h2></div>
+                <div class="card-header"><h2><i class="ri-calendar-event-line"></i> Agendamentos da equipe</h2></div>
                 <?php if (!$visitasPerfil): ?>
-                    <div class="profile-empty-state"><i class="ri-calendar-close-line"></i><p>Você ainda não possui visitas agendadas.</p></div>
+                    <div class="profile-empty-state"><i class="ri-calendar-close-line"></i><p>Novos agendamentos designados a você aparecerão aqui.</p></div>
                 <?php else: ?>
                 <div class="visits-list">
                     <?php foreach ($visitasPerfil as $visita): ?>
-                    <div class="visit-item"><div class="visit-date-badge"><span class="visit-day"><?= (new DateTime($visita['data_agenda']))->format('d') ?></span><span class="visit-month"><?= htmlspecialchars(mesCurtoPerfil($visita['data_agenda'])) ?></span></div><div class="visit-content"><div class="visit-top"><h4><?= htmlspecialchars(diaSemanaPerfil($visita['data_agenda'])) ?></h4><span class="visit-status status-upcoming"><?= htmlspecialchars($visita['status_agenda']) ?></span></div><p><?= htmlspecialchars($visita['servicos']) ?> para <?= htmlspecialchars($visita['pessoa']) ?></p><div class="visit-time"><i class="ri-time-line"></i> <?= substr($visita['hora_inicio_agenda'], 0, 5) ?> - <?= substr($visita['hora_fim_agenda'], 0, 5) ?></div></div></div>
+                    <div class="visit-item"><div class="visit-date-badge"><span class="visit-day"><?= (new DateTime($visita['data_agenda']))->format('d') ?></span><span class="visit-month"><?= htmlspecialchars(mesCurtoPerfil($visita['data_agenda'])) ?></span></div><div class="visit-content"><div class="visit-top"><h4><?= htmlspecialchars(diaSemanaPerfil($visita['data_agenda'])) ?></h4><span class="visit-status status-upcoming"><?= htmlspecialchars($visita['status_agenda']) ?></span></div><p><?= htmlspecialchars($visita['servicos']) ?> para <?= htmlspecialchars($visita['pessoa']) ?></p><div class="visit-time"><i class="ri-time-line"></i> <?= substr($visita['hora_inicio_agenda'], 0, 5) ?> - <?= substr($visita['hora_fim_agenda'], 0, 5) ?></div>
+                        <?php if (mb_strtolower((string) $visita['status_agenda']) === 'aguardando confirmação' && (int) $visita['pode_cancelar'] === 1): ?>
+                            <button type="button" class="btn-primary btn-sm pro-service-action" data-contract-id="<?= (int) $visita['id_contratacao'] ?>" data-action="confirmar">Confirmar agendamento</button>
+                            <button type="button" class="btn-secondary btn-sm pro-service-action" data-contract-id="<?= (int) $visita['id_contratacao'] ?>" data-action="recusar">Recusar agendamento</button>
+                        <?php elseif (mb_strtolower((string) $visita['status_agenda']) === 'aguardando confirmação'): ?>
+                            <small class="profile-review-hint">O horário deste agendamento já começou; entre em contato com o cliente para combinar os próximos passos.</small>
+                        <?php elseif (mb_strtolower((string) $visita['status_agenda']) === 'confirmado' && (int) $visita['pode_concluir'] === 1): ?>
+                            <button type="button" class="btn-primary btn-sm pro-service-action" data-contract-id="<?= (int) $visita['id_contratacao'] ?>" data-action="concluir">Confirmar limpeza concluída</button>
+                        <?php elseif (mb_strtolower((string) $visita['status_agenda']) === 'confirmado' && (int) $visita['pode_cancelar'] === 1): ?>
+                            <button type="button" class="btn-secondary btn-sm pro-service-action" data-contract-id="<?= (int) $visita['id_contratacao'] ?>" data-action="cancelar">Cancelar agendamento</button>
+                        <?php elseif (mb_strtolower((string) $visita['status_agenda']) === 'confirmado'): ?>
+                            <small class="profile-review-hint">Agendamento confirmado. Após realizar o serviço, confirme a conclusão aqui.</small>
+                        <?php endif; ?>
+                        <p class="profile-action-message" role="status" hidden></p></div></div>
                     <?php endforeach; ?>
                 </div>
                 <?php endif; ?>
@@ -125,6 +138,8 @@ $especialidadesTexto = $especialidadesPerfil ? implode(', ', $especialidadesPerf
 
 <?php include __DIR__ . '/../partials/footer.php'; ?>
 <script>window.LumisProfileEvents = <?= json_encode($datasAgendaPerfil, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
+<script>window.LumisProfileCsrf = <?= json_encode($csrfPerfil) ?>;</script>
+<script src="../../Controller/acoes-perfil.js"></script>
 <script src="../../Controller/calendario_horas.js"></script>
 <script src="../../Controller/tema-idioma.js"></script>
 </body>

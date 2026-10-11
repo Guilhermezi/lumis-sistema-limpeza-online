@@ -404,7 +404,6 @@ include __DIR__ . '/../../partials/header.php';
 
         <?php include __DIR__ . '/../../partials/footer.php'; ?>
           
-    <script src="../../../Controller/Sobre_Nav.js"></script>
     <script src="../../../Controller/tema-idioma.js"></script>
 </body>
 </html>

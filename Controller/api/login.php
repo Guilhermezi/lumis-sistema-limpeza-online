@@ -23,7 +23,7 @@ try {
     }
 
     // nome da tabela e da chave primária vêm do mapa, nunca do usuário
-    $sql = 'SELECT ' . $cfg['pk'] . ' AS id, nome, email, senha, auth_versao
+    $sql = 'SELECT ' . $cfg['pk'] . ' AS id, nome, email, senha, auth_versao, email_verificado
               FROM ' . $cfg['tabela'] . '
              WHERE email = :email
              LIMIT 1';
@@ -39,6 +39,10 @@ try {
     if (!$usuario || !password_verify($senha, $hash)){
         registrarTentativaLogin($pdo, $email, $dados['tipo'], false);
         responderErro('credenciais', [], 401);
+    }
+
+    if (!(int) ($usuario['email_verificado'] ?? 0)){
+        responderErro('email-nao-verificado', [], 403);
     }
 
     if (password_needs_rehash($usuario['senha'], PASSWORD_DEFAULT)){

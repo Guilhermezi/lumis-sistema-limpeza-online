@@ -33,5 +33,6 @@ responder([
         'nome'  => $u['nome'],
         'email' => $u['email'],
         'tipo'  => $u['tipo'],
+        'email_verificado' => (bool) ($linha['email_verificado'] ?? 1),
     ],
 ]);

@@ -127,6 +127,7 @@
         // mantém só as que existem no tipo E chegaram no formulário (preserva a ordem do mapa)
         $colunas = array_values(array_intersect($permitidas, array_keys($dados)));
         $colunas[] = 'termos_aceitos_em';
+        $colunas[] = 'email_verificado';
 
         $senha = password_hash($dados['senha'] ?? '', PASSWORD_DEFAULT);
 
@@ -151,6 +152,10 @@
                 }
             if ($coluna === 'termos_aceitos_em'){
                 $valores[$coluna] = (new DateTimeImmutable())->format('Y-m-d H:i:s');
+                continue;
+            }
+            if ($coluna === 'email_verificado'){
+                $valores[$coluna] = 0;
                 continue;
             }
 
@@ -257,7 +262,7 @@
         return $erros;
     }
 
-    function atualizarPerfil(PDO $pdo, int $id, string $tipo, array $dados, ?string $foto): bool{
+    function atualizarPerfil(PDO $pdo, int $id, string $tipo, array $dados, ?string $foto, bool $emailAlterado = false): bool{
         $cfg = configTipo($tipo);
         if (!$cfg){
             return false;
@@ -270,6 +275,9 @@
             'data_nascimento' => trim((string) ($dados['data_nascimento'] ?? '')) ?: null,
             'foto' => $foto,
         ];
+        if ($emailAlterado){
+            $valores['email_verificado'] = 0;
+        }
 
         if ($tipo === 'profissional'){
             $valor = str_replace(',', '.', trim((string) ($dados['valor_minimo'] ?? '')));
@@ -279,6 +287,9 @@
         }
 
         $atribuicoes = array_map(static fn(string $coluna): string => $coluna . ' = :' . $coluna, array_keys($valores));
+        if ($emailAlterado){
+            $atribuicoes[] = 'auth_versao = auth_versao + 1';
+        }
         $valores['id'] = $id;
         $sql = 'UPDATE ' . $cfg['tabela'] . ' SET ' . implode(', ', $atribuicoes)
             . ' WHERE ' . $cfg['pk'] . ' = :id';

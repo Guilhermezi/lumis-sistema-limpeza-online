@@ -1,3 +1,9 @@
+<?php
+require_once dirname(__DIR__, 3) . '/Model/conexao.php';
+$planosStmt = $pdo->query("SELECT id_plano, nome, preco, descricao, duracao, beneficios, tipo FROM Planos ORDER BY (tipo = 'personalizado'), preco, id_plano");
+$planos = $planosStmt->fetchAll();
+$rotulosPlanos = ['Basico' => 'Plano Básico', 'Regular' => 'Plano Regular', 'Premium' => 'Plano Premium', 'Personalizado' => 'Plano Personalizado'];
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -18,6 +24,7 @@
     <link rel="stylesheet" href="../../css/style.css">
     <!-- Estilos especificos da pagina Plano -->
     <link rel="stylesheet" href="../../css/planos.css">
+    <link rel="stylesheet" href="../../css/planos-checkout.css">
 
     <!-- Link para o RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
@@ -67,91 +74,51 @@ include __DIR__ . '/../../partials/header.php';
                 <p class="plans-subtitle" data-i18n="plano-section-subtitulo">Escolha o plano que melhor se encaixa na sua rotina e no seu bolso. Sem fidelidade e sem taxas escondidas.</p>
 
                 <div class="pricing-grid">
-
-                    <div class="pricing-card">
-                        <div class="pricing-icon">
-                            <i class="ri-home-smile-2-line"></i>
-                        </div>
-                        <h3 class="pricing-name" data-i18n="plano-basico-nome">Plano Básico</h3>
-                        <p class="pricing-desc" data-i18n="plano-basico-desc">Perfeito para quem busca praticidade com economia.</p>
-                        <div class="pricing-price">
-                            <span class="pricing-currency">R$</span>
-                            <span class="pricing-amount">99,90</span>
-                            <span class="pricing-period">/mês</span>
-                        </div>
-                        <a href="../auth/login.php" class="btn-primary pricing-btn" data-i18n="plano-botao-quero">Quero este plano</a>
-                        <hr class="pricing-divider">
-                        <ul class="pricing-features">
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-basico-item1">2 limpezas/mês (até 4 cômodos)</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-basico-item2">1 serviço especializado por trimestre (ex: sofá ou vidros)</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-basico-item3">Atendimento em até 3 dias úteis</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-basico-item4">Dicas mensais de organização e sustentabilidade</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="pricing-card pricing-featured">
-                        <span class="pricing-badge" data-i18n="plano-badge-popular">Mais Popular</span>
-                        <div class="pricing-icon">
-                            <i class="ri-sparkling-2-line"></i>
-                        </div>
-                        <h3 class="pricing-name" data-i18n="plano-regular-nome">Plano Regular</h3>
-                        <p class="pricing-desc" data-i18n="plano-regular-desc">Nosso plano mais escolhido, ideal para famílias e pequenos negócios.</p>
-                        <div class="pricing-price">
-                            <span class="pricing-currency">R$</span>
-                            <span class="pricing-amount">179,90</span>
-                            <span class="pricing-period">/mês</span>
-                        </div>
-                        <a href="../auth/login.php" class="btn-primary pricing-btn" data-i18n="plano-botao-quero">Quero este plano</a>
-                        <hr class="pricing-divider">
-                        <ul class="pricing-features">
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-regular-item1">3 limpezas/mês (até 4 cômodos)</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-regular-item2">2 serviços especializados por trimestre (ex: sofá ou vidros)</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-regular-item3">Atendimento em até 2 dias úteis</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-regular-item4">Dicas mensais de organização e sustentabilidade</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-regular-item5">Relatórios simples de impacto ambiental</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="pricing-card pricing-accent">
-                        <span class="pricing-badge" data-i18n="plano-badge-recomendado">Recomendado</span>
-                        <div class="pricing-icon">
-                            <i class="ri-vip-crown-line"></i>
-                        </div>
-                        <h3 class="pricing-name" data-i18n="plano-premium-nome">Plano Premium</h3>
-                        <p class="pricing-desc" data-i18n="plano-premium-desc">Máximo de comodidade e resultados profissionais.</p>
-                        <div class="pricing-price">
-                            <span class="pricing-currency">R$</span>
-                            <span class="pricing-amount">399,90</span>
-                            <span class="pricing-period">/mês</span>
-                        </div>
-                        <a href="../auth/login.php" class="btn-primary pricing-btn" data-i18n="plano-botao-quero">Quero este plano</a>
-                        <hr class="pricing-divider">
-                        <ul class="pricing-features">
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-premium-item1">Limpeza semanal (residencial ou pequena empresa)</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-premium-item2">Todos os serviços especializados liberados (até 4/mês)</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-premium-item3">Atendimento em até 24h</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-premium-item4">Equipe fixa ou exclusiva para empresas</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-premium-item5">Tudo que os planos inferiores oferecem, e mais</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="pricing-card">
-                        <div class="pricing-icon">
-                            <i class="ri-settings-3-line"></i>
-                        </div>
-                        <h3 class="pricing-name" data-i18n="plano-personalizado-nome">Plano Personalizado</h3>
-                        <p class="pricing-desc" data-i18n="plano-personalizado-desc">Flexível, do seu jeito. Monte o plano perfeito.</p>
-                        <div class="pricing-price">
-                            <span class="pricing-amount pricing-custom" data-i18n="plano-personalizado-consulta">Sob consulta</span>
-                        </div>
-                        <a href="contato.php" class="btn-secondary pricing-btn" data-i18n="plano-botao-quero">Quero este plano</a>
-                        <hr class="pricing-divider">
-                        <ul class="pricing-features">
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-personalizado-item1">Você escolhe quanto quer pagar, a frequência e o tamanho da limpeza.</span></li>
-                            <li><i class="ri-checkbox-circle-fill"></i> <span data-i18n="plano-personalizado-item2">Um profissional analisa sua proposta e, se for viável, o serviço é aprovado.</span></li>
-                        </ul>
-                    </div>
-
+                    <?php foreach ($planos as $indice => $plano): ?>
+                        <?php
+                        $nomePlano = $rotulosPlanos[$plano['nome']] ?? $plano['nome'];
+                        $personalizado = $plano['tipo'] === 'personalizado' || (float) $plano['preco'] <= 0;
+                        $classeCard = $indice === 1 ? ' pricing-featured' : ($indice === 2 ? ' pricing-accent' : '');
+                        $iconePlano = match ($plano['nome']) {
+                            'Basico' => 'ri-home-smile-2-line',
+                            'Regular' => 'ri-sparkling-2-line',
+                            'Premium' => 'ri-vip-crown-line',
+                            default => 'ri-settings-3-line',
+                        };
+                        $beneficios = array_filter(array_map('trim', explode(';', (string) $plano['beneficios'])));
+                        ?>
+                        <article class="pricing-card<?= $classeCard ?>">
+                            <?php if ($indice === 1): ?><span class="pricing-badge">Mais Popular</span><?php endif; ?>
+                            <?php if ($indice === 2): ?><span class="pricing-badge">Recomendado</span><?php endif; ?>
+                            <div class="pricing-icon"><i class="<?= htmlspecialchars($iconePlano) ?>"></i></div>
+                            <h3 class="pricing-name"><?= htmlspecialchars($nomePlano) ?></h3>
+                            <p class="pricing-desc"><?= htmlspecialchars((string) $plano['descricao']) ?></p>
+                            <div class="pricing-price">
+                                <?php if ($personalizado): ?>
+                                    <span class="pricing-amount pricing-custom">Sob consulta</span>
+                                <?php else: ?>
+                                    <span class="pricing-currency">R$</span>
+                                    <span class="pricing-amount"><?= number_format((float) $plano['preco'], 2, ',', '.') ?></span>
+                                    <span class="pricing-period">/<?= htmlspecialchars($plano['duracao']) ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <button type="button" class="<?= $personalizado ? 'btn-secondary' : 'btn-primary' ?> pricing-btn plan-select-button"
+                                    data-plan-id="<?= (int) $plano['id_plano'] ?>"
+                                    data-plan-name="<?= htmlspecialchars($nomePlano, ENT_QUOTES, 'UTF-8') ?>"
+                                    data-plan-price="<?= htmlspecialchars((string) $plano['preco']) ?>"
+                                    data-plan-duration="<?= htmlspecialchars((string) $plano['duracao'], ENT_QUOTES, 'UTF-8') ?>"
+                                    data-plan-benefits="<?= htmlspecialchars((string) $plano['beneficios'], ENT_QUOTES, 'UTF-8') ?>"
+                                    data-plan-custom="<?= $personalizado ? 'true' : 'false' ?>">
+                                Quero este plano
+                            </button>
+                            <hr class="pricing-divider">
+                            <ul class="pricing-features">
+                                <?php foreach ($beneficios as $beneficio): ?>
+                                    <li><i class="ri-checkbox-circle-fill"></i> <span><?= htmlspecialchars($beneficio) ?></span></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </article>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
@@ -202,9 +169,66 @@ include __DIR__ . '/../../partials/header.php';
 
     </main>
 
+    <div class="plan-checkout-modal" id="planCheckout" role="dialog" aria-modal="true" aria-labelledby="planCheckoutTitle" hidden>
+        <button class="plan-checkout-backdrop" type="button" data-plan-close aria-label="Fechar"></button>
+        <div class="plan-checkout-dialog">
+            <button class="plan-checkout-close" type="button" data-plan-close aria-label="Fechar"><i class="ri-close-line"></i></button>
+
+            <section class="plan-checkout-step" data-plan-step="summary">
+                <span class="plan-checkout-eyebrow"><i class="ri-price-tag-3-line"></i> Plano selecionado</span>
+                <h2 id="planCheckoutTitle">Confira seu plano</h2>
+                <p class="plan-checkout-subtitle" id="planCheckoutDuration"></p>
+                <div class="plan-checkout-summary">
+                    <div><span>Plano</span><strong id="planCheckoutName">—</strong></div>
+                    <div><span>Valor</span><strong id="planCheckoutPrice">—</strong></div>
+                </div>
+                <h3>O que está incluído</h3>
+                <ul class="plan-checkout-benefits" id="planCheckoutBenefits"></ul>
+                <div class="plan-checkout-actions">
+                    <button class="btn-secondary" type="button" data-plan-close>Voltar aos planos</button>
+                    <button class="btn-primary" type="button" id="planContinue">Continuar</button>
+                    <a class="btn-primary" id="planCustomContact" href="contato.php" hidden>Falar com especialista</a>
+                </div>
+            </section>
+
+            <section class="plan-checkout-step" data-plan-step="payment" hidden>
+                <span class="plan-checkout-eyebrow"><i class="ri-bank-card-line"></i> Pagamento simulado</span>
+                <h2>Como deseja pagar?</h2>
+                <p class="plan-checkout-subtitle">A forma escolhida será registrada como pendente. Nenhuma cobrança real será feita.</p>
+                <div class="plan-checkout-payment-options" role="radiogroup" aria-label="Forma de pagamento">
+                    <button type="button" class="plan-checkout-payment" data-plan-payment="pix"><i class="ri-qr-code-line"></i><span><strong>PIX</strong><small>Pagamento pendente</small></span><i class="ri-check-line"></i></button>
+                    <button type="button" class="plan-checkout-payment" data-plan-payment="cartao"><i class="ri-bank-card-line"></i><span><strong>Cartão</strong><small>Pagamento pendente</small></span><i class="ri-check-line"></i></button>
+                    <button type="button" class="plan-checkout-payment" data-plan-payment="boleto"><i class="ri-barcode-line"></i><span><strong>Boleto</strong><small>Pagamento pendente</small></span><i class="ri-check-line"></i></button>
+                    <button type="button" class="plan-checkout-payment" data-plan-payment="na-hora"><i class="ri-hand-coin-line"></i><span><strong>No atendimento</strong><small>Combine com a equipe</small></span><i class="ri-check-line"></i></button>
+                </div>
+                <p class="plan-checkout-error" id="planCheckoutError" role="alert" hidden></p>
+                <div class="plan-checkout-actions">
+                    <button class="btn-secondary" type="button" id="planBack">Voltar</button>
+                    <button class="btn-primary" type="button" id="planConfirm">Confirmar plano</button>
+                </div>
+            </section>
+
+            <section class="plan-checkout-step plan-checkout-result" data-plan-step="success" hidden>
+                <span class="plan-checkout-result-icon"><i class="ri-check-line"></i></span>
+                <h2>Solicitação registrada!</h2>
+                <p>O plano e a opção de pagamento ficaram pendentes no sistema.</p>
+                <div class="plan-checkout-summary" id="planCheckoutReceipt"></div>
+                <button class="btn-primary" type="button" data-plan-close>Concluir</button>
+            </section>
+
+            <section class="plan-checkout-step plan-checkout-result" data-plan-step="auth" hidden>
+                <span class="plan-checkout-result-icon"><i class="ri-user-line"></i></span>
+                <h2 id="planAuthTitle">Entre para continuar</h2>
+                <p id="planAuthText">A contratação de planos está disponível para contas de cliente.</p>
+                <a class="btn-primary" href="../auth/login.php">Ir para o login</a>
+            </section>
+        </div>
+    </div>
+
     <?php include __DIR__ . '/../../partials/footer.php'; ?>
 
     <script src="../../../Controller/Plano.js"></script>
+    <script src="../../../Controller/planos-checkout.js"></script>
     <script src="../../../Controller/tema-idioma.js"></script>
 </body>
 </html>

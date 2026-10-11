@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'auth-erro-senhas-diferentes':  'As senhas não coincidem.',
             'auth-erro-telefone-invalido':  'Informe um telefone válido.',
             'auth-erro-credenciais':        'E-mail ou senha incorretos.',
+            'auth-erro-email-nao-verificado': 'Confirme seu e-mail antes de entrar. Você pode pedir um novo link na tela de confirmação.',
             'auth-erro-conta-inativa':      'Esta conta não está ativa.',
             'auth-erro-needs-login':        'Você precisa entrar na sua conta para acessar esta página.',
             'auth-erro-nascimento-invalido': 'Informe uma data de nascimento válida.',
@@ -137,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'auth-erro-senhas-diferentes':  'Passwords do not match.',
             'auth-erro-telefone-invalido':  'Enter a valid phone number.',
             'auth-erro-credenciais':        'Wrong email or password.',
+            'auth-erro-email-nao-verificado': 'Please confirm your email before signing in. You can request a new link on the confirmation page.',
             'auth-erro-conta-inativa':      'This account is not active.',
             'auth-erro-needs-login':        'You need to sign in to access this page.',
             'auth-erro-nascimento-invalido': 'Enter a valid birth date.',
@@ -202,6 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'auth-erro-senhas-diferentes':  'Las contraseñas no coinciden.',
             'auth-erro-telefone-invalido':  'Introduce un teléfono válido.',
             'auth-erro-credenciais':        'Correo o contraseña incorrectos.',
+            'auth-erro-email-nao-verificado': 'Confirma tu correo antes de iniciar sesión. Puedes solicitar otro enlace en la página de confirmación.',
             'auth-erro-conta-inativa':      'Esta cuenta no está activa.',
             'auth-erro-needs-login':        'Debes iniciar sesión para acceder a esta página.',
             'auth-erro-nascimento-invalido': 'Introduce una fecha de nacimiento válida.',
@@ -704,7 +707,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 "servicos-cta-titulo": "Pronto para transformar seu espaço?",
                 "servicos-cta-sub": "Cadastre-se agora e tenha acesso a profissionais verificados com os melhores preços.",
                 "servicos-cta-criar-conta": "Criar conta gratuita",
-                "servicos-cta-falar-especialista": "Falar com especialista"
+                "servicos-cta-falar-especialista": "Falar com especialista",
+                "servicos-trust-aria": "Números atuais da plataforma",
+                "servicos-preco-maximo": "Preço máximo",
+                "servicos-ord-relevancia": "Ordem do catálogo",
+                "servicos-vazio-titulo": "Catálogo em atualização",
+                "servicos-vazio-texto": "Nenhum serviço está cadastrado no momento.",
+                "servicos-sem-avaliacoes": "Sem avaliações",
+                "servicos-filtro-vazio-titulo": "Nenhum serviço encontrado",
+                "servicos-filtro-vazio-texto": "Tente remover algum filtro ou pesquisar outro termo.",
+                "servicos-sem-depoimentos": "Ainda não há avaliações",
+                "servicos-sem-depoimentos-sub": "Os primeiros comentários aparecerão aqui.",
+                "servicos-cta-entrar": "Entrar na conta",
+                "servicos-cta-contato": "Entrar em contato",
+                "servicos-cta-sub": "Entre na sua conta ou fale com a Lumis informando o serviço escolhido.",
+                "servicos-resultados-um": "{count} serviço encontrado",
+                "servicos-resultados-varios": "{count} serviços encontrados"
             },
             "en": {
                 "servicos-hero-tag": "Sustainable and professional cleaning",
@@ -798,7 +816,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 "servicos-cta-titulo": "Ready to transform your space?",
                 "servicos-cta-sub": "Sign up now and get access to verified professionals at the best prices.",
                 "servicos-cta-criar-conta": "Create a free account",
-                "servicos-cta-falar-especialista": "Talk to a specialist"
+                "servicos-cta-falar-especialista": "Talk to a specialist",
+                "servicos-trust-aria": "Current platform statistics",
+                "servicos-preco-maximo": "Maximum price",
+                "servicos-ord-relevancia": "Catalog order",
+                "servicos-vazio-titulo": "Catalog being updated",
+                "servicos-vazio-texto": "No services are registered at the moment.",
+                "servicos-sem-avaliacoes": "No reviews yet",
+                "servicos-filtro-vazio-titulo": "No services found",
+                "servicos-filtro-vazio-texto": "Try removing a filter or searching for another term.",
+                "servicos-sem-depoimentos": "No reviews yet",
+                "servicos-sem-depoimentos-sub": "The first comments will appear here.",
+                "servicos-cta-entrar": "Sign in",
+                "servicos-cta-contato": "Contact us",
+                "servicos-cta-sub": "Sign in or contact Lumis and tell us which service you chose.",
+                "servicos-resultados-um": "{count} service found",
+                "servicos-resultados-varios": "{count} services found"
             },
             "es": {
                 "servicos-hero-tag": "Limpieza sostenible y profesional",
@@ -892,7 +925,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 "servicos-cta-titulo": "¿Listo para transformar tu espacio?",
                 "servicos-cta-sub": "Regístrate ahora y accede a profesionales verificados con los mejores precios.",
                 "servicos-cta-criar-conta": "Crear cuenta gratuita",
-                "servicos-cta-falar-especialista": "Hablar con un especialista"
+                "servicos-cta-falar-especialista": "Hablar con un especialista",
+                "servicos-trust-aria": "Estadísticas actuales de la plataforma",
+                "servicos-preco-maximo": "Precio máximo",
+                "servicos-ord-relevancia": "Orden del catálogo",
+                "servicos-vazio-titulo": "Catálogo en actualización",
+                "servicos-vazio-texto": "No hay servicios registrados en este momento.",
+                "servicos-sem-avaliacoes": "Aún no hay valoraciones",
+                "servicos-filtro-vazio-titulo": "No se encontraron servicios",
+                "servicos-filtro-vazio-texto": "Prueba a quitar algún filtro o buscar otro término.",
+                "servicos-sem-depoimentos": "Aún no hay valoraciones",
+                "servicos-sem-depoimentos-sub": "Los primeros comentarios aparecerán aquí.",
+                "servicos-cta-entrar": "Iniciar sesión",
+                "servicos-cta-contato": "Contactar",
+                "servicos-cta-sub": "Inicia sesión o contacta con Lumis e indica el servicio que elegiste.",
+                "servicos-resultados-um": "{count} servicio encontrado",
+                "servicos-resultados-varios": "{count} servicios encontrados"
             }
         },
         "plano":         {
@@ -2856,6 +2904,19 @@ document.addEventListener('DOMContentLoaded', function () {
             if (valor !== undefined) el.setAttribute('placeholder', valor);
         });
 
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+            const valor = traducoes[lang]?.[el.getAttribute('data-i18n-aria-label')];
+            if (valor !== undefined) el.setAttribute('aria-label', valor);
+        });
+
+        const countEl = document.querySelector('.results-count[data-count]');
+        if (countEl) {
+            const count = Number(countEl.dataset.count || 0);
+            const chave = count === 1 ? 'servicos-resultados-um' : 'servicos-resultados-varios';
+            const modelo = traducoes[lang]?.[chave];
+            if (modelo) countEl.textContent = modelo.replaceAll('{count}', String(count));
+        }
+
         if (langToggle) langToggle.textContent = bandeiras[lang];
         html.setAttribute('lang', lang === 'pt' ? 'pt-BR' : lang);
 
@@ -2903,5 +2964,12 @@ document.addEventListener('DOMContentLoaded', function () {
     window.LumisI18n = {
         aplicar: () => aplicarIdioma(idiomaAtual),
         idiomaAtual: () => idiomaAtual,
+        texto: (chave, valores = {}) => {
+            let valor = traducoes[idiomaAtual]?.[chave] || chave;
+            Object.entries(valores).forEach(([nome, conteudo]) => {
+                valor = valor.replaceAll(`{${nome}}`, String(conteudo));
+            });
+            return valor;
+        },
     };
 });

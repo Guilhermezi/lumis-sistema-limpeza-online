@@ -24,6 +24,8 @@ DROP TABLE IF EXISTS Pagamentos;
 DROP TABLE IF EXISTS Agendamento;
 DROP TABLE IF EXISTS Contratacao;
 DROP TABLE IF EXISTS Adicional;
+DROP TABLE IF EXISTS AssinaturaPlano;
+DROP TABLE IF EXISTS VerificacaoEmail;
 DROP TABLE IF EXISTS Servicos;
 DROP TABLE IF EXISTS Profissionais;
 DROP TABLE IF EXISTS Planos;
@@ -44,6 +46,7 @@ CREATE TABLE Cliente (
     foto             VARCHAR(255)   DEFAULT NULL,
     termos_aceitos_em DATETIME      DEFAULT NULL,
     auth_versao      INT            NOT NULL DEFAULT 1,
+    email_verificado TINYINT(1)     NOT NULL DEFAULT 1,
     PRIMARY KEY (id_cliente),
     UNIQUE KEY uk_cliente_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -57,6 +60,23 @@ CREATE TABLE Planos (
     beneficios  TEXT          DEFAULT NULL,
     tipo        VARCHAR(30)   NOT NULL,
     PRIMARY KEY (id_plano)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE AssinaturaPlano (
+    id_assinatura       BIGINT        NOT NULL AUTO_INCREMENT,
+    id_cliente          INT           NOT NULL,
+    id_plano            INT           NOT NULL,
+    status_assinatura   VARCHAR(30)   NOT NULL DEFAULT 'Aguardando pagamento',
+    valor_assinatura    DECIMAL(10,2) NOT NULL,
+    forma_pagamento     VARCHAR(30)   NOT NULL,
+    status_pagamento    VARCHAR(30)   NOT NULL DEFAULT 'Pendente',
+    criada_em           DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_assinatura),
+    KEY idx_assinatura_plano_cliente (id_cliente, criada_em),
+    CONSTRAINT fk_assinatura_plano_cliente
+        FOREIGN KEY (id_cliente) REFERENCES Cliente (id_cliente),
+    CONSTRAINT fk_assinatura_plano_plano
+        FOREIGN KEY (id_plano) REFERENCES Planos (id_plano)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Profissionais (
@@ -73,6 +93,7 @@ id_profissional      INT            NOT NULL AUTO_INCREMENT,
     foto                 VARCHAR(255)   DEFAULT NULL,
     termos_aceitos_em    DATETIME       DEFAULT NULL,
     auth_versao          INT            NOT NULL DEFAULT 1,
+    email_verificado     TINYINT(1)     NOT NULL DEFAULT 1,
     PRIMARY KEY (id_profissional),
     UNIQUE KEY uk_profissional_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -86,6 +107,19 @@ CREATE TABLE TentativaLogin (
     PRIMARY KEY (id_tentativa),
     KEY idx_tentativa_conta_data (identificador, criada_em),
     KEY idx_tentativa_ip_data (ip, criada_em)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE VerificacaoEmail (
+    id_verificacao BIGINT      NOT NULL AUTO_INCREMENT,
+    tipo           VARCHAR(20) NOT NULL,
+    usuario_id     INT         NOT NULL,
+    token_hash     CHAR(64)    NOT NULL,
+    expira_em      DATETIME    NOT NULL,
+    usado_em       DATETIME    DEFAULT NULL,
+    criado_em      DATETIME   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_verificacao),
+    UNIQUE KEY uk_verificacao_email_token (token_hash),
+    KEY idx_verificacao_email_usuario (tipo, usuario_id, expira_em)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE RecuperacaoSenha (
@@ -131,6 +165,7 @@ CREATE TABLE Endereco (
     numero        VARCHAR(10)   NOT NULL,
     complemento   VARCHAR(50)   DEFAULT NULL,
     bairro        VARCHAR(50)   NOT NULL,
+    cidade        VARCHAR(60)   DEFAULT NULL,
     estado        CHAR(2)       NOT NULL,
     cep           VARCHAR(9)    NOT NULL,
     PRIMARY KEY (id_endereco),

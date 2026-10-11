@@ -17,7 +17,6 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/cidade-consciente.css">
-    <script src="../../../Controller/cidade_consciente2.js"></script>
 </head>
 <body data-page="cidade">
  <?php

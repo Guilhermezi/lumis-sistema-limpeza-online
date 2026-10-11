@@ -75,6 +75,52 @@ function buscarResumoPerfilProfissional(PDO $pdo, int $profissionalId): array
     ];
 }
 
+function buscarPlanoPerfilCliente(PDO $pdo, int $clienteId): ?array
+{
+    $sql = "SELECT ap.id_assinatura, ap.status_assinatura, ap.valor_assinatura,
+                   ap.forma_pagamento, ap.status_pagamento, ap.criada_em,
+                   p.nome AS plano
+            FROM AssinaturaPlano ap
+            INNER JOIN Planos p ON p.id_plano = ap.id_plano
+            WHERE ap.id_cliente = :cliente
+            ORDER BY ap.criada_em DESC, ap.id_assinatura DESC
+            LIMIT 1";
+    $linha = executarConsultaPerfil($pdo, $sql, ['cliente' => $clienteId])->fetch();
+    return $linha ?: null;
+}
+
+function buscarContratacoesPerfilCliente(PDO $pdo, int $clienteId, int $limite = 12): array
+{
+    $limite = max(1, min(30, $limite));
+    $sql = "SELECT c.id_contratacao, c.status_contratacao, c.data_contratacao,
+                   c.hora_inicio_contratacao, c.valor_total, p.id_profissional,
+                   p.nome AS profissional, a.status_agenda, pg.status_pagamento,
+                   (TIMESTAMP(a.data_agenda, a.hora_inicio_agenda) > NOW()) AS pode_cancelar,
+                   itens.servicos,
+                   (av.id_avaliacao IS NOT NULL) AS avaliado,
+                   EXISTS (
+                       SELECT 1 FROM Favorito f
+                       WHERE f.id_cliente = c.id_cliente
+                         AND f.id_profissional = c.id_profissional
+                   ) AS favorito
+            FROM Contratacao c
+            INNER JOIN Profissionais p ON p.id_profissional = c.id_profissional
+            LEFT JOIN Agendamento a ON a.id_contratacao = c.id_contratacao
+            LEFT JOIN Pagamentos pg ON pg.id_contratacao = c.id_contratacao
+            LEFT JOIN Avaliacao av ON av.id_contratacao = c.id_contratacao
+            LEFT JOIN (
+                SELECT ic.id_contratacao,
+                       GROUP_CONCAT(DISTINCT s.nome_servico ORDER BY s.nome_servico SEPARATOR ', ') AS servicos
+                FROM ItemContratacao ic
+                INNER JOIN Servicos s ON s.id_servico = ic.id_servico
+                GROUP BY ic.id_contratacao
+            ) itens ON itens.id_contratacao = c.id_contratacao
+            WHERE c.id_cliente = :cliente
+            ORDER BY c.data_contratacao DESC, c.id_contratacao DESC
+            LIMIT {$limite}";
+    return executarConsultaPerfil($pdo, $sql, ['cliente' => $clienteId])->fetchAll();
+}
+
 function buscarEspecialidadesPerfil(PDO $pdo, int $profissionalId): array
 {
     return executarConsultaPerfil($pdo, "SELECT s.nome_servico
@@ -88,10 +134,13 @@ function buscarVisitasPerfil(PDO $pdo, string $tipo, int $usuarioId, int $limite
 {
     $coluna = $tipo === 'profissional' ? 'a.id_profissional' : 'c.id_cliente';
     $pessoa = $tipo === 'profissional' ? 'cl.nome AS pessoa' : 'p.nome AS pessoa';
+    $filtroData = $tipo === 'profissional' ? '' : 'AND a.data_agenda >= CURDATE()';
     $limite = max(1, min(20, $limite));
 
-    $sql = "SELECT a.id_agendamento, a.data_agenda, a.hora_inicio_agenda,
-            a.hora_fim_agenda, a.status_agenda, {$pessoa},
+    $sql = "SELECT a.id_agendamento, a.id_contratacao, a.data_agenda, a.hora_inicio_agenda,
+            a.hora_fim_agenda, a.status_agenda, c.status_contratacao,
+            (TIMESTAMP(a.data_agenda, a.hora_inicio_agenda) > NOW()) AS pode_cancelar,
+            (TIMESTAMP(a.data_agenda, a.hora_fim_agenda) <= NOW()) AS pode_concluir, {$pessoa},
             COALESCE(itens.servicos, 'Serviço sem item informado') AS servicos
         FROM Agendamento a
         INNER JOIN Contratacao c ON c.id_contratacao = a.id_contratacao
@@ -105,8 +154,9 @@ function buscarVisitasPerfil(PDO $pdo, string $tipo, int $usuarioId, int $limite
             GROUP BY ic.id_contratacao
         ) itens ON itens.id_contratacao = c.id_contratacao
         WHERE {$coluna} = :usuario
-          AND a.data_agenda >= CURDATE()
+          {$filtroData}
           AND LOWER(a.status_agenda) NOT LIKE 'cancel%'
+          AND LOWER(a.status_agenda) NOT LIKE 'recus%'
           AND LOWER(a.status_agenda) NOT LIKE 'conclu%'
         ORDER BY a.data_agenda, a.hora_inicio_agenda
         LIMIT {$limite}";
@@ -122,6 +172,7 @@ function buscarDatasAgendaPerfil(PDO $pdo, string $tipo, int $usuarioId): array
         INNER JOIN Contratacao c ON c.id_contratacao = a.id_contratacao
         WHERE {$coluna} = :usuario
           AND LOWER(a.status_agenda) NOT LIKE 'cancel%'
+          AND LOWER(a.status_agenda) NOT LIKE 'recus%'
         ORDER BY a.data_agenda";
 
     return executarConsultaPerfil($pdo, $sql, ['usuario' => $usuarioId])->fetchAll(PDO::FETCH_COLUMN);

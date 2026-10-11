@@ -8,7 +8,8 @@ $controller = $asset . '../Controller/';
         </div>
 
         <nav>
-            <div class="menu-toggle" id="menuToggle">
+            <div class="menu-toggle" id="menuToggle" role="button" tabindex="0"
+                 aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -60,4 +61,5 @@ $controller = $asset . '../Controller/';
             </div>
         </nav>
     </header>
+    <script src="<?= $controller ?>menu.js"></script>
     <script src="<?= $controller ?>Auth.js"></script>
