@@ -35,4 +35,3 @@ $asset = $base === '' ? '../' : '../../';
             </div>
         </div>
     </header>
-    <?php include __DIR__ . '/demo-notice.php'; ?>

@@ -147,6 +147,15 @@ header {
     text-align: center;
 }
 
+.auth-form .demo-notice,
+.checkout-step .demo-notice,
+.plan-checkout-step .demo-notice {
+    width: 100%;
+    margin: .75rem 0 1rem;
+    border: 1px solid #f0d98b;
+    border-radius: 10px;
+}
+
 [data-theme="dark"] .demo-notice {
     color: #fff5d6;
     background: #51421e;

@@ -61,6 +61,7 @@ include __DIR__ . '/../../partials/header.php';
                               action="../../../Controller/api/cadastro.php" method="post" novalidate>
                             <h1 data-i18n="cadastro-trabalhador-criar-conta">Criar conta</h1>
                             <span class="auth-divider" data-i18n="cadastro-trabalhador-ou-email">Use seu e-mail para se cadastrar</span>
+                            <?php include __DIR__ . '/../../partials/demo-notice.php'; ?>
 
                             <div class="auth-field">
                                 <label for="signup-name" data-i18n="cadastro-trabalhador-nome-completo">Nome Completo</label>
