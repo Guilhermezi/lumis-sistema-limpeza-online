@@ -76,39 +76,27 @@ SELECT p.id_profissional, s.id_servico FROM Profissionais p JOIN Servicos s ON s
 INSERT IGNORE INTO Especialidade (id_profissional, id_servico)
 SELECT p.id_profissional, s.id_servico FROM Profissionais p JOIN Servicos s ON s.id_servico IN (7, 12) WHERE p.email = 'paulo.souza@demo.lumis.test';
 
-DROP TEMPORARY TABLE IF EXISTS DemoContratos;
-CREATE TEMPORARY TABLE DemoContratos (
-    cliente_email VARCHAR(100) NOT NULL,
-    profissional_email VARCHAR(100) NOT NULL,
-    servico_id INT NOT NULL,
-    data_servico DATE NOT NULL,
-    inicio TIME NOT NULL,
-    fim TIME NOT NULL,
-    valor DECIMAL(10,2) NOT NULL,
-    nota INT NOT NULL,
-    comentario TEXT NOT NULL
-);
-
-INSERT INTO DemoContratos VALUES
-('amanda.rocha@demo.lumis.test', 'mariana.oliveira@demo.lumis.test', 1, '2026-10-09', '08:00:00', '12:00:00', 120.00, 5, 'Atendimento muito cuidadoso e pontual. Minha casa ficou ótima.'),
-('bruno.nascimento@demo.lumis.test', 'joao.santos@demo.lumis.test', 6, '2026-10-07', '09:00:00', '13:00:00', 150.00, 4, 'O escritório ficou bem organizado e o atendimento foi muito profissional.'),
-('camila.duarte@demo.lumis.test', 'luana.fernandes@demo.lumis.test', 10, '2026-10-05', '13:00:00', '16:00:00', 90.00, 5, 'O sofá ficou renovado. Gostei muito do cuidado durante todo o serviço.'),
-('diego.martins@demo.lumis.test', 'carlos.mendes@demo.lumis.test', 11, '2026-10-02', '08:30:00', '11:30:00', 80.00, 5, 'Os vidros ficaram impecáveis e o serviço terminou dentro do horário combinado.'),
-('elisa.ferreira@demo.lumis.test', 'renata.lima@demo.lumis.test', 3, '2026-09-29', '08:00:00', '14:00:00', 220.00, 5, 'A limpeza antes da mudança facilitou muito o nosso dia. Excelente resultado.'),
-('felipe.almeida@demo.lumis.test', 'paulo.souza@demo.lumis.test', 12, '2026-09-26', '14:00:00', '17:00:00', 100.00, 4, 'O carro ficou muito bem limpo e o processo foi rápido.'),
-('gabriela.costa@demo.lumis.test', 'mariana.oliveira@demo.lumis.test', 5, '2026-09-23', '09:00:00', '13:00:00', 140.00, 5, 'Ótima experiência. A profissional foi atenciosa e deixou tudo em ordem.'),
-('helena.ribeiro@demo.lumis.test', 'joao.santos@demo.lumis.test', 9, '2026-09-20', '08:00:00', '12:00:00', 150.00, 5, 'Serviço muito bem executado no escritório. Pretendo contratar novamente.'),
-('amanda.rocha@demo.lumis.test', 'luana.fernandes@demo.lumis.test', 2, '2026-09-17', '08:00:00', '14:00:00', 180.00, 4, 'A limpeza pesada resolveu os pontos que mais precisavam de atenção.'),
-('bruno.nascimento@demo.lumis.test', 'carlos.mendes@demo.lumis.test', 8, '2026-09-14', '07:30:00', '15:30:00', 280.00, 5, 'O espaço ficou pronto para uso depois da obra. Trabalho excelente.'),
-('camila.duarte@demo.lumis.test', 'renata.lima@demo.lumis.test', 4, '2026-09-11', '08:00:00', '15:00:00', 250.00, 5, 'A equipe teve bastante cuidado com os móveis e removeu toda a sujeira da reforma.'),
-('diego.martins@demo.lumis.test', 'paulo.souza@demo.lumis.test', 7, '2026-09-08', '08:00:00', '14:00:00', 200.00, 4, 'Bom atendimento e resultado consistente na limpeza comercial.');
-
+-- Os registros de contratação são definidos como consultas derivadas em cada
+-- inserção, sem CREATE TEMPORARY TABLE (bloqueado em alguns planos gratuitos).
 INSERT INTO Contratacao
     (status_contratacao, data_contratacao, hora_inicio_contratacao,
      hora_fim_contratacao, valor_total, id_cliente, id_profissional)
 SELECT 'Concluído', d.data_servico, d.inicio, d.fim, d.valor,
        cl.id_cliente, p.id_profissional
-FROM DemoContratos d
+FROM (
+    SELECT 'amanda.rocha@demo.lumis.test' AS cliente_email, 'mariana.oliveira@demo.lumis.test' AS profissional_email, 1 AS servico_id, '2026-10-09' AS data_servico, '08:00:00' AS inicio, '12:00:00' AS fim, 120.00 AS valor, 5 AS nota, 'Atendimento muito cuidadoso e pontual. Minha casa ficou ótima.' AS comentario
+    UNION ALL SELECT 'bruno.nascimento@demo.lumis.test', 'joao.santos@demo.lumis.test', 6, '2026-10-07', '09:00:00', '13:00:00', 150.00, 4, 'O escritório ficou bem organizado e o atendimento foi muito profissional.'
+    UNION ALL SELECT 'camila.duarte@demo.lumis.test', 'luana.fernandes@demo.lumis.test', 10, '2026-10-05', '13:00:00', '16:00:00', 90.00, 5, 'O sofá ficou renovado. Gostei muito do cuidado durante todo o serviço.'
+    UNION ALL SELECT 'diego.martins@demo.lumis.test', 'carlos.mendes@demo.lumis.test', 11, '2026-10-02', '08:30:00', '11:30:00', 80.00, 5, 'Os vidros ficaram impecáveis e o serviço terminou dentro do horário combinado.'
+    UNION ALL SELECT 'elisa.ferreira@demo.lumis.test', 'renata.lima@demo.lumis.test', 3, '2026-09-29', '08:00:00', '14:00:00', 220.00, 5, 'A limpeza antes da mudança facilitou muito o nosso dia. Excelente resultado.'
+    UNION ALL SELECT 'felipe.almeida@demo.lumis.test', 'paulo.souza@demo.lumis.test', 12, '2026-09-26', '14:00:00', '17:00:00', 100.00, 4, 'O carro ficou muito bem limpo e o processo foi rápido.'
+    UNION ALL SELECT 'gabriela.costa@demo.lumis.test', 'mariana.oliveira@demo.lumis.test', 5, '2026-09-23', '09:00:00', '13:00:00', 140.00, 5, 'Ótima experiência. A profissional foi atenciosa e deixou tudo em ordem.'
+    UNION ALL SELECT 'helena.ribeiro@demo.lumis.test', 'joao.santos@demo.lumis.test', 9, '2026-09-20', '08:00:00', '12:00:00', 150.00, 5, 'Serviço muito bem executado no escritório. Pretendo contratar novamente.'
+    UNION ALL SELECT 'amanda.rocha@demo.lumis.test', 'luana.fernandes@demo.lumis.test', 2, '2026-09-17', '08:00:00', '14:00:00', 180.00, 4, 'A limpeza pesada resolveu os pontos que mais precisavam de atenção.'
+    UNION ALL SELECT 'bruno.nascimento@demo.lumis.test', 'carlos.mendes@demo.lumis.test', 8, '2026-09-14', '07:30:00', '15:30:00', 280.00, 5, 'O espaço ficou pronto para uso depois da obra. Trabalho excelente.'
+    UNION ALL SELECT 'camila.duarte@demo.lumis.test', 'renata.lima@demo.lumis.test', 4, '2026-09-11', '08:00:00', '15:00:00', 250.00, 5, 'A equipe teve bastante cuidado com os móveis e removeu toda a sujeira da reforma.'
+    UNION ALL SELECT 'diego.martins@demo.lumis.test', 'paulo.souza@demo.lumis.test', 7, '2026-09-08', '08:00:00', '14:00:00', 200.00, 4, 'Bom atendimento e resultado consistente na limpeza comercial.'
+) AS d
 JOIN Cliente cl ON cl.email = d.cliente_email
 JOIN Profissionais p ON p.email = d.profissional_email
 WHERE NOT EXISTS (
@@ -121,8 +109,21 @@ WHERE NOT EXISTS (
 INSERT INTO ItemContratacao
     (id_contratacao, id_servico, qtde_banheiros, qtde_quartos, qtde_horas, subtotal)
 SELECT c.id_contratacao, d.servico_id, 1, 2,
-       GREATEST(1, TIMESTAMPDIFF(HOUR, d.inicio, d.fim)), d.valor
-FROM DemoContratos d
+       GREATEST(1, TIMESTAMPDIFF(HOUR, c.hora_inicio_contratacao, c.hora_fim_contratacao)), d.valor
+FROM (
+    SELECT 'amanda.rocha@demo.lumis.test' AS cliente_email, 'mariana.oliveira@demo.lumis.test' AS profissional_email, 1 AS servico_id, '2026-10-09' AS data_servico, '08:00:00' AS inicio, '12:00:00' AS fim, 120.00 AS valor, 5 AS nota, 'Atendimento muito cuidadoso e pontual. Minha casa ficou ótima.' AS comentario
+    UNION ALL SELECT 'bruno.nascimento@demo.lumis.test', 'joao.santos@demo.lumis.test', 6, '2026-10-07', '09:00:00', '13:00:00', 150.00, 4, 'O escritório ficou bem organizado e o atendimento foi muito profissional.'
+    UNION ALL SELECT 'camila.duarte@demo.lumis.test', 'luana.fernandes@demo.lumis.test', 10, '2026-10-05', '13:00:00', '16:00:00', 90.00, 5, 'O sofá ficou renovado. Gostei muito do cuidado durante todo o serviço.'
+    UNION ALL SELECT 'diego.martins@demo.lumis.test', 'carlos.mendes@demo.lumis.test', 11, '2026-10-02', '08:30:00', '11:30:00', 80.00, 5, 'Os vidros ficaram impecáveis e o serviço terminou dentro do horário combinado.'
+    UNION ALL SELECT 'elisa.ferreira@demo.lumis.test', 'renata.lima@demo.lumis.test', 3, '2026-09-29', '08:00:00', '14:00:00', 220.00, 5, 'A limpeza antes da mudança facilitou muito o nosso dia. Excelente resultado.'
+    UNION ALL SELECT 'felipe.almeida@demo.lumis.test', 'paulo.souza@demo.lumis.test', 12, '2026-09-26', '14:00:00', '17:00:00', 100.00, 4, 'O carro ficou muito bem limpo e o processo foi rápido.'
+    UNION ALL SELECT 'gabriela.costa@demo.lumis.test', 'mariana.oliveira@demo.lumis.test', 5, '2026-09-23', '09:00:00', '13:00:00', 140.00, 5, 'Ótima experiência. A profissional foi atenciosa e deixou tudo em ordem.'
+    UNION ALL SELECT 'helena.ribeiro@demo.lumis.test', 'joao.santos@demo.lumis.test', 9, '2026-09-20', '08:00:00', '12:00:00', 150.00, 5, 'Serviço muito bem executado no escritório. Pretendo contratar novamente.'
+    UNION ALL SELECT 'amanda.rocha@demo.lumis.test', 'luana.fernandes@demo.lumis.test', 2, '2026-09-17', '08:00:00', '14:00:00', 180.00, 4, 'A limpeza pesada resolveu os pontos que mais precisavam de atenção.'
+    UNION ALL SELECT 'bruno.nascimento@demo.lumis.test', 'carlos.mendes@demo.lumis.test', 8, '2026-09-14', '07:30:00', '15:30:00', 280.00, 5, 'O espaço ficou pronto para uso depois da obra. Trabalho excelente.'
+    UNION ALL SELECT 'camila.duarte@demo.lumis.test', 'renata.lima@demo.lumis.test', 4, '2026-09-11', '08:00:00', '15:00:00', 250.00, 5, 'A equipe teve bastante cuidado com os móveis e removeu toda a sujeira da reforma.'
+    UNION ALL SELECT 'diego.martins@demo.lumis.test', 'paulo.souza@demo.lumis.test', 7, '2026-09-08', '08:00:00', '14:00:00', 200.00, 4, 'Bom atendimento e resultado consistente na limpeza comercial.'
+) AS d
 JOIN Cliente cl ON cl.email = d.cliente_email
 JOIN Profissionais p ON p.email = d.profissional_email
 JOIN Contratacao c ON c.id_cliente = cl.id_cliente
@@ -134,10 +135,47 @@ WHERE NOT EXISTS (
       AND ic.id_servico = d.servico_id
 );
 
+-- Corrige a duração caso uma importação anterior tenha inferido horários
+-- como DATETIME ao invés de TIME no SELECT derivado do provedor.
+UPDATE ItemContratacao ic
+JOIN Contratacao c ON c.id_contratacao = ic.id_contratacao
+JOIN Cliente cl ON cl.id_cliente = c.id_cliente
+JOIN Profissionais p ON p.id_profissional = c.id_profissional
+SET ic.qtde_horas = GREATEST(1, TIMESTAMPDIFF(HOUR, c.hora_inicio_contratacao, c.hora_fim_contratacao))
+WHERE cl.email IN (
+    'amanda.rocha@demo.lumis.test', 'bruno.nascimento@demo.lumis.test',
+    'camila.duarte@demo.lumis.test', 'diego.martins@demo.lumis.test',
+    'elisa.ferreira@demo.lumis.test', 'felipe.almeida@demo.lumis.test',
+    'gabriela.costa@demo.lumis.test', 'helena.ribeiro@demo.lumis.test'
+)
+AND p.email IN (
+    'mariana.oliveira@demo.lumis.test', 'joao.santos@demo.lumis.test',
+    'luana.fernandes@demo.lumis.test', 'carlos.mendes@demo.lumis.test',
+    'renata.lima@demo.lumis.test', 'paulo.souza@demo.lumis.test'
+)
+AND c.data_contratacao IN (
+    '2026-10-09', '2026-10-07', '2026-10-05', '2026-10-02',
+    '2026-09-29', '2026-09-26', '2026-09-23', '2026-09-20',
+    '2026-09-17', '2026-09-14', '2026-09-11', '2026-09-08'
+);
+
 INSERT INTO Avaliacao
     (nota_avaliacao, comentario_avaliacao, id_cliente, id_profissional, id_contratacao)
 SELECT d.nota, d.comentario, cl.id_cliente, p.id_profissional, c.id_contratacao
-FROM DemoContratos d
+FROM (
+    SELECT 'amanda.rocha@demo.lumis.test' AS cliente_email, 'mariana.oliveira@demo.lumis.test' AS profissional_email, 1 AS servico_id, '2026-10-09' AS data_servico, '08:00:00' AS inicio, '12:00:00' AS fim, 120.00 AS valor, 5 AS nota, 'Atendimento muito cuidadoso e pontual. Minha casa ficou ótima.' AS comentario
+    UNION ALL SELECT 'bruno.nascimento@demo.lumis.test', 'joao.santos@demo.lumis.test', 6, '2026-10-07', '09:00:00', '13:00:00', 150.00, 4, 'O escritório ficou bem organizado e o atendimento foi muito profissional.'
+    UNION ALL SELECT 'camila.duarte@demo.lumis.test', 'luana.fernandes@demo.lumis.test', 10, '2026-10-05', '13:00:00', '16:00:00', 90.00, 5, 'O sofá ficou renovado. Gostei muito do cuidado durante todo o serviço.'
+    UNION ALL SELECT 'diego.martins@demo.lumis.test', 'carlos.mendes@demo.lumis.test', 11, '2026-10-02', '08:30:00', '11:30:00', 80.00, 5, 'Os vidros ficaram impecáveis e o serviço terminou dentro do horário combinado.'
+    UNION ALL SELECT 'elisa.ferreira@demo.lumis.test', 'renata.lima@demo.lumis.test', 3, '2026-09-29', '08:00:00', '14:00:00', 220.00, 5, 'A limpeza antes da mudança facilitou muito o nosso dia. Excelente resultado.'
+    UNION ALL SELECT 'felipe.almeida@demo.lumis.test', 'paulo.souza@demo.lumis.test', 12, '2026-09-26', '14:00:00', '17:00:00', 100.00, 4, 'O carro ficou muito bem limpo e o processo foi rápido.'
+    UNION ALL SELECT 'gabriela.costa@demo.lumis.test', 'mariana.oliveira@demo.lumis.test', 5, '2026-09-23', '09:00:00', '13:00:00', 140.00, 5, 'Ótima experiência. A profissional foi atenciosa e deixou tudo em ordem.'
+    UNION ALL SELECT 'helena.ribeiro@demo.lumis.test', 'joao.santos@demo.lumis.test', 9, '2026-09-20', '08:00:00', '12:00:00', 150.00, 5, 'Serviço muito bem executado no escritório. Pretendo contratar novamente.'
+    UNION ALL SELECT 'amanda.rocha@demo.lumis.test', 'luana.fernandes@demo.lumis.test', 2, '2026-09-17', '08:00:00', '14:00:00', 180.00, 4, 'A limpeza pesada resolveu os pontos que mais precisavam de atenção.'
+    UNION ALL SELECT 'bruno.nascimento@demo.lumis.test', 'carlos.mendes@demo.lumis.test', 8, '2026-09-14', '07:30:00', '15:30:00', 280.00, 5, 'O espaço ficou pronto para uso depois da obra. Trabalho excelente.'
+    UNION ALL SELECT 'camila.duarte@demo.lumis.test', 'renata.lima@demo.lumis.test', 4, '2026-09-11', '08:00:00', '15:00:00', 250.00, 5, 'A equipe teve bastante cuidado com os móveis e removeu toda a sujeira da reforma.'
+    UNION ALL SELECT 'diego.martins@demo.lumis.test', 'paulo.souza@demo.lumis.test', 7, '2026-09-08', '08:00:00', '14:00:00', 200.00, 4, 'Bom atendimento e resultado consistente na limpeza comercial.'
+) AS d
 JOIN Cliente cl ON cl.email = d.cliente_email
 JOIN Profissionais p ON p.email = d.profissional_email
 JOIN Contratacao c ON c.id_cliente = cl.id_cliente
@@ -157,5 +195,4 @@ LEFT JOIN (
 ) notas ON notas.id_servico = s.id_servico
 SET s.avaliacao_media = COALESCE(notas.media, 0);
 
-DROP TEMPORARY TABLE DemoContratos;
 COMMIT;

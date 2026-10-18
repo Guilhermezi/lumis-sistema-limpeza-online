@@ -1,4 +1,5 @@
 <?php 
+    require_once __DIR__ . '/config.php';
     // Abre a sessão antes de qualquer outra coisa.
     // $_SESSION só existe DEPOIS do session_start(). Sem esta chamada, um
     // require deste arquivo em uma página comum (que não passa pelo
@@ -23,15 +24,31 @@
         session_start();
     }
 
-    // Conexão com o banco de dados
-    $host = getenv('DB_HOST') ?: 'localhost';
+    // Em produção, nunca recorrer às credenciais locais padrão: a aplicação
+    // deve falhar fechada caso o ambiente do servidor esteja incompleto.
+    $ambiente = configuracaoLumis('APP_ENV', 'production');
+    $hostConfigurado = configuracaoLumis('DB_HOST');
+    $nomeConfigurado = configuracaoLumis('DB_NAME');
+    $usuarioConfigurado = configuracaoLumis('DB_USER');
+    $senhaConfigurada = configuracaoLumis('DB_PASSWORD');
+    $socket = configuracaoLumis('DB_SOCKET', '');
+
+    if ($ambiente === 'production' && (
+        !$hostConfigurado || !$nomeConfigurado || !$usuarioConfigurado || !$senhaConfigurada
+    )) {
+        error_log('lumis: configuração obrigatória do banco ausente em produção.');
+        http_response_code(500);
+        exit('Configuração do servidor incompleta.');
+    }
+
+    // Desenvolvimento mantém os padrões locais documentados no README.
+    $host = $hostConfigurado ?: 'localhost';
     // nome do banco de dados
-    $dbname = getenv('DB_NAME') ?: 'lumis';
+    $dbname = $nomeConfigurado ?: 'lumis';
     // nome do usuário do banco de dados
-    $user = getenv('DB_USER') ?: 'root';
+    $user = $usuarioConfigurado ?: 'root';
     // senha do usuário do banco de dados
-    $password = getenv('DB_PASSWORD') ?: '';
-    $socket = getenv('DB_SOCKET') ?: '';
+    $password = $senhaConfigurada ?: '';
 
     // Opções de configuração do PDO
     $opcoes = [

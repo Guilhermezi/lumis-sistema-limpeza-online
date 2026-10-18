@@ -4,7 +4,7 @@ Aplicação web escolar para consulta e contratação de serviços de limpeza. C
 
 ## Tecnologias
 
-- PHP 8+ e PDO
+- PHP 8.1+ e PDO MySQL
 - MySQL ou MariaDB
 - HTML, CSS e JavaScript
 - DBeaver (opcional) para administrar o banco
@@ -32,6 +32,26 @@ O projeto lê as variáveis do ambiente do PHP; o arquivo `.env.example` é apen
 
 No modo `development`, o link de confirmação de e-mail pode ser exibido na tela para facilitar os testes locais. Em produção, configure o envio de e-mails do servidor e use HTTPS. A consulta automática de CEP usa o ViaCEP, e os ícones Remix Icon são carregados por CDN; esses recursos precisam de conexão com a internet.
 
+## Publicar uma demonstração
+
+O Lumis é um protótipo acadêmico. A faixa de demonstração avisa que os dados devem ser fictícios e que pagamentos e serviços não são reais. Não use esta instalação para atender clientes nem armazene dados pessoais reais.
+
+Para uma hospedagem gratuita, escolha um serviço que ofereça PHP 8.1+, MySQL/MariaDB, SSL/HTTPS e permita regras `.htaccess`. O site não pode ser publicado apenas como conteúdo estático. Depois de criar a conta e o banco no provedor:
+
+1. Importe `Model/lumis.sql` em um banco novo e aplique somente as migrações que ainda não existirem. Não execute esse esquema sobre dados que deseja manter.
+2. Anote o host, nome completo do banco, usuário e senha apresentados pelo provedor. Hospedagens compartilhadas podem usar prefixos nos nomes e hosts diferentes de `localhost`.
+3. Em provedores sem variáveis de ambiente (como planos gratuitos), faça uma cópia de `Model/config.local.example.php` chamada `Model/config.local.php` e preencha os valores privados. Esse arquivo é ignorado pelo Git; a regra raiz de `.htaccess` bloqueia acesso HTTP à pasta `Model/`. Nunca publique o arquivo de exemplo preenchido nem envie as credenciais por mensagem.
+4. Defina `APP_URL` com a URL pública HTTPS exata e mantenha `APP_ENV=production` e `APP_DEMO_MODE=1`.
+5. Configure `MAIL_FROM`, `MAIL_FROM_NAME`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_ENCRYPTION`, `SMTP_USERNAME` e `SMTP_PASSWORD` com uma conta de envio SMTP. O protótipo usa PHPMailer; antes do envio por FTP, execute `composer install --no-dev --optimize-autoloader` e envie também a pasta `vendor/`. Sem SMTP configurado, confirmação e recuperação de senha não enviarão mensagens em produção.
+6. Envie os arquivos para a raiz web do site, preservando `View/uploads/avatars/` como pasta gravável pelo PHP. O repositório inclui regras `.htaccess` para Apache; se o servidor usar Nginx, aplique regras equivalentes no painel/configuração do host.
+7. Importe apenas dados fictícios em uma base isolada de demonstração. Não use a senha compartilhada do seed em uma instalação pública. Verifique cadastro, e-mail, login, fluxos de agendamento e tradução em todos os idiomas antes de divulgar o endereço.
+
+### Publicação automática pelo GitHub
+
+O plano gratuito do InfinityFree não sincroniza diretamente com o GitHub. Este repositório inclui um GitHub Actions workflow que valida o PHP, instala as dependências do Composer e envia os arquivos por FTPS para `/htdocs/` a cada push na branch `MVC`. Para habilitá-lo, adicione `INFINITYFREE_FTP_USERNAME` e `INFINITYFREE_FTP_PASSWORD` em **Settings → Secrets and variables → Actions** no GitHub. Use as credenciais FTP exibidas no painel InfinityFree (não a senha do banco nem a senha do Client Area). O arquivo `Model/config.local.php` não é enviado pelo workflow: crie-o no servidor a partir de `Model/config.local.example.php` e preencha ali os dados privados do banco e SMTP. Depois de configurar os Secrets, execute o workflow em **Actions → Deploy to InfinityFree → Run workflow**; os próximos pushes em `MVC` publicarão automaticamente.
+
+As credenciais do banco e SMTP devem ficar em variáveis privadas do provedor ou no arquivo local `Model/config.local.php`, nunca commitadas no Git nem compartilhadas em mensagens. `.env.example` é somente um modelo e não é carregado automaticamente pelo PHP. O ambiente gratuito é adequado para apresentação e testes, não oferece garantia de disponibilidade ou retenção dos dados; mantenha uma cópia local do banco e das imagens.
+
 ## Banco de dados
 
 Em um banco já existente, aplique somente as migrações que ainda não foram incorporadas, em ordem. Elas estão em `Model/migrations/`:
@@ -54,7 +74,7 @@ Para carregar dados fictícios de apresentação escolar, use `Model/seeds/demo_
 - Edição de dados e foto do perfil, além de consulta da solicitação de plano e seu estado de pagamento.
 - Interface disponível em português, inglês e espanhol em páginas que possuem traduções cadastradas.
 
-Pagamentos de serviços e planos são **simulados**: o sistema registra a escolha e o estado pendente, mas não processa cobranças bancárias.
+Pagamentos de serviços e planos são **simulados**: o sistema registra a escolha e o estado pendente, mas não processa cobranças bancárias. Os avisos legais do site descrevem a demonstração escolar; revise-os antes de qualquer uso comercial.
 
 ## Estrutura principal
 

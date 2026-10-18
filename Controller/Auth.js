@@ -246,7 +246,10 @@
                 box.hidden = false;
                 box.classList.remove('erro');
                 box.classList.add('sucesso');
-                traduzirMensagem(box, ehCadastro ? 'auth-ok-cadastro' : 'auth-ok-login');
+                const chaveSucesso = ehCadastro && resposta.email_enviado === false
+                    ? 'auth-ok-cadastro-email-falhou'
+                    : (ehCadastro ? 'auth-ok-cadastro' : 'auth-ok-login');
+                traduzirMensagem(box, chaveSucesso);
             }
             window.location.href = destinoFinal(form, resposta);
             return;

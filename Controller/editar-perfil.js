@@ -58,21 +58,22 @@
 
                 if (!result.ok) {
                     Object.keys(result.campos || {}).forEach(name => form.querySelector(`[name="${name}"]`)?.closest('.profile-edit-field, .profile-photo-copy')?.classList.add('invalid'));
+                    const texto = chave => window.LumisI18n?.texto(chave) || chave;
                     message.textContent = result.erro === 'email-em-uso'
-                        ? 'Este e-mail já está sendo usado por outra conta.'
+                        ? texto('editar-perfil-erro-email')
                         : result.erro?.startsWith('foto-')
-                            ? 'Não foi possível usar essa foto. Confira o formato e o limite de 5 MB.'
-                            : 'Confira os campos informados e tente novamente.';
+                            ? texto('editar-perfil-erro-foto')
+                            : texto('editar-perfil-erro-dados');
                     message.hidden = false;
                     return;
                 }
 
-                message.textContent = result.mensagem || 'Perfil atualizado com sucesso.';
+                message.textContent = result.mensagem || (window.LumisI18n?.texto('editar-perfil-sucesso') || 'Perfil atualizado com sucesso.');
                 message.classList.add('success');
                 message.hidden = false;
                 setTimeout(() => { window.location.href = result.redirect; }, 700);
             } catch (error) {
-                message.textContent = 'Não foi possível conectar ao servidor. Tente novamente.';
+                message.textContent = window.LumisI18n?.texto('editar-perfil-erro-conexao') || 'Não foi possível conectar ao servidor. Tente novamente.';
                 message.hidden = false;
             } finally {
                 submit.disabled = false;

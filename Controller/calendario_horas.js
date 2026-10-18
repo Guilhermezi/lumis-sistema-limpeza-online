@@ -11,7 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const today = new Date();
     let currentMonth = today.getMonth();
     let currentYear = today.getFullYear();
-    const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    let language = document.documentElement.lang || 'pt-BR';
+
+    function formatarMes(year, month) {
+        return new Intl.DateTimeFormat(language, { month: 'long', year: 'numeric' }).format(new Date(year, month, 1));
+    }
+
+    function formatarData(year, month, day) {
+        return new Intl.DateTimeFormat(language, { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(year, month, day));
+    }
 
     // Datas no formato YYYY-MM-DD são injetadas pelo PHP a partir de Agendamento.
     const eventDates = new Set(Array.isArray(window.LumisProfileEvents) ? window.LumisProfileEvents : []);
@@ -21,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderCalendar() {
-        monthElement.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+        monthElement.textContent = formatarMes(currentYear, currentMonth);
         daysContainer.innerHTML = '';
 
         const firstWeekday = new Date(currentYear, currentMonth, 1).getDay();
@@ -37,14 +45,14 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let day = 1; day <= daysInMonth; day++) {
             const cell = document.createElement('div');
             cell.textContent = day;
-            cell.setAttribute('aria-label', `${day} de ${monthNames[currentMonth]} de ${currentYear}`);
+            cell.setAttribute('aria-label', formatarData(currentYear, currentMonth, day));
 
             if (currentYear === today.getFullYear() && currentMonth === today.getMonth() && day === today.getDate()) {
                 cell.classList.add('today');
             }
             if (eventDates.has(dateKey(currentYear, currentMonth, day))) {
                 cell.classList.add('has-event');
-                cell.setAttribute('title', 'Visita agendada');
+                cell.setAttribute('title', document.documentElement.lang.startsWith('es') ? 'Visita programada' : document.documentElement.lang.startsWith('en') ? 'Scheduled visit' : 'Visita agendada');
             }
             daysContainer.appendChild(cell);
         }
@@ -65,6 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
     todayButton.addEventListener('click', function () {
         currentMonth = today.getMonth();
         currentYear = today.getFullYear();
+        renderCalendar();
+    });
+
+    document.addEventListener('lumis:language-changed', function (event) {
+        language = event.detail?.language === 'pt' ? 'pt-BR' : (event.detail?.language || 'pt-BR');
         renderCalendar();
     });
 

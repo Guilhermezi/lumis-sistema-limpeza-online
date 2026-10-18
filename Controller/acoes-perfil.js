@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const csrf = window.LumisProfileCsrf || '';
+    const t = (key) => window.LumisI18n?.texto(key) || key;
     const post = async (url, payload) => {
         const response = await fetch(url, {
             method: 'POST',
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(payload),
         });
         const data = await response.json();
-        if (!response.ok || !data.ok) throw new Error(data.erro || 'Não foi possível concluir esta ação.');
+        if (!response.ok || !data.ok) throw new Error(data.erro || t('acao-erro-agendamento'));
         return data;
     };
 
@@ -25,9 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 button.dataset.favorito = data.favorito ? '1' : '0';
                 button.setAttribute('aria-pressed', data.favorito ? 'true' : 'false');
-                button.innerHTML = `<i class="ri-heart-${data.favorito ? 'fill' : 'line'}"></i> ${data.favorito ? 'Profissional favoritado' : 'Favoritar profissional'}`;
+                const key = data.favorito ? 'perfil-profissional-favoritado' : 'perfil-favoritar-profissional';
+                button.innerHTML = `<i class="ri-heart-${data.favorito ? 'fill' : 'line'}"></i> <span data-i18n="${key}">${t(key)}</span>`;
             } catch (_) {
-                window.alert('Não foi possível atualizar seu profissional favorito. Atualize a página e tente novamente.');
+                window.alert(t('acao-favorito-erro'));
             } finally {
                 button.disabled = false;
             }
@@ -47,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     nota: Number(fields.get('nota')),
                     comentario: fields.get('comentario') || '',
                 });
-                message.textContent = 'Avaliação enviada. Obrigado pelo feedback!';
+                message.textContent = t('acao-avaliacao-sucesso');
                 message.hidden = false;
                 window.setTimeout(() => window.location.reload(), 700);
             } catch (_) {
-                message.textContent = 'Não foi possível enviar a avaliação. Confira os dados e tente novamente.';
+                message.textContent = t('acao-avaliacao-erro');
                 message.hidden = false;
                 button.disabled = false;
             }
@@ -62,9 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', async () => {
             const acao = button.dataset.action;
             const confirmacoes = {
-                recusar: 'Deseja realmente recusar este agendamento?',
-                cancelar: 'Deseja realmente cancelar este agendamento?',
-                concluir: 'Confirmar que a limpeza foi concluída?',
+                recusar: t('acao-confirmar-recusa'),
+                cancelar: t('acao-confirmar-cancelamento'),
+                concluir: t('acao-confirmar-conclusao'),
             };
             if (confirmacoes[acao] && !window.confirm(confirmacoes[acao])) return;
             const card = button.closest('.visit-content');
@@ -77,10 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 if (message) {
                     const mensagens = {
-                        confirmar: 'Agendamento confirmado. Após realizar o serviço, confirme a conclusão.',
-                        concluir: 'Limpeza marcada como concluída. O cliente já pode avaliar o serviço.',
-                        recusar: 'Agendamento recusado.',
-                        cancelar: 'Agendamento cancelado.',
+                        confirmar: t('acao-mensagem-confirmado'),
+                        concluir: t('acao-mensagem-concluido'),
+                        recusar: t('acao-mensagem-recusado'),
+                        cancelar: t('acao-mensagem-cancelado'),
                     };
                     message.textContent = mensagens[acao];
                     message.hidden = false;
@@ -88,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.setTimeout(() => window.location.reload(), 700);
             } catch (_) {
                 if (message) {
-                    message.textContent = 'Não foi possível atualizar o agendamento. Recarregue a página e tente novamente.';
+                    message.textContent = t('acao-erro-agendamento');
                     message.hidden = false;
                 }
                 button.disabled = false;
@@ -98,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.client-cancel-booking').forEach((button) => {
         button.addEventListener('click', async () => {
-            if (!window.confirm('Deseja realmente cancelar este agendamento?')) return;
+            if (!window.confirm(t('acao-confirmar-cancelamento-cliente'))) return;
             const card = button.closest('.profile-order');
             const message = card?.querySelector('.profile-action-message');
             button.disabled = true;
@@ -108,13 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     acao: 'cancelar',
                 });
                 if (message) {
-                    message.textContent = 'Agendamento cancelado. Como o pagamento é simulado, nenhum estorno real é processado.';
+                    message.textContent = t('acao-cancelado-simulado');
                     message.hidden = false;
                 }
                 window.setTimeout(() => window.location.reload(), 900);
             } catch (_) {
                 if (message) {
-                    message.textContent = 'Não foi possível cancelar. O agendamento pode já ter começado ou sido atualizado.';
+                    message.textContent = t('acao-erro-cancelar');
                     message.hidden = false;
                 }
                 button.disabled = false;

@@ -5,13 +5,21 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    function lerPreferencia(chave) {
+        try { return localStorage.getItem(chave); } catch (_) { return null; }
+    }
+
+    function salvarPreferencia(chave, valor) {
+        try { localStorage.setItem(chave, valor); } catch (_) { /* preferência opcional */ }
+    }
+
     /* ================================================
        DARK MODE
        ================================================ */
     const themeToggle = document.getElementById('themeToggle');
     const html = document.documentElement;
 
-    let tema = localStorage.getItem('tema')
+    let tema = lerPreferencia('tema')
         || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
     html.setAttribute('data-theme', tema);
@@ -20,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     themeToggle?.addEventListener('click', () => {
         tema = tema === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', tema);
-        localStorage.setItem('tema', tema);
+        salvarPreferencia('tema', tema);
         atualizarIconeTema();
     });
 
@@ -60,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'nav-logout':        'Sair',
             'auth-carregando':   'Aguarde...',
             'auth-ok-cadastro':  'Conta criada com sucesso! Redirecionando...',
+            'auth-ok-cadastro-email-falhou': 'Conta criada, mas não foi possível enviar o e-mail agora. Use a opção de reenviar confirmação.',
             'auth-ok-login':     'Login realizado! Redirecionando...',
             'auth-ok-logout':    'Sessão encerrada.',
             'auth-erro-obrigatorios':       'Preencha todos os campos obrigatórios.',
@@ -87,6 +96,25 @@ document.addEventListener('DOMContentLoaded', function () {
             'lang-portugues':    'Português',
             'lang-ingles':       'English',
             'lang-espanhol':     'Español',
+            'demo-aviso-titulo': 'Projeto demonstrativo',
+            'demo-aviso-texto':  'Use apenas dados fictícios. Agendamentos e pagamentos não são reais e os dados podem ser apagados.',
+            'email-verificacao-titulo': 'Confirme seu e-mail',
+            'email-verificacao-confirmado-titulo': 'E-mail confirmado',
+            'email-verificacao-seguranca': 'Segurança da conta',
+            'email-verificacao-sessao': 'Sua sessão expirou. Atualize a página e tente novamente.',
+            'email-verificacao-email-invalido': 'Informe um e-mail válido para receber as instruções.',
+            'email-verificacao-sucesso': 'E-mail confirmado! Agora você já pode entrar na sua conta.',
+            'email-verificacao-expirado': 'Este link expirou ou já foi utilizado. Você pode solicitar outro abaixo.',
+            'email-verificacao-falha': 'Não foi possível confirmar o e-mail agora. Tente novamente.',
+            'email-verificacao-link-invalido': 'O link de confirmação é inválido. Você pode solicitar outro abaixo.',
+            'email-verificacao-reenviado': 'Se houver uma conta pendente para esse endereço, enviaremos um novo link de confirmação.',
+            'email-verificacao-debug': 'Abrir link de verificação (ambiente local)',
+            'email-verificacao-tipo': 'Tipo de conta',
+            'email-verificacao-cliente': 'Cliente',
+            'email-verificacao-profissional': 'Profissional',
+            'email-verificacao-email': 'Seu e-mail',
+            'email-verificacao-reenviar': 'Reenviar confirmação',
+            'email-verificacao-voltar': 'Voltar para o login',
             'footer-tagline':    'Especialistas em limpeza sustentável',
             'footer-links':      'Links Rápidos',
             'footer-inicio':     'Início',
@@ -111,6 +139,52 @@ document.addEventListener('DOMContentLoaded', function () {
             'footer-termos':     'Termos de Uso',
             'footer-voltar':     'Voltar para a Página Inicial',
             'footer-direitos2':  '© 2025 Projeto Lumis - Todos os direitos reservados',
+            'perfil-titulo': 'Lumis - Perfil', 'perfil-nascimento': 'Nascido em',
+            'perfil-stat-recorrentes': 'Profissionais recorrentes', 'perfil-visitas-vazio': 'Você ainda não possui visitas agendadas.',
+            'perfil-servicos-titulo': 'Meus serviços', 'perfil-servicos-ajuda': 'Aqui você acompanha o profissional designado, salva-o nos favoritos e avalia o atendimento depois que a limpeza for concluída.',
+            'perfil-servicos-vazio': 'Seus agendamentos e o profissional designado aparecerão aqui.', 'perfil-servicos-escolher': 'Escolher um serviço',
+            'perfil-profissional-designado': 'Profissional designado:', 'perfil-pagamento': 'Pagamento:',
+            'perfil-cancelar-agendamento': 'Cancelar agendamento', 'perfil-profissional-favoritado': 'Profissional favoritado',
+            'perfil-favoritar-profissional': 'Favoritar profissional', 'perfil-review-pergunta': 'Como foi o serviço?',
+            'perfil-review-escolher': 'Escolha uma nota', 'perfil-review-excelente': '★★★★★ — Excelente',
+            'perfil-review-muito-bom': '★★★★ — Muito bom', 'perfil-review-bom': '★★★ — Bom', 'perfil-review-regular': '★★ — Regular', 'perfil-review-ruim': '★ — Ruim',
+            'perfil-review-comentario': 'Comentário (opcional)', 'perfil-review-placeholder': 'Conte como foi sua experiência',
+            'perfil-review-enviar': 'Enviar avaliação', 'perfil-review-concluida': 'Serviço avaliado',
+            'perfil-review-disponibilidade': 'A avaliação ficará disponível depois que o profissional concluir o serviço.',
+            'perfil-atividade-vazia': 'Nenhuma atividade registrada ainda.', 'perfil-plano-titulo': 'Meu plano',
+            'perfil-plano-vazio': 'Você ainda não solicitou um plano.', 'perfil-plano-ver': 'Ver planos', 'perfil-plano-ultima': 'Última solicitação',
+            'perfil-plano-forma': 'Forma escolhida', 'perfil-plano-valor': 'Valor', 'perfil-plano-simulado': 'Este projeto registra a solicitação, mas não realiza cobrança real.',
+            'perfil-plano-consultar': 'Consultar planos', 'perfil-cal-anterior': 'Mês anterior', 'perfil-cal-proximo': 'Próximo mês',
+            'perfil-cal-dia-evento': 'Dia com visita agendada', 'perfil-pro-vazio': 'Você ainda não favoritou nenhum profissional.',
+            'perfil-sem-avaliacoes': 'Sem avaliações', 'perfil-nao-informado': 'Não informado',
+            'status-agenda-aguardando': 'Aguardando confirmação', 'status-agenda-confirmado': 'Confirmado',
+            'status-agenda-recusado': 'Recusado pelo profissional', 'status-agenda-cancelado-cliente': 'Cancelado pelo cliente',
+            'status-agenda-cancelado-profissional': 'Cancelado pelo profissional', 'status-agenda-concluido': 'Concluído',
+            'status-contratacao-agendado': 'Agendado', 'status-pagamento-aguardando': 'Aguardando pagamento',
+            'status-pagamento-pendente': 'Pendente', 'status-pagamento-pago': 'Pago',
+            'editar-perfil-titulo': 'Lumis - Editar perfil', 'editar-perfil-conta': 'Minha conta', 'editar-perfil-titulo-form': 'Editar perfil',
+            'editar-perfil-intro': 'Atualize os dados que aparecem no seu perfil.', 'editar-perfil-voltar': 'Voltar ao perfil',
+            'editar-perfil-foto': 'Foto do perfil', 'editar-perfil-foto-ajuda': 'Envie uma imagem JPG, PNG ou WebP de até 5 MB.',
+            'editar-perfil-escolher-foto': 'Escolher foto', 'editar-perfil-remover-foto': 'Remover foto atual', 'editar-perfil-dados': 'Dados pessoais',
+            'editar-perfil-obrigatorios': 'Campos marcados com * são obrigatórios.', 'editar-perfil-nome': 'Nome completo *', 'editar-perfil-email': 'E-mail *',
+            'editar-perfil-telefone': 'Telefone *', 'editar-perfil-nascimento': 'Data de nascimento', 'editar-perfil-regiao': 'Região de atuação *',
+            'editar-perfil-experiencia': 'Experiência', 'editar-perfil-valor': 'Valor mínimo (R$)', 'editar-perfil-cancelar': 'Cancelar', 'editar-perfil-salvar': 'Salvar alterações',
+            'editar-perfil-erro-email': 'Este e-mail já está sendo usado por outra conta.', 'editar-perfil-erro-foto': 'Não foi possível usar essa foto. Confira o formato e o limite de 5 MB.',
+            'editar-perfil-erro-dados': 'Confira os campos informados e tente novamente.', 'editar-perfil-sucesso': 'Perfil atualizado com sucesso.', 'editar-perfil-erro-conexao': 'Não foi possível conectar ao servidor. Tente novamente.',
+            'acao-favorito-erro': 'Não foi possível atualizar seu profissional favorito. Atualize a página e tente novamente.', 'acao-avaliacao-sucesso': 'Avaliação enviada. Obrigado pelo feedback!',
+            'acao-avaliacao-erro': 'Não foi possível enviar a avaliação. Confira os dados e tente novamente.', 'acao-confirmar-recusa': 'Deseja realmente recusar este agendamento?',
+            'acao-confirmar-cancelamento': 'Deseja realmente cancelar este agendamento?', 'acao-confirmar-conclusao': 'Confirmar que a limpeza foi concluída?',
+            'acao-mensagem-confirmado': 'Agendamento confirmado. Após realizar o serviço, confirme a conclusão.', 'acao-mensagem-concluido': 'Limpeza marcada como concluída. O cliente já pode avaliar o serviço.',
+            'acao-mensagem-recusado': 'Agendamento recusado.', 'acao-mensagem-cancelado': 'Agendamento cancelado.', 'acao-erro-agendamento': 'Não foi possível atualizar o agendamento. Recarregue a página e tente novamente.',
+            'acao-confirmar-cancelamento-cliente': 'Deseja realmente cancelar este agendamento?', 'acao-cancelado-simulado': 'Agendamento cancelado. Como o pagamento é simulado, nenhum estorno real é processado.',
+            'acao-erro-cancelar': 'Não foi possível cancelar. O agendamento pode já ter começado ou sido atualizado.',
+            'perfil-pro-verificado': 'Conta verificada', 'perfil-pro-contagem-avaliacoes': 'avaliações', 'perfil-pro-visitas-vazio': 'Novos agendamentos designados a você aparecerão aqui.',
+            'perfil-pro-pagina-titulo': 'Lumis - Perfil profissional',
+            'perfil-pro-para': 'para', 'perfil-pro-confirmar-agendamento': 'Confirmar agendamento', 'perfil-pro-recusar-agendamento': 'Recusar agendamento',
+            'perfil-pro-horario-iniciado': 'O horário deste agendamento já começou; entre em contato com o cliente para combinar os próximos passos.',
+            'perfil-pro-info-label-experiencia': 'Experiência', 'perfil-avaliacoes-vazio': 'Você ainda não avaliou nenhum serviço.',
+            'perfil-pro-confirmar-conclusao': 'Confirmar limpeza concluída', 'perfil-pro-status-confirmado-ajuda': 'Agendamento confirmado. Após realizar o serviço, confirme a conclusão aqui.',
+            'perfil-pro-atividade-vazia': 'Nenhuma atividade profissional registrada ainda.', 'perfil-pro-avaliacoes-vazio': 'Você ainda não recebeu avaliações.',
         },
         en: {
             'nav-inicio':        'Home',
@@ -126,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'nav-logout':        'Log out',
             'auth-carregando':   'Please wait...',
             'auth-ok-cadastro':  'Account created! Redirecting...',
+            'auth-ok-cadastro-email-falhou': 'Your account was created, but we could not send the email. Use the resend confirmation option.',
             'auth-ok-login':     'Signed in! Redirecting...',
             'auth-ok-logout':    'Session closed.',
             'auth-erro-obrigatorios':       'Please fill in all required fields.',
@@ -153,6 +228,25 @@ document.addEventListener('DOMContentLoaded', function () {
             'lang-portugues':    'Portuguese',
             'lang-ingles':       'English',
             'lang-espanhol':     'Spanish',
+            'demo-aviso-titulo': 'Demo project',
+            'demo-aviso-texto':  'Use fictional data only. Bookings and payments are not real, and data may be deleted.',
+            'email-verificacao-titulo': 'Confirm your email',
+            'email-verificacao-confirmado-titulo': 'Email confirmed',
+            'email-verificacao-seguranca': 'Account security',
+            'email-verificacao-sessao': 'Your session expired. Refresh the page and try again.',
+            'email-verificacao-email-invalido': 'Enter a valid email address to receive instructions.',
+            'email-verificacao-sucesso': 'Email confirmed! You can now sign in to your account.',
+            'email-verificacao-expirado': 'This link expired or was already used. You can request another below.',
+            'email-verificacao-falha': 'We could not confirm your email right now. Please try again.',
+            'email-verificacao-link-invalido': 'This confirmation link is invalid. You can request another below.',
+            'email-verificacao-reenviado': 'If there is a pending account for this address, we will send a new confirmation link.',
+            'email-verificacao-debug': 'Open verification link (local environment)',
+            'email-verificacao-tipo': 'Account type',
+            'email-verificacao-cliente': 'Customer',
+            'email-verificacao-profissional': 'Professional',
+            'email-verificacao-email': 'Your email',
+            'email-verificacao-reenviar': 'Resend confirmation',
+            'email-verificacao-voltar': 'Back to sign in',
             'footer-tagline':    'Sustainable cleaning specialists',
             'footer-links':      'Quick Links',
             'footer-inicio':     'Home',
@@ -177,6 +271,52 @@ document.addEventListener('DOMContentLoaded', function () {
             'footer-termos':     'Terms of Use',
             'footer-voltar':     'Back to Home',
             'footer-direitos2':  '© 2025 Lumis Project - All rights reserved',
+            'perfil-titulo': 'Lumis - Profile', 'perfil-nascimento': 'Born on',
+            'perfil-stat-recorrentes': 'Returning professionals', 'perfil-visitas-vazio': 'You have no scheduled visits yet.',
+            'perfil-servicos-titulo': 'My services', 'perfil-servicos-ajuda': 'Track your assigned professional, save them as a favorite, and review the service after cleaning is complete.',
+            'perfil-servicos-vazio': 'Your bookings and assigned professional will appear here.', 'perfil-servicos-escolher': 'Choose a service',
+            'perfil-profissional-designado': 'Assigned professional:', 'perfil-pagamento': 'Payment:',
+            'perfil-cancelar-agendamento': 'Cancel booking', 'perfil-profissional-favoritado': 'Professional favorited',
+            'perfil-favoritar-profissional': 'Favorite professional', 'perfil-review-pergunta': 'How was the service?',
+            'perfil-review-escolher': 'Choose a rating', 'perfil-review-excelente': '★★★★★ — Excellent',
+            'perfil-review-muito-bom': '★★★★ — Very good', 'perfil-review-bom': '★★★ — Good', 'perfil-review-regular': '★★ — Fair', 'perfil-review-ruim': '★ — Poor',
+            'perfil-review-comentario': 'Comment (optional)', 'perfil-review-placeholder': 'Tell us about your experience',
+            'perfil-review-enviar': 'Submit review', 'perfil-review-concluida': 'Service reviewed',
+            'perfil-review-disponibilidade': 'You can review the service after the professional marks it as complete.',
+            'perfil-atividade-vazia': 'No activity recorded yet.', 'perfil-plano-titulo': 'My plan',
+            'perfil-plano-vazio': 'You have not requested a plan yet.', 'perfil-plano-ver': 'View plans', 'perfil-plano-ultima': 'Latest request',
+            'perfil-plano-forma': 'Selected method', 'perfil-plano-valor': 'Price', 'perfil-plano-simulado': 'This project records the request but does not process real payments.',
+            'perfil-plano-consultar': 'Browse plans', 'perfil-cal-anterior': 'Previous month', 'perfil-cal-proximo': 'Next month',
+            'perfil-cal-dia-evento': 'Day with a scheduled visit', 'perfil-pro-vazio': 'You have not favorited any professionals yet.',
+            'perfil-sem-avaliacoes': 'No reviews', 'perfil-nao-informado': 'Not provided',
+            'status-agenda-aguardando': 'Awaiting confirmation', 'status-agenda-confirmado': 'Confirmed',
+            'status-agenda-recusado': 'Declined by professional', 'status-agenda-cancelado-cliente': 'Canceled by customer',
+            'status-agenda-cancelado-profissional': 'Canceled by professional', 'status-agenda-concluido': 'Completed',
+            'status-contratacao-agendado': 'Scheduled', 'status-pagamento-aguardando': 'Awaiting payment',
+            'status-pagamento-pendente': 'Pending', 'status-pagamento-pago': 'Paid',
+            'editar-perfil-titulo': 'Lumis - Edit profile', 'editar-perfil-conta': 'My account', 'editar-perfil-titulo-form': 'Edit profile',
+            'editar-perfil-intro': 'Update the information shown on your profile.', 'editar-perfil-voltar': 'Back to profile',
+            'editar-perfil-foto': 'Profile photo', 'editar-perfil-foto-ajuda': 'Upload a JPG, PNG, or WebP image up to 5 MB.',
+            'editar-perfil-escolher-foto': 'Choose photo', 'editar-perfil-remover-foto': 'Remove current photo', 'editar-perfil-dados': 'Personal information',
+            'editar-perfil-obrigatorios': 'Fields marked with * are required.', 'editar-perfil-nome': 'Full name *', 'editar-perfil-email': 'Email *',
+            'editar-perfil-telefone': 'Phone *', 'editar-perfil-nascimento': 'Date of birth', 'editar-perfil-regiao': 'Service area *',
+            'editar-perfil-experiencia': 'Experience', 'editar-perfil-valor': 'Minimum price (BRL)', 'editar-perfil-cancelar': 'Cancel', 'editar-perfil-salvar': 'Save changes',
+            'editar-perfil-erro-email': 'This email is already being used by another account.', 'editar-perfil-erro-foto': 'This photo could not be used. Check its format and the 5 MB size limit.',
+            'editar-perfil-erro-dados': 'Check the information and try again.', 'editar-perfil-sucesso': 'Profile updated successfully.', 'editar-perfil-erro-conexao': 'Could not connect to the server. Please try again.',
+            'acao-favorito-erro': 'Could not update your favorite professional. Refresh the page and try again.', 'acao-avaliacao-sucesso': 'Review submitted. Thank you for your feedback!',
+            'acao-avaliacao-erro': 'Could not submit the review. Check the information and try again.', 'acao-confirmar-recusa': 'Are you sure you want to decline this booking?',
+            'acao-confirmar-cancelamento': 'Are you sure you want to cancel this booking?', 'acao-confirmar-conclusao': 'Confirm that the cleaning is complete?',
+            'acao-mensagem-confirmado': 'Booking confirmed. After completing the service, confirm it here.', 'acao-mensagem-concluido': 'Cleaning marked as complete. The customer can now review the service.',
+            'acao-mensagem-recusado': 'Booking declined.', 'acao-mensagem-cancelado': 'Booking canceled.', 'acao-erro-agendamento': 'Could not update the booking. Reload the page and try again.',
+            'acao-confirmar-cancelamento-cliente': 'Are you sure you want to cancel this booking?', 'acao-cancelado-simulado': 'Booking canceled. Since payment is simulated, no real refund is processed.',
+            'acao-erro-cancelar': 'Could not cancel. The booking may have started or already been updated.',
+            'perfil-pro-verificado': 'Verified account', 'perfil-pro-contagem-avaliacoes': 'reviews', 'perfil-pro-visitas-vazio': 'New bookings assigned to you will appear here.',
+            'perfil-pro-pagina-titulo': 'Lumis - Professional profile',
+            'perfil-pro-para': 'for', 'perfil-pro-confirmar-agendamento': 'Confirm booking', 'perfil-pro-recusar-agendamento': 'Decline booking',
+            'perfil-pro-horario-iniciado': 'This booking time has started; contact the customer to agree on next steps.',
+            'perfil-pro-info-label-experiencia': 'Experience', 'perfil-avaliacoes-vazio': 'You have not reviewed any services yet.',
+            'perfil-pro-confirmar-conclusao': 'Confirm cleaning is complete', 'perfil-pro-status-confirmado-ajuda': 'Booking confirmed. After completing the service, confirm it here.',
+            'perfil-pro-atividade-vazia': 'No professional activity recorded yet.', 'perfil-pro-avaliacoes-vazio': 'You have not received any reviews yet.',
         },
         es: {
             'nav-inicio':        'Inicio',
@@ -192,6 +332,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'nav-logout':        'Cerrar sesión',
             'auth-carregando':   'Un momento...',
             'auth-ok-cadastro':  '¡Cuenta creada! Redirigiendo...',
+            'auth-ok-cadastro-email-falhou': 'La cuenta se creó, pero no pudimos enviar el correo. Usa la opción para reenviar la confirmación.',
             'auth-ok-login':     '¡Sesión iniciada! Redirigiendo...',
             'auth-ok-logout':    'Sesión cerrada.',
             'auth-erro-obrigatorios':       'Rellena todos los campos obligatorios.',
@@ -219,6 +360,25 @@ document.addEventListener('DOMContentLoaded', function () {
             'lang-portugues':    'Portugués',
             'lang-ingles':       'Inglés',
             'lang-espanhol':     'Español',
+            'demo-aviso-titulo': 'Proyecto de demostración',
+            'demo-aviso-texto':  'Use solo datos ficticios. Las reservas y los pagos no son reales, y los datos pueden eliminarse.',
+            'email-verificacao-titulo': 'Confirma tu correo electrónico',
+            'email-verificacao-confirmado-titulo': 'Correo confirmado',
+            'email-verificacao-seguranca': 'Seguridad de la cuenta',
+            'email-verificacao-sessao': 'Tu sesión ha caducado. Actualiza la página e inténtalo de nuevo.',
+            'email-verificacao-email-invalido': 'Introduce un correo válido para recibir las instrucciones.',
+            'email-verificacao-sucesso': '¡Correo confirmado! Ya puedes iniciar sesión.',
+            'email-verificacao-expirado': 'Este enlace ha caducado o ya se utilizó. Puedes solicitar otro abajo.',
+            'email-verificacao-falha': 'No se pudo confirmar el correo ahora. Inténtalo de nuevo.',
+            'email-verificacao-link-invalido': 'El enlace de confirmación no es válido. Puedes solicitar otro abajo.',
+            'email-verificacao-reenviado': 'Si existe una cuenta pendiente para esta dirección, enviaremos un nuevo enlace de confirmación.',
+            'email-verificacao-debug': 'Abrir enlace de verificación (entorno local)',
+            'email-verificacao-tipo': 'Tipo de cuenta',
+            'email-verificacao-cliente': 'Cliente',
+            'email-verificacao-profissional': 'Profesional',
+            'email-verificacao-email': 'Tu correo electrónico',
+            'email-verificacao-reenviar': 'Reenviar confirmación',
+            'email-verificacao-voltar': 'Volver al inicio de sesión',
             'footer-tagline':    'Especialistas en limpieza sostenible',
             'footer-links':      'Enlaces rápidos',
             'footer-inicio':     'Inicio',
@@ -243,6 +403,52 @@ document.addEventListener('DOMContentLoaded', function () {
             'footer-termos':     'Términos de Uso',
             'footer-voltar':     'Volver a la página de inicio',
             'footer-direitos2':  '© 2025 Proyecto Lumis - Todos los derechos reservados',
+            'perfil-titulo': 'Lumis - Perfil', 'perfil-nascimento': 'Nacido el',
+            'perfil-stat-recorrentes': 'Profesionales recurrentes', 'perfil-visitas-vazio': 'Aún no tienes visitas programadas.',
+            'perfil-servicos-titulo': 'Mis servicios', 'perfil-servicos-ajuda': 'Consulta al profesional asignado, guárdalo como favorito y evalúa el servicio cuando termine la limpieza.',
+            'perfil-servicos-vazio': 'Tus reservas y el profesional asignado aparecerán aquí.', 'perfil-servicos-escolher': 'Elegir un servicio',
+            'perfil-profissional-designado': 'Profesional asignado:', 'perfil-pagamento': 'Pago:',
+            'perfil-cancelar-agendamento': 'Cancelar reserva', 'perfil-profissional-favoritado': 'Profesional favorito',
+            'perfil-favoritar-profissional': 'Marcar profesional como favorito', 'perfil-review-pergunta': '¿Qué te pareció el servicio?',
+            'perfil-review-escolher': 'Elige una valoración', 'perfil-review-excelente': '★★★★★ — Excelente',
+            'perfil-review-muito-bom': '★★★★ — Muy bueno', 'perfil-review-bom': '★★★ — Bueno', 'perfil-review-regular': '★★ — Regular', 'perfil-review-ruim': '★ — Malo',
+            'perfil-review-comentario': 'Comentario (opcional)', 'perfil-review-placeholder': 'Cuéntanos cómo fue tu experiencia',
+            'perfil-review-enviar': 'Enviar reseña', 'perfil-review-concluida': 'Servicio evaluado',
+            'perfil-review-disponibilidade': 'Podrás evaluar el servicio cuando el profesional lo marque como finalizado.',
+            'perfil-atividade-vazia': 'Aún no hay actividad registrada.', 'perfil-plano-titulo': 'Mi plan',
+            'perfil-plano-vazio': 'Aún no has solicitado un plan.', 'perfil-plano-ver': 'Ver planes', 'perfil-plano-ultima': 'Última solicitud',
+            'perfil-plano-forma': 'Método elegido', 'perfil-plano-valor': 'Precio', 'perfil-plano-simulado': 'Este proyecto registra la solicitud, pero no procesa pagos reales.',
+            'perfil-plano-consultar': 'Consultar planes', 'perfil-cal-anterior': 'Mes anterior', 'perfil-cal-proximo': 'Próximo mes',
+            'perfil-cal-dia-evento': 'Día con visita programada', 'perfil-pro-vazio': 'Aún no has marcado profesionales como favoritos.',
+            'perfil-sem-avaliacoes': 'Sin reseñas', 'perfil-nao-informado': 'No informado',
+            'status-agenda-aguardando': 'Pendiente de confirmación', 'status-agenda-confirmado': 'Confirmado',
+            'status-agenda-recusado': 'Rechazado por el profesional', 'status-agenda-cancelado-cliente': 'Cancelado por el cliente',
+            'status-agenda-cancelado-profissional': 'Cancelado por el profesional', 'status-agenda-concluido': 'Finalizado',
+            'status-contratacao-agendado': 'Programado', 'status-pagamento-aguardando': 'Pendiente de pago',
+            'status-pagamento-pendente': 'Pendiente', 'status-pagamento-pago': 'Pagado',
+            'editar-perfil-titulo': 'Lumis - Editar perfil', 'editar-perfil-conta': 'Mi cuenta', 'editar-perfil-titulo-form': 'Editar perfil',
+            'editar-perfil-intro': 'Actualiza la información que aparece en tu perfil.', 'editar-perfil-voltar': 'Volver al perfil',
+            'editar-perfil-foto': 'Foto del perfil', 'editar-perfil-foto-ajuda': 'Sube una imagen JPG, PNG o WebP de hasta 5 MB.',
+            'editar-perfil-escolher-foto': 'Elegir foto', 'editar-perfil-remover-foto': 'Eliminar foto actual', 'editar-perfil-dados': 'Datos personales',
+            'editar-perfil-obrigatorios': 'Los campos marcados con * son obligatorios.', 'editar-perfil-nome': 'Nombre completo *', 'editar-perfil-email': 'Correo electrónico *',
+            'editar-perfil-telefone': 'Teléfono *', 'editar-perfil-nascimento': 'Fecha de nacimiento', 'editar-perfil-regiao': 'Zona de trabajo *',
+            'editar-perfil-experiencia': 'Experiencia', 'editar-perfil-valor': 'Precio mínimo (BRL)', 'editar-perfil-cancelar': 'Cancelar', 'editar-perfil-salvar': 'Guardar cambios',
+            'editar-perfil-erro-email': 'Otra cuenta ya está usando este correo electrónico.', 'editar-perfil-erro-foto': 'No se pudo usar esta foto. Revisa el formato y el límite de 5 MB.',
+            'editar-perfil-erro-dados': 'Revisa los datos e inténtalo de nuevo.', 'editar-perfil-sucesso': 'Perfil actualizado correctamente.', 'editar-perfil-erro-conexao': 'No se pudo conectar con el servidor. Inténtalo de nuevo.',
+            'acao-favorito-erro': 'No se pudo actualizar tu profesional favorito. Actualiza la página e inténtalo de nuevo.', 'acao-avaliacao-sucesso': 'Reseña enviada. ¡Gracias por tus comentarios!',
+            'acao-avaliacao-erro': 'No se pudo enviar la reseña. Revisa los datos e inténtalo de nuevo.', 'acao-confirmar-recusa': '¿Quieres rechazar esta reserva?',
+            'acao-confirmar-cancelamento': '¿Quieres cancelar esta reserva?', 'acao-confirmar-conclusao': '¿Confirmas que la limpieza ha terminado?',
+            'acao-mensagem-confirmado': 'Reserva confirmada. Cuando termines el servicio, confirma su finalización aquí.', 'acao-mensagem-concluido': 'Limpieza marcada como finalizada. El cliente ya puede evaluar el servicio.',
+            'acao-mensagem-recusado': 'Reserva rechazada.', 'acao-mensagem-cancelado': 'Reserva cancelada.', 'acao-erro-agendamento': 'No se pudo actualizar la reserva. Recarga la página e inténtalo de nuevo.',
+            'acao-confirmar-cancelamento-cliente': '¿Quieres cancelar esta reserva?', 'acao-cancelado-simulado': 'Reserva cancelada. Como el pago es simulado, no se procesa ningún reembolso real.',
+            'acao-erro-cancelar': 'No se pudo cancelar. La reserva puede haber comenzado o ya haberse actualizado.',
+            'perfil-pro-verificado': 'Cuenta verificada', 'perfil-pro-contagem-avaliacoes': 'reseñas', 'perfil-pro-visitas-vazio': 'Las nuevas reservas asignadas aparecerán aquí.',
+            'perfil-pro-pagina-titulo': 'Lumis - Perfil profesional',
+            'perfil-pro-para': 'para', 'perfil-pro-confirmar-agendamento': 'Confirmar reserva', 'perfil-pro-recusar-agendamento': 'Rechazar reserva',
+            'perfil-pro-horario-iniciado': 'La hora de esta reserva ya comenzó; contacta al cliente para acordar los próximos pasos.',
+            'perfil-pro-info-label-experiencia': 'Experiencia', 'perfil-avaliacoes-vazio': 'Aún no has evaluado ningún servicio.',
+            'perfil-pro-confirmar-conclusao': 'Confirmar limpieza finalizada', 'perfil-pro-status-confirmado-ajuda': 'Reserva confirmada. Cuando termines el servicio, confirma su finalización aquí.',
+            'perfil-pro-atividade-vazia': 'Aún no hay actividad profesional registrada.', 'perfil-pro-avaliacoes-vazio': 'Aún no has recibido reseñas.',
         },
     };
 
@@ -2592,6 +2798,14 @@ document.addEventListener('DOMContentLoaded', function () {
         "politica":         {
             "pt": {
                 "politica-titulo": "Política de Privacidade - Projeto Lumis",
+                "politica-demo-aviso-titulo": "Aviso: protótipo acadêmico",
+                "politica-demo-aviso": "Esta versão pública é uma demonstração escolar, não um serviço comercial. Não informe dados pessoais reais. Os dados enviados aos formulários podem ser armazenados no banco de demonstração e apagados sem aviso.",
+                "politica-demo-dados-titulo": "Dados usados na demonstração",
+                "politica-demo-dados": "Para demonstrar cadastro, perfil e agendamento, o sistema pode registrar nomes, e-mails, telefones, endereços, fotos de perfil e informações de teste. Prefira sempre valores fictícios.",
+                "politica-demo-armazenamento-titulo": "Armazenamento e segurança",
+                "politica-demo-armazenamento": "O banco e os arquivos enviados pertencem ao ambiente de demonstração do projeto. Este protótipo não passou por auditoria de segurança para uso comercial; não o utilize para guardar informações reais ou sensíveis.",
+                "politica-demo-finalidade-titulo": "Finalidade",
+                "politica-demo-finalidade": "As informações fictícias servem apenas para apresentar e testar o trabalho escolar. Não há cobrança nem prestação real de serviços nesta demonstração.",
                 "politica-atualizacao": "Última atualização: 15 de Setembro de 2025",
                 "politica-introducao-texto": "O Projeto Lumis valoriza a privacidade e a segurança dos dados de seus usuários. Esta Política de Privacidade explica como coletamos, usamos, compartilhamos e protegemos suas informações pessoais.",
                 "politica-coleta-titulo": "1. Coleta e Uso de Informações Pessoais",
@@ -2648,6 +2862,14 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             "en": {
                 "politica-titulo": "Privacy Policy - Lumis Project",
+                "politica-demo-aviso-titulo": "Notice: school project prototype",
+                "politica-demo-aviso": "This public version is a school project demo, not a commercial service. Do not enter real personal information. Data submitted through forms may be stored in the demo database and deleted without notice.",
+                "politica-demo-dados-titulo": "Data used in this demo",
+                "politica-demo-dados": "To demonstrate registration, profiles and bookings, the system may store names, emails, phone numbers, addresses, profile photos and test information. Please use fictional values only.",
+                "politica-demo-armazenamento-titulo": "Storage and security",
+                "politica-demo-armazenamento": "The database and uploaded files belong to the project's demo environment. This prototype has not undergone a security audit for commercial use; do not use it to store real or sensitive information.",
+                "politica-demo-finalidade-titulo": "Purpose",
+                "politica-demo-finalidade": "Fictional information is used only to present and test the school project. This demo does not process payments or provide real services.",
                 "politica-atualizacao": "Last updated: September 15, 2025",
                 "politica-introducao-texto": "The Lumis Project values the privacy and security of its users' data. This Privacy Policy explains how we collect, use, share and protect your personal information.",
                 "politica-coleta-titulo": "1. Collection and Use of Personal Information",
@@ -2704,6 +2926,14 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             "es": {
                 "politica-titulo": "Política de Privacidad - Proyecto Lumis",
+                "politica-demo-aviso-titulo": "Aviso: prototipo académico",
+                "politica-demo-aviso": "Esta versión pública es una demostración escolar, no un servicio comercial. No introduzca datos personales reales. Los datos enviados mediante formularios pueden guardarse en la base de datos de demostración y eliminarse sin previo aviso.",
+                "politica-demo-dados-titulo": "Datos usados en la demostración",
+                "politica-demo-dados": "Para mostrar el registro, los perfiles y las reservas, el sistema puede guardar nombres, correos electrónicos, teléfonos, direcciones, fotos de perfil e información de prueba. Use únicamente datos ficticios.",
+                "politica-demo-armazenamento-titulo": "Almacenamiento y seguridad",
+                "politica-demo-armazenamento": "La base de datos y los archivos enviados pertenecen al entorno de demostración del proyecto. Este prototipo no ha pasado por una auditoría de seguridad para uso comercial; no lo utilice para guardar información real o sensible.",
+                "politica-demo-finalidade-titulo": "Finalidad",
+                "politica-demo-finalidade": "La información ficticia se utiliza únicamente para presentar y probar el trabajo escolar. Esta demostración no procesa pagos ni presta servicios reales.",
                 "politica-atualizacao": "Última actualización: 15 de septiembre de 2025",
                 "politica-introducao-texto": "El Proyecto Lumis valora la privacidad y la seguridad de los datos de sus usuarios. Esta Política de Privacidad explica cómo recopilamos, usamos, compartimos y protegemos su información personal.",
                 "politica-coleta-titulo": "1. Recopilación y Uso de Información Personal",
@@ -2762,6 +2992,14 @@ document.addEventListener('DOMContentLoaded', function () {
         "termo":         {
             "pt": {
                 "termo-titulo": "Termos de Uso - Projeto Lumis",
+                "termo-demo-aviso-titulo": "Aviso: protótipo acadêmico",
+                "termo-demo-aviso": "A Lumis é um projeto escolar de demonstração. Não representa uma empresa de limpeza em operação nem oferece serviços reais.",
+                "termo-demo-uso-titulo": "Uso da demonstração",
+                "termo-demo-uso": "Use somente dados fictícios. Agendamentos, profissionais e avaliações são apresentados para demonstrar funcionalidades e podem ser reiniciados ou removidos.",
+                "termo-demo-pagamento-titulo": "Pagamentos",
+                "termo-demo-pagamento": "As opções de pagamento são simuladas. Nenhuma cobrança, assinatura, contratação ou estorno real é processado.",
+                "termo-demo-limites-titulo": "Limites do projeto",
+                "termo-demo-limites": "Este protótipo não deve ser usado para contratar serviços. Esta página é um aviso sobre a demonstração acadêmica, não um contrato para operação comercial.",
                 "termo-aceitacao-titulo": "1. Aceitação dos Termos",
                 "termo-aceitacao-texto": "Ao acessar e utilizar a plataforma Lumis, você concorda em cumprir e ficar vinculado a estes Termos de Uso. Se você não concordar com qualquer parte destes termos, não poderá utilizar nossos serviços.",
                 "termo-cadastro-titulo": "2. Cadastro de Usuários",
@@ -2799,6 +3037,14 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             "en": {
                 "termo-titulo": "Terms of Use - Lumis Project",
+                "termo-demo-aviso-titulo": "Notice: school project prototype",
+                "termo-demo-aviso": "Lumis is a school project demo. It does not represent an operating cleaning company and does not offer real services.",
+                "termo-demo-uso-titulo": "Using the demo",
+                "termo-demo-uso": "Use fictional data only. Bookings, professionals and reviews are displayed to demonstrate features and may be reset or removed.",
+                "termo-demo-pagamento-titulo": "Payments",
+                "termo-demo-pagamento": "Payment options are simulated. No real charge, subscription, booking or refund is processed.",
+                "termo-demo-limites-titulo": "Project limitations",
+                "termo-demo-limites": "Do not use this prototype to book cleaning services. This page is a notice about an academic demo, not a contract for commercial operations.",
                 "termo-aceitacao-titulo": "1. Acceptance of the Terms",
                 "termo-aceitacao-texto": "By accessing and using the Lumis platform, you agree to comply with and be bound by these Terms of Use. If you do not agree with any part of these terms, you may not use our services.",
                 "termo-cadastro-titulo": "2. User Registration",
@@ -2836,6 +3082,14 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             "es": {
                 "termo-titulo": "Términos de Uso - Proyecto Lumis",
+                "termo-demo-aviso-titulo": "Aviso: prototipo académico",
+                "termo-demo-aviso": "Lumis es una demostración de un proyecto escolar. No representa una empresa de limpieza en funcionamiento ni ofrece servicios reales.",
+                "termo-demo-uso-titulo": "Uso de la demostración",
+                "termo-demo-uso": "Use únicamente datos ficticios. Las reservas, los profesionales y las reseñas se muestran para demostrar funciones y pueden reiniciarse o eliminarse.",
+                "termo-demo-pagamento-titulo": "Pagos",
+                "termo-demo-pagamento": "Las opciones de pago son simuladas. No se procesa ningún cobro, suscripción, contratación ni reembolso real.",
+                "termo-demo-limites-titulo": "Limitaciones del proyecto",
+                "termo-demo-limites": "No utilice este prototipo para contratar servicios de limpieza. Esta página es un aviso sobre una demostración académica, no un contrato para una operación comercial.",
                 "termo-aceitacao-titulo": "1. Aceptación de los Términos",
                 "termo-aceitacao-texto": "Al acceder y utilizar la plataforma Lumis, usted acepta cumplir y quedar vinculado a estos Términos de Uso. Si no está de acuerdo con cualquier parte de estos términos, no podrá utilizar nuestros servicios.",
                 "termo-cadastro-titulo": "2. Registro de Usuarios",
@@ -2885,6 +3139,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const bandeiras = { pt: '🇧🇷', en: '🇺🇸', es: '🇪🇸' };
 
     function aplicarIdioma(lang) {
+        if (!Object.prototype.hasOwnProperty.call(traducoes, lang)) lang = 'pt';
         idiomaAtual = lang;
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const chave = el.getAttribute('data-i18n');
@@ -2924,8 +3179,9 @@ document.addEventListener('DOMContentLoaded', function () {
             opt.classList.toggle('ativo', opt.getAttribute('data-lang') === lang);
         });
 
-        localStorage.setItem('idioma', lang);
+        salvarPreferencia('idioma', lang);
         langDropdown?.classList.remove('open');
+        document.dispatchEvent(new CustomEvent('lumis:language-changed', { detail: { language: lang } }));
     }
 
     // Abre/fecha dropdown
@@ -2956,7 +3212,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Carrega idioma salvo
-    const idiomaSalvo = localStorage.getItem('idioma') || 'pt';
+    const idiomaSalvo = lerPreferencia('idioma') || 'pt';
     let idiomaAtual = idiomaSalvo;
     aplicarIdioma(idiomaAtual);
 

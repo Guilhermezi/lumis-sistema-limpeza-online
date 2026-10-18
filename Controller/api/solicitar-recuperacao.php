@@ -2,6 +2,7 @@
 // POST /Controller/api/solicitar-recuperacao.php
 // Gera um token descartável de recuperação sem revelar se o e-mail existe.
 require __DIR__ . '/_bootstrap.php';
+require_once dirname(__DIR__, 2) . '/Model/email.php';
 exigirMetodo('POST');
 exigirCsrf();
 
@@ -56,7 +57,7 @@ try {
             ]);
 
             // APP_URL é preferível em produção; a montagem pela requisição é só fallback local.
-            $base = rtrim((string) getenv('APP_URL'), '/');
+            $base = rtrim((string) configuracaoLumis('APP_URL', ''), '/');
             if ($base === ''){
                 $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
                     || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
@@ -67,16 +68,15 @@ try {
 
             $url = $base . '/View/pages/auth/redefinir-senha.php?tipo=' . rawurlencode($dados['tipo'])
                 . '&token=' . rawurlencode($token);
-            $remetente = getenv('MAIL_FROM') ?: 'no-reply@lumis.local';
             $assunto = 'Redefinição de senha - Lumis';
             $mensagem = "Olá, {$usuario['nome']}.\n\nUse o link abaixo para redefinir sua senha. "
                 . "Ele expira em 30 minutos e só pode ser usado uma vez.\n\n{$url}\n\n"
                 . "Se você não fez esta solicitação, ignore esta mensagem.";
-            $enviado = @mail($usuario['email'], $assunto, $mensagem, "From: Lumis <{$remetente}>\r\nContent-Type: text/plain; charset=UTF-8");
+            $enviado = enviarEmailLumis((string) $usuario['email'], (string) $usuario['nome'], $assunto, $mensagem);
             if (!$enviado) error_log('api: não foi possível enviar e-mail de recuperação para o usuário ' . $usuario['id']);
 
             // Facilita o teste local sem expor o token quando APP_ENV é production.
-            if ((getenv('APP_ENV') ?: 'production') === 'development'){
+            if (configuracaoLumis('APP_ENV', 'production') === 'development'){
                 $resposta['debug_url'] = $url;
             }
         }

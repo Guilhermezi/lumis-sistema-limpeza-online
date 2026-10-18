@@ -3,6 +3,7 @@ require_once dirname(__DIR__, 3) . '/Controller/api/_bootstrap.php';
 require_once dirname(__DIR__, 3) . '/Model/email_verificacao.php';
 
 $mensagem = '';
+$mensagemI18n = '';
 $status = 'info';
 $debugUrl = null;
 
@@ -10,6 +11,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $csrfRecebido = $_POST['_csrf'] ?? '';
     if (!is_string($csrfRecebido) || !hash_equals(tokenCsrf(), $csrfRecebido)) {
         $mensagem = 'Sua sessão expirou. Atualize a página e tente novamente.';
+        $mensagemI18n = 'email-verificacao-sessao';
         $status = 'erro';
     } else {
         $tipo = (string) ($_POST['tipo'] ?? '');
@@ -17,6 +19,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         $cfg = configTipo($tipo);
         if (!$cfg || !filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 100) {
             $mensagem = 'Informe um e-mail válido para receber as instruções.';
+            $mensagemI18n = 'email-verificacao-email-invalido';
             $status = 'erro';
         } else {
             $stmt = $pdo->prepare(
@@ -65,30 +68,36 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                 )->execute(['tipo' => $tipo, 'usuario_id' => $verificacao['usuario_id']]);
                 $pdo->commit();
                 $mensagem = 'E-mail confirmado! Agora você já pode entrar na sua conta.';
+                $mensagemI18n = 'email-verificacao-sucesso';
                 $status = 'sucesso';
             } else {
                 $pdo->rollBack();
                 $mensagem = 'Este link expirou ou já foi utilizado. Você pode solicitar outro abaixo.';
+                $mensagemI18n = 'email-verificacao-expirado';
                 $status = 'erro';
             }
         } catch (Throwable $e) {
             if ($pdo->inTransaction()) $pdo->rollBack();
             error_log('email-verificacao: ' . $e->getMessage());
             $mensagem = 'Não foi possível confirmar o e-mail agora. Tente novamente.';
+            $mensagemI18n = 'email-verificacao-falha';
             $status = 'erro';
         }
     } else {
         $mensagem = 'O link de confirmação é inválido. Você pode solicitar outro abaixo.';
+        $mensagemI18n = 'email-verificacao-link-invalido';
         $status = 'erro';
     }
 } elseif (isset($_GET['reenviado'])) {
     $mensagem = $_SESSION['verificacao_email_flash'] ?? 'Se houver uma conta pendente, enviaremos um novo link.';
+    $mensagemI18n = 'email-verificacao-reenviado';
     unset($_SESSION['verificacao_email_flash']);
     $status = 'info';
 }
 
 if ($mensagem === '' && isset($_SESSION['verificacao_email_flash'])) {
     $mensagem = (string) $_SESSION['verificacao_email_flash'];
+    $mensagemI18n = 'email-verificacao-reenviado';
     unset($_SESSION['verificacao_email_flash']);
     $status = 'info';
 }
@@ -107,15 +116,21 @@ $csrf = tokenCsrf();
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/verificar-email.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <title>Confirme seu e-mail - Lumis</title>
+    <title data-i18n="email-verificacao-titulo">Confirme seu e-mail - Lumis</title>
 </head>
-<body>
+<body data-page="verificar-email">
+    <?php
+    $base = '../';
+    $tituloI18n = '';
+    $titulo = '';
+    include __DIR__ . '/../../partials/header-minimo.php';
+    ?>
     <main class="email-verification-page">
         <section class="email-verification-card" aria-labelledby="verificationTitle">
             <span class="email-verification-icon <?= htmlspecialchars($status) ?>"><i class="ri-mail-check-line"></i></span>
-            <p class="email-verification-eyebrow">Segurança da conta</p>
-            <h1 id="verificationTitle"><?= $status === 'sucesso' ? 'E-mail confirmado' : 'Confirme seu e-mail' ?></h1>
-            <p class="email-verification-copy">
+            <p class="email-verification-eyebrow" data-i18n="email-verificacao-seguranca">Segurança da conta</p>
+            <h1 id="verificationTitle" data-i18n="<?= $status === 'sucesso' ? 'email-verificacao-confirmado-titulo' : 'email-verificacao-titulo' ?>"><?= $status === 'sucesso' ? 'E-mail confirmado' : 'Confirme seu e-mail' ?></h1>
+            <p class="email-verification-copy"<?= $mensagemI18n ? ' data-i18n="' . htmlspecialchars($mensagemI18n, ENT_QUOTES, 'UTF-8') . '"' : '' ?>>
                 <?= $mensagem !== ''
                     ? htmlspecialchars($mensagem)
                     : 'Sua conta só poderá ser acessada depois da confirmação. Confira sua caixa de entrada e a pasta de spam.' ?>
@@ -123,26 +138,27 @@ $csrf = tokenCsrf();
 
             <?php if ($debugUrl): ?>
                 <a class="email-verification-debug" href="<?= htmlspecialchars($debugUrl, ENT_QUOTES, 'UTF-8') ?>">
-                    Abrir link de verificação (ambiente local)
+                    <span data-i18n="email-verificacao-debug">Abrir link de verificação (ambiente local)</span>
                 </a>
             <?php endif; ?>
 
             <?php if ($status !== 'sucesso'): ?>
                 <form class="email-resend-form" method="post" action="verificar-email.php">
                     <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES, 'UTF-8') ?>">
-                    <label for="verificationType">Tipo de conta</label>
+                    <label for="verificationType" data-i18n="email-verificacao-tipo">Tipo de conta</label>
                     <select id="verificationType" name="tipo" required>
-                        <option value="cliente">Cliente</option>
-                        <option value="profissional">Profissional</option>
+                        <option value="cliente" data-i18n="email-verificacao-cliente">Cliente</option>
+                        <option value="profissional" data-i18n="email-verificacao-profissional">Profissional</option>
                     </select>
-                    <label for="verificationEmail">Seu e-mail</label>
+                    <label for="verificationEmail" data-i18n="email-verificacao-email">Seu e-mail</label>
                     <input id="verificationEmail" type="email" name="email" maxlength="100" autocomplete="email" required>
-                    <button type="submit" class="btn-primary">Reenviar confirmação</button>
+                    <button type="submit" class="btn-primary" data-i18n="email-verificacao-reenviar">Reenviar confirmação</button>
                 </form>
             <?php endif; ?>
 
-            <a class="email-verification-login" href="login.php">Voltar para o login</a>
+            <a class="email-verification-login" href="login.php" data-i18n="email-verificacao-voltar">Voltar para o login</a>
         </section>
     </main>
+    <script src="../../../Controller/tema-idioma.js"></script>
 </body>
 </html>

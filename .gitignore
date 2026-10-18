@@ -1,0 +1,13 @@
+# Configuração e segredos locais
+.env
+.env.*
+!.env.example
+/Model/config.local.php
+
+# Dependências PHP instaladas localmente
+/vendor/
+
+# Logs e arquivos enviados por usuários
+*.log
+/View/uploads/avatars/*
+!/View/uploads/avatars/.gitkeep

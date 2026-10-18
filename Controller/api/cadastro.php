@@ -36,6 +36,7 @@ try {
 
     responder([
         'ok'       => true,
+        'email_enviado' => (bool) $verificacao['enviado'],
         'redirect' => 'verificar-email.php',
         'mensagem' => 'Conta criada. Confirme seu e-mail para ativá-la.',
     ]);

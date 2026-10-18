@@ -130,6 +130,29 @@ header {
     transition: background-color 250ms ease;
 }
 
+.demo-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .25rem .55rem;
+    min-height: 38px;
+    padding: .45rem 1rem;
+    box-sizing: border-box;
+    color: var(--cor-texto, #263238);
+    background: #fff3cd;
+    border-bottom: 1px solid #f0d98b;
+    font-size: .82rem;
+    line-height: 1.4;
+    text-align: center;
+}
+
+[data-theme="dark"] .demo-notice {
+    color: #fff5d6;
+    background: #51421e;
+    border-bottom-color: #76602a;
+}
+
 /*==========LOGO============*/
 #logo-headers {
     display: flex;

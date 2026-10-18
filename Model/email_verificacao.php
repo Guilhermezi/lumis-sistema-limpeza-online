@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/email.php';
 
 /**
  * Cria uma confirmação de e-mail de uso único e tenta enviá-la.
@@ -41,26 +42,17 @@ function criarVerificacaoEmail(PDO $pdo, string $tipo, array $usuario, bool $res
         'token_hash' => hash('sha256', $token),
     ]);
 
-    $remetente = getenv('MAIL_FROM') ?: 'no-reply@lumis.local';
-    if (!filter_var($remetente, FILTER_VALIDATE_EMAIL)) {
-        $remetente = 'no-reply@lumis.local';
-    }
     $nome = trim(str_replace(["\r", "\n"], '', (string) ($usuario['nome'] ?? '')));
     $assunto = 'Confirme seu e-mail - Lumis';
     $mensagem = "Olá, {$nome}.\n\nConfirme seu endereço de e-mail acessando o link abaixo. "
         . "O link expira em 24 horas e só pode ser usado uma vez.\n\n{$url}\n\n"
         . "Se você não criou uma conta na Lumis, ignore esta mensagem.";
-    $enviado = @mail(
-        (string) $usuario['email'],
-        $assunto,
-        $mensagem,
-        "From: Lumis <{$remetente}>\r\nContent-Type: text/plain; charset=UTF-8"
-    );
+    $enviado = enviarEmailLumis((string) $usuario['email'], $nome, $assunto, $mensagem);
     if (!$enviado) {
         error_log('email-verificacao: falha no envio para usuario ' . (int) $usuario['id']);
     }
 
-    $development = (getenv('APP_ENV') ?: 'production') === 'development';
+    $development = configuracaoLumis('APP_ENV', 'production') === 'development';
     return [
         'enviado' => $enviado,
         'limitado' => false,
@@ -70,7 +62,7 @@ function criarVerificacaoEmail(PDO $pdo, string $tipo, array $usuario, bool $res
 
 function urlBaseAplicacao(): string
 {
-    $base = rtrim((string) getenv('APP_URL'), '/');
+    $base = rtrim((string) configuracaoLumis('APP_URL', ''), '/');
     if ($base !== '') {
         return $base;
     }

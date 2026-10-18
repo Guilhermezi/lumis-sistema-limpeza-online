@@ -264,8 +264,8 @@ function manterSessaoAtiva(): bool{
     $agora = time();
     $iniciada = (int) ($_SESSION['auth_iniciada_em'] ?? $agora);
     $ultima = (int) ($_SESSION['auth_ultima_atividade'] ?? $agora);
-    $limiteInativo = (int) (getenv('SESSION_IDLE_SECONDS') ?: 1800);
-    $limiteAbsoluto = (int) (getenv('SESSION_MAX_SECONDS') ?: 28800);
+    $limiteInativo = (int) configuracaoLumis('SESSION_IDLE_SECONDS', 1800);
+    $limiteAbsoluto = (int) configuracaoLumis('SESSION_MAX_SECONDS', 28800);
 
     if (($agora - $ultima) > $limiteInativo || ($agora - $iniciada) > $limiteAbsoluto){
         $_SESSION = [];

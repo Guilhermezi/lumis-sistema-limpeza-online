@@ -1,0 +1,64 @@
+Environment secrets
+This environment has no secrets.
+
+Repository secretsname: Deploy to InfinityFree
+
+on:
+  push:
+    branches:
+      - MVC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-infinityfree
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Validate and upload site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+
+      - name: Install production dependencies
+        run: composer install --no-dev --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+      - name: Check PHP syntax
+        run: |
+          find . -path './.git' -prune -o -path './vendor' -prune -o -name '*.php' -print0 \
+            | xargs -0 -r -n1 php -l
+
+      - name: Deploy files over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ftpupload.net
+          protocol: ftps
+          port: 21
+          username: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
+          password: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: /htdocs/
+          exclude: |
+            **/.git*/**
+            **/.github/**
+            **/.env*
+            **/config.local.php
+            **/*.sql
+            README.md
+            LICENSES/**
+            .agents/**
+            .aws/**
+            .codex/**
+            .idea/**
+            .vscode/**
