@@ -1,0 +1,536 @@
+/* ============================================
+   ENTRAR.CSS - Estilos especificos da pagina Cadastro
+   Depende de: ../style.css (Design System global)
+   ============================================ */
+
+.auth-page {
+    overflow-x: hidden;
+}
+
+.section-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/*================= SECAO AUTH =================*/
+.auth-section {
+    padding: 2rem 0 4rem;
+    background: var(--cor-fundo);
+}
+
+/*========= Card principal =========*/
+.auth-card {
+    background-color: var(--white);
+    border-radius: 28px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    margin: 0 auto;
+
+    /* Grid em vez de position:absolute.
+       Com os dois formulários em position:absolute, nenhum deles contava na
+       altura do pai, então o card ficava travado em 520px e o overflow:hidden
+       cortava o botão Continuar — não dava nem para rolar.
+
+       No grid, os dois forms caem na MESMA célula (grid-area: 1/1) e ficam
+       empilhados. O card passa a ter a altura do mais alto dos dois, e cada
+       form é escondido com opacity, sem sair do lugar. */
+    display: grid;
+    min-height: 520px;
+}
+
+.auth-card a {
+    color: var(--cor-texto);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/*========= Formularios =========*/
+.auth-card form {
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem 2.5rem;
+    /* height:100% tirado: no grid a célula já dá a altura, e forçar 100%
+       fazia o conteúdo estourar sem poder crescer */
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Os dois formulários dividem a mesma célula para o card assumir a altura do
+   maior. No desktop cada um ocupa metade: login à esquerda e cadastro à
+   direita, acompanhando fisicamente o movimento do painel colorido. */
+.form-container {
+    grid-area: 1 / 1;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s;
+}
+
+/* Esconde sem tirar do grid: visibility tira do fluxo visual e impede
+   clicar no formulário invisible, sem quebrar a animação. */
+.sign-in {
+    justify-self: start;
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+.auth-card.active .sign-in {
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+}
+
+.sign-up {
+    justify-self: end;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+}
+
+.auth-card.active .sign-up {
+    opacity: 1;
+    visibility: visible;
+    z-index: 5;
+}
+
+.auth-card h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+/*========= Campos =========*/
+.auth-field {
+    width: 100%;
+    margin-bottom: 0.9rem;
+}
+
+.auth-field label {
+    display: block;
+    font-family: var(--h1-font);
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 0.35rem;
+}
+
+.auth-field input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: var(--radius-sm);
+    font-family: var(--p-font);
+    font-size: 0.95rem;
+    color: var(--cor-texto);
+    background: var(--white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.auth-field input::placeholder {
+    color: #aaa;
+}
+
+.auth-field input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(80, 191, 135, 0.15);
+}
+
+.auth-forgot {
+    align-self: flex-end;
+    font-size: 0.85rem;
+    color: var(--cor-terciaria) !important;
+    margin: 0.25rem 0 0.75rem;
+}
+
+.auth-forgot:hover {
+    text-decoration: underline;
+}
+
+.auth-submit {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-family: var(--h1-font);
+    font-weight: 600;
+}
+
+.auth-field.invalido input {
+    border-color: #e05252;
+    box-shadow: 0 0 0 3px rgba(224, 82, 82, 0.15);
+}
+
+.auth-field-error {
+    display: block;
+    margin-top: 0.35rem;
+    color: #b13c3c;
+    font-size: 0.78rem;
+}
+
+.auth-field-password {
+    position: relative;
+}
+
+.auth-field-password input {
+    padding-right: 3rem;
+}
+
+.auth-password-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 1.85rem;
+    border: 0;
+    background: transparent;
+    color: var(--cor-texto-secundario);
+    cursor: pointer;
+    padding: 0.35rem;
+    font-size: 1.1rem;
+}
+
+.auth-consent {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.6rem;
+}
+
+.auth-consent input {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.15rem;
+}
+
+.auth-consent label {
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+.auth-consent .auth-field-error {
+    grid-column: 1 / -1;
+}
+
+.auth-card-compact {
+    max-width: 460px;
+    min-height: 0;
+}
+
+/* Recuperação e redefinição têm apenas um formulário, portanto usam toda a
+   largura do card em vez da divisão de 50% do login/cadastro. */
+.auth-card-compact .form-container {
+    width: 100%;
+    justify-self: stretch;
+}
+
+.auth-help {
+    margin: 0.5rem 0 1.5rem;
+    text-align: center;
+    color: var(--cor-texto-secundario);
+}
+
+.auth-back {
+    margin-top: 1rem;
+    color: var(--cor-primaria) !important;
+}
+
+.auth-debug-link {
+    display: block;
+    margin-top: 0.5rem;
+    text-decoration: underline !important;
+}
+
+.auth-message {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-family: var(--h1-font);
+    line-height: 1.4;
+    border: 1px solid transparent;
+}
+
+.auth-message.erro {
+    background-color: rgba(224, 82, 82, 0.12);
+    border-color: rgba(224, 82, 82, 0.45);
+    color: #b13c3c;
+}
+
+.auth-message.sucesso {
+    background-color: rgba(80, 191, 135, 0.12);
+    border-color: rgba(80, 191, 135, 0.45);
+    color: #2c7a56;
+}
+
+.auth-submit:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.auth-submit.carregando {
+    position: relative;
+    color: transparent;
+}
+
+.auth-submit.carregando::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: -0.55rem 0 0 -0.55rem;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: auth-girar 0.7s linear infinite;
+}
+
+@keyframes auth-girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    color: var(--cor-texto-secundario);
+    font-size: 0.85rem;
+    margin: 0.75rem 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/*========= Toggle (painel animado) =========*/
+.toggle-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 140px 0 0 100px;
+    z-index: 1000;
+}
+
+.auth-card.active .toggle-container {
+    transform: translateX(-100%);
+    border-radius: 0 140px 100px 0;
+}
+
+.toggle {
+    background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
+    height: 100%;
+    color: var(--white);
+    position: relative;
+    left: -100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.auth-card.active .toggle {
+    transform: translateX(50%);
+}
+
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 2rem;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-panel h2,
+.toggle-panel p {
+    color: var(--white);
+}
+
+.toggle-panel h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.toggle-panel p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0.75rem 0 1.5rem;
+}
+
+.toggle-panel a {
+    color: var(--white);
+    text-decoration: underline;
+    font-size: 0.85rem;
+    margin-top: 1.25rem;
+}
+
+.toggle-panel a:hover {
+    color: var(--cor-botao-texto-hover);
+}
+
+.toggle-left {
+    transform: translateX(-200%);
+}
+
+.auth-card.active .toggle-left {
+    transform: translateX(0);
+}
+
+.toggle-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.auth-card.active .toggle-right {
+    transform: translateX(200%);
+}
+
+.toggle-btn {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--h1-font);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+    background: var(--white);
+    color: var(--cor-primaria);
+}
+
+/*========= Toggle mobile (abas) =========*/
+.auth-mobile-toggle {
+    display: none;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 460px;
+    margin: 1.5rem auto 0;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--cor-primaria);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--cor-primaria);
+    font-family: var(--h1-font);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tab.active {
+    background: var(--cor-primaria);
+    color: var(--white);
+}
+
+/*========= Termos =========*/
+.auth-terms {
+    text-align: center;
+    max-width: 460px;
+    margin: 1.5rem auto 0;
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.6;
+}
+
+.auth-terms a {
+    color: var(--cor-primaria);
+    font-weight: 600;
+}
+
+.auth-terms a:hover {
+    text-decoration: underline;
+}
+
+/*================= Responsividade =================*/
+@media (max-width: 868px) {
+    .auth-card {
+        width: 100%;
+        max-width: 460px;
+        min-height: 0;
+        border-radius: var(--radius-lg);
+    }
+
+    .toggle-container {
+        display: none;
+    }
+
+    .auth-mobile-toggle {
+        display: flex;
+    }
+
+    /* No mobile os dois forms ficam na MESMA célula do grid, então trocar por
+       display não funciona mais: quem controla a troca é opacity/visibility.
+       Aqui só se garante que a célula ocupe a largura toda. */
+    .form-container {
+        grid-area: 1 / 1;
+        width: 100%;
+        justify-self: stretch;
+    }
+
+    .auth-card form {
+        height: auto;
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 480px) {
+    .auth-card form {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .auth-mobile-toggle {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .form-container,
+    .toggle-container,
+    .toggle,
+    .toggle-panel,
+    .auth-tab {
+        transition: none;
+    }
+
+    .auth-submit.carregando::after {
+        animation-duration: 1.5s;
+    }
+}
+
+/* ==== Lumis dark mode ==== */

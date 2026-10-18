@@ -1,0 +1,111 @@
+/* ============================================
+   POLITICA_DE_PRIVACIDADE.CSS - Estilos especificos
+   Depende de: ../style.css (Design System global)
+   ============================================ */
+
+/* Header simples (substitui header global do projeto) */
+header {
+    background-color: var(--cor-terciaria);
+    color: white;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    position: static;
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header h1 {
+    margin: 0;
+    text-align: center;
+    flex: 1 1 auto;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+}
+
+/* Layout da pagina */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Tipografia da pagina */
+h1 {
+    margin-bottom: 1.5rem;
+    color: var(--cor-texto);
+}
+
+h2 {
+    margin: 1.5rem 0 1rem 0;
+    color: var(--cor-primaria);
+}
+
+p, ul {
+    margin-bottom: 1rem;
+}
+
+ul {
+    margin-left: 1.5rem;
+}
+
+/* Secoes de conteudo */
+section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Footer simples (substitui footer global do projeto) */
+footer {
+    background-color: var(--cor-primaria);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Links */
+a {
+    color: var(--cor-terciaria);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.footer-link {
+    color: white;
+}
+
+/* Data da ultima atualizacao */
+.last-update {
+    text-align: right;
+    font-style: italic;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 1rem;
+}
+
+/* ==== Lumis dark mode ==== */
+[data-theme="dark"] section {
+    background-color: var(--white);
+}
+
+[data-theme="dark"] header {
+    background-color: #1f2f3f;
+    color: var(--cor-texto);
+}
+
+[data-theme="dark"] footer {
+    background-color: #1f3a2c;
+    color: var(--cor-texto);
+}
+[data-theme="dark"] .footer-link {
+    color: var(--cor-texto-secundario);
+}
