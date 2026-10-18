@@ -57,7 +57,9 @@ function enviarEmailLumis(string $destinatario, string $nome, string $assunto, s
             $mailer->isHTML(false);
             return $mailer->send();
         } catch (Throwable $erro) {
-            error_log('lumis-email: falha SMTP (' . get_class($erro) . ').');
+            $detalheSmtp = isset($mailer->ErrorInfo) ? (string) $mailer->ErrorInfo : '';
+            $detalheSmtp = substr(str_replace(["\r", "\n"], ' ', $detalheSmtp), 0, 500);
+            error_log('lumis-email: falha SMTP (' . get_class($erro) . '): ' . $detalheSmtp);
             return false;
         }
     }

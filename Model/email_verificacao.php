@@ -20,6 +20,7 @@ function criarVerificacaoEmail(PDO $pdo, string $tipo, array $usuario, bool $res
         );
         $limite->execute(['tipo' => $tipo, 'usuario_id' => $usuario['id']]);
         if ((int) $limite->fetchColumn() >= 3) {
+            error_log('email-verificacao: limite de reenvios atingido para usuario ' . (int) $usuario['id']);
             return ['enviado' => false, 'limitado' => true, 'debug_url' => null];
         }
     }
@@ -27,11 +28,6 @@ function criarVerificacaoEmail(PDO $pdo, string $tipo, array $usuario, bool $res
     $token = bin2hex(random_bytes(32));
     $url = urlBaseAplicacao() . '/View/pages/auth/verificar-email.php?tipo=' . rawurlencode($tipo)
         . '&token=' . rawurlencode($token);
-
-    $pdo->prepare(
-        'UPDATE VerificacaoEmail SET usado_em = NOW()
-         WHERE tipo = :tipo AND usuario_id = :usuario_id AND usado_em IS NULL'
-    )->execute(['tipo' => $tipo, 'usuario_id' => $usuario['id']]);
 
     $pdo->prepare(
         'INSERT INTO VerificacaoEmail (tipo, usuario_id, token_hash, expira_em)
@@ -48,7 +44,29 @@ function criarVerificacaoEmail(PDO $pdo, string $tipo, array $usuario, bool $res
         . "O link expira em 24 horas e só pode ser usado uma vez.\n\n{$url}\n\n"
         . "Se você não criou uma conta na Lumis, ignore esta mensagem.";
     $enviado = enviarEmailLumis((string) $usuario['email'], $nome, $assunto, $mensagem);
-    if (!$enviado) {
+
+    if ($enviado) {
+        // Só invalida links anteriores depois que o SMTP aceitou a mensagem.
+        $pdo->prepare(
+            'UPDATE VerificacaoEmail SET usado_em = NOW()
+             WHERE tipo = :tipo AND usuario_id = :usuario_id AND usado_em IS NULL
+               AND token_hash <> :token_hash'
+        )->execute([
+            'tipo' => $tipo,
+            'usuario_id' => $usuario['id'],
+            'token_hash' => hash('sha256', $token),
+        ]);
+    } else {
+        // A tentativa falhou: descarta apenas o token que não chegou ao usuário,
+        // preservando qualquer link anterior que ainda possa funcionar.
+        $pdo->prepare(
+            'UPDATE VerificacaoEmail SET usado_em = NOW()
+             WHERE tipo = :tipo AND usuario_id = :usuario_id AND token_hash = :token_hash'
+        )->execute([
+            'tipo' => $tipo,
+            'usuario_id' => $usuario['id'],
+            'token_hash' => hash('sha256', $token),
+        ]);
         error_log('email-verificacao: falha no envio para usuario ' . (int) $usuario['id']);
     }
 

@@ -30,8 +30,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             $usuario = $stmt->fetch();
 
             if ($usuario && !(int) $usuario['email_verificado']) {
-                $envio = criarVerificacaoEmail($pdo, $tipo, $usuario);
-                $debugUrl = $envio['debug_url'];
+                try {
+                    $envio = criarVerificacaoEmail($pdo, $tipo, $usuario);
+                    $debugUrl = $envio['debug_url'];
+                } catch (Throwable $e) {
+                    error_log('email-verificacao: erro no reenvio (' . get_class($e) . ')');
+                }
+            } else {
+                // Evita registrar endereço em log e mantém a resposta genérica
+                // para não permitir descobrir quais contas estão cadastradas.
+                error_log('email-verificacao: nenhuma conta pendente encontrada para o tipo informado');
             }
 
             $_SESSION['verificacao_email_flash'] = 'Se houver uma conta pendente para esse endereço, enviaremos um novo link de confirmação.';
@@ -101,7 +109,7 @@ if ($mensagem === '' && isset($_SESSION['verificacao_email_flash'])) {
     unset($_SESSION['verificacao_email_flash']);
     $status = 'info';
 }
-if (getenv('APP_ENV') === 'development') {
+if (configuracaoLumis('APP_ENV', 'production') === 'development') {
     $debugUrl = $_SESSION['email_verificacao_debug_url'] ?? null;
     unset($_SESSION['email_verificacao_debug_url']);
 }
