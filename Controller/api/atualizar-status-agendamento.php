@@ -20,6 +20,21 @@ if (($tipoUsuario === 'cliente' && $acao !== 'cancelar') || ($tipoUsuario === 'p
 
 try {
     $pdo->beginTransaction();
+    // O cliente é autorizado pela contratação; o profissional, pelo vínculo
+    // da contratação e do agendamento com a própria conta. Não aplique ambos
+    // os filtros a todos os perfis, pois isso torna a consulta impossível.
+    if ($tipoUsuario === 'cliente') {
+        $filtroResponsavel = 'AND c.id_cliente = :cliente';
+        $parametrosResponsavel = ['cliente' => $sessao['id']];
+    } else {
+        $filtroResponsavel = 'AND c.id_profissional = :profissional_contratacao
+                              AND a.id_profissional = :profissional_agenda';
+        $parametrosResponsavel = [
+            'profissional_contratacao' => $sessao['id'],
+            'profissional_agenda' => $sessao['id'],
+        ];
+    }
+
     $busca = $pdo->prepare(
         'SELECT a.id_agendamento, a.status_agenda,
                 (TIMESTAMP(a.data_agenda, a.hora_inicio_agenda) > NOW()) AS horario_futuro,
@@ -27,17 +42,10 @@ try {
          FROM Agendamento a
          INNER JOIN Contratacao c ON c.id_contratacao = a.id_contratacao
          WHERE c.id_contratacao = :contratacao
-           AND c.id_cliente = :cliente
-           AND c.id_profissional = :profissional_contratacao
-           AND a.id_profissional = :profissional_agenda
+           ' . $filtroResponsavel . '
          LIMIT 1 FOR UPDATE'
     );
-    $busca->execute([
-        'contratacao' => $contratacaoId,
-        'cliente' => $tipoUsuario === 'cliente' ? $sessao['id'] : -1,
-        'profissional_contratacao' => $sessao['id'],
-        'profissional_agenda' => $tipoUsuario === 'profissional' ? $sessao['id'] : -1,
-    ]);
+    $busca->execute(['contratacao' => $contratacaoId] + $parametrosResponsavel);
     $agendamento = $busca->fetch();
     if (!$agendamento) {
         $pdo->rollBack();
