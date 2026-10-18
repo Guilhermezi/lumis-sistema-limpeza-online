@@ -1,0 +1,12 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?:Model|LICENSES|\.git)(?:/|$) - [F,L,NC]
+    RewriteRule (^|/)\. - [F,L]
+    RewriteRule (^|/)README\.md$ - [F,L,NC]
+</IfModule>
+
+<FilesMatch "(?i)\.(env|sql|md)$">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,119 @@
+.email-verification-page {
+    display: grid;
+    min-height: calc(100vh - 70px);
+    place-items: center;
+    padding: 2rem 1rem;
+    background: var(--cor-fundo);
+}
+
+.email-verification-card {
+    width: min(100%, 480px);
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+    border: 1px solid rgba(80, 191, 135, 0.2);
+    border-radius: 24px;
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.email-verification-icon {
+    display: grid;
+    width: 72px;
+    height: 72px;
+    place-items: center;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    color: var(--cor-primaria);
+    background: rgba(80, 191, 135, 0.12);
+    font-size: 2rem;
+}
+
+.email-verification-icon.sucesso {
+    color: #fff;
+    background: var(--cor-primaria);
+}
+
+.email-verification-icon.erro {
+    color: #a63240;
+    background: rgba(224, 82, 96, 0.12);
+}
+
+.email-verification-eyebrow {
+    margin-bottom: 0.5rem;
+    color: var(--cor-primaria);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.email-verification-card h1 {
+    margin-bottom: 0.65rem;
+    color: var(--cor-texto);
+    font-family: var(--h1-font);
+    font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
+.email-verification-copy {
+    margin-bottom: 1.25rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.6;
+}
+
+.email-resend-form {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 1.25rem;
+    text-align: left;
+}
+
+.email-resend-form label {
+    margin-top: 0.35rem;
+    color: var(--cor-texto);
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+
+.email-resend-form input,
+.email-resend-form select {
+    width: 100%;
+    min-height: 46px;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid rgba(80, 191, 135, 0.3);
+    border-radius: 10px;
+    outline: none;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    font: inherit;
+}
+
+.email-resend-form input:focus,
+.email-resend-form select:focus {
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(80, 191, 135, 0.13);
+}
+
+.email-resend-form button {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.6rem;
+    cursor: pointer;
+}
+
+.email-verification-debug {
+    display: inline-flex;
+    margin: 0.25rem 0 0.75rem;
+    color: var(--cor-primaria);
+    font-weight: 700;
+}
+
+.email-verification-login {
+    display: inline-flex;
+    margin-top: 1.25rem;
+    color: var(--cor-texto-secundario);
+    font-weight: 600;
+}
+
+[data-theme="dark"] .email-verification-card {
+    background: #1f2622;
+}

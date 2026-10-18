@@ -1,0 +1,353 @@
+<?php
+    // Mapa dos tipos de usuário: cada tipo aponta para sua tabela e suas colunas
+    function tiposSuportados(){
+        return [
+            'cliente' => [
+                'tabela'      => 'Cliente',
+                'pk'          => 'id_cliente',
+                'perfil'      => 'perfil.php',
+                'comuns'      => ['nome', 'email', 'telefone', 'data_nascimento', 'senha', 'foto'],
+                'especificos' => [],
+            ],
+            'profissional' => [
+                'tabela'      => 'Profissionais',
+                'pk'          => 'id_profissional',
+                'perfil'      => 'perfil-profissional.php',
+                'comuns'      => ['nome', 'email', 'telefone', 'data_nascimento', 'senha', 'foto'],
+                'especificos' => ['experiencia', 'valor_minimo', 'regiao_atuacao', 'verificado'],
+            ],
+        ];
+    }
+
+    // Busca a configuração de um tipo; devolve null se o tipo não existir
+    function configTipo($tipo){
+        $tipos = tiposSuportados();               // carrega o mapa completo
+        return $tipos[$tipo] ?? null;             // devolve só a configuração pedida
+    }
+
+    // Limite de caracteres de cada coluna, conforme definido no banco
+    function limite($coluna){
+        return [                                   // lista dos limites por nome de coluna
+            'nome'           => 100,
+            'email'          => 100,
+            'telefone'       => 15,
+            'experiencia'    => 50,
+            'regiao_atuacao' => 100,
+            'foto'           => 255,
+        ][$coluna] ?? null;                       // indexa pelo nome e devolve o limite
+    }
+
+    function normalizarEmail($email){
+        return mb_strtolower(trim((string) $email), 'UTF-8');
+    }
+
+    // Confere os dados do cadastro; devolve array vazio se estiver tudo certo
+    function validarCadastro($dados, $cfg){
+        $erros = [];                              // começa sem nenhum erro registrado
+
+        if (($dados['aceite_termos'] ?? '') !== '1'){
+            $erros['aceite_termos'] = 'obrigatorios';
+        }
+
+        // ---- NOME ----
+        $nome = trim($dados['nome'] ?? '');       // tira espaços das pontas; ?? '' evita campo ausente
+        if ($nome === ''){                        // comparação estrita: '' e 0 não se confundem
+            $erros['nome'] = 'obrigatorios';
+        } elseif (mb_strlen($nome) < 2 || mb_strlen($nome) > limite('nome')){
+            $erros['nome'] = 'nome-invalido';     // mb_strlen conta caracteres, strlen contaria bytes
+        }
+
+        // ---- EMAIL ----
+        $email = normalizarEmail($dados['email'] ?? '');
+        if ($email === ''){
+            $erros['email'] = 'obrigatorios';
+        } elseif (mb_strlen($email) > limite('email') || !filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $erros['email'] = 'email-invalido';
+        }
+
+        // ---- TELEFONE ----
+        $telefone = preg_replace('/\D/', '', $dados['telefone'] ?? '');   // \D remove tudo que não é dígito
+        if ($telefone === ''){
+            $erros['telefone'] = 'obrigatorios';
+        } elseif (mb_strlen($telefone) < 10 || mb_strlen($telefone) > 11){ // celular: 11, fixo: 10
+            $erros['telefone'] = 'telefone-invalido';
+        }
+
+        // ---- SENHA ----
+        $senha = $dados['senha'] ?? '';
+        if ($senha === ''){
+            $erros['senha'] = 'obrigatorios';
+        } elseif (mb_strlen($senha) < 10 || mb_strlen($senha) > 1024){
+            $erros['senha'] = 'senha-curta';
+        }
+
+        // ---- CONFIRMAÇÃO DE SENHA ----
+        $confirmar = $dados['senha_confirma'] ?? '';
+        if ($confirmar === ''){
+            $erros['senha_confirma'] = 'obrigatorios';
+        } elseif ($senha !== $confirmar){               // !== compara valor e tipo
+            $erros['senha_confirma'] = 'senhas-diferentes';
+        }
+
+        // ---- DATA DE NASCIMENTO ----
+        $nascimento = trim($dados['data_nascimento'] ?? '');
+        if ($nascimento !== ''){                   // campo é opcional: vazio não é erro
+            $data = DateTime::createFromFormat('Y-m-d', $nascimento);
+            // createFromFormat rola 31/02 para 03/03 sem avisar, então comparamos de volta
+            if (!$data || $data->format('Y-m-d') !== $nascimento || $data > new DateTime('today')){
+                $erros['data_nascimento'] = 'nascimento-invalido';
+            }
+        }
+
+        // ---- CAMPOS ESPECÍFICOS DO TIPO ----
+        foreach (['experiencia', 'regiao_atuacao'] as $coluna){       // valida cada coluna do tipo
+            if (!in_array($coluna, $cfg['especificos'], true)){       // true = comparação estrita
+                continue;                                             // campo não existe neste tipo: pula
+            }
+            $valor = trim($dados[$coluna] ?? '');
+            if ($coluna === 'regiao_atuacao' && $valor === ''){       // regiao_atuacao é NOT NULL no banco
+                $erros[$coluna] = 'obrigatorios';
+            } elseif ($valor !== '' && mb_strlen($valor) > limite($coluna)){
+                $erros[$coluna] = $coluna . '-longa';                 // impede truncamento silencioso
+            }
+        }
+
+        return $erros;                              // array vazio = cadastrou tudo certo
+    }
+
+    // Grava o usuario no banco e devolve o id criado; null = email ja cadastrado
+    // $dados = os campos que vieram do formulário, já com data-nascimento e demais
+    // $cfg   = a configuração do tipo, que vem de configTipo('cliente') ou configTipo('profissional')
+    //          Ela diz QUAL tabela gravar e QUAIS colunas aquele tipo tem.
+    //          Por isso o "array $cfg": se o tipo não existir no mapa, configTipo devolve
+    //          null e o PHP solta TypeError aqui ANTES de qualquer SQL ser montado.
+    function cadastrar(PDO $pdo, array $dados, array $cfg){
+        // junta as colunas comuns com as específicas deste tipo
+        $permitidas = array_merge($cfg['comuns'], $cfg['especificos']);
+        // mantém só as que existem no tipo E chegaram no formulário (preserva a ordem do mapa)
+        $colunas = array_values(array_intersect($permitidas, array_keys($dados)));
+        $colunas[] = 'termos_aceitos_em';
+        $colunas[] = 'email_verificado';
+
+        $senha = password_hash($dados['senha'] ?? '', PASSWORD_DEFAULT);
+
+        // telefone fica só com dígitos: "(11) 98765-4321" vira "11987654321"
+        $telefone = preg_replace('/\D/', '', $dados['telefone'] ?? '');
+
+        // guarda, por coluna, o valor exato que será enviado ao banco
+        $valores = [];
+        foreach ($colunas as $coluna){
+            // senha e telefone já tratadas acima: entram prontas, sem passar pelo trim
+            if ($coluna === 'senha'){ 
+                $valores[$coluna] = $senha; 
+                continue; 
+                }
+            if ($coluna === 'email'){
+                $valores[$coluna] = normalizarEmail($dados[$coluna] ?? '');
+                continue;
+            }
+            if ($coluna === 'telefone'){ 
+                $valores[$coluna] = $telefone; 
+                continue; 
+                }
+            if ($coluna === 'termos_aceitos_em'){
+                $valores[$coluna] = (new DateTimeImmutable())->format('Y-m-d H:i:s');
+                continue;
+            }
+            if ($coluna === 'email_verificado'){
+                $valores[$coluna] = 0;
+                continue;
+            }
+
+            // (string) converte para texto: se o campo vier null, vira '' em vez de dar erro no trim
+            $valor = trim((string) ($dados[$coluna] ?? ''));
+            // vazio vira NULL (coluna opcional fica NULL de verdade no banco);
+            // com texto, usa o valor JÁ TRIMADO, senão o nome entraria com espaço das pontas
+            $valores[$coluna] = $valor === '' ? null : $valor;
+        }
+
+        // rede de segurança: se nenhuma coluna foi montada, ou a senha não entrou, para
+        // aqui com exceção legível em vez de gerar "INSERT INTO Cliente ()", que o
+        // banco recusaria com mensagem confusa. Não deveria chegar aqui, mas se chegar, quebra limpo
+        if (!$colunas || !isset($valores['senha'])){
+            throw new InvalidArgumentException('cadastro sem senha');
+        }
+
+        // transforma cada nome de coluna no marcador do PDO:
+        //   nome, email, telefone  ->  :nome, :email, :telefone
+        // no SQL eles são só "espaços em branco"; o valor viaja fora, pelo execute()
+        $marcadores = array_map(fn($c) => ':' . $c, array_keys($valores));
+
+        // monta o INSERT com dois pares paralelos: nomes de coluna e marcadores.
+        // Só o nome da TABELA entra interpolado na string, e ele nunca vem do usuário:
+        // vem de $cfg, que só tem 'Cliente' e 'Profissionais', escritos à mão no mapa
+        $sql = 'INSERT INTO ' . $cfg['tabela'] . ' (' . implode(', ', array_keys($valores)) . ') VALUES (' . implode(', ', $marcadores) . ')';
+        // resultado: INSERT INTO Cliente (nome, email, telefone, senha) VALUES (:nome, :email, :telefone, :senha)
+
+        try {
+            // prepare() envia o SQL ao banco; execute() envia os dados de $valores,
+            // cada um ligado ao marcador pelo nome da coluna
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($valores);
+            // pergunta ao banco qual id do auto_increment este INSERT gerou, já como int
+            return (int) $pdo->lastInsertId();
+        } catch (PDOException $e){
+            // 1062 = violação de chave única, ou seja, email repetido.
+            // viramos null para o endpoint responder "email-em-uso" em vez de erro 500
+            if (($e->errorInfo[1] ?? null) === 1062){
+                return null;
+            }
+            // qualquer outro erro do banco sobe normalmente
+            throw $e;
+        }
+    }
+
+    // Busca um usuário pelo id e devolve a linha do banco; null se não existir
+    function buscarUsuario(PDO $pdo, int $id, string $tipo){
+        $cfg = configTipo($tipo);
+
+        if ($cfg === null){
+            return null;
+        }
+
+        // nome da tabela e da chave primária vêm do mapa, nunca do usuário
+        $sql = 'SELECT * FROM ' . $cfg['tabela'] . ' WHERE ' . $cfg['pk'] . ' = :id LIMIT 1';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+
+        return $stmt->fetch() ?: null;
+    }
+
+    // Valida somente os campos que podem ser alterados na área de perfil.
+    // Senha e verificação profissional permanecem em fluxos separados.
+    function validarAtualizacaoPerfil(array $dados, array $cfg): array{
+        $erros = [];
+        $nome = trim((string) ($dados['nome'] ?? ''));
+        $email = normalizarEmail($dados['email'] ?? '');
+        $telefone = preg_replace('/\D/', '', (string) ($dados['telefone'] ?? ''));
+        $nascimento = trim((string) ($dados['data_nascimento'] ?? ''));
+
+        if (mb_strlen($nome) < 2 || mb_strlen($nome) > limite('nome')){
+            $erros['nome'] = 'nome-invalido';
+        }
+        if (mb_strlen($email) > limite('email') || !filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $erros['email'] = 'email-invalido';
+        }
+        if (strlen($telefone) < 10 || strlen($telefone) > 11){
+            $erros['telefone'] = 'telefone-invalido';
+        }
+        if ($nascimento !== ''){
+            $data = DateTime::createFromFormat('Y-m-d', $nascimento);
+            if (!$data || $data->format('Y-m-d') !== $nascimento || $data > new DateTime('today')){
+                $erros['data_nascimento'] = 'nascimento-invalido';
+            }
+        }
+
+        if (in_array('regiao_atuacao', $cfg['especificos'], true)){
+            $regiao = trim((string) ($dados['regiao_atuacao'] ?? ''));
+            $experiencia = trim((string) ($dados['experiencia'] ?? ''));
+            $valor = str_replace(',', '.', trim((string) ($dados['valor_minimo'] ?? '')));
+
+            if ($regiao === '' || mb_strlen($regiao) > limite('regiao_atuacao')){
+                $erros['regiao_atuacao'] = 'regiao-invalida';
+            }
+            if (mb_strlen($experiencia) > limite('experiencia')){
+                $erros['experiencia'] = 'experiencia-longa';
+            }
+            if ($valor !== '' && (!is_numeric($valor) || (float) $valor < 0 || (float) $valor > 999999.99)){
+                $erros['valor_minimo'] = 'valor-invalido';
+            }
+        }
+
+        return $erros;
+    }
+
+    function atualizarPerfil(PDO $pdo, int $id, string $tipo, array $dados, ?string $foto, bool $emailAlterado = false): bool{
+        $cfg = configTipo($tipo);
+        if (!$cfg){
+            return false;
+        }
+
+        $valores = [
+            'nome' => trim((string) $dados['nome']),
+            'email' => normalizarEmail($dados['email']),
+            'telefone' => preg_replace('/\D/', '', (string) $dados['telefone']),
+            'data_nascimento' => trim((string) ($dados['data_nascimento'] ?? '')) ?: null,
+            'foto' => $foto,
+        ];
+        if ($emailAlterado){
+            $valores['email_verificado'] = 0;
+        }
+
+        if ($tipo === 'profissional'){
+            $valor = str_replace(',', '.', trim((string) ($dados['valor_minimo'] ?? '')));
+            $valores['experiencia'] = trim((string) ($dados['experiencia'] ?? '')) ?: null;
+            $valores['valor_minimo'] = $valor === '' ? null : number_format((float) $valor, 2, '.', '');
+            $valores['regiao_atuacao'] = trim((string) $dados['regiao_atuacao']);
+        }
+
+        $atribuicoes = array_map(static fn(string $coluna): string => $coluna . ' = :' . $coluna, array_keys($valores));
+        if ($emailAlterado){
+            $atribuicoes[] = 'auth_versao = auth_versao + 1';
+        }
+        $valores['id'] = $id;
+        $sql = 'UPDATE ' . $cfg['tabela'] . ' SET ' . implode(', ', $atribuicoes)
+            . ' WHERE ' . $cfg['pk'] . ' = :id';
+
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($valores);
+            return true;
+        } catch (PDOException $e){
+            if (($e->errorInfo[1] ?? null) === 1062){
+                return false;
+            }
+            throw $e;
+        }
+    }
+
+    function identificadorLogin(string $email, string $tipo): string{
+        return hash('sha256', $tipo . '|' . normalizarEmail($email));
+    }
+
+    function ipCliente(): string{
+        return substr((string) ($_SERVER['REMOTE_ADDR'] ?? 'desconhecido'), 0, 45);
+    }
+
+    function loginBloqueado(PDO $pdo, string $email, string $tipo): bool{
+        $desde = (new DateTimeImmutable('-15 minutes'))->format('Y-m-d H:i:s');
+        $stmt = $pdo->prepare(
+            'SELECT
+                (SELECT COUNT(*) FROM TentativaLogin
+                 WHERE identificador = :identificador AND sucesso = 0 AND criada_em >= :desde_conta) AS por_conta,
+                (SELECT COUNT(*) FROM TentativaLogin
+                 WHERE ip = :ip AND sucesso = 0 AND criada_em >= :desde_ip) AS por_ip'
+        );
+        $stmt->execute([
+            'identificador' => identificadorLogin($email, $tipo),
+            'ip' => ipCliente(),
+            'desde_conta' => $desde,
+            'desde_ip' => $desde,
+        ]);
+        $contagem = $stmt->fetch() ?: [];
+        return (int) ($contagem['por_conta'] ?? 0) >= 5 || (int) ($contagem['por_ip'] ?? 0) >= 20;
+    }
+
+    function registrarTentativaLogin(PDO $pdo, string $email, string $tipo, bool $sucesso): void{
+        $identificador = identificadorLogin($email, $tipo);
+        if ($sucesso){
+            $stmt = $pdo->prepare('DELETE FROM TentativaLogin WHERE identificador = :identificador');
+            $stmt->execute(['identificador' => $identificador]);
+            return;
+        }
+
+        $stmt = $pdo->prepare(
+            'INSERT INTO TentativaLogin (identificador, ip, sucesso) VALUES (:identificador, :ip, 0)'
+        );
+        $stmt->execute(['identificador' => $identificador, 'ip' => ipCliente()]);
+
+        // Mantém a tabela pequena sem depender de um cron para a limpeza básica.
+        if (random_int(1, 100) === 1){
+            $pdo->exec("DELETE FROM TentativaLogin WHERE criada_em < DATE_SUB(NOW(), INTERVAL 2 DAY)");
+        }
+    }
