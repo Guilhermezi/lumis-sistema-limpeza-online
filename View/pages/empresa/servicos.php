@@ -373,7 +373,7 @@ $precoMaximo = $precos ? (int) ceil(max($precos) / 50) * 50 : 500;
                     <button type="button" class="checkout-payment" data-payment="boleto"><i class="ri-barcode-line"></i><span><strong>Boleto</strong><small>Pagamento pendente</small></span><i class="ri-check-line checkout-check"></i></button>
                     <button type="button" class="checkout-payment" data-payment="na-hora"><i class="ri-hand-coin-line"></i><span><strong>No atendimento</strong><small>Pague ao profissional</small></span><i class="ri-check-line checkout-check"></i></button>
                 </div>
-                <p class="checkout-payment-note"><i class="ri-information-line"></i> Este projeto registra a opção escolhida, mas não realiza cobrança bancária real.</p>
+                <?php include __DIR__ . '/../../partials/demo-notice.php'; ?>
                 <p class="checkout-error" id="checkoutError" role="alert" hidden></p>
                 <div class="checkout-actions">
                     <button type="button" class="btn-secondary" id="checkoutBack"><i class="ri-arrow-left-line"></i> Voltar</button>

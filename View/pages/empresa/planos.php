@@ -194,7 +194,7 @@ include __DIR__ . '/../../partials/header.php';
             <section class="plan-checkout-step" data-plan-step="payment" hidden>
                 <span class="plan-checkout-eyebrow"><i class="ri-bank-card-line"></i> Pagamento simulado</span>
                 <h2>Como deseja pagar?</h2>
-                <p class="plan-checkout-subtitle">A forma escolhida será registrada como pendente. Nenhuma cobrança real será feita.</p>
+                <?php include __DIR__ . '/../../partials/demo-notice.php'; ?>
                 <div class="plan-checkout-payment-options" role="radiogroup" aria-label="Forma de pagamento">
                     <button type="button" class="plan-checkout-payment" data-plan-payment="pix"><i class="ri-qr-code-line"></i><span><strong>PIX</strong><small>Pagamento pendente</small></span><i class="ri-check-line"></i></button>
                     <button type="button" class="plan-checkout-payment" data-plan-payment="cartao"><i class="ri-bank-card-line"></i><span><strong>Cartão</strong><small>Pagamento pendente</small></span><i class="ri-check-line"></i></button>

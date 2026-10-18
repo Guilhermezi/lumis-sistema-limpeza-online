@@ -61,6 +61,5 @@ $controller = $asset . '../Controller/';
             </div>
         </nav>
     </header>
-    <?php include __DIR__ . '/demo-notice.php'; ?>
     <script src="<?= $controller ?>menu.js"></script>
     <script src="<?= $controller ?>Auth.js"></script>
